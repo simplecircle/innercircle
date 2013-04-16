@@ -1,14 +1,11 @@
 Innercircle::Application.routes.draw do
 
-  get "company/new"
+  resources :companies
+  resources :users
 
-  get "company/show"
-
-  get "company/edit"
-
-  get "users/new"
-
-  get "users/show"
+  get "signup"=>"companies#new"
+  get "login"=>"sessions#new"
+  post "login"=>"sessions#create"
   root :to => 'home#index'
 
   # The priority is based upon order of creation:
