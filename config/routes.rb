@@ -1,4 +1,5 @@
 Innercircle::Application.routes.draw do
+
   get "company/new"
 
   get "company/show"
@@ -8,6 +9,7 @@ Innercircle::Application.routes.draw do
   get "users/new"
 
   get "users/show"
+  root :to => 'home#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
