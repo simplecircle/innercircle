@@ -1,4 +1,14 @@
 Innercircle::Application.routes.draw do
+  get "company/new"
+
+  get "company/show"
+
+  get "company/edit"
+
+  get "users/new"
+
+  get "users/show"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
