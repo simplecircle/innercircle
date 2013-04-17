@@ -1,6 +1,7 @@
 = form_for @company, :html=>{multipart:true} do |f|
   = f.fields_for :users do |user|
     %p
+      = user.hidden_field :role, value:"admin"
       = user.label :full_name
       = user.text_field :full_name
     %p

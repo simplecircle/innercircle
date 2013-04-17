@@ -6,6 +6,7 @@ class Company < ActiveRecord::Base
   mount_uploader :banner, BannerUploader
 
   validates :name, presence:true
+  validates :name, uniqueness:true
   validates :website_url, presence:true
   validates :banner, presence:true
 end

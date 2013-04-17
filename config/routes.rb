@@ -1,6 +1,8 @@
 Innercircle::Application.routes.draw do
 
   resources :companies
+  # get "talent"=>"users#index"
+  match 'talent', to: 'users#index', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   resources :users
 
   get "signup"=>"companies#new"

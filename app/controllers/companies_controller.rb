@@ -6,8 +6,9 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.create(params[:company])
+    @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
     if @company.save!
-      redirect_to root_url
+      redirect_to talent_url
     end
   end
 

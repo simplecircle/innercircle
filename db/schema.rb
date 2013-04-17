@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416224830) do
+ActiveRecord::Schema.define(:version => 20130417134136) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -21,7 +21,10 @@ ActiveRecord::Schema.define(:version => 20130416224830) do
     t.string   "banner"
     t.integer  "width"
     t.integer  "height"
+    t.string   "subdomain"
   end
+
+  add_index "companies", ["subdomain"], :name => "index_companies_on_subdomain", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -34,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20130416224830) do
   end
 
   add_index "users", ["company_id"], :name => "index_users_on_company_id"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["full_name"], :name => "index_users_on_full_name"
 
 end
