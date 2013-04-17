@@ -8,6 +8,7 @@ class CompaniesController < ApplicationController
     @company = Company.create(params[:company])
     @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
     if @company.save!
+      session[:user_id] = @company.users.first.id
       redirect_to talent_url
     end
   end
