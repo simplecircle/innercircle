@@ -14,15 +14,17 @@ class UsersController < ApplicationController
   end
 
   def create
+    @company = Company.find_by_subdomain!(request.subdomain)
     @user = User.create(params[:user])
     @user.skip_password_validation = true
-    if @user.save!
-      params[:company_depts].each do |key, value|
-        if value.to_i == 1
-          ProfilesCompanyDept.create!(profile_id:@user.profile.id, company_dept_id:key)
-        end
+    @depts = params[:company_depts]
+    if @user.save
+      @depts.each do |dept|
+        ProfilesCompanyDept.create!(profile_id:@user.profile.id, company_dept_id:dept)
       end
       redirect_to confirmation_url
+    else
+      render "new"
     end
   end
 

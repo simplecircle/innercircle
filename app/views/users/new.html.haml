@@ -10,9 +10,11 @@
   %p
     = f.label :email
     = f.text_field :email
-  %p
-    - @depts.each do |dept|
-      = check_box :company_depts, dept.id
+  %p Select the category that fits you best
+  - CompanyDept.all.each do |dept|
+    %p
+      = check_box_tag "category_#{dept.id.to_s}", dept.id, @depts.include?(dept.id.to_s), name:'company_depts[]'
+      = label_tag  "category_#{dept.id.to_s}", dept.name
   = f.fields_for :profile do |profile|
     %p
       = profile.label :job_title
