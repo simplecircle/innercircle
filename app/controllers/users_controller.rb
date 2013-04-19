@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     # Ensure this password doesn't exist in future iterations
     @user.password = SecureRandom.urlsafe_base64
     @depts = params[:company_depts]
+    @tags = ActsAsTaggableOn::Tag.all.map(&:name)
     if @depts.nil?
       @user.errors.add(:categories, "You have to choose at least one category.")
       render "new"

@@ -26,6 +26,8 @@
       = profile.label :url, "Your site, blog or Linkedin profile"
       = profile.text_field :url
   %p
-    = label_tag :skills
-    = text_field_tag :skills, @user.profile.skill_list
+    /= label_tag :skills
+    /= text_field_tag :skills, @user.profile.skill_list
+    = select_tag "skills", options_for_select(@tags), {multiple:true, "data-placeholder"=>"Type names to add contributors"}
+    /= select_tag "skills", @tags, @tags, {}, {multiple:true, "data-placeholder"=>"Type names to add contributors"}
   = f.submit "Join now"
