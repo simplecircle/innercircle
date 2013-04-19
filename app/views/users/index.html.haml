@@ -1,2 +1,5 @@
-%h2
-  Invite great people to join Kickstarter’s talent-community by sending them this link:
+- if current_company
+  %h2
+    Invite great people to join #{current_company.name}'s talent-community by sending them this link:
+    = link_to "#{current_company.subdomain}.getinnercircle.com/join", join_url(subdomain:current_company.subdomain)
+

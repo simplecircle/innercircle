@@ -1,4 +1,7 @@
 class CompaniesController < ApplicationController
+
+  # before_filter :restrict_access
+
   def new
     @company = Company.new
     @user = @company.users.build

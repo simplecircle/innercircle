@@ -6,13 +6,5 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    - if current_company
-      = link_to(current_company.name, root_url)
-    - if current_user
-      = link_to(current_user.full_name, root_url)
-      = link_to "Log Out", logout_url
-    - else
-      = link_to "Log In", login_url
-    %hr
     /= render "shared/flash", :flash=>flash
     = yield

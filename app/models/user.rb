@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :company_id, :email, :full_name, :password_digest, :password, :role
+  attr_accessible :company_id, :email, :full_name, :password_digest, :password, :role, :profile_attributes
   attr_accessor :skip_password_validation
 
   belongs_to :company
+  has_one :profile
+  accepts_nested_attributes_for :profile
 
   # override has_secure_password forced validation.
   require 'bcrypt'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417134136) do
+ActiveRecord::Schema.define(:version => 20130417210113) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,32 @@ ActiveRecord::Schema.define(:version => 20130417134136) do
   end
 
   add_index "companies", ["subdomain"], :name => "index_companies_on_subdomain", :unique => true
+
+  create_table "company_depts", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "profiles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "url"
+    t.string   "job_title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
+
+  create_table "profiles_company_depts", :force => true do |t|
+    t.integer  "profile_id"
+    t.integer  "company_dept_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "profiles_company_depts", ["company_dept_id"], :name => "index_profiles_company_depts_on_company_dept_id"
+  add_index "profiles_company_depts", ["profile_id"], :name => "index_profiles_company_depts_on_profile_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"

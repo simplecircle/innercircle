@@ -1,0 +1,23 @@
+= image_tag(@company.banner_url(:medium))
+%h1= @company.name
+%hr
+%h2 Join our talent-community to receive job opportunities that match your skills.
+= form_for @user do |f|
+  = f.hidden_field :role, value:"talent"
+  %p
+    = f.label :full_name
+    = f.text_field :full_name
+  %p
+    = f.label :email
+    = f.text_field :email
+  %p
+    - @depts.each do |dept|
+      = check_box :company_depts, dept.id
+  = f.fields_for :profile do |profile|
+    %p
+      = profile.label :job_title
+      = profile.text_field :job_title
+    %p
+      = profile.label :url, "Your site, blog or Linkedin profile"
+      = profile.text_field :url
+  = f.submit "Join now"
