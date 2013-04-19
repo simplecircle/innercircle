@@ -16,9 +16,10 @@ class UsersController < ApplicationController
   def create
     @company = Company.find_by_subdomain!(request.subdomain)
     @user = User.create(params[:user])
-    @user.skip_password_validation = true
+    # Ensure this password doesn't exist in future iterations
+    @user.password = SecureRandom.urlsafe_base64
     @depts = params[:company_depts]
-    if @user.save
+    if @user.save!
       @depts.each do |dept|
         ProfilesCompanyDept.create!(profile_id:@user.profile.id, company_dept_id:dept)
       end
