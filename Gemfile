@@ -21,6 +21,7 @@ gem 'capistrano-ext','~> 1.2.1'
 gem 'lograge'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'babosa'
+gem 'acts-as-taggable-on'
 
 
 # Gems used only for assets and not required

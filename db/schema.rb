@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417210113) do
+ActiveRecord::Schema.define(:version => 20130419161256) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -51,6 +51,23 @@ ActiveRecord::Schema.define(:version => 20130417210113) do
 
   add_index "profiles_company_depts", ["company_dept_id"], :name => "index_profiles_company_depts_on_company_dept_id"
   add_index "profiles_company_depts", ["profile_id"], :name => "index_profiles_company_depts_on_profile_id"
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       :limit => 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"

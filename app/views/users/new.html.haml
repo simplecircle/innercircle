@@ -25,4 +25,7 @@
     %p
       = profile.label :url, "Your site, blog or Linkedin profile"
       = profile.text_field :url
+  %p
+    = label_tag :skills
+    = text_field_tag :skills, @user.profile.skill_list
   = f.submit "Join now"

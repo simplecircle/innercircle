@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   def create
     @company = Company.find_by_subdomain!(request.subdomain)
     @user = User.create(params[:user])
+    @user.profile.skill_list = params[:skills]
     # Ensure this password doesn't exist in future iterations
     @user.password = SecureRandom.urlsafe_base64
     @depts = params[:company_depts]
