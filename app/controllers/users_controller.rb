@@ -19,13 +19,18 @@ class UsersController < ApplicationController
     # Ensure this password doesn't exist in future iterations
     @user.password = SecureRandom.urlsafe_base64
     @depts = params[:company_depts]
-    if @user.save!
-      @depts.each do |dept|
-        ProfilesCompanyDept.create!(profile_id:@user.profile.id, company_dept_id:dept)
-      end
-      redirect_to confirmation_url
-    else
+    if @depts.nil?
+      @user.errors.add(:categories, "You have to choose at least one category.")
       render "new"
+    else
+      if @user.save
+        @depts.each do |dept|
+          ProfilesCompanyDept.create!(profile_id:@user.profile.id, company_dept_id:dept)
+        end
+        redirect_to confirmation_url
+      else
+        render "new"
+      end
     end
   end
 

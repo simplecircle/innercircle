@@ -5,15 +5,18 @@
 = form_for @user do |f|
   = f.hidden_field :role, value:"talent"
   %p
+    .inline_error= @user.errors[:full_name].first
     = f.label :full_name
     = f.text_field :full_name
   %p
+    .inline_error= @user.errors[:email].first
     = f.label :email
     = f.text_field :email
+  .inline_error= @user.errors[:categories].first
   %p Select the category that fits you best
   - CompanyDept.all.each do |dept|
     %p
-      = check_box_tag "category_#{dept.id.to_s}", dept.id, @depts.include?(dept.id.to_s), name:'company_depts[]'
+      = check_box_tag "category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]'
       = label_tag  "category_#{dept.id.to_s}", dept.name
   = f.fields_for :profile do |profile|
     %p
