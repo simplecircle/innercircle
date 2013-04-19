@@ -1,0 +1,5 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#skills").autoSuggest("<%= escape_javascript(@tags) %>", {selectedItemProp: "name", searchObjProps: "name"});
+  });
+</script>

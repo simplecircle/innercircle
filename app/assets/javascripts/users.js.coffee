@@ -1,3 +1,14 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+$(document).ready ->
+  data = [
+    {name: "Mick Jagger"},
+    {name: "Johnny Storm"},
+    {name: "Richard Hatch"},
+    {name: "Kelly Slater"},
+    {name: "Rudy Hamilton"},
+    {name: "Michael Jordan"}
+  ];
+  $("#skills").autoSuggest data,
+    selectedItemProp: "name"
+    searchObjProps: "name"
+
