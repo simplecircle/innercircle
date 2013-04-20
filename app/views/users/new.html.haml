@@ -23,6 +23,7 @@
       = profile.label :job_title
       = profile.text_field :job_title
     %p
+      .inline_error= @user.profile.errors[:url].first
       = profile.label :url, "Your site, blog or Linkedin profile"
       = profile.text_field :url
   %p

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   validates :full_name, presence:true
   validates :email, presence:true
   validates :email, uniqueness:true
+  validates_format_of :email, with:/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i, message:"Email isn't valid"
   validates :password, presence:true
 
   def self.by_category(subdomain, category)

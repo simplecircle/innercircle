@@ -10,9 +10,11 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.create(params[:company])
     @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
-    if @company.save!
+    if @company.save
       session[:user_id] = @company.users.first.id
       redirect_to talent_url
+    else
+      render "new"
     end
   end
 
