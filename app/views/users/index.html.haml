@@ -2,4 +2,19 @@
   %h2
     Invite great people to join #{current_company.name}'s talent-community by sending them this link:
     = link_to "#{current_company.subdomain}.getinnercircle.com/join", join_url(subdomain:current_company.subdomain)
-
+%ul
+  %h3 Creatives
+  - @creative.each do |talent|
+    %li= talent.full_name
+%ul
+  %h3 Operations
+  - @operations.each do |talent|
+    %li= talent.full_name
+%ul
+  %h3 Sales & Marketing
+  - @sales_marketing.each do |talent|
+    %li= talent.full_name
+%ul
+  %h3 Technology
+  - @technology.each do |talent|
+    %li= talent.full_name

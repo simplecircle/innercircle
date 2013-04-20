@@ -6,6 +6,11 @@ class UsersController < ApplicationController
 
 
   def index
+    @creative = User.by_category(current_company.subdomain, "creative")
+    @operations = User.by_category(current_company.subdomain, "operations")
+    @sales_marketing = User.by_category(current_company.subdomain, "sales & marketing")
+    @technology = User.by_category(current_company.subdomain, "technology")
+
   end
 
   def new
@@ -15,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(params[:user])
+    @user = @company.users.create(params[:user])
     # Ensure this password doesn't already exist in future iterations before creation
     @user.password = SecureRandom.urlsafe_base64
     @incoming_tags = params[:as_values_true]

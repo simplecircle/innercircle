@@ -6,4 +6,5 @@ class Profile < ActiveRecord::Base
   has_many :company_depts, through: :profiles_company_depts
 
   acts_as_taggable_on :skills
+
 end

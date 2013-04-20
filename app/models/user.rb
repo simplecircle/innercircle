@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
 
   attr_accessible :company_id, :email, :full_name, :password_digest, :password, :role, :profile_attributes
-  attr_accessor :skip_password_validation
 
   belongs_to :company
   has_one :profile
@@ -15,6 +14,9 @@ class User < ActiveRecord::Base
   validates :full_name, presence:true
   validates :email, presence:true
   validates :email, uniqueness:true
-  validates :password, presence:true, unless: :skip_password_validation
+  validates :password, presence:true
 
+  def self.by_category(subdomain, category)
+    joins(:company, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:full_name)
+  end
 end
