@@ -28,9 +28,13 @@
       = profile.text_field :url
   %p
     = label_tag :skills
+    %br
+    = @tags
+    %br
+    = @incoming_tags
     :javascript
       $(document).ready(function() {
-        $("#skills").autoSuggest($.parseJSON('#{@tags}'), {asHtmlID: true, neverSubmit: true, emptyText: "Type a comma to add a new skill", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
+          $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", asHtmlID: true, neverSubmit: true, emptyText: "Type a comma to add a new skill", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
       });
     = text_field_tag nil, nil, {id:"skills"}
   = f.submit "Join now"
