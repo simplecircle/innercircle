@@ -51,18 +51,22 @@
 // Utility classes
 @import "twitter/bootstrap/utilities.less"; // Has to be last to override when necessary
 
-body { padding-top: 60px; }
+body { padding-top: 80px; }
 
 @import "twitter/bootstrap/responsive";
 
 // Set the correct sprite paths
 @iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
 @iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+// Custom colors
+// -------------------------
+@linkColor: #68b4fd;
 
 @navbarBackground: white;
 @navbarBackgroundHighlight: white;
 @navbarText: #666666;
-@navbarLinkColor: #6fa6db;
+@navbarLinkColor: #68b4fd;
+
 .navbar{
   h1{
     padding-left:10px;
@@ -80,6 +84,9 @@ body { padding-top: 60px; }
   }
   .nav > li > a {
     padding-top:20px;
+    font-size:16px;
+    font-weight:bold;
+    text-shadow:none;
   }
   .nav.pull-right{
     border-left:1px solid #ccc;
