@@ -3,18 +3,23 @@
     Invite great people to join #{current_company.name}'s talent-community by sending them this link:
     = link_to "#{current_company.subdomain}.getinnercircle.com/join", join_url(subdomain:current_company.subdomain)
 %ul
-  %h3 Creatives
+  %h3 Creatives (#{@creative.count})
   - @creative.each do |talent|
-    %li= talent.full_name
+    %li= link_to(capitalize_phrase(talent.full_name), user_url(talent))
 %ul
-  %h3 Operations
+  %h3 Operations (#{@operations.count})
   - @operations.each do |talent|
-    %li= talent.full_name
+    %li= link_to(capitalize_phrase(talent.full_name), user_url(talent))
 %ul
-  %h3 Sales & Marketing
+  %h3 Sales & Marketing (#{@sales_marketing.count})
   - @sales_marketing.each do |talent|
-    %li= talent.full_name
+    %li= link_to(capitalize_phrase(talent.full_name), user_url(talent))
 %ul
-  %h3 Technology
+  %h3 Technology (#{@technology.count})
   - @technology.each do |talent|
-    %li= talent.full_name
+    %li= link_to(capitalize_phrase(talent.full_name), user_url(talent))
+
+%section.highlite
+  %h4 Who should I invite?
+  %p
+    Invite people you’ve met at meetups, panels, hackathons, online—anyone you’d like to keep on your watch-list.

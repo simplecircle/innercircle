@@ -1,0 +1,9 @@
+%h1= capitalize_phrase(@user.full_name)
+%h2= @user.profile.job_title.capitalize if @user.profile.job_title
+%p
+  = link_to("Learn more", @user.profile.url, target:"_blank") if @user.profile.url
+%p
+  = mail_to(@user.email, "Email #{first_name(@user.full_name)}") if @user.email
+%ul#skills
+  - @user.profile.skills.each do |skill|
+    %li= skill

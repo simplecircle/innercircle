@@ -20,4 +20,6 @@ class User < ActiveRecord::Base
   def self.by_category(subdomain, category)
     joins(:company, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:full_name)
   end
+
+
 end

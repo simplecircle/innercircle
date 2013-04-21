@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user, :current_company
+  helper_method :current_user, :current_company, :capitalize_phrase, :first_name
 
   private
 
@@ -15,5 +15,13 @@ class ApplicationController < ActionController::Base
 
   def restrict_access
     redirect_to(login_url) unless current_user
+  end
+
+  def capitalize_phrase(phrase)
+    phrase.split.each{|x|x.capitalize!}.join(" ")
+  end
+
+  def first_name(full_name)
+    full_name.split.first.capitalize
   end
 end
