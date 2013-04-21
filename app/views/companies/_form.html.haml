@@ -1,29 +1,30 @@
 = form_for @company, :html=>{multipart:true} do |f|
-  = f.fields_for :users do |user|
-    = user.hidden_field :role, value:"admin"
+  %fieldset
+    = f.fields_for :users do |user|
+      = user.hidden_field :role, value:"admin"
+      %p
+        .inline_error= @company.users.first.errors[:full_name].first
+        = user.label :full_name
+        = user.text_field :full_name, class:"span4"
+      %p
+        .inline_error= @company.users.first.errors[:email].first
+        = user.label :email
+        = user.text_field :email, class:"input-block-level"
+      %p
+        .inline_error= @company.users.first.errors[:password].first
+        = user.label :password
+        = user.password_field :password, class:"input-block-level"
     %p
-      .inline_error= @company.users.first.errors[:full_name].first
-      = user.label :full_name
-      = user.text_field :full_name
+      .inline_error= @company.errors[:name].first
+      = f.label :name, "Company name"
+      = f.text_field :name, class:"input-block-level"
     %p
-      .inline_error= @company.users.first.errors[:email].first
-      = user.label :email
-      = user.text_field :email
+      .inline_error= @company.errors[:website_url].first
+      = f.label :website_url
+      = f.text_field :website_url, class:"input-block-level"
     %p
-      .inline_error= @company.users.first.errors[:password].first
-      = user.label :password
-      = user.password_field :password
-  %p
-    .inline_error= @company.errors[:name].first
-    = f.label :name, "Company name"
-    = f.text_field :name
-  %p
-    .inline_error= @company.errors[:website_url].first
-    = f.label :website_url
-    = f.text_field :website_url
-  %p
-    .inline_error= @company.errors[:banner].first
-    = f.label :banner
-    = f.file_field :banner
-  = f.submit "Create account"
+      .inline_error= @company.errors[:banner].first
+      = f.label :banner
+      = f.file_field :banner
+    = f.submit "Create account", class:"btn btn-large"
 

@@ -52,6 +52,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    commonjs (0.2.6)
     erubis (2.7.0)
     excon (0.20.1)
     execjs (1.4.0)
@@ -83,6 +84,11 @@ GEM
       thor (~> 0.14)
     json (1.7.7)
     kgio (2.8.0)
+    less (2.3.2)
+      commonjs (~> 0.2.6)
+    less-rails (2.3.3)
+      actionpack (>= 3.1)
+      less (~> 2.3.1)
     libv8 (3.3.10.4)
     lograge (0.2.0)
       actionpack
@@ -148,6 +154,10 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    twitter-bootstrap-rails (2.2.6)
+      actionpack (>= 3.1)
+      execjs
+      railties (>= 3.1)
     tzinfo (0.3.37)
     uglifier (2.0.1)
       execjs (>= 0.3.0)
@@ -173,6 +183,7 @@ DEPENDENCIES
   haml
   haml-rails
   jquery-rails (= 1.0.19)
+  less-rails
   lograge
   pg
   rails (= 3.2.12)
@@ -180,5 +191,6 @@ DEPENDENCIES
   sass
   sass-rails (~> 3.2.3)
   therubyracer (~> 0.9.8)
+  twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   unicorn
