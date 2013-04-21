@@ -12,25 +12,26 @@
   .row
     .span1
       &nbsp;
-    .span6
-      %h3 Creatives (#{@creative.count})
-      %ul
+    .span6#dashboard_index.mtxl
+      %h4.bb-1 Creatives (#{@creative.count})
+      %ul.unstyled
         - @creative.each do |talent|
-          %li= link_to(capitalize_phrase(talent.full_name), user_url(talent))
-      %h3 Operations (#{@operations.count})
-      %ul
+          = link_to user_url(talent) do
+            %li= capitalize_phrase(talent.full_name)
+      %h4.bb-1 Operations (#{@operations.count})
+      %ul.unstyled
         - @operations.each do |talent|
           %li= link_to(capitalize_phrase(talent.full_name), user_url(talent))
-      %h3 Sales & Marketing (#{@sales_marketing.count})
-      %ul
+      %h4.bb-1 Sales & Marketing (#{@sales_marketing.count})
+      %ul.unstyled
         - @sales_marketing.each do |talent|
           %li= link_to(capitalize_phrase(talent.full_name), user_url(talent))
-      %h3 Technology (#{@technology.count})
-      %ul
+      %h4.bb-1 Technology (#{@technology.count})
+      %ul.unstyled
         - @technology.each do |talent|
           %li= link_to(capitalize_phrase(talent.full_name), user_url(talent))
-    .span3
-      %section.highlite
+    .span5
+      %section.highlight.mtxl.mlxl
         %h4 Who should I invite?
         %p
           Invite people you’ve met at meetups, panels, hackathons, online—anyone you’d like to keep on your watch-list.
