@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @operations = User.by_category(current_company.subdomain, "operations")
     @sales_marketing = User.by_category(current_company.subdomain, "sales & marketing")
     @technology = User.by_category(current_company.subdomain, "technology")
-
+    @headline = "Talent"
   end
 
   def new
@@ -43,6 +43,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @headline = capitalize_phrase(@user.full_name)
   end
 
   def confirmation

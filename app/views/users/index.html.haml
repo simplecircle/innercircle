@@ -21,15 +21,18 @@
       %h4.bb-1 Operations (#{@operations.count})
       %ul.unstyled
         - @operations.each do |talent|
-          %li= link_to(capitalize_phrase(talent.full_name), user_url(talent))
+          = link_to user_url(talent) do
+            %li= capitalize_phrase(talent.full_name)
       %h4.bb-1 Sales & Marketing (#{@sales_marketing.count})
       %ul.unstyled
         - @sales_marketing.each do |talent|
-          %li= link_to(capitalize_phrase(talent.full_name), user_url(talent))
+          = link_to user_url(talent) do
+            %li= capitalize_phrase(talent.full_name)
       %h4.bb-1 Technology (#{@technology.count})
       %ul.unstyled
         - @technology.each do |talent|
-          %li= link_to(capitalize_phrase(talent.full_name), user_url(talent))
+          = link_to user_url(talent) do
+            %li= capitalize_phrase(talent.full_name)
     .span5
       %section.highlight.mtxl.mlxl
         %h4 Who should I invite?

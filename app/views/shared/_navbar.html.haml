@@ -9,21 +9,24 @@
       .container
         .row
           .span1
-            .brand inner circle
+            .brand= link_to("inner circle", talent_url)
           .span11
             %ul.nav
               %li.divider-vertical
-                %h1 Talent
+                %h1= @headline
             %ul.nav.pull-right
               %li
               - if current_company
                 %li
-                  = link_to(capitalize_phrase(current_company.name), root_url)
+                  = link_to(capitalize_phrase(current_company.name), talent_url)
               - if current_user
-                %li
-                  = link_to(capitalize_phrase(current_user.full_name), root_url)
-                %li
-                  = link_to "Log Out", logout_url
+                %li.dropdown
+                  %a.display-strong.white.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                    = first_name(current_user.full_name).capitalize
+                    %b.caret.caret-black
+                  %ul.dropdown-menu
+                    %li= link_to("Settings", root_url)
+                    %li= link_to "Logout", logout_url
               - else
                 %li
                   = link_to "Log In", login_url
