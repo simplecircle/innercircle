@@ -59,12 +59,34 @@ body { padding-top: 60px; }
 @iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
 @iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
 
-@navbarBackground: #555;
-@navbarBackgroundHighlight: #888;
-@navbarText: #eee;
-@navbarLinkColor: #eee;
-
-.navbar .brand {
-  color: #FAFFB8;
+@navbarBackground: white;
+@navbarBackgroundHighlight: white;
+@navbarText: #666666;
+@navbarLinkColor: #6fa6db;
+.navbar{
+  h1{
+    padding-left:10px;
+  }
+  .brand {
+    color: #cccccc;
+    font-size:14px;
+    font-weight:bold;
+    padding:10px 0 0 0;
+  }
+  .divider-vertical{
+    border-left:1px solid #ccc;
+    height:60px;
+    margin-left:-13px;
+  }
+  .nav > li > a {
+    padding-top:20px;
+  }
+  .nav.pull-right{
+    border-left:1px solid #ccc;
+    height:60px;
+  }
+}
+.navbar-fixed-top .navbar-inner{
+  box-shadow:none;
 }
 
