@@ -25,7 +25,7 @@
                     = first_name(current_user.full_name).capitalize
                     %b.caret.caret-black
                   %ul.dropdown-menu
-                    %li= link_to("Settings", root_url)
+                    %li= link_to("Edit profile", root_url)
                     %li= link_to "Logout", logout_url
               - else
                 %li

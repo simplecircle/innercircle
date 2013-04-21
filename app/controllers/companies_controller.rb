@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
 
   # before_filter :restrict_access
+  layout :choose_layout
 
   def new
     @company = Company.new
@@ -22,5 +23,15 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+  end
+
+  private
+
+  def choose_layout
+    if ['new'].include? action_name
+      'onboarding'
+    else
+      'application'
+    end
   end
 end
