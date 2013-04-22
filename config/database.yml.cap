@@ -1,0 +1,17 @@
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: innercircle_production
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
+
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: innercircle_staging
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
