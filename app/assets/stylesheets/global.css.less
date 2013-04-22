@@ -8,25 +8,39 @@
   outline-style: none;
 }
 @yellow: #FFF8C2;
-  section {
-    &.highlight{
-      background:@yellow;
-      padding:2px 10px 10px 10px;
-     .border-radius(@borderRadiusLarge);
-     text-align:center;
-     p{
-      color:@gray;
-     }
-    }
+section {
+  &.gray{
+    background:@grayLighter;
   }
+  &.highlight{
+    background:@yellow;
+    padding:2px 10px 10px 10px;
+   .border-radius(@borderRadiusLarge);
+   text-align:center;
+   p{
+    color:@gray;
+   }
+  }
+}
+.checkbox-group{
+  label{
+    color:@grayLight;
+    font-size:16px;
+    padding-left:20px;
+  }
+}
+.column-center{
+  float:none;
+  margin:0 auto;
+}
 .inline_error{
   color:red;
   line-height:30px;
 }
 .field_with_errors input{
-  /*background:#FFD2CC;*/
   border:2px solid red;
 }
+
 /* borders */
 .bt-1 { border-top: 1px solid #ccc; }
 .bb-1 { border-bottom: 1px solid #ccc; }

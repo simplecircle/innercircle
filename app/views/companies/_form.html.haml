@@ -4,25 +4,25 @@
       = user.hidden_field :role, value:"admin"
       %p
         .inline_error= @company.users.first.errors[:full_name].first
-        = user.text_field :full_name, class:"input-block-level", placeholder:"Full name"
+        = user.text_field :full_name, class:"input-block-level", placeholder:"* Full name"
 
       %p
         .inline_error= @company.users.first.errors[:email].first
-        = user.text_field :email, class:"input-block-level", placeholder:"Email"
+        = user.text_field :email, class:"input-block-level", placeholder:"* Email"
         %span.help-block Receipts and account notices will be sent here
 
       %p
         .inline_error= @company.users.first.errors[:password].first
-        = user.password_field :password, class:"input-block-level", placeholder:"Password"
+        = user.password_field :password, class:"input-block-level", placeholder:"* Password"
       %hr
 
       %p
         .inline_error= @company.errors[:name].first
-        = f.text_field :name, class:"input-block-level", placeholder:"Company name"
+        = f.text_field :name, class:"input-block-level", placeholder:"* Company name"
 
       %p
         .inline_error= @company.errors[:website_url].first
-        = f.text_field :website_url, class:"input-block-level", placeholder:"Company site"
+        = f.text_field :website_url, class:"input-block-level", placeholder:"* Company site"
       .inline_error= @company.errors[:banner].first
       %span.help-block Add a great photo of your team or office
       = f.file_field :banner

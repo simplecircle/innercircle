@@ -1,36 +1,45 @@
-= image_tag(@company.banner_url(:medium))
-%h1= @company.name
+.container
+  .row
+    .span6.column-center
+      = image_tag(@company.banner_url(:large), class:"banner")
+      %h1.text-center= capitalize_phrase(@company.name)
 %hr
-%h2 Join our talent-community to receive job opportunities that match your skills.
-= form_for @user do |f|
-  = f.hidden_field :role, value:"talent"
-  %p
-    .inline_error= @user.errors[:full_name].first
-    = f.label :full_name
-    = f.text_field :full_name
-  %p
-    .inline_error= @user.errors[:email].first
-    = f.label :email
-    = f.text_field :email
-  .inline_error= @user.errors[:categories].first
-  %p Select the category that fits you best
-  - CompanyDept.all.each do |dept|
-    %p
-      = check_box_tag "category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]'
-      = label_tag  "category_#{dept.id.to_s}", dept.name
-  = f.fields_for :profile do |profile|
-    %p
-      = profile.label :job_title
-      = profile.text_field :job_title
-    %p
-      .inline_error= @user.profile.errors[:url].first
-      = profile.label :url, "Your site, blog or Linkedin profile"
-      = profile.text_field :url
-  %p
-    = label_tag :skills
-    :javascript
-      $(document).ready(function() {
-          $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", asHtmlID: true, neverSubmit: true, emptyText: "Type a comma to add a new skill", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
-      });
-    = text_field_tag nil, nil, {id:"skills"}
-  = f.submit "Join now"
+%h4.text-center.mbxl Join our talent-community to receive job opportunities that match your skills.
+%section.gray
+  .container
+    .row
+      .span5.column-center.mtl
+        = form_for @user do |f|
+          = f.hidden_field :role, value:"talent"
+          %p
+            .inline_error= @user.errors[:full_name].first
+            = f.text_field :full_name, class:"input-block-level", placeholder:"* Full name"
+          %p
+            .inline_error= @user.errors[:email].first
+            = f.text_field :email, class:"input-block-level", placeholder:"* Email"
+
+          .inline_error= @user.errors[:categories].first
+          %h4
+            * Which category fits you best?
+          - CompanyDept.all.each do |dept|
+            %p.checkbox-group
+              = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"pull-left")
+              = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
+          %hr
+          = f.fields_for :profile do |profile|
+            %p
+              = profile.text_field :job_title, class:"input-block-level", placeholder:"Job title"
+            %p
+              .inline_error= @user.profile.errors[:url].first
+              = profile.text_field :url, class:"input-block-level", placeholder:"Your site, blog or Linkedin profile"
+          %p
+            = label_tag :skills
+            :javascript
+              $(document).ready(function() {
+                  $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", asHtmlID: true, neverSubmit: true, emptyText: "Type a comma to add a new skill", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
+              });
+            = text_field_tag nil, nil, {id:"skills"}
+          = f.submit("Join now", class:"btn btn-large btn-primary btn-block mtxl mbm")
+          .small.text-center.mbxl
+            Your membership is private. It’s just between you and #{capitalize_phrase(@company.name)}.
+

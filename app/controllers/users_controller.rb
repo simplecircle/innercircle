@@ -57,7 +57,7 @@ class UsersController < ApplicationController
   end
 
   def choose_layout
-    if ['new', 'confirmation'].include? action_name
+    if ['new', 'create', 'confirmation'].include? action_name
       'onboarding'
     else
       'application'

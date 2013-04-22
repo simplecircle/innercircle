@@ -1,6 +1,13 @@
 @import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins.less";
 
 #users{
+  img{
+    &.banner{
+      border:10px solid black;
+      .border-radius(@borderRadiusLarge);
+    }
+  }
   #dashboard_index{
     h4{
       margin:0;
