@@ -221,15 +221,21 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 /*OVERRIDES*/
 @import "twitter/bootstrap/variables.less";
 @import "twitter/bootstrap/mixins.less";
+
 ul.as-selections{
   border: 1px solid #cecece;
   .border-radius(@baseBorderRadius);
+	.box-shadow(none);
+	padding:4px 0px 0px 6px;
 }
 ul.as-selections li.as-original input{
-	padding:18px 0 10px 10px;
+	color:@grayLight;
+	padding-top:5px;
+	height:32px;
 	border:none;
 	.box-shadow(none);
 	font-size:16px;
+	padding-left:2px;
 }
 ul.as-selections li.as-selection-item {
 	color:@gray;
@@ -268,8 +274,21 @@ ul.as-selections li:hover.as-selection-item {
 }
 ul.as-selections li:hover.as-selection-item a.as-close {
   color: darken(@linkColor, 4%);
-  .box-shadow(none);
-
+  text-shadow:none;
 }
-
-
+ul.as-selections li.as-selection-item a:hover.as-close {
+	text-decoration: none;
+}
+ul.as-selections li.as-selection-item.selected{
+	border:1px solid #68B4FD;
+}
+li.as-result-item{
+  .border-radius(0);
+}
+li.as-result-item.active {
+	background-color:#68B4FD;
+	background-image:none;
+	border-color:#68B4FD;
+	color: #fff;
+	text-shadow:none;
+}

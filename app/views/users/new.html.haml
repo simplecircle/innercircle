@@ -32,12 +32,12 @@
               .inline_error= @user.profile.errors[:url].first
               = profile.text_field :url, class:"input-block-level", placeholder:"Your site, blog or Linkedin profile"
           %p
-            = label_tag :skills
             :javascript
               $(document).ready(function() {
-                  $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", startText:"", asHtmlID: true, neverSubmit: true, emptyText: "Type a comma to add a new skill", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
+                  $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", startText:"Skills & tools", asHtmlID: true, minChars:2, neverSubmit: true, emptyText: "Separate tags with a comma or tab", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
               });
             = text_field_tag nil, nil, {id:"skills"}
+            .help-block.small List a handful. i.e Excel, baking, Ruby, Agile, responsive design...
           = f.submit("Join now", class:"btn btn-large btn-primary btn-block mtxl mbm")
           .small.text-center.mbxl
             Your membership is private. It’s just between you and #{capitalize_phrase(@company.name)}.
