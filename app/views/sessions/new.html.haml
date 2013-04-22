@@ -1,14 +1,11 @@
 #user
-  .row.inner
-    .col.span_5
-      &nbsp;
-    .col.span_7
-      = form_tag login_url do
-        %p
-          = label_tag :email
-          = text_field_tag :email, params[:email]
-        %p
-          = label_tag :password
-          = password_field_tag :password
-        #submit_wrapper
-          = submit_tag "Login", class:"btn huge fl"
+  .container
+    .row
+      .span5.column-center
+        .well
+          = form_tag login_url do
+            %p
+              = text_field_tag :email, params[:email], class:"input-block-level", placeholder:"Email"
+            %p
+              = password_field_tag :password, nil, class:"input-block-level", placeholder:"Password"
+            = submit_tag "Login", class:"btn btn-large btn-primary btn-block"

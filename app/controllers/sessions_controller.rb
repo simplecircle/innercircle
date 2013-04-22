@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  layout "onboarding"
+
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
@@ -13,6 +15,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to login_url, notice: "Logged out!"
+    redirect_to login_url, notice: "Logged out."
   end
 end

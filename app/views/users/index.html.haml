@@ -6,7 +6,7 @@
       - if current_company
         %h2.mtl
           Invite great people to join #{capitalize_phrase(current_company.name)}'s talent-community by sending them this link:
-        %h4= link_to "#{current_company.subdomain}.getinnercircle.com/join", join_url(subdomain:current_company.subdomain)
+        %h4= link_to("#{current_company.subdomain}.getinnercircle.com/join", join_url(subdomain:current_company.subdomain), target:"_blank")
 %hr
 .container
   .row

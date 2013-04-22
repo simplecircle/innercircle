@@ -1,0 +1,7 @@
+- unless flash[:notice].blank?
+  #flash-notice
+    = raw flash.notice
+
+- unless flash[:alert].blank?
+  #flash-alert
+    = raw flash[:alert]

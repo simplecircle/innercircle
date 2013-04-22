@@ -9,7 +9,7 @@
       %p
         .inline_error= @company.users.first.errors[:email].first
         = user.text_field :email, class:"input-block-level", placeholder:"* Email"
-        %span.help-block Receipts and account notices will be sent here
+        %span.help-block.small Receipts and account notices will be sent here
 
       %p
         .inline_error= @company.users.first.errors[:password].first
