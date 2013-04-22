@@ -7,6 +7,7 @@ class Profile < ActiveRecord::Base
   after_validation :add_url_protocol
 
   validates_format_of :url, with:/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}?/, message:"URL isn't valid", allow_blank:true
+  validates :job_title, presence:true
 
   acts_as_taggable_on :skills
   ActsAsTaggableOn.force_lowercase = true

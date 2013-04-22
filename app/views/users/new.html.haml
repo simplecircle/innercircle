@@ -27,7 +27,8 @@
           %hr
           = f.fields_for :profile do |profile|
             %p
-              = profile.text_field :job_title, class:"input-block-level", placeholder:"Job title"
+              .inline_error= @user.profile.errors[:job_title].first
+              = profile.text_field :job_title, class:"input-block-level", placeholder:"* Job title"
             %p
               .inline_error= @user.profile.errors[:url].first
               = profile.text_field :url, class:"input-block-level", placeholder:"Your site, blog or Linkedin profile"
