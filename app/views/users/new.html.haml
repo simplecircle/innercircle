@@ -19,8 +19,7 @@
             = f.text_field :email, class:"input-block-level", placeholder:"* Email"
 
           .inline_error= @user.errors[:categories].first
-          %h4
-            * Which category fits you best?
+          .help-block * Which category fits you best?
           - CompanyDept.all.each do |dept|
             %p.checkbox-group
               = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"pull-left")
@@ -36,7 +35,7 @@
             = label_tag :skills
             :javascript
               $(document).ready(function() {
-                  $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", asHtmlID: true, neverSubmit: true, emptyText: "Type a comma to add a new skill", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
+                  $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", startText:"", asHtmlID: true, neverSubmit: true, emptyText: "Type a comma to add a new skill", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
               });
             = text_field_tag nil, nil, {id:"skills"}
           = f.submit("Join now", class:"btn btn-large btn-primary btn-block mtxl mbm")

@@ -215,3 +215,61 @@ ul.as-list,  x:-moz-any-link, x:default {
 BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 	border: none;
 }
+
+
+
+/*OVERRIDES*/
+@import "twitter/bootstrap/variables.less";
+@import "twitter/bootstrap/mixins.less";
+ul.as-selections{
+  border: 1px solid #cecece;
+  .border-radius(@baseBorderRadius);
+}
+ul.as-selections li.as-original input{
+	padding:18px 0 10px 10px;
+	border:none;
+	.box-shadow(none);
+	font-size:16px;
+}
+ul.as-selections li.as-selection-item {
+	color:@gray;
+	font-size:14px;
+	font-family:@sansFontFamily;
+	text-shadow:none;
+	background-color:@grayLighter;
+	background-image:none;
+	border-top-color:none;
+	border: 1px solid #cecece;
+	padding: 4px 7px 4px 10px;
+	margin-top:4px;
+  .border-radius(@baseBorderRadius);
+	.box-shadow(none);
+}
+ul.as-selections li.as-selection-item.blur {
+	color:@gray;
+	font-size:14px;
+	font-family:@sansFontFamily;
+	text-shadow:none;
+	background-color:#E6E6E6;
+	background-image:none;
+	border-top-color:none;
+	border: 1px solid #cecece;
+	padding: 4px 7px 4px 10px;
+	margin-top:4px;
+  .border-radius(@baseBorderRadius);
+	.box-shadow(none);
+}
+ul.as-selections li:hover.as-selection-item {
+	color:white;
+	background-color:#68B4FD;
+	background-image:none;
+	border-color:#68B4FD;
+	border-top-color:#68B4FD;
+}
+ul.as-selections li:hover.as-selection-item a.as-close {
+  color: darken(@linkColor, 4%);
+  .box-shadow(none);
+
+}
+
+
