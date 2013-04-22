@@ -103,21 +103,22 @@ input[type="file"]{
 }
 
 .btn {
-  box-sizing: border-box;
-  display: inline-block;
-  padding: 3px 16px;
-  margin-bottom: 0; // For input.btn
-  color:white !important;
-  text-shadow:none !important;
-  line-height: @baseLineHeight;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
   background:@linkColor;
   border: 1px solid @linkColor;
   .border-radius(@baseBorderRadius);
+  box-sizing: border-box;
+  color:white !important;
+  cursor: pointer;
+  display: inline-block;
+  line-height: @baseLineHeight;
+  margin-bottom: 0; // For input.btn
+  padding: 7px 16px;
+  text-shadow:none !important;
+  text-align: center;
+  vertical-align: middle;
   &:hover{
     background: darken(@linkColor, 4%);
+    text-decoration:none;
   }
 }
 .btn-large {
