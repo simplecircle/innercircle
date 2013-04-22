@@ -4,37 +4,45 @@
       &nbsp;
     .span11
       - if current_company
-        %h2
-          Invite great people to join #{current_company.name}'s talent-community by sending them this link:
+        %h3.mtl
+          Invite great people to join #{capitalize_phrase(current_company.name)}'s talent-community by sending them this link:
         %h4= link_to "#{current_company.subdomain}.getinnercircle.com/join", join_url(subdomain:current_company.subdomain)
 %hr
 .container
   .row
     .span1
       &nbsp;
-    .span6#dashboard_index.mtxl
-      %h4.bb-1 Creatives (#{@creative.count})
+    .span3
+      %section.highlight.mtxl
+        %h4 Who should I invite?
+        %p
+          Invite people you’ve met at meetups, panels, hackathons, online—anyone you’d like to keep on your watch-list.
+    .span8#dashboard_index.mtxl
+      %h4.bb-1
+        Creatives
+        %span.counter.pull-right (#{@creative.count})
       %ul.unstyled
         - @creative.each do |talent|
           = link_to user_url(talent) do
             %li= capitalize_phrase(talent.full_name)
-      %h4.bb-1 Operations (#{@operations.count})
+      %h4.bb-1
+        Operations
+        %span.counter.pull-right (#{@operations.count})
       %ul.unstyled
         - @operations.each do |talent|
           = link_to user_url(talent) do
             %li= capitalize_phrase(talent.full_name)
-      %h4.bb-1 Sales & Marketing (#{@sales_marketing.count})
+      %h4.bb-1
+        Sales & Marketing
+        %span.counter.pull-right (#{@sales_marketing.count})
       %ul.unstyled
         - @sales_marketing.each do |talent|
           = link_to user_url(talent) do
             %li= capitalize_phrase(talent.full_name)
-      %h4.bb-1 Technology (#{@technology.count})
+      %h4.bb-1
+        Technology
+        %span.counter.pull-right (#{@technology.count})
       %ul.unstyled
         - @technology.each do |talent|
           = link_to user_url(talent) do
             %li= capitalize_phrase(talent.full_name)
-    .span5
-      %section.highlight.mtxl.mlxl
-        %h4 Who should I invite?
-        %p
-          Invite people you’ve met at meetups, panels, hackathons, online—anyone you’d like to keep on your watch-list.

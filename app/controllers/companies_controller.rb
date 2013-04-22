@@ -28,7 +28,7 @@ class CompaniesController < ApplicationController
   private
 
   def choose_layout
-    if ['new'].include? action_name
+    if ['new', 'create'].include? action_name
       'onboarding'
     else
       'application'
