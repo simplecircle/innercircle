@@ -1,0 +1,52 @@
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins.less";
+
+
+/* Begin custom rules*/
+@media (max-width:570px) {
+  h1{
+    font-size:30px;
+    line-height:34px;
+  }
+  h2{
+    font-size:26px;
+    line-height:30px;
+  }
+  #users{
+    img{
+      &.banner{
+        border:none;
+        border-bottom:1px solid @gray;
+        .border-radius(0);
+        box-sizing:border-box;
+        margin-top:-30px;
+      }
+    }
+  }
+  section{
+    &.highlight{
+      .border-radius(0);
+    }
+  }
+  .mobile-padding{
+    padding:0 20px 0 20px;
+  }
+  .well{
+    .border-radius(0);
+  }
+  /*This needs to be set along with body padding left and right 0 in responsive 767 to make screen full bleed */
+/* .navbar-fixed-top {
+    margin-right:0;
+  }
+  #logo{
+    margin-left:0px;
+    position:absolute;
+    width:145px;
+  }
+   .row-fluid .controls-row [class*="span"] + [class*="span"] {
+    margin-left:0 !important;
+  }
+*/
+}
+
+

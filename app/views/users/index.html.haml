@@ -2,22 +2,22 @@
   .row
     .span1
       &nbsp;
-    .span11
+    .span11.mobile-padding
       - if current_company
         %h2.mtl
           Invite great people to join #{capitalize_phrase(current_company.name)}'s talent-community by sending them this link:
         %h4= link_to("#{current_company.subdomain}.getinnercircle.com/join", join_url(subdomain:current_company.subdomain), target:"_blank")
-%hr
+%hr.hidden-phone
 .container
   .row
-    .span1
+    .span1.hidden-phone
       &nbsp;
     .span3
       %section.highlight.mtxl
         %h4 Who should I invite?
         %p
           Invite people you’ve met at meetups, panels, hackathons, online—anyone you’d like to keep on your watch-list.
-    .span8#dashboard_index.mtxl
+    .span8#dashboard_index.mtxl.mobile-padding
       %h4.bb-1
         Creatives
         %span.counter.pull-right (#{@creative.count})

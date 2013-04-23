@@ -1,4 +1,4 @@
-= form_for(@company, :html=>{multipart:true, class:"well"}) do |f|
+= form_for(@company, :html=>{multipart:true}) do |f|
   %fieldset
     = f.fields_for :users do |user|
       = user.hidden_field :role, value:"admin"

@@ -10,9 +10,11 @@
  *
  *= require_self
  *= require bootstrap_and_overrides
+ *= require responsive-767px-max-override
  *= require users
  *= require company
  *= require global
  *= require autoSuggest
+ *= require media_query_overrides
 */
 

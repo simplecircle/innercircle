@@ -2,20 +2,19 @@
   .row
     .span1
       &nbsp;
-    .span11
+    .span11.mobile-padding
       %h1 Create your account & company profile
-%hr
+%hr.hidden-phone
 .container
   .row
     .span1
       &nbsp
-    .span5
+    .span5.well
       = render 'form'
-    .span5
+    .span5.mobile-padding
       %section
         %h4 Inner Circle will help your company:
         %ul
           %li Keep their hiring funnel filled
           %li Keep passive candidates in the loop
           %li Share company culture
-

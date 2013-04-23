@@ -3,13 +3,13 @@
     .span1
       &nbsp;
     .span11
-      %h3.mbn.mtl= @user.profile.job_title.capitalize if @user.profile.job_title
+      %h3.mbn.mtl.mobile-padding= @user.profile.job_title.capitalize if @user.profile.job_title
 %hr
 .container
   .row
     .span1
       &nbsp;
-    .span8
+    .span8.mobile-padding
       = link_to("Learn more", @user.profile.url, target:"_blank", class:"btn btn-primary pull-left mrl") if @user.profile.url
       = mail_to(@user.email, "Email #{first_name(@user.full_name)}", class:"btn btn-primary pull-left") if @user.email
       .clearfix
