@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:devilcoders/cloudfiles_asset_sync.git
+  revision: 9fd5e2d2d6b713ef0d0ef2183299b63db4136a42
+  specs:
+    cloudfiles_asset_sync (1.1.2)
+      cloudfiles
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -45,6 +52,8 @@ GEM
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
+    cloudfiles (1.5.0.1)
+      json
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -177,6 +186,7 @@ DEPENDENCIES
   capistrano
   capistrano-ext (~> 1.2.1)
   carrierwave
+  cloudfiles_asset_sync!
   coffee-rails (~> 3.2.1)
   execjs
   fog
