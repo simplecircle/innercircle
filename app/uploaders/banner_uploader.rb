@@ -55,7 +55,7 @@ class BannerUploader < CarrierWave::Uploader::Base
         :rackspace_servicenet => Rails.env.production?
       }
       config.fog_directory = "production_innercircle_media"
-      config.fog_host = "http://06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com"
+      config.asset_host = "http://06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com"
       config.storage = :fog
     end
   elsif Rails.env.staging?
@@ -67,7 +67,7 @@ class BannerUploader < CarrierWave::Uploader::Base
         :rackspace_servicenet => Rails.env.staging?
       }
       config.fog_directory = "staging_innercircle_media"
-      config.fog_host = "http://db32ab1e937965fd76a9-6283d20fe675d8c76c27a22322e7037e.r14.cf1.rackcdn.com"
+      config.asset_host = "http://db32ab1e937965fd76a9-6283d20fe675d8c76c27a22322e7037e.r14.cf1.rackcdn.com"
       config.storage = :fog
     end
   else
