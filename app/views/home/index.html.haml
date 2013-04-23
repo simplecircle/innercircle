@@ -5,6 +5,11 @@
       %hr.mbxl
       %h1.text-center
         Yes, your company does need a talent-community.
-      %h4.text-center
-        Inner Circle can help.
-        = link_to "Sign up now", signup_url
+      .text-center
+        %h2
+          Inner Circle can help.
+        %hr.mbxl
+        = link_to("Sign Up Now", signup_url, class:"btn btn-large btn-primary")
+        .mtl
+          Already have an account?
+          = link_to("Login", login_url, class:"")
