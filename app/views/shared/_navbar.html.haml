@@ -1,5 +1,6 @@
 .navbar.navbar-fixed-top
   .navbar-inner
+    %h1.hidden-desktop.pull-left= @headline
     %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
       %span.icon-bar
       %span.icon-bar
@@ -8,13 +9,13 @@
       .container
         .row
           .span1
-            .brand= link_to(image_tag("logo_small_gray.jpg"), talent_url)
+            .brand.hidden-phone= link_to(image_tag("logo_small_gray.jpg"), talent_url)
           .span11
             %ul.nav
               %li.divider-vertical
-                %h1= @headline
+                %h1.hidden-phone= @headline
             %ul.nav.pull-right
-              %li
+              %li.divider-vertical
               - if current_company
                 %li
                   = link_to(capitalize_phrase(current_company.name), talent_url)

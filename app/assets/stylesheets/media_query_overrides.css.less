@@ -10,7 +10,7 @@
   }
   h2{
     font-size:26px;
-    line-height:30px;
+    line-height:33px;
   }
   #users{
     img{
@@ -26,6 +26,18 @@
   section{
     &.highlight{
       .border-radius(0);
+    }
+  }
+  .navbar-fixed-top{
+    margin:0;
+    .navbar-inner{
+      background-image:none;
+      background-color:@grayLighter;
+    }
+    .nav > li > a {
+      padding-top:7px;
+      font-size:20px;
+      color:@gray;
     }
   }
   .mobile-padding{
