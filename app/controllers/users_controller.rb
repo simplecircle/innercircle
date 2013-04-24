@@ -43,7 +43,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @headline = capitalize_phrase(@user.full_name)
+    @headline = "#{@user.first_name.capitalize} #{@user.last_name.capitalize}"
   end
 
   def confirmation

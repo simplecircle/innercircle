@@ -28,6 +28,9 @@
       .border-radius(0);
     }
   }
+  .mobile-padding{
+    padding:0 10px 0 10px;
+  }
   .navbar-fixed-top{
     margin:0;
     .navbar-inner{
@@ -40,25 +43,13 @@
       color:@gray;
     }
   }
-  .mobile-padding{
-    padding:0 10px 0 10px;
+  /*This fixes rotation bug on mobile views that have form fields*/
+  .row-fluid .controls-row [class*="span"] + [class*="span"] {
+    margin-left:0 !important;
   }
   .well{
     .border-radius(0);
   }
-  /*This needs to be set along with body padding left and right 0 in responsive 767 to make screen full bleed */
-/* .navbar-fixed-top {
-    margin-right:0;
-  }
-  #logo{
-    margin-left:0px;
-    position:absolute;
-    width:145px;
-  }
-   .row-fluid .controls-row [class*="span"] + [class*="span"] {
-    margin-left:0 !important;
-  }
-*/
 }
 
 

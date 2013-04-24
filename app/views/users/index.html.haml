@@ -24,25 +24,25 @@
       %ul.unstyled
         - @creative.each do |talent|
           = link_to user_url(talent) do
-            %li= capitalize_phrase(talent.full_name)
+            %li= "#{talent.first_name.capitalize} #{talent.last_name.capitalize}"
       %h4.bb-1
         Operations
         %span.counter.pull-right (#{@operations.count})
       %ul.unstyled
         - @operations.each do |talent|
           = link_to user_url(talent) do
-            %li= capitalize_phrase(talent.full_name)
+            %li= "#{talent.first_name.capitalize} #{talent.last_name.capitalize}"
       %h4.bb-1
         Sales & Marketing
         %span.counter.pull-right (#{@sales_marketing.count})
       %ul.unstyled
         - @sales_marketing.each do |talent|
           = link_to user_url(talent) do
-            %li= capitalize_phrase(talent.full_name)
+            %li= "#{talent.first_name.capitalize} #{talent.last_name.capitalize}"
       %h4.bb-1
         Technology
         %span.counter.pull-right (#{@technology.count})
       %ul.unstyled
         - @technology.each do |talent|
           = link_to user_url(talent) do
-            %li= capitalize_phrase(talent.full_name)
+            %li= "#{talent.first_name.capitalize} #{talent.last_name.capitalize}"

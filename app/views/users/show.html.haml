@@ -11,7 +11,7 @@
       &nbsp;
     .span8.mobile-padding
       = link_to("Learn more", @user.profile.url, target:"_blank", class:"btn btn-primary pull-left mrl") if @user.profile.url
-      = mail_to(@user.email, "Email #{first_name(@user.full_name)}", class:"btn btn-primary pull-left") if @user.email
+      = mail_to(@user.email, "Email #{@user.first_name.capitalize}", class:"btn btn-primary pull-left") if @user.email
       .clearfix
 
       %h4.mtxl Job categories:

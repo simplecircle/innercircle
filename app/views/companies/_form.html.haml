@@ -2,17 +2,16 @@
   %fieldset
     = f.fields_for :users do |user|
       = user.hidden_field :role, value:"admin"
-      %p
-        .inline_error= @company.users.first.errors[:full_name].first
-        = user.text_field :full_name, class:"input-block-level", placeholder:"* Full name"
-
+      .row-fluid
+        .controls.controls-row
+          = user.text_field :first_name, class:"span6", placeholder:"* First name"
+          = user.text_field :last_name, class:"span6", placeholder:"* Last name"
       %p
         .inline_error= @company.users.first.errors[:email].first
         = user.text_field :email, class:"input-block-level", placeholder:"* Email"
         %span.help-block.small Receipts and account notices will be sent here
 
       %p
-        .inline_error= @company.users.first.errors[:password].first
         = user.password_field :password, class:"input-block-level", placeholder:"* Password"
       %hr
 
