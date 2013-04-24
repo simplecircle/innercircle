@@ -18,6 +18,25 @@
         %p
           Invite people you’ve met at meetups, panels, hackathons, online—anyone you’d like to keep on your watch-list.
     .span8#dashboard_index.mtxl.mobile-padding
+      %h4 Sample email text:
+      %p.mts
+        Hi There!
+        %br
+        I wanted to invite you to join #{capitalize_phrase(current_company.name)}'s talent community. It’s a great way to learn about new opportunities, events and news at #{capitalize_phrase(current_company.name)}. Just fill out this short form and we’ll send you relevant opportunities as they come up.
+        %br
+        %br
+        #{current_company.subdomain}.getinnercircle.com/join
+%hr.hidden-phone
+.container-fluid
+  .row-fluid
+    .span1.hidden-phone
+      &nbsp;
+    .span3
+      %section.highlight.mtxl
+        %h4 Then what happens?
+        %p
+          As talent joins, they’ll show up in these categories.
+    .span8#dashboard_index.mtxl.mobile-padding
       %h4.bb-1
         Creatives
         %span.counter.pull-right (#{@creative.count})
