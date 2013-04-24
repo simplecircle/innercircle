@@ -1,12 +1,10 @@
 #user
-  .container
-    .row
-      .span5.column-center
-        .text-center.mbxl= link_to(image_tag("logo_small_gray.jpg"), talent_url)
-        .well
-          = form_tag login_url do
-            %p
-              = text_field_tag :email, params[:email], class:"input-block-level", placeholder:"Email"
-            %p
-              = password_field_tag :password, nil, class:"input-block-level", placeholder:"Password"
-            = submit_tag "Login", class:"btn btn-large btn-primary btn-block"
+  .span5.column-center
+    .text-center.mbxl= link_to(image_tag("logo_small_gray.jpg"), talent_url)
+    .well
+      = form_tag login_url do
+        %p
+          = text_field_tag :email, params[:email], class:"input-block-level", placeholder:"Email"
+        %p
+          = password_field_tag :password, nil, class:"input-block-level", placeholder:"Password"
+        = submit_tag "Login", class:"btn btn-large btn-primary btn-block"

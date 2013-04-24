@@ -1,5 +1,5 @@
-.container
-  .row
+.container-fluid
+  .row-fluid
     .span1
       &nbsp;
     .span11.mobile-padding
@@ -8,8 +8,8 @@
           Invite great people to join #{capitalize_phrase(current_company.name)}'s talent-community by sending them this link:
         %h4= link_to("#{current_company.subdomain}.getinnercircle.com/join", join_url(subdomain:current_company.subdomain), target:"_blank")
 %hr.hidden-phone
-.container
-  .row
+.container-fluid
+  .row-fluid
     .span1.hidden-phone
       &nbsp;
     .span3
