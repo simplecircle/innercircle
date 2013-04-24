@@ -1,7 +1,7 @@
 .span6.column-center
   = image_tag(@company.banner_url(:large), class:"banner")
   %h1.text-center.mobile-padding= capitalize_phrase(@company.name)
-%h4.text-center.mobile-padding.mbxl Join our talent-community to receive job opportunities that match your skills.
+  %h4.text-center.mobile-padding.mbxl Join our talent-community to receive job opportunities that match your skills.
 %section.gray
   .span5.column-center.mobile-padding
     = form_for @user do |f|
