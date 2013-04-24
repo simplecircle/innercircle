@@ -1,9 +1,10 @@
 @import "twitter/bootstrap/variables.less";
 @import "twitter/bootstrap/mixins.less";
-div{
-  background:red;
-}
 
+/*This form hack needs to be here so rotation sizing works as expected on ios6*/
+form{
+ overflow: hidden;
+}
 /*Remove default browser outline focus*/
 :focus {
   outline-color: transparent;
