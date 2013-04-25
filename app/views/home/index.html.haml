@@ -6,10 +6,16 @@
       %h1.text-center
         Yes, your company does need a talent-community.
       .text-center
-        %h2
-          Inner Circle can help.
+        %h3
+          Use Inner Circle to keep in touch with the best people.
         %hr.mbxl
         = link_to("Sign Up Now", signup_url, class:"btn btn-large btn-primary")
-        .mtl
+        .mtl.mbxl
           Already have an account?
           = link_to("Login", login_url, class:"")
+        .mtxl.mbxl &nbsp;
+        .mtxl.mbxl &nbsp;
+        %h5.mtxl.mbn
+          Looking for opportunities at your favorite companies?
+        Get in line for an invite 
+        = mail_to("getinnercircle@gmail.com", "here.")
