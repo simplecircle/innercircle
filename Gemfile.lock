@@ -1,6 +1,6 @@
 GIT
-  remote: git@github.com:devilcoders/cloudfiles_asset_sync.git
-  revision: 9fd5e2d2d6b713ef0d0ef2183299b63db4136a42
+  remote: git@github.com:simplecircle/cloudfiles_asset_sync.git
+  revision: a61657a6817e5d0e98cf557e4ea776f259ac86f5
   specs:
     cloudfiles_asset_sync (1.1.2)
       cloudfiles
