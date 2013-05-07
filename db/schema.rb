@@ -11,17 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507145948) do
+ActiveRecord::Schema.define(:version => 20130507191543) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.string   "website_url"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "banner"
     t.integer  "width"
     t.integer  "height"
     t.string   "subdomain"
+    t.string   "content_instagram"
+    t.string   "content_facebook"
+    t.string   "content_tumblr"
+    t.string   "content_twitter"
+    t.string   "content_jobs_page"
+    t.string   "short_description", :limit => 80
+    t.string   "hq_city"
+    t.string   "hq_state"
+    t.string   "employee_count"
   end
 
   add_index "companies", ["subdomain"], :name => "index_companies_on_subdomain", :unique => true

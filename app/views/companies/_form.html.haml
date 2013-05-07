@@ -39,24 +39,23 @@
           .inline_error= @company.errors[:website_url].first
 
       .control-group
-        %label.control-label{:for=>:name} 
+        %label.control-label{:for=>:short_description} 
           * Short Description
-          
         .controls
-          = co.text_area :name, :class=>'span8 pam', :maxlength=>"80", :rows=>"3"
+          = co.text_area :short_description, :class=>'span8 pam', :maxlength=>"80", :rows=>"3"
           %span.help-block.small 80 characters max
-          .inline_error= @company.errors[:name].first
+          .inline_error= @company.errors[:short_description].first
 
       .control-group
-        %label.control-label{:for=>:website_url} * Headquarters
+        %label.control-label{:for=>:hq} * Headquarters
         .controls.controls-row
-          = co.text_field :website_url, :class=>'span6'
-          = co.select :website_url, options_for_select([["NY", "NY"], ["pending", "2"], ["success", "3"]]), {}, {:class=> 'span2'}
+          = co.text_field :hq_city, {:class=>'span5', :placeholder=>'City'}
+          = co.select :hq_state, Company.states, {}, {:class=> 'span3', :placeholder => "State"}
 
       .control-group
-        %label.control-label{:for=>:website_url} * Employees
+        %label.control-label{:for=>:employee_count} * Employees
         .controls.controls-row
-          = co.select :website_url, options_for_select([["0-10", "0_10"], ["11-50", "11_50"], ["51 - 100", "51_100"], ["101-250", "101_250"], ["251-500", "251_500"], ["500+", "500_9999"]]), {}, {:class=> 'span8'}
+          = co.select :employee_count, Company.employee_counts, {}, {:class=> 'span8'}
 
       .control-group
         %label.control-label * Company Categories
@@ -78,29 +77,29 @@
       %hr.mtn
 
       .control-group
-        %label.control-label{:for=>:name} * Instagram
+        %label.control-label{:for=>:content_instagram} * Instagram
         .controls
-          = co.text_field :name, {:class=>'span8', :placeholder=>'instagram.com/account'}
+          = co.text_field :content_instagram, {:class=>'span8', :placeholder=>'instagram.com/account'}
           
       .control-group
-        %label.control-label{:for=>:name} * Facebook
+        %label.control-label{:for=>:content_facebook} * Facebook
         .controls
-          = co.text_field :name, {:class=>'span8', :placeholder=>'facebook.com/account'}
+          = co.text_field :content_facebook, {:class=>'span8', :placeholder=>'facebook.com/account'}
           
       .control-group
-        %label.control-label{:for=>:name} * Tumblr
+        %label.control-label{:for=>:content_tumblr} * Tumblr
         .controls
-          = co.text_field :name, {:class=>'span8', :placeholder=>'account.tumblr.com'}
+          = co.text_field :content_tumblr, {:class=>'span8', :placeholder=>'account.tumblr.com'}
           
       .control-group
-        %label.control-label{:for=>:name} * Twitter
+        %label.control-label{:for=>:content_twitter} * Twitter
         .controls
-          = co.text_field :name, {:class=>'span8', :placeholder=>'@account'}
+          = co.text_field :content_twitter, {:class=>'span8', :placeholder=>'@account'}
           
       .control-group
-        %label.control-label{:for=>:name} * Jobs Page
+        %label.control-label{:for=>:content_jobs_page} * Jobs Page
         .controls
-          = co.text_field :name, {:class=>'span8', :placeholder=>'jobs.company.com'}
+          = co.text_field :content_jobs_page, {:class=>'span8', :placeholder=>'jobs.company.com'}
           
 
       %p
