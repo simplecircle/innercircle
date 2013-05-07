@@ -1,20 +1,16 @@
 .span6.column-center
-  //Massive kludge so Niamh doesn't need an image!
-  - unless @company.subdomain == "niamh"
-    = image_tag(@company.banner_url(:large), class:"banner")
   %h1.text-center.mobile-padding= capitalize_phrase(@company.name)
   %h4.text-center.mobile-padding.mbxl Join our talent-community to receive job opportunities that match your skills.
 %section.gray
   .span5.column-center.mobile-padding
     = form_for @user do |f|
       = f.hidden_field :role, value:"talent"
-      .row-fluid.mtl
-        .controls.controls-row
-          = f.text_field :first_name, class:"span6", placeholder:"* First name"
-          = f.text_field :last_name, class:"span6", placeholder:"* Last name"
       %p
         .inline_error= @user.errors[:email].first
         = f.text_field :email, class:"input-block-level", placeholder:"* Email"
+      %p
+        .inline_error= @user.errors[:password].first
+        = f.password_field :password, class:"input-block-level", placeholder:"* Password"
 
       .inline_error= @user.errors[:categories].first
       .help-block * Which category fits you best?
@@ -22,21 +18,6 @@
         %p.checkbox-group
           = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"pull-left")
           = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
-      %hr
-      = f.fields_for :profile do |profile|
-        %p
-          .inline_error= @user.profile.errors[:job_title].first
-          = profile.text_field :job_title, class:"input-block-level", placeholder:"* Job title"
-        %p
-          .inline_error= @user.profile.errors[:url].first
-          = profile.text_field :url, class:"input-block-level", placeholder:"Your site, blog or Linkedin profile"
-      %p
-        :javascript
-          $(document).ready(function() {
-              $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", startText:"Skills & tools", asHtmlID: true, minChars:2, neverSubmit: true, emptyText: "Separate tags with a comma or tab", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
-          });
-        = text_field_tag nil, nil, {id:"skills"}
-        .help-block.small List a handful. i.e Excel, baking, Ruby, Agile, responsive design...
       = f.submit("Join now", class:"btn btn-large btn-primary btn-block mtxl mbm")
       .small.text-center.mbxl
         Your membership is private. It’s just between you and #{capitalize_phrase(@company.name)}.

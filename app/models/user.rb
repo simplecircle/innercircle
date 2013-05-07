@@ -12,8 +12,6 @@ class User < ActiveRecord::Base
   attr_reader :password
   include ActiveModel::SecurePassword::InstanceMethodsOnActivation
 
-  validates :first_name, presence:true
-  validates :last_name, presence:true
   validates :email, presence:true
   validates :email, uniqueness:true
   validates_format_of :email, with:/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i, message:"Email isn't valid"
