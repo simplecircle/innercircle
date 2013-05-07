@@ -9,12 +9,10 @@ gem 'jquery-rails','1.0.19'
 gem 'sass'
 gem 'haml'
 gem 'execjs'
-gem 'therubyracer','~> 0.9.8'
 gem 'fog'
 gem 'rmagick'
 gem 'carrierwave'
 gem 'cloudfiles_asset_sync', :git => 'git@github.com:simplecircle/cloudfiles_asset_sync.git'
-gem 'unicorn'
 gem 'capistrano'
 gem 'capistrano-ext','~> 1.2.1'
 gem 'lograge'
@@ -22,6 +20,12 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'babosa'
 gem 'acts-as-taggable-on'
 
+if RUBY_PLATFORM =~ /mingw32/
+  gem 'therubyracer','0.11.0beta1' #0.11.0beta5
+  gem 'libv8', '~> 3.3.8' #3.3.10.4
+else
+  gem 'unicorn'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
