@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507191543) do
+ActiveRecord::Schema.define(:version => 20130507194117) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(:version => 20130507191543) do
   end
 
   add_index "companies", ["subdomain"], :name => "index_companies_on_subdomain", :unique => true
+
+  create_table "companies_verticals", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "vertical_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "companies_verticals", ["company_id"], :name => "index_companies_verticals_on_company_id"
+  add_index "companies_verticals", ["vertical_id"], :name => "index_companies_verticals_on_vertical_id"
 
   create_table "company_depts", :force => true do |t|
     t.string   "name"
@@ -103,5 +113,11 @@ ActiveRecord::Schema.define(:version => 20130507191543) do
 
   add_index "users_companies", ["company_id"], :name => "index_users_companies_on_company_id"
   add_index "users_companies", ["user_id"], :name => "index_users_companies_on_user_id"
+
+  create_table "verticals", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
