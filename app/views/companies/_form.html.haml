@@ -1,30 +1,111 @@
-= form_for(@company, :html=>{multipart:true}) do |f|
+= form_for(@company, :html=>{multipart:true, :class=> 'form-horizontal'}) do |co|
   %fieldset
-    = f.fields_for :users do |user|
+    = co.fields_for :users do |user|
       = user.hidden_field :role, value:"admin"
-      .row-fluid
+      %h3.form-section-header Your Info
+      %hr.mtn
+      .control-group
+        %label.control-label{:for=>:first_name} * First Name
+        .controls
+          = user.text_field :first_name, :class=>'span8'
+      .control-group
+        %label.control-label{:for=>:last_name} * Last Name
+        .controls
+          = user.text_field :last_name, :class=>'span8'
+      .control-group
+        %label.control-label{:for=>:email} * Email
+        .controls
+          = user.text_field :email, :class=>'span8'
+          .inline_error= @company.users.first.errors[:email].first
+          %span.help-block.small Receipts and account notices will be sent here
+      .control-group
+        %label.control-label{:for=>:password} * Password
+        .controls
+          = user.password_field :password, :class=>'span8'
+
+      %h3.form-section-header Company Info
+      %hr.mtn
+
+      .control-group
+        %label.control-label{:for=>:name} * Company Name
+        .controls
+          = co.text_field :name, :class=>'span8'
+          .inline_error= @company.errors[:name].first
+
+      .control-group
+        %label.control-label{:for=>:website_url} * Website
+        .controls
+          = co.text_field :website_url, :class=>'span8'
+          .inline_error= @company.errors[:website_url].first
+
+      .control-group
+        %label.control-label{:for=>:name} 
+          * Short Description
+          
+        .controls
+          = co.text_area :name, :class=>'span8 pam', :maxlength=>"80", :rows=>"3"
+          %span.help-block.small 80 characters max
+          .inline_error= @company.errors[:name].first
+
+      .control-group
+        %label.control-label{:for=>:website_url} * Headquarters
         .controls.controls-row
-          = user.text_field :first_name, class:"span6", placeholder:"* First name"
-          = user.text_field :last_name, class:"span6", placeholder:"* Last name"
-      %p
-        .inline_error= @company.users.first.errors[:email].first
-        = user.text_field :email, class:"input-block-level", placeholder:"* Email"
-        %span.help-block.small Receipts and account notices will be sent here
+          = co.text_field :website_url, :class=>'span6'
+          = co.select :website_url, options_for_select([["NY", "NY"], ["pending", "2"], ["success", "3"]]), {}, {:class=> 'span2'}
+
+      .control-group
+        %label.control-label{:for=>:website_url} * Employees
+        .controls.controls-row
+          = co.select :website_url, options_for_select([["0-10", "0_10"], ["11-50", "11_50"], ["51 - 100", "51_100"], ["101-250", "101_250"], ["251-500", "251_500"], ["500+", "500_9999"]]), {}, {:class=> 'span8'}
+
+      .control-group
+        %label.control-label * Company Categories
+        .controls.controls-row
+          %label.checkbox{:for=>:name}
+            = co.check_box :name  
+            Vertical 1
+          %label.checkbox{:for=>:name}
+            = co.check_box :name  
+            Vertical 2
+      .control-group
+        %label.control-label * Banner Picture
+        .controls.controls-row
+          = co.file_field :banner
+          %span.help-block Add a great photo of your team or office
+          .inline_error= @company.errors[:banner].first
+      
+      %h3.form-section-header Content Channels
+      %hr.mtn
+
+      .control-group
+        %label.control-label{:for=>:name} * Instagram
+        .controls
+          = co.text_field :name, {:class=>'span8', :placeholder=>'instagram.com/account'}
+          
+      .control-group
+        %label.control-label{:for=>:name} * Facebook
+        .controls
+          = co.text_field :name, {:class=>'span8', :placeholder=>'facebook.com/account'}
+          
+      .control-group
+        %label.control-label{:for=>:name} * Tumblr
+        .controls
+          = co.text_field :name, {:class=>'span8', :placeholder=>'account.tumblr.com'}
+          
+      .control-group
+        %label.control-label{:for=>:name} * Twitter
+        .controls
+          = co.text_field :name, {:class=>'span8', :placeholder=>'@account'}
+          
+      .control-group
+        %label.control-label{:for=>:name} * Jobs Page
+        .controls
+          = co.text_field :name, {:class=>'span8', :placeholder=>'jobs.company.com'}
+          
 
       %p
-        = user.password_field :password, class:"input-block-level", placeholder:"* Password"
-      %hr
-
-      %p
-        .inline_error= @company.errors[:name].first
-        = f.text_field :name, class:"input-block-level", placeholder:"* Company name"
-
-      %p
-        .inline_error= @company.errors[:website_url].first
-        = f.text_field :website_url, class:"input-block-level", placeholder:"* Company site"
-      .inline_error= @company.errors[:banner].first
-      %span.help-block Add a great photo of your team or office
-      = f.file_field :banner
-      %p
-        = f.submit "Create account", class:"btn btn-large btn-block mtl"
+      .control-group
+        %label.control-label
+        .controls
+          = co.submit "Create account", class:"btn btn-large mtl span8"
 
