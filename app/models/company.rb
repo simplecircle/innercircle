@@ -1,6 +1,9 @@
 class Company < ActiveRecord::Base
+
   attr_accessible :name, :website_url, :users_attributes, :banner
-  has_many :users
+
+  has_many :users_companies
+  has_many :users, through: :users_companies
   accepts_nested_attributes_for :users
   after_validation :add_url_protocol
 

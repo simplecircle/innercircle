@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_company
-    @current_company ||= current_user.company if current_user
+    @current_company ||= Company.find(session[:company_id]) if session[:company_id]
   end
 
   def restrict_access

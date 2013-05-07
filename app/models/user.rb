@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :company_id, :email, :first_name, :last_name, :password_digest, :password, :role, :profile_attributes
 
-  belongs_to :company
+  has_many :users_companies
+  has_many :companies, through: :users_companies
   has_one :profile
   accepts_nested_attributes_for :profile
 
@@ -19,7 +20,9 @@ class User < ActiveRecord::Base
   validates :password, presence:true
 
   def self.by_category(subdomain, category)
-    joins(:company, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:first_name)
+    joins(:companies, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:first_name)
+    # This worked before users and company became has_many
+    # joins(:company, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:first_name)
   end
 
 
