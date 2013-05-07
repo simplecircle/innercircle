@@ -1,6 +1,6 @@
 set :deploy_to, "/var/www/sites/#{application}"
 set :rails_env, "production"
-set :branch, "master"
+set :branch, "production"
 set :unicorn_pid, "#{deploy_to}/current/tmp/pids/unicorn.pid"
 
 # Server innercircle(production)
