@@ -6,7 +6,7 @@ class CompaniesController < ApplicationController
   def new
     @company = Company.new
     @user = @company.users.build
-    # @profile = @user.build_profile
+    @profile = @user.build_profile
     @verticals = Vertical.all
   end
 

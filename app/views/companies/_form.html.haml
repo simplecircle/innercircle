@@ -4,16 +4,21 @@
       = user.hidden_field :role, value:"admin"
       %h3.form-section-header Your Info
       %hr.mtn
+      / <input class="span8" id="company_users_attributes_0_email" name="company[users_attributes][0][email]" size="30" type="text">
       .control-group
         %label.control-label{:for=>:first_name} * First Name
         .controls
-          = user.text_field :first_name, :class=>'span8'
-          .inline_error= @company.users.first.errors[:first_name].first
+          = text_field 'company[users_attributes][0][profile_attributes]', 'first_name', :class => "span8"
+          / TODO: fix this kludge (if we want to), and decide if we want to validate
+          / = profile_fields.text_field :first_name, :class=>'span8'
+          / .inline_error= @company.users.first.profile.errors[:first_name].first
       .control-group
         %label.control-label{:for=>:last_name} * Last Name
         .controls
-          = user.text_field :last_name, :class=>'span8'
-          .inline_error= @company.users.first.errors[:last_name].first
+          = text_field 'company[users_attributes][0][profile_attributes]', 'last_name', :class => "span8"
+          / TODO: fix this kludge (if we want to), and decide if we want to validate
+          / = profile_fields.text_field :last_name, :class=>'span8'
+          / .inline_error= @company.users.first.profile.errors[:last_name].first
       .control-group
         %label.control-label{:for=>:email} * Email
         .controls
