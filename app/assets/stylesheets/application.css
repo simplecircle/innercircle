@@ -11,6 +11,7 @@
  *= require_self
  *= require bootstrap_and_overrides
  *= require responsive-767px-max-override
+ *= require variables
  *= require users
  *= require company
  *= require global
