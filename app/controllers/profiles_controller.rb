@@ -2,18 +2,16 @@ class ProfilesController < ApplicationController
 
   layout :choose_layout
   before_filter :find_resource, only: [:show, :update]
-  # before_filter :restrict_access_unless_belongs_to_current_user
+  before_filter :restrict_access_unless_belongs_to_current_user
 
-  def callback
-    if auth = request.env["omniauth.auth"]
-      logger.info "+++++++++++++++++++++++++++"
-      logger.info @skills = auth["extra"]["raw_info"]["skills"].values[1].each{|s| puts s.skill.name}
-      # raise auth.to_yaml
-    end
-  end
   def show
     if auth = request.env["omniauth.auth"]
-      raise auth.to_yaml
+      info = auth["info"]
+      @profile.first_name = info["first_name"]
+      @profile.last_name = info["last_name"]
+      @profile.job_title = info["headline"]
+      @incoming_tags = auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",")
+      # raise auth.to_yaml
     end
   end
 
@@ -30,8 +28,8 @@ class ProfilesController < ApplicationController
   private
 
   def find_resource
-    @profile = Profile.find(params[:id]) || current_user.profile
-    # @user is just here for restrict_access_unless_belongs_to_current_user's use.
+    # Use current_user for linkedin callback
+    @profile = params[:id]? Profile.find(params[:id]) : current_user.profile
     @user = @profile.user
     @company = Company.find_by_subdomain!(request.subdomain)
     @tags = ActsAsTaggableOn::Tag.all.to_json(only: :name)

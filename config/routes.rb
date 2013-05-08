@@ -8,7 +8,7 @@ Innercircle::Application.routes.draw do
   resources :users
   resources :profiles, only:[:show, :update], constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
 
-  match "/auth/linkedin/callback" => "profiles#callback"
+  match "/auth/linkedin/callback" => "profiles#show"
   match "auth/failure" => "home#index"
   get "signup"=>"companies#new"
   get "login"=>"sessions#new"
