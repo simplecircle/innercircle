@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @operations = User.by_category(current_company.subdomain, "operations")
     @sales_marketing = User.by_category(current_company.subdomain, "sales & marketing")
     @technology = User.by_category(current_company.subdomain, "technology")
-    @headline = "Talent"
+    @headline = ""
   end
 
   def new

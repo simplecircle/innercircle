@@ -1,8 +1,22 @@
 .container-fluid
   .row-fluid
-    .span1
-      &nbsp;
-    .span11.mobile-padding
+    .span10.offset1.mobile-padding
+      .row-fluid.dashboard-header
+        .span9
+          %h1.mbn.pull-left= current_company.name + '\'s Dashboard'
+        .span3.hidden-iphone
+          .dashboard-header-links
+            = link_to("#{current_company.subdomain}.jobcrush.co", join_url(subdomain:current_company.subdomain), target:"_blank", class:"mrl")
+            = link_to("Edit profile", '/profile')
+      %hr.man
+  .row-fluid
+    .span10.offset1.mobile-padding
+      %section#awaiting-approval-box.highlight.pal
+        %h4#awaiting-approval-message.mrl 6 posts awaiting approval
+        %button.btn.btn-warning.btn-large Review now
+  .row-fluid
+
+    .span10.mobile-padding.offset1
       - if current_company
         %h2.mtl
           Invite great people to join #{capitalize_phrase(current_company.name)}'s talent-community by sending them this link:
@@ -10,8 +24,6 @@
 %hr.hidden-phone
 .container-fluid
   .row-fluid
-    .span1.hidden-phone
-      &nbsp;
     .span3
       %section.highlight.mtxl
         %h4 Who should I invite?
