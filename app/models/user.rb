@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   has_many :users_companies
   has_many :companies, through: :users_companies
-  has_one :profile
+  has_one :profile, :dependent => :destroy
   accepts_nested_attributes_for :profile
 
   # override has_secure_password forced validation.
