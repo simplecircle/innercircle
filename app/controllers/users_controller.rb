@@ -19,12 +19,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = @company.users.create(params[:user])
+    @user = @company.users.build(params[:user])
     @user.build_profile
-    # Ensure this password doesn't already exist in future iterations before creation
-    # @user.password = SecureRandom.urlsafe_base64
     @depts = params[:company_depts]
+    unless @local_join
+      # Ensure this password doesn't already exist in future iterations before creation
+      @user.password = SecureRandom.urlsafe_base64
+    end
     if @depts.nil?
+      @user.valid?
       @user.errors.add(:categories, "You have to choose at least one category.")
       render "new"
     else
@@ -52,6 +55,7 @@ class UsersController < ApplicationController
 
   def find_resource
     @company = Company.find_by_subdomain!(request.subdomain)
+    @local_join= true if params[:local_join] == "true"
   end
 
   def choose_layout
