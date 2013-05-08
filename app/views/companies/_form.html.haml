@@ -8,10 +8,12 @@
         %label.control-label{:for=>:first_name} * First Name
         .controls
           = user.text_field :first_name, :class=>'span8'
+          .inline_error= @company.users.first.errors[:first_name].first
       .control-group
         %label.control-label{:for=>:last_name} * Last Name
         .controls
           = user.text_field :last_name, :class=>'span8'
+          .inline_error= @company.users.first.errors[:last_name].first
       .control-group
         %label.control-label{:for=>:email} * Email
         .controls
@@ -22,6 +24,7 @@
         %label.control-label{:for=>:password} * Password
         .controls
           = user.password_field :password, :class=>'span8'
+          .inline_error= @company.users.first.errors[:password].first
 
       %h3.form-section-header Company Info
       %hr.mtn
@@ -51,21 +54,24 @@
         .controls.controls-row
           = co.text_field :hq_city, {:class=>'span5', :placeholder=>'City'}
           = co.select :hq_state, Company.states, {}, {:class=> 'span3', :placeholder => "State"}
+          .inline_error= @company.errors[:hq_city].first
+          .inline_error= @company.errors[:hq_state].first
 
       .control-group
         %label.control-label{:for=>:employee_count} * Employees
         .controls.controls-row
           = co.select :employee_count, Company.employee_counts, {}, {:class=> 'span8'}
+          .inline_error= @company.errors[:employee_count].first
 
       .control-group
-        %label.control-label * Company Categories
+        %label.control-label Company Categories
         .controls.controls-row
-          %label.checkbox{:for=>:name}
-            = co.check_box :name  
-            Vertical 1
-          %label.checkbox{:for=>:name}
-            = co.check_box :name  
-            Vertical 2
+          = co.fields_for :verticals do |company_verticals|
+            - Vertical.all.each do |v|
+              %label.checkbox{:for=>:name}
+                = check_box_tag("vertical_#{v.id.to_s}", v.id, (@verticals.include?(v.id.to_s) if @verticals), name: 'verticals[]')
+                = v.name
+            
       .control-group
         %label.control-label * Banner Picture
         .controls.controls-row
@@ -77,27 +83,27 @@
       %hr.mtn
 
       .control-group
-        %label.control-label{:for=>:content_instagram} * Instagram
+        %label.control-label{:for=>:content_instagram} Instagram
         .controls
-          = co.text_field :content_instagram, {:class=>'span8', :placeholder=>'instagram.com/account'}
+          = co.text_field :content_instagram, {:class=>'span8', :placeholder=>'username'}
           
       .control-group
-        %label.control-label{:for=>:content_facebook} * Facebook
+        %label.control-label{:for=>:content_facebook} Facebook
         .controls
-          = co.text_field :content_facebook, {:class=>'span8', :placeholder=>'facebook.com/account'}
+          = co.text_field :content_facebook, {:class=>'span8', :placeholder=>'username'}
           
       .control-group
-        %label.control-label{:for=>:content_tumblr} * Tumblr
+        %label.control-label{:for=>:content_tumblr} Tumblr
         .controls
           = co.text_field :content_tumblr, {:class=>'span8', :placeholder=>'account.tumblr.com'}
           
       .control-group
-        %label.control-label{:for=>:content_twitter} * Twitter
+        %label.control-label{:for=>:content_twitter} Twitter
         .controls
-          = co.text_field :content_twitter, {:class=>'span8', :placeholder=>'@account'}
+          = co.text_field :content_twitter, {:class=>'span8', :placeholder=>'@username'}
           
       .control-group
-        %label.control-label{:for=>:content_jobs_page} * Jobs Page
+        %label.control-label{:for=>:content_jobs_page} Jobs Page
         .controls
           = co.text_field :content_jobs_page, {:class=>'span8', :placeholder=>'jobs.company.com'}
           

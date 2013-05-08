@@ -1,6 +1,6 @@
 class Company < ActiveRecord::Base
 
-  attr_accessible :name, :website_url, :users_attributes, :banner
+  attr_accessible :name, :website_url, :users_attributes, :banner, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :content_instagram, :content_facebook, :content_tumblr, :content_twitter, :content_jobs_page
 
   has_many :users_companies
   has_many :users, through: :users_companies
@@ -9,20 +9,24 @@ class Company < ActiveRecord::Base
   has_many :companies_verticals
   has_many :verticals, through: :companies_verticals
   
-  accepts_nested_attributes_for :users, :verticals
+  accepts_nested_attributes_for :users
 
   mount_uploader :banner, BannerUploader
 
   validates :name, presence:true
   validates :name, uniqueness:true
   validates :website_url, presence:true
+  validates :short_description, presence:true
+  validates :hq_city, presence:true
+  validates_format_of :employee_count, with:/^[\d]+_[\d]+$/, message:"please select a range"
+  validates_format_of :hq_state, with:/^[A-Z]{2}$/, message:"please select a state"
   validates_format_of :website_url, with:/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}?/, message:"URL isn't valid"
   validates :banner, presence:true
 
   private
 
   def self.employee_counts
-    [["0 - 10", "0_10"], ["11 - 50", "11_50"], ["51 - 100", "51_100"], ["101 - 250", "101_250"], ["251 - 500", "251_500"], ["500+", "500_9999"]]
+    [["Select a range", ""], ["0 - 10", "0_10"], ["11 - 50", "11_50"], ["51 - 100", "51_100"], ["101 - 250", "101_250"], ["251 - 500", "251_500"], ["500+", "500_9999"]]
   end
 
   def self.states
