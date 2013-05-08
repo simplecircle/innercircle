@@ -84,6 +84,7 @@ GEM
       activesupport (>= 3.1, < 4.1)
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
+    hashie (2.0.4)
     highline (1.6.18)
     hike (1.2.2)
     i18n (0.6.4)
@@ -116,6 +117,15 @@ GEM
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     nokogiri (1.5.9)
+    oauth (0.4.7)
+    omniauth (1.1.4)
+      hashie (>= 1.2, < 3)
+      rack
+    omniauth-linkedin (0.1.0)
+      omniauth-oauth (~> 1.0)
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
     pg (0.15.1)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -195,6 +205,8 @@ DEPENDENCIES
   jquery-rails (= 1.0.19)
   less-rails
   lograge
+  omniauth
+  omniauth-linkedin
   pg
   rails (= 3.2.12)
   rmagick

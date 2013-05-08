@@ -15,6 +15,8 @@ gem 'lograge'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'babosa'
 gem 'acts-as-taggable-on'
+gem 'omniauth'
+gem 'omniauth-linkedin'
 
 if RUBY_PLATFORM =~ /mingw32/
   gem 'therubyracer','0.11.0beta1' #0.11.0beta5
