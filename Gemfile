@@ -1,9 +1,5 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.12'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'pg'
 gem 'jquery-rails','1.0.19'
 gem 'sass'
@@ -24,6 +20,7 @@ if RUBY_PLATFORM =~ /mingw32/
   gem 'therubyracer','0.11.0beta1' #0.11.0beta5
   gem 'libv8', '~> 3.3.8' #3.3.10.4
 else
+  gem 'therubyracer','~> 0.9.8'
   gem 'unicorn'
 end
 

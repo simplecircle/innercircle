@@ -1,5 +1,5 @@
 class Profile < ActiveRecord::Base
-  attr_accessible :job_title, :url, :user_id, :skills
+  attr_accessible :first_name, :last_name, :job_title, :url, :user_id, :skills
 
   belongs_to :user
   has_many :profiles_company_depts
@@ -7,7 +7,6 @@ class Profile < ActiveRecord::Base
   after_validation :add_url_protocol
 
   validates_format_of :url, with:/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}?/, message:"URL isn't valid", allow_blank:true
-  validates :job_title, presence:true
 
   acts_as_taggable_on :skills
   ActsAsTaggableOn.force_lowercase = true

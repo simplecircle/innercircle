@@ -1,0 +1,23 @@
+.span6.column-center
+  %h4.text-center.mobile-padding.mbxl Success!
+%section.gray
+  .span5.column-center.mobile-padding
+    = form_for @profile do |f|
+      .row-fluid.mtl
+        .controls.controls-row
+          = f.text_field :first_name, class:"span6", placeholder:"First name"
+          = f.text_field :last_name, class:"span6", placeholder:"Last name"
+      %p
+        = f.text_field :job_title, class:"input-block-level", placeholder:"Ideal job title"
+      %p
+        .inline_error= @profile.errors[:url].first
+        = f.text_field :url, class:"input-block-level", placeholder:"Your site, blog or Linkedin profile"
+      %p
+        :javascript
+          $(document).ready(function() {
+              $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", startText:"Skills & tools", asHtmlID: true, minChars:2, neverSubmit: true, emptyText: "Separate tags with a comma or tab", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
+           });
+        = text_field_tag nil, nil, {id:"skills"}
+        .help-block.small List a handful. i.e Excel, baking, Ruby, Agile, responsive design...
+      = f.submit("Submit", class:"btn btn-large btn-primary btn-block mtxl mbm")
+
