@@ -11,20 +11,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507183856) do
+ActiveRecord::Schema.define(:version => 20130507194117) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.string   "website_url"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "banner"
     t.integer  "width"
     t.integer  "height"
     t.string   "subdomain"
+    t.string   "content_instagram"
+    t.string   "content_facebook"
+    t.string   "content_tumblr"
+    t.string   "content_twitter"
+    t.string   "content_jobs_page"
+    t.string   "short_description", :limit => 80
+    t.string   "hq_city"
+    t.string   "hq_state"
+    t.string   "employee_count"
   end
 
   add_index "companies", ["subdomain"], :name => "index_companies_on_subdomain", :unique => true
+
+  create_table "companies_verticals", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "vertical_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "companies_verticals", ["company_id"], :name => "index_companies_verticals_on_company_id"
+  add_index "companies_verticals", ["vertical_id"], :name => "index_companies_verticals_on_vertical_id"
 
   create_table "company_depts", :force => true do |t|
     t.string   "name"
@@ -98,5 +117,11 @@ ActiveRecord::Schema.define(:version => 20130507183856) do
 
   add_index "users_companies", ["company_id"], :name => "index_users_companies_on_company_id"
   add_index "users_companies", ["user_id"], :name => "index_users_companies_on_user_id"
+
+  create_table "verticals", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

@@ -1,20 +1,9 @@
-.container-fluid
-  .row-fluid
-    .span1
-      &nbsp;
-    .span11.mobile-padding
-      %h1 Create your account & company profile
-%hr.hidden-phone
-.container-fluid
-  .row-fluid
-    .span1
-      &nbsp
-    .span5.well
-      = render 'form'
-    .span5.mobile-padding
-      %section
-        %h4 Use your talent-community to:
-        %ul
-          %li Fill your hiring funnel with the talent you want most
-          %li Drip-market company culture
-          %li Match relevant jobs to potential candidates on your watch-list
+#signup
+  .container-fluid
+    .row-fluid
+      .span8.offset2.mobile-padding
+        %h1 Create your account & company profile
+  .container-fluid
+    .row-fluid
+      .span8.offset2
+        = render 'form'
