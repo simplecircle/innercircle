@@ -1,79 +1,106 @@
 .container-fluid
   .row-fluid
     .span10.offset1.mobile-padding
-      .row-fluid.dashboard-header
+      .row-fluid.dashboard-header.bb-1
         .span9
-          %h1.mbn.pull-left= current_company.name + '\'s Dashboard'
-        .span3.hidden-iphone
+          %h1.mbn= current_company.name + '\'s Dashboard'
+        .span3
           .dashboard-header-links
             = link_to("#{current_company.subdomain}.jobcrush.co", join_url(subdomain:current_company.subdomain), target:"_blank", class:"mrl")
             = link_to("Edit profile", '/profile')
-      %hr.man
   .row-fluid
     .span10.offset1.mobile-padding
-      %section#awaiting-approval-box.highlight.pal
+      %section#awaiting-approval-box.highlight.tac
         %h4#awaiting-approval-message.mrl 6 posts awaiting approval
         %button.btn.btn-warning.btn-large Review now
-  .row-fluid
 
-    .span10.mobile-padding.offset1
-      - if current_company
-        %h2.mtl
-          Invite great people to join #{capitalize_phrase(current_company.name)}'s talent-community by sending them this link:
-        %h4= link_to("#{current_company.subdomain}.getinnercircle.com/join", join_url(subdomain:current_company.subdomain), target:"_blank")
-%hr.hidden-phone
-.container-fluid
-  .row-fluid
-    .span3
-      %section.highlight.mtxl
-        %h4 Who should I invite?
-        %p
-          Invite people you’ve met at meetups, panels, hackathons, online—anyone you’d like to keep on your watch-list.
-    .span8#dashboard_index.mtxl.mobile-padding
-      %h4 Sample email text:
-      %p.mts
-        Hi There!
-        %br
-        I wanted to invite you to join #{capitalize_phrase(current_company.name)}'s talent-community. It’s a great way to learn about new opportunities, events and news at #{capitalize_phrase(current_company.name)}. Just fill out this short form and we’ll send you relevant opportunities as they come up.
-        %br
-        %br
-        #{current_company.subdomain}.getinnercircle.com/join
-%hr.hidden-phone
-.container-fluid
-  .row-fluid
-    .span1.hidden-phone
-      &nbsp;
-    .span3
-      %section.highlight.mtxl
-        %h4 Then what happens?
-        %p
-          As talent joins, they’ll show up in these categories.
-    .span8#dashboard_index.mtxl.mobile-padding
-      %h4.bb-1
-        Creatives
-        %span.counter.pull-right (#{@creative.count})
-      %ul.unstyled
-        - @creative.each do |talent|
-          = link_to user_url(talent) do
-            %li= talent.email
-      %h4.bb-1
-        Operations
-        %span.counter.pull-right (#{@operations.count})
-      %ul.unstyled
-        - @operations.each do |talent|
-          = link_to user_url(talent) do
-            %li= talent.email
-      %h4.bb-1
-        Sales & Marketing
-        %span.counter.pull-right (#{@sales_marketing.count})
-      %ul.unstyled
-        - @sales_marketing.each do |talent|
-          = link_to user_url(talent) do
-            %li= talent.email
-      %h4.bb-1
-        Technology
-        %span.counter.pull-right (#{@technology.count})
-      %ul.unstyled
-        - @technology.each do |talent|
-          = link_to user_url(talent) do
-            %li= talent.email
+  .row-fluid.mtxl
+    .span10.offset1.mobile-padding
+      .row-fluid
+        .span7
+          .row-fluid.dashboard-header.bb-1
+            .span8
+              %h3.mbn
+                Talent Community
+            .span4
+              .dashboard-header-links
+                = link_to("+ Add Talent", '/add')
+          .row-fluid
+            .span12
+              %section.highlight.tal
+                .mbm Who should I invite?
+                .mbm.detail-text Invite people you've met at meetups, panels, hackathons, online - anyone you'd like to keep on your watchlist.
+                Share this link with people you want to invite: 
+                = link_to("#{current_company.subdomain}.jobcrush.co/join", join_url(subdomain:current_company.subdomain), target:"_blank")
+          .row-fluid
+            .span12#dashboard_index.mtxl
+              %h4.bb-1
+                Creative
+                %span.counter.pull-right (#{@creative.count})
+              %ul.unstyled
+                %li.bb-1 Kenny Chan
+                %li.bb-1 Kenny Chan
+                - @creative.each do |talent|
+                  = link_to user_url(talent) do
+                    %li.bb-1= talent.email
+              %h4.bb-1
+                Operations
+                %span.counter.pull-right (#{@operations.count})
+              %ul.unstyled
+                - @operations.each do |talent|
+                  = link_to user_url(talent) do
+                    %li.bb-1= talent.email
+              %h4.bb-1
+                Sales / Marketing
+                %span.counter.pull-right (#{@sales_marketing.count})
+              %ul.unstyled
+                - @sales_marketing.each do |talent|
+                  = link_to user_url(talent) do
+                    %li.bb-1= talent.email
+              %h4.bb-1
+                Technology
+                %span.counter.pull-right (#{@technology.count})
+              %ul.unstyled
+                - @technology.each do |talent|
+                  = link_to user_url(talent) do
+                    %li.bb-1= talent.email
+
+        .span5
+          .row-fluid.dashboard-header.bb-1
+            .span8
+              %h3.mbn
+                Admins
+            .span4
+              .dashboard-header-links
+                = link_to("+ Add Admin", '/add-admin')
+          .row-fluid
+            .span12.mtm
+              %ul.unstyled
+                %li.bb-1.ptl Kenny Chan
+                %li.bb-1.ptl Kenny Chan
+                - @sales_marketing.each do |talent|
+                  = link_to user_url(talent) do
+                    %li.bb-1.ptl= talent.email
+
+          .row-fluid.dashboard-header.bb-1.mtxl
+            .span12
+              %h3.mbn
+                Content Channels
+          .row-fluid
+            .span12.mtm
+              %ul.unstyled
+                %li.bb-1.ptl 
+                  Jobs page: 
+                  =link_to("jobs.test.com", 'http://jobs.test.com', target:"_blank")
+                %li.bb-1.ptl 
+                  Instagram: 
+                %li.bb-1.ptl 
+                  Facebook: 
+                %li.bb-1.ptl 
+                  Twitter: 
+                %li.bb-1.ptl 
+                  Tumblr: 
+
+          
+
+     

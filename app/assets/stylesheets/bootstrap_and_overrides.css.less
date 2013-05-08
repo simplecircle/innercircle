@@ -75,6 +75,7 @@ body { padding-top: 66px; }
 @navbarText: #666666;
 @navbarLinkColor: #68b4fd;
 @navbarLinkColor: @grayLight;
+@accentColor: #fe675c;
 
 // Navbar
 // -------------------------
@@ -131,7 +132,15 @@ input[type="file"]{
     background: darken(@linkColor, 4%);
     text-decoration:none;
   }
+  &.btn-warning {
+    background: @accentColor;
+    border-color: @accentColor;
+    &:hover {
+      background: darken(@accentColor, 4%);
+    }
+  }
 }
+
 .btn-large {
   padding: @paddingLarge;
   font-size:18px;
