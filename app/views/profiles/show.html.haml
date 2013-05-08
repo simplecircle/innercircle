@@ -1,6 +1,7 @@
-.span6.column-center
-  %h4.text-center.mobile-padding.mbxl Success!
-%section.gray
+.span7.column-center
+  %h2.text-center.mobile-padding.mbm.mtxl Success!
+  %h4.text-center.mobile-padding.mbxl.lh-24 Now help #{capitalize_phrase(@company.name)} better match you with opportunities by completing the fields below
+%section
   .span5.column-center.mobile-padding
     = link_to("Auto-fill with LinkedIn", "/auth/linkedin", class:"btn btn-large btn-primary btn-block mtxl mbm")
     = form_for @profile do |f|
@@ -11,14 +12,14 @@
       %p
         = f.text_field :job_title, class:"input-block-level", placeholder:"Ideal job title"
       %p
+        .inline_error= @profile.errors[:url].first
+        = f.text_field :url, class:"input-block-level", placeholder:"Your site, blog or Linkedin profile"
+      %p
         :javascript
           $(document).ready(function() {
               $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", startText:"Skills & tools", asHtmlID: true, minChars:2, neverSubmit: true, emptyText: "Separate tags with a comma or tab", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
            });
         = text_field_tag nil, nil, {id:"skills"}
         .help-block.small List a handful. i.e Excel, baking, Ruby, Agile, responsive design...
-      %p
-        .inline_error= @profile.errors[:url].first
-        = f.text_field :url, class:"input-block-level", placeholder:"Your site, blog or Linkedin profile"
       = f.submit("Submit", class:"btn btn-large btn-primary btn-block mtxl mbm")
 
