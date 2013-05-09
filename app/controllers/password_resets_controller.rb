@@ -8,9 +8,9 @@ class PasswordResetsController < ApplicationController
       user = User.find_by_email(params[:email].downcase)
       if user
         user.send_password_reset
-        redirect_to(new_password_reset_path, notice:"<br /><h2>Check your email for password reset instructions</h2>")
+         redirect_to(new_password_reset_path, notice:"<h3>Check your email for reset instructions</h3>")
       else
-        redirect_to(new_password_reset_path, notice:"<br /><h2>Email not found</h2>If you created your account with Facebook, there's no password to reset. <br />Just use <a href=\"/login\">Facebook login</a>")
+        redirect_to(new_password_reset_path, alert:"<h3>Email not found</h3>")
       end
     end
   end
