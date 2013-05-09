@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507194117) do
+ActiveRecord::Schema.define(:version => 20130509131648) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20130507194117) do
     t.datetime "updated_at",      :null => false
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "auth_token"
   end
 
   add_index "users", ["company_id"], :name => "index_users_on_company_id"

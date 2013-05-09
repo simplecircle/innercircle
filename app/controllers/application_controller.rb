@@ -6,11 +6,12 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
   end
 
+  # This methods needs to be deleted once all scoping is handled through subdomains.
   def current_company
-    @current_company ||= Company.find(session[:company_id]) if session[:company_id]
+    @current_company ||= User.find_by_auth_token!(cookies[:auth_token]).companies.first if cookies[:auth_token]
   end
 
   def restrict_access
