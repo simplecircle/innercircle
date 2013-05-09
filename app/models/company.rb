@@ -9,7 +9,7 @@ class Company < ActiveRecord::Base
   has_many :companies_verticals
   has_many :verticals, through: :companies_verticals
   
-  accepts_nested_attributes_for :users
+  accepts_nested_attributes_for :users, :users_companies
 
   mount_uploader :banner, BannerUploader
 

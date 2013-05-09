@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :users_companies
   has_many :companies, through: :users_companies
   has_one :profile, :dependent => :destroy
-  accepts_nested_attributes_for :profile
+  accepts_nested_attributes_for :profile, :users_companies
   before_create { generate_token(:auth_token) }
 
   # override has_secure_password forced validation.
