@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :company_id, :email, :first_name, :last_name, :password_digest, :password, :role, :profile_attributes
+  attr_accessible :company_id, :email, :first_name, :last_name, :password_digest, :password, :password_confirmation, :role, :profile_attributes
 
   has_many :users_companies
   has_many :companies, through: :users_companies
@@ -16,12 +16,21 @@ class User < ActiveRecord::Base
   validates :email, presence:true
   validates :email, uniqueness:true
   validates_format_of :email, with:/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i, message:"Email isn't valid"
-  validates :password, presence:true
+  # These password validations are here for password reset functionality.
+  validates_presence_of :password, if: :password
+  validates_confirmation_of :password, if: :password
 
   def self.by_category(subdomain, category)
     joins(:companies, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:first_name)
     # This worked before users and company became has_many
     # joins(:company, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:first_name)
+  end
+
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
   end
 
   def generate_token(column)

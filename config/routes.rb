@@ -1,12 +1,12 @@
 Innercircle::Application.routes.draw do
 
-
   resources :companies
   get "talent"=>"users#index"
   match 'join', to: 'users#new', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   match 'local_join', to: 'users#new', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   resources :users
   resources :profiles, only:[:show, :update], constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+  resources :password_resets
 
   match "/auth/linkedin/callback" => "profiles#show"
   match "auth/failure" => "home#index"

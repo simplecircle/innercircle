@@ -35,7 +35,7 @@ class UsersController < ApplicationController
         @depts.each do |dept|
           ProfilesCompanyDept.create!(profile_id:@user.profile.id, company_dept_id:dept)
         end
-        session[:user_id] = @user.id
+        cookies.permanent[:auth_token] = {value:@user.auth_token, domain: :all}
         redirect_to profile_url(@user.profile)
       else
         render "new"

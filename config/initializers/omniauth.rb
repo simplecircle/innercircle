@@ -11,7 +11,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   elsif Rails.env == "staging"
     # The full_host must be explicitly set as Omniauth doesnt parse the subdomain when
     # building out the callback string.
-    OmniAuth.config.full_host = "http://devstream.me"
+    OmniAuth.config.full_host = "http://jobcrush.co"
     provider :linkedin, "kcrafqgom9ui", "FXyXAJMctckNCkUw"
   else
     provider :linkedin, "kcrafqgom9ui", "FXyXAJMctckNCkUw"
