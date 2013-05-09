@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  include UrlHelper
 
   helper_method :current_user, :current_company, :capitalize_phrase, :first_name
 
@@ -39,7 +40,7 @@ class ApplicationController < ActionController::Base
       false
     end
   end
-
+  
   def capitalize_phrase(phrase)
     phrase.split.each{|x|x.capitalize!}.join(" ")
   end
