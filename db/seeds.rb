@@ -6,4 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-verticals = Vertical.create([{ name: 'Vertical A' }, {name: 'Vertical B'}])
+Vertical.create([{ name: 'Vertical A' }, {name: 'Vertical B'}])
+
+CompanyDept.create([{name: 'Operations'}, {name: 'Creative'}, {name: 'Sales & Marketing'}, {name: 'Technology'}])
+
+ActsAsTaggableOn::Tag.create([{name: 'Rails'}])
