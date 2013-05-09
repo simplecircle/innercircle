@@ -13,6 +13,7 @@
  *= require responsive-767px-max-override
  *= require variables
  *= require users
+ *= require dashboard
  *= require company
  *= require global
  *= require autoSuggest
