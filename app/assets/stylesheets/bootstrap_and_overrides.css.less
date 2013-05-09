@@ -66,6 +66,8 @@ body {
 /*@import "twitter/bootstrap/responsive-767px-max.less";*/
 @import "twitter/bootstrap/responsive-navbar.less";
 
+@import "variables.css.less";
+
 
 // Set the correct sprite paths
 /*@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
@@ -134,7 +136,15 @@ input[type="file"]{
     background: darken(@linkColor, 4%);
     text-decoration:none;
   }
+  &.btn-warning {
+    background: @accentColor;
+    border-color: @accentColor;
+    &:hover {
+      background: darken(@accentColor, 4%);
+    }
+  }
 }
+
 .btn-large {
   padding: @paddingLarge;
   font-size:18px;
@@ -187,4 +197,11 @@ input[type="file"]{
 }
 .well{
   .box-sizing(border-box);
+}
+.clear {
+  clear: both;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+  display: block;
 }
