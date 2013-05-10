@@ -85,7 +85,7 @@ body {
 // -------------------------
 @navbarCollapseWidth:             570px;
 
-textarea, 
+textarea,
 select,
 input[type="text"],
 input[type="password"]{
@@ -94,7 +94,7 @@ input[type="password"]{
   .box-shadow(0px 1px 1px white);
   .box-sizing(border-box);
   font-size:16px;
-  height:50px;
+  height:40px;
   &:focus {
     border-color: @linkColor;
     outline: 0;
@@ -122,7 +122,7 @@ input[type="file"]{
   border: 1px solid @linkColor;
   .border-radius(@baseBorderRadius);
   box-sizing: border-box;
-  .box-shadow(0px 2px 2px #787878);
+  /*.box-shadow(0px 2px 2px #787878);*/
   color:white !important;
   cursor: pointer;
   display: inline-block;
@@ -175,22 +175,22 @@ input[type="file"]{
     padding-left:10px;
   }
   .brand {
-    margin-right:-5px;
-    padding:19px 0px 0 10px;
+    /*margin-right:-5px;*/
+    margin-left:0;
+    padding:14px 0px 0 0px;
   }
   .divider-vertical{
     border-left:1px solid #ccc;
-    height:60px;
-    margin-left:-10px;
+    height:50px;
   }
   .nav > li > a {
-    padding-top:20px;
+    padding-top:15px;
     font-size:15px;
     text-shadow:none;
   }
 }
 .navbar-fixed-top {
-  border-top:4px solid @grayLighter;
+  border-top:2px solid @accentColor;
 }
 .navbar-fixed-top .navbar-inner{
   box-shadow:none;

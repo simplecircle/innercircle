@@ -35,8 +35,8 @@ class UsersController < ApplicationController
         @depts.each do |dept|
           ProfilesCompanyDept.create!(profile_id:@user.profile.id, company_dept_id:dept)
         end
-        cookies.permanent[:auth_token] = {value:@user.auth_token, domain: :all}
-        redirect_to profile_url(@user.profile)
+        # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
+        redirect_to edit_profile_url(@user.auth_token)
       else
         render "new"
       end

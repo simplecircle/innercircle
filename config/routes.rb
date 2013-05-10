@@ -5,11 +5,12 @@ Innercircle::Application.routes.draw do
   match 'join', to: 'users#new', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   match 'local_join', to: 'users#new', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   resources :users
-  resources :profiles, only:[:show, :update], constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+  resources :profiles, only:[:edit, :update], constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   resources :password_resets
 
-  match "/auth/linkedin/callback" => "profiles#show"
-  match "auth/failure" => "home#index"
+  match "/auth/linkedin/callback"=>"profiles#edit"
+  match "auth/failure"=>"home#index"
+  get "callback_session"=>"profiles#callback_session"
   get "signup"=>"companies#new"
   get "login"=>"sessions#new"
   post "login"=>"sessions#create"

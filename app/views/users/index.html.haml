@@ -6,7 +6,7 @@
           %h1.mbn= current_company.name + '\'s Dashboard'
         .span4
           .dashboard-header-links
-            = link_to("#{current_company.subdomain}.jobcrush.co", join_url(subdomain:current_company.subdomain), target:"_blank", class:"mrl")
+            = link_to("#{current_company.subdomain}.jobcrush.co", join_url(subdomain:current_company.subdomain),  class:"mrl")
             = link_to("Edit profile", '/profile')
   .row-fluid
     .span10.offset1.mobile-padding

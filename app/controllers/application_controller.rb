@@ -18,16 +18,6 @@ class ApplicationController < ActionController::Base
     redirect_to(login_url) unless current_user
   end
 
-  def restrict_access_unless_belongs_to_current_user
-    if current_user
-      unless current_user.id == @user.id
-        redirect_to(login_url)
-      end
-    else
-      redirect_to(login_url)
-    end
-  end
-
   def belongs_to_current_user?
     if current_user
       if current_user.id == @user.id

@@ -1,10 +1,9 @@
 class ProfilesController < ApplicationController
 
   layout :choose_layout
-  before_filter :find_resource, only: [:show, :update]
-  before_filter :restrict_access_unless_belongs_to_current_user
+  before_filter :find_resource, only: [:edit, :update]
 
-  def show
+  def edit
     if auth = request.env["omniauth.auth"]
       info = auth["info"]
       @profile.first_name = info["first_name"]
@@ -22,22 +21,27 @@ class ProfilesController < ApplicationController
     if @profile.update_attributes(params[:profile])
         redirect_to confirmation_url
       else
-        render "show"
+        render "edit"
       end
+  end
+
+  def callback_session
+    session[:callback_token] = User.find_by_auth_token(params[:id]).auth_token
+    redirect_to "/auth/linkedin"
   end
 
   private
 
+
   def find_resource
-    # Use current_user for linkedin callback
-    @profile = params[:id]? Profile.find(params[:id]) : current_user.profile
-    @user = @profile.user
+    @user = params[:id]? User.find_by_auth_token(params[:id]) : User.find_by_auth_token(session[:callback_token])
+    @profile = @user.profile
     @company = Company.find_by_subdomain!(request.subdomain)
     @tags = ActsAsTaggableOn::Tag.all.to_json(only: :name)
   end
 
   def choose_layout
-    if ['show', 'update'].include? action_name
+    if ['edit', 'update'].include? action_name
       'onboarding'
     else
       'application'

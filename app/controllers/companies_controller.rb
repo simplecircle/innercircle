@@ -21,7 +21,7 @@ class CompaniesController < ApplicationController
     end
     if @company.save
       session[:company_id] = @company.id
-      session[:user_id] = @company.users.first.id
+      cookies.permanent[:auth_token] = {value:@company.users.first.auth_token, domain: :all}
       redirect_to talent_url
     else
       render "new"

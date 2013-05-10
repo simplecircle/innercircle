@@ -22,10 +22,10 @@ class PasswordResetsController < ApplicationController
   def update
     @user = User.find_by_password_reset_token!(params[:id])
     if @user.password_reset_sent_at < 2.hours.ago
-      redirect_to(new_password_reset_path, notice:"<h2>Password reset has expired</h2>")
+      redirect_to(new_password_reset_path, notice:"<h3>Password reset has expired</h3>")
     elsif @user.update_attributes(params[:user])
       cookies.permanent[:auth_token] = {value:@user.auth_token, domain: :all}
-      redirect_to(root_path, notice:"<h2>You're good to go!</h2>")
+      redirect_to(root_path, notice:"<h3>You're good to go!</h3>")
     else
       render :edit
     end

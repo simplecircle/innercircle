@@ -22,8 +22,6 @@ class User < ActiveRecord::Base
 
   def self.by_category(subdomain, category)
     joins(:companies, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:first_name)
-    # This worked before users and company became has_many
-    # joins(:company, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:first_name)
   end
 
   def send_password_reset
