@@ -13,8 +13,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(params[:user])
-    @company.users << @user
+    @user = @company.users.build(params[:user])   
     @user.build_profile
     @depts = params[:company_depts]
     unless @local_join
@@ -27,6 +26,7 @@ class UsersController < ApplicationController
       render "new"
     else
       if @user.save
+        @company.users << @user
         @depts.each do |dept|
           ProfilesCompanyDept.create!(profile_id:@user.profile.id, company_dept_id:dept)
         end
