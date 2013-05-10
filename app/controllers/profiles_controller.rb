@@ -10,8 +10,13 @@ class ProfilesController < ApplicationController
       @profile.last_name = info["last_name"]
       @profile.job_title = info["headline"]
       @profile.url = info["urls"]["public_profile"]
+      @profile.linkedin_profile = info["urls"]["public_profile"]
       @incoming_tags = auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",")
       # raise auth.to_yaml
+
+      @profile.linkedin_data = JSON.parse(auth.to_json)
+      @profile.save
+      @as_hash = @profile.linkedin_data
     end
   end
 

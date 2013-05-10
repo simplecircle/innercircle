@@ -1,4 +1,5 @@
 class Profile < ActiveRecord::Base
+
   attr_accessible :first_name, :last_name, :job_title, :url, :user_id, :skills
 
   belongs_to :user
