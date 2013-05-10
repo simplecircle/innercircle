@@ -24,7 +24,7 @@
                 Talent Community
             .span4
               .dashboard-header-links
-                = link_to("+ Add Talent", '/add')
+                = link_to("+ Add Talent", join_url(subdomain:@company.subdomain))
           .row-fluid
             .span12
               %section.highlight.tal
@@ -72,18 +72,17 @@
               .dashboard-header-links
                 = link_to("+ Add Admin", '/add-admin')
           .row-fluid
-            .span12.mtm
+            .span12
               %ul.unstyled
-                - @sales_marketing.each do |talent|
-                  = link_to user_url(talent) do
-                    %li.bb-1.ptl= talent.email
+                - @admins.each do |admin|
+                  %li.bb-1.ptl= admin.email
 
           .row-fluid.dashboard-header.bb-1.mtxl
             .span12
               %h3.mbn
                 Content Channels
           .row-fluid
-            .span12.mtm
+            .span12
               %ul.unstyled
                 %li.bb-1.ptl 
                   Jobs page: 

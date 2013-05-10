@@ -9,6 +9,7 @@ class DashboardController < ApplicationController
     @operations = User.by_category(@company.subdomain, "Operations")
     @sales_marketing = User.by_category(@company.subdomain, "Sales & Marketing")
     @technology = User.by_category(@company.subdomain, "Technology")
+    @admins = @company.users.where :role => "admin"
     @headline = ""
   end
 
