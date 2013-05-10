@@ -20,10 +20,10 @@ Innercircle::Application.routes.draw do
 
   match "/auth/linkedin/callback" => "profiles#show"
   match "auth/failure" => "home#index"
-  get "signup"=>"companies#new"
-  get "login"=>"sessions#new"
-  post "login"=>"sessions#create"
-  get "logout"=>"sessions#destroy"
-  get "confirmation"=>"users#confirmation"
+  get "signup" => "companies#new"
+  get "login" => "sessions#new"
+  post "login" => "sessions#create"
+  get "logout" => "sessions#destroy"
+  get "confirmation" => "users#confirmation"
   
 end

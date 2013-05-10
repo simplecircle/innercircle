@@ -15,6 +15,6 @@ class SessionsController < ApplicationController
 
   def destroy
     cookies.delete(:auth_token, domain: :all)
-    redirect_to root_url(subdomain: false), notice: "Logged out."
+    redirect_to root_url(subdomain: false, src:"logout"), notice: "Logged out."
   end
 end
