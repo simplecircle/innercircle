@@ -8,6 +8,6 @@
 
 Vertical.create([{ name: 'Vertical A' }, {name: 'Vertical B'}])
 
-CompanyDept.create([{name: 'Operations'}, {name: 'Creative'}, {name: 'Sales & Marketing'}, {name: 'Technology'}])
+CompanyDept.create([{name: 'operations'}, {name: 'creative'}, {name: 'sales & marketing'}, {name: 'technology'}])
 
 ActsAsTaggableOn::Tag.create([{name: 'Rails'}])
