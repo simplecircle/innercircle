@@ -25,7 +25,7 @@ class CompaniesController < ApplicationController
       # session[:user_id] = @company.users.first.id
       @user = @company.users.first
       cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all}
-      redirect_to talent_url(subdomain: @company.subdomain)
+      redirect_to dashboard_url(subdomain: @company.subdomain)
     else
       render "new"
     end

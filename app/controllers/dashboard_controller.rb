@@ -19,7 +19,7 @@ class DashboardController < ApplicationController
   def ensure_proper_subdomain
     # If you're an admin, force a subdomain. Otherwise, if you're a god (like Kanye West), redirect home (or the "companies list", when we create that)
     if current_user.role == 'admin' && request.subdomain.empty? && current_user.companies.first != nil
-      redirect_to talent_url(:host => current_user.companies.first.subdomain + '.' + request.domain)
+      redirect_to dashboard_url(:host => current_user.companies.first.subdomain + '.' + request.domain)
     elsif current_user.role == 'god' && request.subdomain.empty?
       redirect_to '/'
     end      

@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      cookies.permanent[:auth_token] = {value:user.auth_token, domain: :all}
-      redirect_to talent_url(subdomain: user.companies.first.subdomain)
+      cookies.permanent[:auth_token] = {value: user.auth_token, domain: :all}
+      redirect_to dashboard_url(subdomain: user.companies.first.subdomain)
     else
       flash.now.alert = "Invalid email or password"
       render "new"

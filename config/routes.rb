@@ -5,7 +5,7 @@ Innercircle::Application.routes.draw do
   resources :users
   resources :password_resets
 
-  get "talent" => "dashboard#index"
+  get "dashboard" => "dashboard#index"
 
   constraints(Subdomain) do
     match 'join' => 'users#new'

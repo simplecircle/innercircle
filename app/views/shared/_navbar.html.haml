@@ -8,7 +8,7 @@
       .container-fluid
         .row-fluid
           .span1.hidden-phone
-            .brand= link_to(image_tag("logo_small_gray.jpg"), talent_url)
+            .brand= link_to(image_tag("logo_small_gray.jpg"), dashboard_url)
           .span11
             %ul.nav
               %li.divider-vertical
@@ -17,7 +17,7 @@
               %li.divider-vertical
               - if current_user && current_user.role == "admin"
                 %li
-                  = link_to("Dashboard", talent_url)
+                  = link_to("Dashboard", dashboard_url)
               - if current_user
                 %li.dropdown
                   %a.display-strong.white.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

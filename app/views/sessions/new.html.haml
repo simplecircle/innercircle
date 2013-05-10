@@ -2,7 +2,7 @@
   .span5.column-center
     .span5.column-center.text-center
       = render "shared/flash", :flash=>flash
-    .text-center.mbxl= link_to(image_tag("logo_small_gray.jpg"), talent_url)
+    .text-center.mbxl= link_to(image_tag("logo_small_gray.jpg"), dashboard_url)
     .well
       = form_tag login_url do
         %p
