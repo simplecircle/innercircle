@@ -5,18 +5,19 @@
       %span.icon-bar
       %span.icon-bar
     .nav-collapse.collapse
-      .container
-        .row
-          .span2.hidden-phone
-            .brand= link_to(image_tag("logo_small_gray.jpg"), talent_url)
-          .span10
+      .container-fluid
+        .row-fluid
+          .span1.hidden-phone
+            .brand= link_to(image_tag("logo_small_gray.jpg"), root_url(subdomain:false, src:"nav"))
+          .span11
             %ul.nav
               %li.divider-vertical
                 %h1= @headline
             %ul.nav.pull-right
-              - if current_company
+              %li.divider-vertical
+              - if current_user && current_user.role == "admin"
                 %li
-                  = link_to(capitalize_phrase(current_company.name), talent_url)
+                  = link_to("Dashboard", dashboard_url)
               - if current_user
                 %li.dropdown
                   %a.display-strong.white.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

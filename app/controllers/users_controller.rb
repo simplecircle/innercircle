@@ -4,13 +4,7 @@ class UsersController < ApplicationController
   before_filter :restrict_access, only:[:index, :show]
   before_filter :find_resource, only: [:new, :create]
 
-
   def index
-    @creative = User.by_category(current_company.subdomain, "creative")
-    @operations = User.by_category(current_company.subdomain, "operations")
-    @sales_marketing = User.by_category(current_company.subdomain, "sales & marketing")
-    @technology = User.by_category(current_company.subdomain, "technology")
-    @headline = ""
   end
 
   def new
@@ -19,7 +13,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = @company.users.build(params[:user])
+    @user = User.create(params[:user])
+    @company.users << @user
     @user.build_profile
     @depts = params[:company_depts]
     unless @local_join

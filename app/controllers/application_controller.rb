@@ -1,17 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user, :current_company, :capitalize_phrase, :first_name
+  helper_method :current_user, :capitalize_phrase, :first_name
 
   private
 
   def current_user
     @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
-  end
-
-  # This methods needs to be deleted once all scoping is handled through subdomains.
-  def current_company
-    @current_company ||= User.find_by_auth_token!(cookies[:auth_token]).companies.first if cookies[:auth_token]
   end
 
   def restrict_access
@@ -29,7 +24,7 @@ class ApplicationController < ActionController::Base
       false
     end
   end
-
+  
   def capitalize_phrase(phrase)
     phrase.split.each{|x|x.capitalize!}.join(" ")
   end

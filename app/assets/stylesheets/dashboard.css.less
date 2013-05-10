@@ -1,0 +1,49 @@
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins.less";
+@import "variables.css.less";
+
+#dashboard{
+  section.highlight {
+    padding: 20px;
+  }
+  .dashboard-header {
+    position: relative;
+  }
+  .dashboard-header-links {
+    font-weight: bold;
+    position: absolute;
+    bottom: 4px;
+    right: 0;
+    text-align: right;
+  }
+  .detail-text {
+    color: @grayLight;
+  }
+  #awaiting-approval-message {
+    display: inline;
+    color: @accentColor;
+  }
+  li.bb-1 {
+    border-color: @grayLighter;
+  }
+  #dashboard_index{
+    h4{
+      margin:0;
+      padding-bottom:5px;
+    }
+    ul{
+      padding-bottom:20px;
+      li{
+        font-size:16px;
+        padding:7px 0;
+      }
+      li:hover{
+        background:@grayLighter;
+      }
+    }
+    .counter{
+      color:@grayLight;
+      font-size:14px;
+    }
+  }
+}

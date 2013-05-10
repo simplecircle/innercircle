@@ -3,10 +3,10 @@
     .span10.offset1.mobile-padding
       .row-fluid.dashboard-header.bb-1
         .span8
-          %h1.mbn= current_company.name + '\'s Dashboard'
+          %h1.mbn= @company.name + '\'s Dashboard'
         .span4
           .dashboard-header-links
-            = link_to("#{current_company.subdomain}.jobcrush.co", join_url(subdomain:current_company.subdomain),  class:"mrl")
+            = link_to("#{@company.subdomain}.jobcrush.co", join_url(subdomain:@company.subdomain), target:"_blank", class:"mrl")
             = link_to("Edit profile", '/profile')
   .row-fluid
     .span10.offset1.mobile-padding
@@ -24,22 +24,20 @@
                 Talent Community
             .span4
               .dashboard-header-links
-                = link_to("+ Add Talent", '/add')
+                = link_to("+ Add Talent", join_url(subdomain:@company.subdomain))
           .row-fluid
             .span12
               %section.highlight.tal
                 .mbm Who should I invite?
                 .mbm.detail-text Invite people you've met at meetups, panels, hackathons, online - anyone you'd like to keep on your watchlist.
                 Share this link with people you want to invite: 
-                = link_to("#{current_company.subdomain}.jobcrush.co/join", join_url(subdomain:current_company.subdomain), target:"_blank")
+                = link_to("#{@company.subdomain}.jobcrush.co/join", join_url(subdomain:@company.subdomain), target:"_blank")
           .row-fluid
             .span12#dashboard_index.mtxl
               %h4.bb-1
                 Creative
                 %span.counter.pull-right (#{@creative.count})
               %ul.unstyled
-                %li.bb-1 Kenny Chan
-                %li.bb-1 Kenny Chan
                 - @creative.each do |talent|
                   = link_to user_url(talent) do
                     %li.bb-1= talent.email
@@ -74,20 +72,17 @@
               .dashboard-header-links
                 = link_to("+ Add Admin", '/add-admin')
           .row-fluid
-            .span12.mtm
+            .span12
               %ul.unstyled
-                %li.bb-1.ptl Kenny Chan
-                %li.bb-1.ptl Kenny Chan
-                - @sales_marketing.each do |talent|
-                  = link_to user_url(talent) do
-                    %li.bb-1.ptl= talent.email
+                - @admins.each do |admin|
+                  %li.bb-1.ptl= admin.email
 
           .row-fluid.dashboard-header.bb-1.mtxl
             .span12
               %h3.mbn
                 Content Channels
           .row-fluid
-            .span12.mtm
+            .span12
               %ul.unstyled
                 %li.bb-1.ptl 
                   Jobs page: 

@@ -5,10 +5,8 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      cookies.permanent[:auth_token] = {value:user.auth_token, domain: :all}
-      # this session will not be needed once all company finds are scoped through the subdomain
-      session[:company_id] = user.companies.first.id
-      redirect_to talent_url, :notice => "Logged in!"
+      cookies.permanent[:auth_token] = {value: user.auth_token, domain: :all}
+      redirect_to dashboard_url(subdomain: user.companies.first.subdomain)
     else
       flash.now.alert = "Invalid email or password"
       render "new"
@@ -17,8 +15,6 @@ class SessionsController < ApplicationController
 
   def destroy
     cookies.delete(:auth_token, domain: :all)
-    # this session will not be needed once all company finds are scoped through the subdomain
-    session[:company_id] = nil
-    redirect_to root_url, notice: "Logged out."
+    redirect_to root_url(subdomain: false, src:"logout"), notice: "Logged out."
   end
 end

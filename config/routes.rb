@@ -1,13 +1,31 @@
 Innercircle::Application.routes.draw do
+  root :to => 'home#index'
 
   resources :companies
-  get "talent"=>"users#index"
-  match 'join', to: 'users#new', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
-  match 'local_join', to: 'users#new', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   resources :users
-  resources :profiles, only:[:edit, :update], constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   resources :password_resets
 
+  get "dashboard" => "dashboard#index"
+
+  constraints(Subdomain) do
+    match 'join' => 'users#new'
+    match 'local_join' => 'users#new'
+    resources :profiles, only:[:show, :update]
+  end
+
+  constraints(NoSubdomain) do
+    match 'join' => 'home#index'
+    match 'local_join' => 'home#index'
+  end
+
+  match "/auth/linkedin/callback" => "profiles#show"
+  match "auth/failure" => "home#index"
+  get "signup" => "companies#new"
+  get "login" => "sessions#new"
+  post "login" => "sessions#create"
+  get "logout" => "sessions#destroy"
+  get "confirmation" => "users#confirmation"
+  
   match "/auth/linkedin/callback"=>"profiles#edit"
   match "auth/failure"=>"home#index"
   get "callback_session"=>"profiles#callback_session"
