@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  include UrlHelper
 
   helper_method :current_user, :current_company, :capitalize_phrase, :first_name
 
