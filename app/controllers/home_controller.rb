@@ -11,6 +11,5 @@ class HomeController < ApplicationController
     else #not an immediate redirect (ie no src query string), so we should clear the redirect source
       session[:redirect_source] = nil
     end
-    
   end
 end

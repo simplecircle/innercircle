@@ -10,7 +10,7 @@ Innercircle::Application.routes.draw do
   constraints(Subdomain) do
     match 'join' => 'users#new'
     match 'local_join' => 'users#new'
-    resources :profiles, only:[:show, :update]
+    resources :profiles, only:[:edit, :update]
   end
 
   constraints(NoSubdomain) do
@@ -18,14 +18,6 @@ Innercircle::Application.routes.draw do
     match 'local_join' => 'home#index'
   end
 
-  match "/auth/linkedin/callback" => "profiles#show"
-  match "auth/failure" => "home#index"
-  get "signup" => "companies#new"
-  get "login" => "sessions#new"
-  post "login" => "sessions#create"
-  get "logout" => "sessions#destroy"
-  get "confirmation" => "users#confirmation"
-  
   match "/auth/linkedin/callback"=>"profiles#edit"
   match "auth/failure"=>"home#index"
   get "callback_session"=>"profiles#callback_session"
@@ -34,5 +26,4 @@ Innercircle::Application.routes.draw do
   post "login"=>"sessions#create"
   get "logout"=>"sessions#destroy"
   get "confirmation"=>"users#confirmation"
-  root :to => 'home#index'
 end

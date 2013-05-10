@@ -5,12 +5,11 @@ class DashboardController < ApplicationController
   before_filter :find_resource
 
   def index
-    @creative = User.by_category(@company.subdomain, "Creative")
-    @operations = User.by_category(@company.subdomain, "Operations")
-    @sales_marketing = User.by_category(@company.subdomain, "Sales & Marketing")
-    @technology = User.by_category(@company.subdomain, "Technology")
+    @creative = User.by_category(@company.subdomain, "creative")
+    @operations = User.by_category(@company.subdomain, "operations")
+    @sales_marketing = User.by_category(@company.subdomain, "sales & marketing")
+    @technology = User.by_category(@company.subdomain, "technology")
     @admins = @company.users.where :role => "admin"
-    @headline = ""
   end
 
   def find_resource
@@ -22,6 +21,6 @@ class DashboardController < ApplicationController
       redirect_to dashboard_url(subdomain: current_user.companies.first.subdomain)
     elsif current_user.role == 'god' && request.subdomain.empty?
       redirect_to '/'
-    end      
+    end
   end
 end
