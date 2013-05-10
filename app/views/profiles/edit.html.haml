@@ -1,10 +1,9 @@
-.span7.column-center
-  %h2.text-center.mobile-padding.mbm.mtxl Success!
-  %h4.text-center.mobile-padding.mbxl.lh-24 Now help #{capitalize_phrase(@company.name)} better match you with opportunities by completing the fields below
+.span8.column-center
+  %h3.text-center.mobile-padding.mbxl Great! Now help #{capitalize_phrase(@company.name)} better match you with opportunities by completing the fields below.
 %hr
 %section
   .span5.column-center.mobile-padding
-    = link_to("Auto-fill with LinkedIn", callback_session_url(id:@user.auth_token), class:"btn btn-warning btn-block mtxl mbm")
+    = link_to("Auto-fill with LinkedIn", callback_session_url(id:@user.auth_token), class:"btn btn-linkedin btn-large btn-block mtxl mbm")
     = form_for @profile, url:"/profiles/#{@profile.user.auth_token}" do |f|
       .row-fluid.mtl
         .controls.controls-row

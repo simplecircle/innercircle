@@ -11,7 +11,7 @@
       = hidden_field_tag :local_join, @local_join
       = f.hidden_field :role, value:"talent"
       %p
-        .inline_error= @user.errors[:email].first
+        .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
         = f.text_field :email, class:"input-block-level", placeholder:"* Email"
       - if @local_join
         %p
@@ -25,7 +25,7 @@
           = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"pull-left")
           = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
       = f.submit("Join now", class:"btn btn-large btn-primary btn-block mtxl mbm")
-      .small.text-center.mbxl
+      .tiny.text-center.mbxl
         Your membership is private. It’s just between you and #{capitalize_phrase(@company.name)}.
       .pbm
 
