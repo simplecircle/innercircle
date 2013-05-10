@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    @company = Company.create(params[:company])
+    @company = Company.new(params[:company])
     @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
     @verticals = params[:verticals]
     if @verticals
@@ -19,10 +19,7 @@ class CompaniesController < ApplicationController
         CompaniesVertical.create!(company_id: @company.id, vertical_id: v)
       end
     end
-
     if @company.save
-      # session[:company_id] = @company.id
-      # session[:user_id] = @company.users.first.id
       @user = @company.users.first
       cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all}
       redirect_to dashboard_url(subdomain: @company.subdomain)
