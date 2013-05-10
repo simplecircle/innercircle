@@ -13,6 +13,7 @@ class Company < ActiveRecord::Base
 
   mount_uploader :banner, BannerUploader
 
+  validate :profile_has_names?
   validates :name, presence:true
   validates :name, uniqueness:true
   validates :website_url, presence:true
@@ -27,6 +28,16 @@ class Company < ActiveRecord::Base
 
   def self.employee_counts
     [["Select a range", ""], ["0 - 10", "0_10"], ["11 - 50", "11_50"], ["51 - 100", "51_100"], ["101 - 250", "101_250"], ["251 - 500", "251_500"], ["500+", "500_9999"]]
+  end
+
+  def profile_has_names?
+    @profile = users.first.profile
+    if [nil, ""].include? @profile.first_name
+      errors.add("first_name", "Please enter your first name")
+    end
+    if [nil, ""].include? @profile.last_name
+      errors.add("last_name", "Please enter your last name")
+    end
   end
 
   def self.states

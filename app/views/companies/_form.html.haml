@@ -7,13 +7,13 @@
       .control-group
         %label.control-label{:for=>:first_name} * First Name
         .controls
-          = text_field 'company[users_attributes][0][profile_attributes]', 'first_name', :class => "span8"
-          .inline_error= @company.users.first.profile.errors[:first_name].first
+          = text_field 'company[users_attributes][0][profile_attributes]', 'first_name', {:class => "span8", :value => @profile.first_name}
+          .inline_error= @company.errors[:first_name].first
       .control-group
         %label.control-label{:for=>:last_name} * Last Name
         .controls
           = text_field 'company[users_attributes][0][profile_attributes]', 'last_name', :class => "span8"
-          .inline_error= @company.users.first.profile.errors[:last_name].first
+          .inline_error= @company.errors[:last_name].first
       .control-group
         %label.control-label{:for=>:email} * Email
         .controls
