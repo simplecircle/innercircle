@@ -15,9 +15,9 @@
                 %h1= @headline
             %ul.nav.pull-right
               %li.divider-vertical
-              - if current_company
+              - if current_user && current_user.role == "admin"
                 %li
-                  = link_to(capitalize_phrase(current_company.name), talent_url)
+                  = link_to("Dashboard", talent_url)
               - if current_user
                 %li.dropdown
                   %a.display-strong.white.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
