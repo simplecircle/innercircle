@@ -1,8 +1,9 @@
 class DashboardController < ApplicationController
 
-  before_filter :find_resource
-  before_filter :restrict_access
+  # ensuring subdomain must be called first!
   before_filter :ensure_proper_subdomain
+  before_filter :find_resource
+  before_filter :authorize
 
   def index
     @creative = User.by_category(@company.subdomain, "creative")

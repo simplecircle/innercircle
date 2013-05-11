@@ -10,7 +10,6 @@ class Company < ActiveRecord::Base
   after_validation :add_url_protocol
   mount_uploader :banner, BannerUploader
 
-
   validates :name, presence:true
   validates :name, uniqueness:true
   validates :website_url, presence:true

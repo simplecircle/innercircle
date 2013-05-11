@@ -1,6 +1,5 @@
 class CompaniesController < ApplicationController
 
-  # before_filter :restrict_access
   layout :choose_layout
 
   def new

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   layout :choose_layout
-  before_filter :restrict_access, only:[:show]
-  before_filter :find_resource, only: [:new, :create]
+  before_filter :find_resource, only: [:new, :create, :show]
+  before_filter :authorize, only:[:show]
 
 
   def new
@@ -37,8 +37,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @headline = "#{@user.profile.first_name.capitalize} #{@user.profile.last_name.capitalize}"
+    @user = @company.users.find(params[:id])
   end
 
   def confirmation

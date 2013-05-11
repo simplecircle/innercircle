@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
   end
 
-  def restrict_access
+  def authorize
     if current_user
       return if current_user.role == "god"
       Company.find_by_subdomain!(request.subdomain).users.select("users.id").where(role:"admin").each {|user| return if user.id == current_user.id}
