@@ -1,20 +1,23 @@
 class DashboardController < ApplicationController
-  layout "application"
-  before_filter :restrict_access, only:[:index]
-  before_filter :ensure_proper_subdomain
+
   before_filter :find_resource
+  before_filter :restrict_access
+  before_filter :ensure_proper_subdomain
 
   def index
     @creative = User.by_category(@company.subdomain, "creative")
     @operations = User.by_category(@company.subdomain, "operations")
     @sales_marketing = User.by_category(@company.subdomain, "sales & marketing")
     @technology = User.by_category(@company.subdomain, "technology")
-    @admins = @company.users.where :role => "admin"
+    @admins = @company.users.where(role:"admin")
   end
+
+  private
 
   def find_resource
     @company = Company.find_by_subdomain!(request.subdomain)
   end
+
   def ensure_proper_subdomain
     # If you're an admin, force a subdomain. Otherwise, redirect home
     if current_user.role == 'admin' && request.subdomain.empty? && current_user.companies.first != nil
@@ -23,4 +26,5 @@ class DashboardController < ApplicationController
       redirect_to '/'
     end
   end
+
 end

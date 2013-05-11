@@ -21,20 +21,12 @@ class CompaniesController < ApplicationController
     end
 
     if @company.save
-      # session[:company_id] = @company.id
-      # session[:user_id] = @company.users.first.id
       @user = @company.users.first
       cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all}
       redirect_to dashboard_url(subdomain: @company.subdomain)
     else
       render "new"
     end
-  end
-
-  def show
-  end
-
-  def edit
   end
 
   private

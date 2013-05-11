@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
 
-  layout "onboarding"
-
   def index
     if params[:src] != nil #Being directed home from a protected page
       session[:redirect_source] = params[:src]

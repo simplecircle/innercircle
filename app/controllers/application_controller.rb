@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
 
-  helper_method :current_user, :capitalize_phrase, :first_name
+  protect_from_forgery
+  helper_method :current_user, :capitalize_phrase
 
   private
 
@@ -10,7 +10,11 @@ class ApplicationController < ActionController::Base
   end
 
   def restrict_access
-    redirect_to(login_url) unless current_user
+    if current_user
+      return if current_user.role == "god"
+      Company.find_by_subdomain!(request.subdomain).users.select("users.id").where(role:"admin").each {|user| return if user.id == current_user.id}
+    end
+    redirect_to(login_url)
   end
 
   def belongs_to_current_user?
@@ -24,7 +28,7 @@ class ApplicationController < ActionController::Base
       false
     end
   end
-  
+
   def capitalize_phrase(phrase)
     phrase.split.each{|x|x.capitalize!}.join(" ")
   end
