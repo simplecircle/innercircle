@@ -6,8 +6,25 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Vertical.create([{ name: 'Vertical A' }, {name: 'Vertical B'}])
+Vertical.create([
+  { name: 'eCommerce' },
+  { name: 'Internet' },
+  { name: 'Gaming' },
+  { name: 'Marketing / PR / Branding' },
+  { name: 'Entertainment / Media' },
+  { name: 'Education' },
+  { name: 'Healthcare' },
+  { name: 'B2B Software / Saas' },
+  { name: 'Finance' },
+  { name: 'Government / Politics' },
+  { name: 'Fashion' },
+  { name: 'Travel' },
+  { name: 'Social Impact' }
+])
 
 CompanyDept.create([{name: 'operations'}, {name: 'creative'}, {name: 'sales & marketing'}, {name: 'technology'}])
+
+
+
 
 ActsAsTaggableOn::Tag.create([{name: 'Rails'}])
