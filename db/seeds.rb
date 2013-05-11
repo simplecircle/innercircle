@@ -23,8 +23,4 @@ Vertical.create([
 ])
 
 CompanyDept.create([{name: 'operations'}, {name: 'creative'}, {name: 'sales & marketing'}, {name: 'technology'}])
-
-
-
-
 ActsAsTaggableOn::Tag.create([{name: 'Rails'}])
