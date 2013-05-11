@@ -67,16 +67,16 @@
         %label.control-label Company Categories
         .controls.controls-row
           = co.fields_for :verticals do |company_verticals|
-            - Vertical.all.each do |v|
-              %label.checkbox{:for=>:name}
+            - Vertical.order(:name).each do |v|
+              %label.checkbox{:for=>"vertical_#{v.id.to_s}", :class=>"two-column-checkbox-label span5"}
                 = check_box_tag("vertical_#{v.id.to_s}", v.id, (@verticals.include?(v.id.to_s) if @verticals), name: 'verticals[]')
                 = v.name
             
       .control-group
         %label.control-label * Banner Picture
         .controls.controls-row
-          = co.file_field :banner
           %span.help-block Add a great photo of your team or office
+          = co.file_field :banner
           .inline_error= @company.errors[:banner].first
       
       %h3.form-section-header Content Channels
