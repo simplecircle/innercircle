@@ -3,7 +3,7 @@
     .span10.offset1.mobile-padding
       .row-fluid.dashboard-header.bb-1
         .span8
-          %h1.mbn= @company.name + '\'s Dashboard'
+          %h2.mbn= "#{capitalize_phrase(@company.name)}’s Dashboard"
         .span4
           .dashboard-header-links
             = link_to("#{@company.subdomain}.jobcrush.co", join_url(subdomain:@company.subdomain), target:"_blank", class:"mrl")

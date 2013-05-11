@@ -18,8 +18,8 @@ Innercircle::Application.routes.draw do
     match 'local_join' => 'home#index'
   end
 
-  match "/auth/linkedin/callback"=>"profiles#edit"
-  match "auth/failure"=>"home#index"
+  get "/auth/linkedin/callback"=>"profiles#edit"
+  get "auth/failure"=>"home#index"
   get "callback_session"=>"profiles#callback_session"
   get "signup"=>"companies#new"
   get "login"=>"sessions#new"

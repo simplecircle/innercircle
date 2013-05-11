@@ -5,6 +5,7 @@ class ProfilesController < ApplicationController
 
   def edit
     if auth = request.env["omniauth.auth"]
+      # raise auth.to_yaml
       info = auth["info"]
       @profile.first_name = info["first_name"]
       @profile.last_name = info["last_name"]
@@ -12,11 +13,10 @@ class ProfilesController < ApplicationController
       @profile.url = info["urls"]["public_profile"]
       @profile.linkedin_profile = info["urls"]["public_profile"]
       @incoming_tags = auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",")
-      # raise auth.to_yaml
 
       @profile.linkedin_data = JSON.parse(auth.to_json)
       @profile.save
-      @as_hash = @profile.linkedin_data
+      session[:callback_token] = nil
     end
   end
 
@@ -35,8 +35,8 @@ class ProfilesController < ApplicationController
     redirect_to "/auth/linkedin"
   end
 
-  private
 
+  private
 
   def find_resource
     @user = params[:id]? User.find_by_auth_token(params[:id]) : User.find_by_auth_token(session[:callback_token])

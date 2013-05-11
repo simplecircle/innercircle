@@ -5,8 +5,8 @@
       %span.icon-bar
       %span.icon-bar
     .nav-collapse.collapse
-      .container-fluid
-        .row-fluid
+      .container
+        .row
           .span1.hidden-phone
             .brand= link_to(image_tag("logo_small_gray.jpg"), root_url(subdomain:false, src:"nav"))
           .span11
@@ -14,7 +14,6 @@
               %li.divider-vertical
                 %h1= @headline
             %ul.nav.pull-right
-              %li.divider-vertical
               - if current_user && current_user.role == "admin"
                 %li
                   = link_to("Dashboard", dashboard_url)

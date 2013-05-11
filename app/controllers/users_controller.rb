@@ -1,11 +1,9 @@
 class UsersController < ApplicationController
 
   layout :choose_layout
-  before_filter :restrict_access, only:[:index, :show]
-  before_filter :find_resource, only: [:new, :create]
+  before_filter :find_resource, only: [:new, :create, :show]
+  before_filter :authorize, only:[:show]
 
-  def index
-  end
 
   def new
     @user = User.new
@@ -13,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = @company.users.build(params[:user])   
+    @user = @company.users.build(params[:user])
     @user.build_profile
     @depts = params[:company_depts]
     unless @local_join
@@ -39,8 +37,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @headline = "#{@user.profile.first_name.capitalize} #{@user.profile.last_name.capitalize}"
+    @user = @company.users.find(params[:id])
   end
 
   def confirmation

@@ -4,13 +4,10 @@ class Company < ActiveRecord::Base
 
   has_many :users_companies
   has_many :users, through: :users_companies
-  after_validation :add_url_protocol
-
   has_many :companies_verticals
   has_many :verticals, through: :companies_verticals
-  
   accepts_nested_attributes_for :users, :users_companies
-
+  after_validation :add_url_protocol
   mount_uploader :banner, BannerUploader
 
   validate :profile_has_names?

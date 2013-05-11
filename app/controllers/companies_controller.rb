@@ -1,6 +1,5 @@
 class CompaniesController < ApplicationController
 
-  # before_filter :restrict_access
   layout :choose_layout
 
   def new
@@ -23,17 +22,12 @@ class CompaniesController < ApplicationController
       end
     end
     if @company.save
+      @user = @company.users.first
       cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all}
       redirect_to dashboard_url(subdomain: @company.subdomain)
     else
       render "new"
     end
-  end
-
-  def show
-  end
-
-  def edit
   end
 
   private
