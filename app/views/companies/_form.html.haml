@@ -12,7 +12,7 @@
       .control-group
         %label.control-label{:for=>:last_name} * Last Name
         .controls
-          = text_field 'company[users_attributes][0][profile_attributes]', 'last_name', :class => "span8"
+          = text_field 'company[users_attributes][0][profile_attributes]', 'last_name', {:class => "span8", :value => @profile.last_name}
           .inline_error= @company.errors[:last_name].first
       .control-group
         %label.control-label{:for=>:email} * Email
