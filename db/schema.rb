@@ -11,23 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130510161912) do
+ActiveRecord::Schema.define(:version => 20130513150428) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.string   "website_url"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "banner"
     t.integer  "width"
     t.integer  "height"
     t.string   "subdomain"
-    t.string   "content_instagram"
+    t.string   "content_instagram_username"
     t.string   "content_facebook"
     t.string   "content_tumblr"
     t.string   "content_twitter"
     t.string   "content_jobs_page"
-    t.string   "short_description", :limit => 80
+    t.string   "short_description",          :limit => 80
     t.string   "hq_city"
     t.string   "hq_state"
     t.string   "employee_count"
@@ -50,6 +50,23 @@ ActiveRecord::Schema.define(:version => 20130510161912) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "posts", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "provider"
+    t.string   "provider_uid"
+    t.datetime "provider_publication_date"
+    t.text     "provider_raw_data"
+    t.string   "media_url"
+    t.string   "like_count"
+    t.boolean  "auto_publish"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "posts", ["company_id"], :name => "index_posts_on_company_id"
+  add_index "posts", ["provider_publication_date"], :name => "index_posts_on_provider_publication_date"
+  add_index "posts", ["provider_uid"], :name => "index_posts_on_provider_uid"
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
