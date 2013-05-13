@@ -73,9 +73,8 @@
                 = v.name
             
       .control-group
-        %label.control-label * Banner Picture
+        %label.control-label * Company logo
         .controls.controls-row
-          %span.help-block Add a great photo of your team or office
           = co.file_field :banner
           .inline_error= @company.errors[:banner].first
       
