@@ -4,7 +4,8 @@ class PostsController < ApplicationController
     companies = Company.all
     companies.each do |company|
       if company.instagram_username
-        InstagramUsernameWorker.perform_async(company.id)
+        # Call http://jobcrush.local/posts/new?first_run=true when initializing a new company.
+        InstagramUsernameWorker.perform_async(company.id, params[:first_run])
       end
     end
     render text:"Workers are working"
