@@ -11,28 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514004302) do
+ActiveRecord::Schema.define(:version => 20130514013811) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.string   "website_url"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
     t.string   "banner"
     t.integer  "width"
     t.integer  "height"
     t.string   "subdomain"
-    t.string   "content_instagram_username"
-    t.string   "content_facebook"
-    t.string   "content_tumblr"
-    t.string   "content_twitter"
-    t.string   "content_jobs_page"
-    t.string   "short_description",          :limit => 80
+    t.string   "instagram_username"
+    t.string   "facebook"
+    t.string   "tumblr"
+    t.string   "twitter"
+    t.string   "jobs_page"
+    t.string   "short_description",               :limit => 80
     t.string   "hq_city"
     t.string   "hq_state"
     t.string   "employee_count"
     t.string   "foursquare_v2_id"
-    t.string   "content_instagram_uid"
+    t.string   "instagram_uid"
+    t.boolean  "instagram_username_auto_publish",               :default => true
+    t.boolean  "instagram_location_auto_publish",               :default => true
+    t.string   "instagram_location_id"
   end
 
   add_index "companies", ["subdomain"], :name => "index_companies_on_subdomain", :unique => true
@@ -62,9 +65,9 @@ ActiveRecord::Schema.define(:version => 20130514004302) do
     t.string   "media_url"
     t.string   "like_count"
     t.boolean  "auto_publish"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.boolean  "published"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "published",                 :default => true
   end
 
   add_index "posts", ["company_id"], :name => "index_posts_on_company_id"

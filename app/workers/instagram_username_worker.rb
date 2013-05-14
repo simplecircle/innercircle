@@ -7,11 +7,12 @@ class InstagramUsernameWorker
 
   def perform(company_id)
     company = Company.find(company_id)
-    if company.content_instagram_uid.nil?
-      uid = self.get_uid(company.content_instagram_username)
-      company.update_attribute!(:content_instagram_uid, uid)
+    if company.instagram_uid.nil?
+      uid = self.get_uid(company.instagram_username)
+      company.update_attribute!(:instagram_uid, uid)
     end
-    media = self.get_media(company.content_instagram_uid)
+
+    media = self.get_media(company.instagram_uid)
     media["data"].each do |post|
       unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid("instagram", post["id"])
         Post.create({
@@ -20,7 +21,8 @@ class InstagramUsernameWorker
           provider_publication_date:Time.at(post["created_time"].to_i).to_datetime,
           provider_raw_data:JSON.parse(post.to_json),
           media_url:post["images"]["standard_resolution"]["url"],
-          like_count:post["likes"]["count"]
+          like_count:post["likes"]["count"],
+          published:company.instagram_username_auto_publish
          })
       end
     end
