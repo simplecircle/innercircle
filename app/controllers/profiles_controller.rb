@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
 
   layout :choose_layout
   before_filter :find_resource, only: [:edit, :update]
+  before_filter :ensure_proper_subdomain, only: [:show]
 
   def edit
     if auth = request.env["omniauth.auth"]
@@ -18,6 +19,13 @@ class ProfilesController < ApplicationController
       @profile.save
       session[:callback_token] = nil
     end
+  end
+
+  def show
+    @mode = 'update'
+    @company = Company.find_by_subdomain!(request.subdomain)
+    @verticals = @company.verticals.map(&:id)
+    @submit_button_text = "Save"
   end
 
   def update
@@ -43,6 +51,17 @@ class ProfilesController < ApplicationController
     @profile = @user.profile
     @company = Company.find_by_subdomain!(request.subdomain)
     @tags = ActsAsTaggableOn::Tag.all.to_json(only: :name)
+  end
+
+  def ensure_proper_subdomain
+    # If you're an admin, force a subdomain. Otherwise, redirect home
+    if current_user
+      if current_user.role == 'admin' && request.subdomain.empty? && current_user.companies.first != nil
+        redirect_to profile_url(subdomain: current_user.companies.first.subdomain)
+      elsif current_user.role == 'god' && request.subdomain.empty?
+        redirect_to '/'
+      end
+    end
   end
 
   def choose_layout
