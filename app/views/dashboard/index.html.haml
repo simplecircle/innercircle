@@ -1,6 +1,7 @@
 .container-fluid
   .row-fluid
     .span10.offset1.mobile-padding
+      = render "shared/flash", :flash=>flash
       .row-fluid.dashboard-header.bb-1
         .span8
           %h2.mbn= "#{capitalize_phrase(@company.name)}’s Dashboard"
@@ -86,15 +87,19 @@
               %ul.unstyled
                 %li.bb-1.ptl 
                   Jobs page: 
-                  =link_to("jobs.test.com", 'http://jobs.test.com', target:"_blank")
+                  =link_to(@company.content_jobs_page, "http://instagram.com/#{@company.content_jobs_page}", target:"_blank")
                 %li.bb-1.ptl 
-                  Instagram: 
+                  Instagram:
+                  =link_to(@company.content_instagram, "http://instagram.com/#{@company.content_instagram}", target:"_blank")
                 %li.bb-1.ptl 
-                  Facebook: 
+                  Facebook:
+                  =link_to(@company.content_facebook, "http://facebook.com/#{@company.content_facebook}", target:"_blank")
                 %li.bb-1.ptl 
-                  Twitter: 
+                  Twitter:
+                  =link_to(@company.content_twitter, "http://twitter.com/#{@company.content_twitter}", target:"_blank")
                 %li.bb-1.ptl 
-                  Tumblr: 
+                  Tumblr:
+                  =link_to(@company.content_tumblr, "http://tumblr.com/#{@company.content_tumblr}", target:"_blank")
 
           
 
