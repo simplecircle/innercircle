@@ -1,7 +1,9 @@
 - unless flash[:notice].blank?
-  #flash-notice
-    = raw flash.notice
+  .alert.alert-success
+    %strong
+      = raw flash.notice
 
 - unless flash[:alert].blank?
-  #flash-alert
-    = raw flash[:alert]
+  .alert.alert-error
+    %strong
+      = raw flash[:alert]
