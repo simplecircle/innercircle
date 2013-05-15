@@ -24,7 +24,7 @@ class CompaniesController < ApplicationController
     @user = @company.users.first
     @profile = @user.profile
 
-    @verticals = params[:verticals].map{|v| v.to_i}
+    @verticals = (params[:verticals] || []).map{|v| v.to_i}
     if @company.save
       @user = @company.users.first
       save_verticals(@verticals, @company) if @verticals
