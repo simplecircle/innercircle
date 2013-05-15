@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130510161912) do
+ActiveRecord::Schema.define(:version => 20130515025325) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20130510161912) do
     t.string   "hq_city"
     t.string   "hq_state"
     t.string   "employee_count"
+    t.string   "banner_cache"
   end
 
   add_index "companies", ["subdomain"], :name => "index_companies_on_subdomain", :unique => true

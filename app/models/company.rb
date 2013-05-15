@@ -1,6 +1,6 @@
 class Company < ActiveRecord::Base
 
-  attr_accessible :name, :website_url, :users_attributes, :banner, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :content_instagram, :content_facebook, :content_tumblr, :content_twitter, :content_jobs_page
+  attr_accessible :name, :website_url, :users_attributes, :banner, :banner_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :content_instagram, :content_facebook, :content_tumblr, :content_twitter, :content_jobs_page
 
   has_many :users_companies
   has_many :users, through: :users_companies

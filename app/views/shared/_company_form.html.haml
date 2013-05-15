@@ -77,7 +77,9 @@
   .control-group
     %label.control-label * Company logo
     .controls.controls-row
+      = image_tag(@company.banner, :width => 100) if @company.banner?
       = co.file_field :banner
+      = co.hidden_field :banner_cache, :value => @company.banner_cache
       .inline_error= @company.errors[:banner].first
   
   %h3.form-section-header Content Channels
