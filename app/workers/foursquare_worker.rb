@@ -3,9 +3,9 @@ class FoursquareWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
   include HTTParty
+  PROVIDER = "foursquare"
 
   def perform(company_id, first_run=false)
-    @provider = "foursquare"
     @offset = 0
     if first_run
       @first_run = true
@@ -29,9 +29,9 @@ class FoursquareWorker
     unless media["response"]["photos"]["groups"][1].nil?
       media["response"]["photos"]["groups"][1]["items"].each do |post|
         logger.info "check if post exists"
-        unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(@provider, post["id"])
+        unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
           post = Post.create({
-            provider:@provider,
+            provider:PROVIDER,
             provider_uid:post["id"],
             provider_publication_date:Time.at(post["createdAt"].to_i).to_datetime,
             provider_raw_data:JSON.parse(post.to_json),
