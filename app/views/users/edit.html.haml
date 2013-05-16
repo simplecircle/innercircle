@@ -22,7 +22,7 @@
           %label.control-label{:for=>:email} Email
           .controls
             = f.text_field :email, class:"span8", placeholder:"Email"
-            %span.help-block.small= link_to "Reset Password", new_password_reset_path, :target=>"_blank", :id=>"reset-password-link"
+            %span.help-block.small= link_to "Reset Password", new_password_reset_path, :id=>"reset-password-link"
             .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
 
         - if @user.talent?
