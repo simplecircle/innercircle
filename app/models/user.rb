@@ -28,6 +28,14 @@ class User < ActiveRecord::Base
     return companies if admin_or_god?
   end
 
+  def admin?
+    role == 'admin'
+  end
+
+  def talent?
+    role == 'talent'
+  end
+
   def god?
     role == 'god'
   end
