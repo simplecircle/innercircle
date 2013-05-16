@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514013811) do
+ActiveRecord::Schema.define(:version => 20130516211457) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -36,6 +36,10 @@ ActiveRecord::Schema.define(:version => 20130514013811) do
     t.boolean  "instagram_username_auto_publish",               :default => true
     t.boolean  "instagram_location_auto_publish",               :default => true
     t.string   "instagram_location_id"
+    t.string   "banner_cache"
+    t.boolean  "facebook_auto_publish",                         :default => true
+    t.boolean  "tumblr_auto_publish",                           :default => true
+    t.boolean  "twitter_auto_publish",                          :default => true
   end
 
   add_index "companies", ["subdomain"], :name => "index_companies_on_subdomain", :unique => true
@@ -63,11 +67,11 @@ ActiveRecord::Schema.define(:version => 20130514013811) do
     t.datetime "provider_publication_date"
     t.text     "provider_raw_data"
     t.string   "media_url"
-    t.string   "like_count"
     t.boolean  "auto_publish"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
     t.boolean  "published",                 :default => true
+    t.integer  "like_count",                :default => 0,    :null => false
   end
 
   add_index "posts", ["company_id"], :name => "index_posts_on_company_id"
