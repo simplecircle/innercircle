@@ -1,8 +1,12 @@
 Innercircle::Application.routes.draw do
-  root :to => 'home#index'
 
-  resources :companies
+  require 'sidekiq/web'
+  mount Sidekiq::Web, at: "/sidekiq"
+
+  root :to => 'home#index'
   resources :users
+  resources :companies
+  resources :posts
   resources :password_resets
 
 

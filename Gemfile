@@ -17,6 +17,10 @@ gem 'babosa'
 gem 'acts-as-taggable-on'
 gem 'omniauth'
 gem 'omniauth-linkedin'
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+gem 'httparty'
 
 if RUBY_PLATFORM =~ /mingw32/
   gem 'therubyracer','0.11.0beta1' #0.11.0beta5
