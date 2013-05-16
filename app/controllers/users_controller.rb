@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   layout :choose_layout
-  before_filter :find_resource, only: [:new, :create, :show]
+  before_filter :find_resource
   before_filter :authorize_user, only:[:show, :update]
 
   def new
@@ -11,20 +11,30 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @user.assign_attributes(params[:user])
     @notice = nil
     @depts = params[:company_depts]
-    if @depts.nil?
+    @depts = @depts.map{|x| x.to_i } if !@depts.blank?
+
+    if !params[:as_values_true].blank?
+      @incoming_tags = params[:as_values_true].split(",").reject(&:empty?).join(",")
+      @user.profile.skill_list = @incoming_tags #Need to define it this way so that tags populate on form reload (i.e. if validation fails)
+    end
+
+    if @depts.nil? && @user.talent?
       @user.errors.add(:categories, "You have to choose at least one category.")
       render "edit"
     else
-      if current_user.update_attributes(params[:user])
-        save_departments(@depts, @user.profile)
+      if @user.save
+        save_departments(@depts, @user.profile) if @user.talent?
         @notice = "Account Updated"
-      end
-      if current_user.god_or_admin?
-        redirect_to dashboard_url, notice: @notice
+        if current_user.god_or_admin?
+          redirect_to dashboard_url, notice: @notice
+        else
+          redirect_to current_user, notice: @notice
+        end
       else
-        redirect_to current_user, notice: @notice
+        render 'edit'
       end
     end
   end
@@ -42,7 +52,7 @@ class UsersController < ApplicationController
       @user.errors.add(:categories, "You have to choose at least one category.")
       render "new"
     else
-      if @user.save
+      if @user.save!
         @company.users << @user
         save_departments(@depts, @user.profile)
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
@@ -60,6 +70,7 @@ class UsersController < ApplicationController
   def edit
     @user = current_user
     @depts = @user.profile.company_depts.map(&:id)
+    @incoming_tags = @user.profile.skills.map(&:name).join(',')
   end
 
   def confirmation
@@ -75,13 +86,14 @@ class UsersController < ApplicationController
       end
     end
     departments.each do |dept|
-      ProfilesCompanyDept.create!(profile_id: profile.id, company_dept_id: dept)
+      ProfilesCompanyDept.find_or_create_by_profile_id_and_company_dept_id(profile.id, dept)
     end
   end
 
   def find_resource
     @company = request.subdomain.empty? ? current_user.companies.first : Company.find_by_subdomain!(request.subdomain)
     @local_join= true if params[:local_join] == "true"
+    @tags = ActsAsTaggableOn::Tag.all.to_json(only: :name)
   end
 
   def choose_layout
