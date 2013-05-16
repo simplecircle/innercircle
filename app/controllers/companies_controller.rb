@@ -10,13 +10,27 @@ class CompaniesController < ApplicationController
     redirect_to signup_url(subdomain: false) if !request.subdomain.empty?
   end
 
+  def edit
+    @mode = 'update'
+    @company = Company.find_by_subdomain!(request.subdomain)
+    @verticals = @company.verticals.map(&:id)
+    @submit_button_text = "Save"
+  end
+
   def update
+    @notice = nil
     @company = current_user.owned_companies.find(params[:id])
-    if @company
-      @company.update_attributes! params[:company]
-      save_verticals(params[:verticals], @company)
+    @company.assign_attributes params[:company]
+    @verticals = params[:verticals]
+    @verticals = @verticals.map{|x| x.to_i } if !@verticals.blank?
+    
+    if @company.save
+      save_verticals(@verticals, @company)
+      @notice = "Profile Updated"
+      redirect_to dashboard_url, notice: @notice
+    else
+      render 'edit'
     end
-    redirect_to dashboard_url, notice:"Profile Updated"
   end
 
   def create
@@ -44,7 +58,7 @@ class CompaniesController < ApplicationController
       end
     end
     verticals.each do |v|
-      CompaniesVertical.create!(company_id: company.id, vertical_id: v)
+      CompaniesVertical.find_or_create_by_company_id_and_vertical_id(company.id, v)
     end
   end
 
