@@ -11,17 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+ActiveRecord::Schema.define(:version => 20130515025325) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.string   "website_url"
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
     t.string   "banner"
     t.integer  "width"
     t.integer  "height"
     t.string   "subdomain"
+    t.string   "instagram_username"
+    t.string   "facebook"
+    t.string   "tumblr"
+    t.string   "twitter"
+    t.string   "jobs_page"
+    t.string   "short_description",               :limit => 80
     t.string   "hq_city"
     t.string   "hq_state"
     t.string   "employee_count"
+    t.string   "banner_cache"
+    t.string   "foursquare_v2_id"
+    t.string   "instagram_uid"
+    t.boolean  "instagram_username_auto_publish",               :default => true
+    t.boolean  "instagram_location_auto_publish",               :default => true
+    t.string   "instagram_location_id"
   end
 
   add_index "companies", ["subdomain"], :name => "index_companies_on_subdomain", :unique => true
@@ -41,6 +56,24 @@
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "posts", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "provider"
+    t.string   "provider_uid"
+    t.datetime "provider_publication_date"
+    t.text     "provider_raw_data"
+    t.string   "media_url"
+    t.string   "like_count"
+    t.boolean  "auto_publish"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "published",                 :default => true
+  end
+
+  add_index "posts", ["company_id"], :name => "index_posts_on_company_id"
+  add_index "posts", ["provider_publication_date"], :name => "index_posts_on_provider_publication_date"
+  add_index "posts", ["provider_uid"], :name => "index_posts_on_provider_uid"
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
