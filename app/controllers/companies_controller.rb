@@ -22,11 +22,11 @@ class CompaniesController < ApplicationController
     @company = Company.new(params[:company])
     @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
     @user = @company.users.first
+    @user.role = 'admin' if @user.role == nil
     @profile = @user.profile
 
     @verticals = (params[:verticals] || []).map{|v| v.to_i}
     if @company.save
-      @user = @company.users.first
       save_verticals(@verticals, @company) if @verticals
       cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all}
       redirect_to dashboard_url(subdomain: @company.subdomain)

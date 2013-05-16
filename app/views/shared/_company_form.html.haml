@@ -2,8 +2,6 @@
   %fieldset
   - if @user && @mode != 'update'
     = co.fields_for :users, @user do |user|
-      - if @mode != 'update'
-        = user.hidden_field :role, value:"admin"
       %h3.form-section-header Your Info
       %hr.mtn
       .control-group
