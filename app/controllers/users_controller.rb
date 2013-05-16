@@ -2,12 +2,24 @@ class UsersController < ApplicationController
 
   layout :choose_layout
   before_filter :find_resource, only: [:new, :create, :show]
-  before_filter :authorize, only:[:show]
-
+  before_filter :authorize_user, only:[:show, :update]
 
   def new
     @user = User.new
     @depts = CompanyDept.all
+  end
+
+  def update
+    @notice = nil
+    if current_user.update_attributes(params[:user])
+      @notice = "Account Updated"
+    end
+
+    if current_user.god_or_admin?
+      redirect_to dashboard_url, notice: @notice
+    else
+      redirect_to current_user, notice: @notice
+    end
   end
 
   def create
@@ -37,7 +49,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = @company.users.find(params[:id])
+    @user = User.find(params[:id])
+  end
+
+  def edit
+    @user = current_user
   end
 
   def confirmation
@@ -46,7 +62,7 @@ class UsersController < ApplicationController
   private
 
   def find_resource
-    @company = Company.find_by_subdomain!(request.subdomain)
+    @company = request.subdomain.empty? ? current_user.companies.first : Company.find_by_subdomain!(request.subdomain)
     @local_join= true if params[:local_join] == "true"
   end
 
