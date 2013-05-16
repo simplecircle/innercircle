@@ -7,8 +7,8 @@
           %h2.mbn= "#{capitalize_phrase(@company.name)}’s Dashboard"
         .span5
           .dashboard-header-links
-            = link_to("#{@company.subdomain}.jobcrush.co", join_url(subdomain:@company.subdomain), target:"_blank", class:"mrl")
-            = link_to("Edit profile", :controller => "companies", :action=>"edit", :id=>@company.id)
+            = link_to("#{@company.subdomain}.jobcrush.co", root_url(subdomain:@company.subdomain), target:"_blank", class:"mrl")
+            = link_to("Edit company profile", :controller => "companies", :action=>"edit", :id=>@company.id)
   .row-fluid
     .span10.offset1.mobile-padding
       %section#awaiting-approval-box.highlight.tac
