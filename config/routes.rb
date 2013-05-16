@@ -9,7 +9,6 @@ Innercircle::Application.routes.draw do
   resources :posts
   resources :password_resets
 
-
   constraints(Subdomain) do
     match 'join' => 'users#new'
     match 'local_join' => 'users#new'
@@ -21,7 +20,6 @@ Innercircle::Application.routes.draw do
     match 'local_join' => 'home#index'
   end
 
-  get "profile" => "profiles#show"
   get "dashboard" => "dashboard#index"
   get "/auth/linkedin/callback"=>"profiles#edit"
   get "auth/failure"=>"home#index"
