@@ -1,7 +1,7 @@
 .container-fluid
   .row-fluid
     .span10.offset1.mobile-padding
-      = render "shared/flash", :flash=>flash
+      = render "shared/flash", :flash=>flash unless flash.blank?
       .row-fluid.dashboard-header.bb-1
         .span7
           %h2.mbn= "#{capitalize_phrase(@company.name)}’s Dashboard"
