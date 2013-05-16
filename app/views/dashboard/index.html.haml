@@ -3,9 +3,9 @@
     .span10.offset1.mobile-padding
       = render "shared/flash", :flash=>flash
       .row-fluid.dashboard-header.bb-1
-        .span8
+        .span7
           %h2.mbn= "#{capitalize_phrase(@company.name)}’s Dashboard"
-        .span4
+        .span5
           .dashboard-header-links
             = link_to("#{@company.subdomain}.jobcrush.co", join_url(subdomain:@company.subdomain), target:"_blank", class:"mrl")
             = link_to("Edit profile", '/profile')
