@@ -7,6 +7,7 @@ class CompaniesController < ApplicationController
     @user = @company.users.build
     @profile = @user.build_profile
     @verticals = Vertical.all
+    redirect_to signup_url(subdomain: false) if !request.subdomain.empty?
   end
 
   def update
