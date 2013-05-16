@@ -1,0 +1,41 @@
+.container-fluid
+  .row-fluid
+    .span8.offset2
+      %h2.form-section-header Edit Account
+      %hr.mtn
+      = form_for(@user, :html=>{:class=> 'form-horizontal'}) do |f|
+        = f.fields_for :profile do |p|
+          .control-group
+            %label.control-label Name
+            .controls.controls-row
+              = p.text_field :first_name, class:"span4", placeholder: "First Name"
+              = p.text_field :last_name, class:"span4", placeholder: "Last Name"
+              .inline_error= @user.profile.errors[:first_name].first
+              .inline_error= @user.profile.errors[:last_name].first
+
+        .control-group
+          %label.control-label{:for=>:email} Email
+          .controls
+            = f.text_field :email, class:"span8", placeholder:"Email"
+            .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
+        .control-group
+          %label.control-label Password
+          .controls
+            = link_to "Reset Password", new_password_reset_path, :target=>"_blank"
+        %p
+        .control-group
+          %label.control-label
+          .controls
+            = f.submit "Save", class:"btn btn-large mtl span8"
+
+        / .inline_error= @user.errors[:categories].first
+        / .help-block * Which category fits you best?
+        / - CompanyDept.all.each do |dept|
+        /   %p.checkbox-group
+        /     = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"pull-left")
+        /     = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
+        / = f.submit("Join now", class:"btn btn-large btn-primary btn-block mtxl mbm")
+        / .tiny.text-center.mbxl
+        /   Your membership is private. It’s just between you and #{capitalize_phrase(@company.name)}.
+        / .pbm
+
