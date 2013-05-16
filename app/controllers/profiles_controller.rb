@@ -16,16 +16,15 @@ class ProfilesController < ApplicationController
       @incoming_tags = auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",")
 
       @profile.linkedin_data = JSON.parse(auth.to_json)
-      @profile.save
       session[:callback_token] = nil
+      if session[:linkedin_callback_page] == 'users_edit'
+        @depts = @user.profile.company_depts.map(&:id)
+        render 'users/edit', :layout => "application"
+        session[:linkedin_callback_page] = nil
+      else
+        @profile.save
+      end
     end
-  end
-
-  def show
-    @mode = 'update'
-    @company = Company.find_by_subdomain!(request.subdomain)
-    @verticals = @company.verticals.map(&:id)
-    @submit_button_text = "Save"
   end
 
   def update
@@ -40,16 +39,16 @@ class ProfilesController < ApplicationController
 
   def callback_session
     session[:callback_token] = User.find_by_auth_token(params[:id]).auth_token
+    session[:linkedin_callback_page] = params[:linkedin_callback_page]
     redirect_to "/auth/linkedin"
   end
-
 
   private
 
   def find_resource
     @user = params[:id]? User.find_by_auth_token(params[:id]) : User.find_by_auth_token(session[:callback_token])
     @profile = @user.profile
-    @company = Company.find_by_subdomain!(request.subdomain)
+    @company = request.subdomain.empty? ? current_user.companies.first : Company.find_by_subdomain!(request.subdomain)
     @tags = ActsAsTaggableOn::Tag.all.to_json(only: :name)
   end
 
