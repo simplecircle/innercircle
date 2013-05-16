@@ -19,11 +19,7 @@ class ApplicationController < ActionController::Base
 
   def belongs_to_current_user?
     if current_user
-      if current_user.id == @user.id
-        true
-      else
-        false
-      end
+      current_user.id == @user.id
     else
       false
     end
