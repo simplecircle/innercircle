@@ -11,3 +11,4 @@ public/photo
 public/manifest.yml
 config/database.yml
 .rvmrc
+/nginx/
