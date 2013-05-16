@@ -85,22 +85,19 @@
           .row-fluid
             .span12
               %ul.unstyled
-                %li.bb-1.ptl 
-                  Jobs page: 
-                  =link_to(@company.content_jobs_page, "http://instagram.com/#{@company.content_jobs_page}", target:"_blank")
-                %li.bb-1.ptl 
+                %li.bb-1.ptl
+                  Jobs page:
+                  =link_to(@company.jobs_page, "http://instagram.com/#{@company.jobs_page}", target:"_blank")
+                %li.bb-1.ptl
                   Instagram:
-                  =link_to(@company.content_instagram, "http://instagram.com/#{@company.content_instagram}", target:"_blank")
-                %li.bb-1.ptl 
+                  =link_to(@company.instagram_username, "http://instagram.com/#{@company.instagram_username}", target:"_blank")
+                %li.bb-1.ptl
                   Facebook:
-                  =link_to(@company.content_facebook, "http://facebook.com/#{@company.content_facebook}", target:"_blank")
-                %li.bb-1.ptl 
+                  =link_to(@company.facebook, "http://facebook.com/#{@company.facebook}", target:"_blank")
+                %li.bb-1.ptl
                   Twitter:
-                  =link_to(@company.content_twitter, "http://twitter.com/#{@company.content_twitter}", target:"_blank")
-                %li.bb-1.ptl 
+                  =link_to(@company.twitter, "http://twitter.com/#{@company.twitter}", target:"_blank")
+                %li.bb-1.ptl
                   Tumblr:
-                  =link_to(@company.content_tumblr, "http://tumblr.com/#{@company.content_tumblr}", target:"_blank")
+                  =link_to(@company.tumblr, "http://tumblr.com/#{@company.tumblr}", target:"_blank")
 
-          
-
-     

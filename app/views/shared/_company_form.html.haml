@@ -88,27 +88,23 @@
   .control-group
     %label.control-label{:for=>:content_instagram} Instagram
     .controls
-      = co.text_field :content_instagram, {:class=>'span8', :placeholder=>'username'}
-      
+      = co.text_field :instagram_username, {:class=>'span8', :placeholder=>'username'}
   .control-group
     %label.control-label{:for=>:content_facebook} Facebook
     .controls
-      = co.text_field :content_facebook, {:class=>'span8', :placeholder=>'username'}
-      
+      = co.text_field :facebook, {:class=>'span8', :placeholder=>'username'}
   .control-group
     %label.control-label{:for=>:content_tumblr} Tumblr
     .controls
-      = co.text_field :content_tumblr, {:class=>'span8', :placeholder=>'account.tumblr.com'}
-      
+      = co.text_field :tumblr, {:class=>'span8', :placeholder=>'account.tumblr.com'}
   .control-group
     %label.control-label{:for=>:content_twitter} Twitter
     .controls
-      = co.text_field :content_twitter, {:class=>'span8', :placeholder=>'@username'}
-      
+      = co.text_field :twitter, {:class=>'span8', :placeholder=>'@username'}
   .control-group
     %label.control-label{:for=>:content_jobs_page} Jobs Page
     .controls
-      = co.text_field :content_jobs_page, {:class=>'span8', :placeholder=>'jobs.company.com'}
+      = co.text_field :jobs_page, {:class=>'span8', :placeholder=>'jobs.company.com'}
 
   %p
   .control-group
