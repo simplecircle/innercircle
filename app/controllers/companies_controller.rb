@@ -44,7 +44,6 @@ class CompaniesController < ApplicationController
       end
     end
     verticals.each do |v|
-      logger.info v
       CompaniesVertical.create!(company_id: company.id, vertical_id: v)
     end
   end
