@@ -11,29 +11,6 @@ class CompaniesController < ApplicationController
     redirect_to signup_url(subdomain: false) if !request.subdomain.empty?
   end
 
-  def edit
-    @mode = 'update'
-    @company = Company.find_by_subdomain!(request.subdomain)
-    @verticals = @company.verticals.map(&:id)
-    @submit_button_text = "Save"
-  end
-
-  def update
-    @notice = nil
-    @company = current_user.owned_companies.find(params[:id])
-    @company.assign_attributes params[:company]
-    @verticals = params[:verticals]
-    @verticals = @verticals.map{|x| x.to_i } if !@verticals.blank?
-    
-    if @company.save
-      save_verticals(@verticals, @company)
-      @notice = "Profile Updated"
-      redirect_to dashboard_url, notice: @notice
-    else
-      render 'edit'
-    end
-  end
-
   def create
     @company = Company.new(params[:company])
     @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
@@ -50,6 +27,34 @@ class CompaniesController < ApplicationController
       render "new"
     end
   end
+
+  def show
+    @posts = @company.posts.order("provider_publication_date DESC")
+  end
+
+  def edit
+    @mode = 'update'
+    @company = Company.find_by_subdomain!(request.subdomain)
+    @verticals = @company.verticals.map(&:id)
+    @submit_button_text = "Save"
+  end
+
+  def update
+    @notice = nil
+    @company = current_user.owned_companies.find(params[:id])
+    @company.assign_attributes params[:company]
+    @verticals = params[:verticals]
+    @verticals = @verticals.map{|x| x.to_i } if !@verticals.blank?
+
+    if @company.save
+      save_verticals(@verticals, @company)
+      @notice = "Profile Updated"
+      redirect_to dashboard_url, notice: @notice
+    else
+      render 'edit'
+    end
+  end
+
 
   def save_verticals(verticals, company)
     #Destroy vertical association if the user unchecked it in form
