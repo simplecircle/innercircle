@@ -22,11 +22,9 @@
           %label.control-label{:for=>:email} Email
           .controls
             = f.text_field :email, class:"span8", placeholder:"Email"
+            %span.help-block.small= link_to "Reset Password", new_password_reset_path, :target=>"_blank", :id=>"reset-password-link"
             .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
-        .control-group
-          %label.control-label Password
-          .controls
-            = link_to "Reset Password", new_password_reset_path, :target=>"_blank", :id=>"reset-password-link"
+
         - if @user.talent?
           .control-group
             %label.control-label Skill Categories
@@ -38,7 +36,7 @@
               .inline_error= @user.errors[:categories].first 
           = f.fields_for :profile do |p|
             .control-group
-              %label.control-label Ideal job Title
+              %label.control-label Ideal Job Title
               .controls
                 = p.text_field :job_title, class:"span8", placeholder:"Ideal job title"
             .control-group
