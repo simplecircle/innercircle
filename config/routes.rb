@@ -8,7 +8,6 @@ Innercircle::Application.routes.draw do
   resources :posts
   resources :password_resets
 
-
   constraints(Subdomain) do
     match '/' => 'companies#show'
     match 'join' => 'users#new'

@@ -1,17 +1,10 @@
 @import "twitter/bootstrap/variables";
 @import "twitter/bootstrap/mixins.less";
 @import "variables.css.less";
-
-#companies{
-
-}
+@import "global.css.less";
 
 #signup {
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  -o-user-select: none;
-  user-select: none;
+  .no-text-select;
 
   background-color: @tableBackgroundHover;
   h1 {
@@ -19,10 +12,6 @@
   }
   h1, h2, h3, h4 {
     text-align: center;
-  }
-  .form-section-header {
-    margin: 50px 0 0 0;
-    line-height: 1.5;
   }
   textarea {
     height: 80px;

@@ -24,6 +24,30 @@ class User < ActiveRecord::Base
     joins(:companies, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:first_name)
   end
 
+  def owned_companies
+    return companies if admin_or_god?
+  end
+
+  def admin?
+    role == 'admin'
+  end
+
+  def talent?
+    role == 'talent'
+  end
+
+  def god?
+    role == 'god'
+  end
+
+  def admin_or_god?
+    ['admin', 'god'].include? role
+  end
+
+  def god_or_admin?
+    ['admin', 'god'].include? role
+  end
+
   def send_password_reset
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now

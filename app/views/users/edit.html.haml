@@ -1,0 +1,63 @@
+.container-fluid
+  .row-fluid
+    .span8.offset2
+      %h2.form-section-header Edit Account
+      %hr.mtn
+      = form_for(@user, :html=>{:class=> 'form-horizontal'}) do |f|
+        - if current_user.talent?
+          .control-group
+            %label.control-label
+            .controls
+              = link_to("Auto-fill with LinkedIn", callback_session_url(id:@user.auth_token, linkedin_callback_page:"users_edit"), class:"btn btn-linkedin btn-large span8")
+        = f.fields_for :profile do |p|
+          .control-group
+            %label.control-label Name
+            .controls.controls-row
+              = p.text_field :first_name, class:"span4", placeholder: "First Name"
+              = p.text_field :last_name, class:"span4", placeholder: "Last Name"
+              .inline_error= @user.profile.errors[:first_name].first
+              .inline_error= @user.profile.errors[:last_name].first
+
+        .control-group
+          %label.control-label{:for=>:email} Email
+          .controls
+            = f.text_field :email, class:"span8", placeholder:"Email"
+            .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
+        .control-group
+          %label.control-label Password
+          .controls
+            = link_to "Reset Password", new_password_reset_path, :target=>"_blank", :id=>"reset-password-link"
+        - if @user.talent?
+          .control-group
+            %label.control-label Skill Categories
+            .controls
+              %p.checkbox-group
+                - CompanyDept.all.each do |dept|
+                  = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_i) if @depts), name:'company_depts[]', class:"pull-left")
+                  = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
+              .inline_error= @user.errors[:categories].first 
+          = f.fields_for :profile do |p|
+            .control-group
+              %label.control-label Ideal job Title
+              .controls
+                = p.text_field :job_title, class:"span8", placeholder:"Ideal job title"
+            .control-group
+              %label.control-label Website
+              .controls
+                = p.text_field :url, class:"span8", placeholder:"Your site, blog or Linkedin profile"
+                %span.help-block.small Your site, blog or Linkedin profile
+                .inline_error= @user.profile.errors[:url].first
+            .control-group
+              %label.control-label Skills & tools
+              .controls
+                :javascript
+                  $(document).ready(function() {
+                      $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", startText:"Skills & tools", asHtmlID: true, minChars:2, neverSubmit: true, emptyText: "Separate tags with a comma or tab", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
+                   });
+                = text_field_tag nil, nil, {id:"skills", class:"span8"}
+                %span.help-block.small List a handful. i.e Excel, baking, Ruby, Agile, responsive design...
+        %p
+        .control-group
+          %label.control-label
+          .controls
+            = f.submit "Save", class:"btn btn-large mtl span8"
