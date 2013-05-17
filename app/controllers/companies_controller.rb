@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
 
   layout :choose_layout
+  before_filter :find_resource, only: [:show]
 
   def new
     @company = Company.new
@@ -30,7 +31,15 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def show
+    @posts = @company.posts.order("provider_publication_date DESC")
+  end
+
   private
+
+  def find_resource
+    @company = Company.find_by_subdomain!(request.subdomain)
+  end
 
   def choose_layout
     if ['new', 'create'].include? action_name

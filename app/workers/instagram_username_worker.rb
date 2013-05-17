@@ -36,7 +36,7 @@ class InstagramUsernameWorker
     media["pagination"].empty? ? next_max_id = nil : next_max_id = media["pagination"]["next_max_id"]
 
     media["data"].each do |post|
-      logger.info "check if post exists"
+      logger.info "#{company.name} -- provider_id -- #{post["id"]}"
       unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
         post = company.posts.create({
           provider:PROVIDER,
@@ -47,7 +47,7 @@ class InstagramUsernameWorker
           like_count:post["likes"]["count"],
           published:company.instagram_username_auto_publish
          })
-        logger.info "Post #{post.id} created"
+        logger.info "#{company.name} -- #{post.id} created"
       end
     end
     if @first_run and next_max_id

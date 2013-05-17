@@ -1,1 +1,2 @@
-tumblr_worker.rb
+class TumblrWorker
+end
