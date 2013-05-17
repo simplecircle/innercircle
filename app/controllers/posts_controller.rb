@@ -16,6 +16,9 @@ class PostsController < ApplicationController
       # if company.facebook
       #   FacebookWorker.perform_async(company.id, params[:first_run])
       # end
+      if company.tumblr
+        TumblrWorker.perform_async(company.id, params[:first_run])
+      end
     end
     render text:"Workers are working"
   end
