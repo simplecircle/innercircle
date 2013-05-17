@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
   attr_accessible :name, :website_url, :users_attributes, :banner, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :content_instagram, :content_facebook, :content_tumblr, :content_twitter, :content_jobs_page
 
   has_many :users_companies
+  has_many :posts
   has_many :users, through: :users_companies
   has_many :companies_verticals
   has_many :verticals, through: :companies_verticals

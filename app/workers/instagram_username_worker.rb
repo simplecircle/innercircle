@@ -38,7 +38,7 @@ class InstagramUsernameWorker
     media["data"].each do |post|
       logger.info "check if post exists"
       unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
-        post = Post.create({
+        post = company.posts.create({
           provider:PROVIDER,
           provider_uid:post["id"],
           provider_publication_date:Time.at(post["created_time"].to_i).to_datetime,

@@ -13,9 +13,9 @@ class PostsController < ApplicationController
       # if company.foursquare_v2_id
       #   FoursquareWorker.perform_async(company.id, params[:first_run])
       # end
-      if company.facebook
-        FacebookWorker.perform_async(company.id, params[:first_run])
-      end
+      # if company.facebook
+      #   FacebookWorker.perform_async(company.id, params[:first_run])
+      # end
     end
     render text:"Workers are working"
   end
