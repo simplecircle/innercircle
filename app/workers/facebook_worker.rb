@@ -19,30 +19,25 @@ class FacebookWorker
   def get_albums(page)
     HTTParty.get("https://graph.facebook.com/#{page}/albums",
       :query=>{access_token:"CAABnZC9SmhE4BACO4oLv15wZCWyhmhNUcBJek9ypNGpKWJGR6oEs2v1P8vibAP0qmsO96mkIaD0EjlxZCEvLTURZAnW6P9ZBMMuZBcTua5k0lKZA0RZAO805GzR6NBCun4ExQDENWM1ySDFTMgVmRpTo3mBEIZBLBZCh1wZCQp4iELYyQDyVx1S43ZC1", limit:@limit})
-    # logger.info media.to_yaml
-    # logger.info media["data"].each{|album| p album["id"]; p album["created_time"];}
   end
 
   def get_media(album, company)
     media = HTTParty.get("https://graph.facebook.com/#{album}/photos",
       :query=>{access_token:"CAABnZC9SmhE4BACO4oLv15wZCWyhmhNUcBJek9ypNGpKWJGR6oEs2v1P8vibAP0qmsO96mkIaD0EjlxZCEvLTURZAnW6P9ZBMMuZBcTua5k0lKZA0RZAO805GzR6NBCun4ExQDENWM1ySDFTMgVmRpTo3mBEIZBLBZCh1wZCQp4iELYyQDyVx1S43ZC1", limit:@limit})
-    # logger.info media.to_yaml
-    # logger.info media["data"].each{|xmedia| p xmedia["images"].first["source"]}
     media["data"].each do |post|
       logger.info "check if post exists"
       unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
         fql = URI::encode("select like_info from photo where object_id=")
-        like_count = HTTParty.get("https://graph.facebook.com/fql?q=#{fql}#{post['id']}",
-        :query=>{access_token:"CAABnZC9SmhE4BACO4oLv15wZCWyhmhNUcBJek9ypNGpKWJGR6oEs2v1P8vibAP0qmsO96mkIaD0EjlxZCEvLTURZAnW6P9ZBMMuZBcTua5k0lKZA0RZAO805GzR6NBCun4ExQDENWM1ySDFTMgVmRpTo3mBEIZBLBZCh1wZCQp4iELYyQDyVx1S43ZC1"})
-        logger.info like_count["data"].first["like_info"]["like_count"]
+        fql_response = HTTParty.get("https://graph.facebook.com/fql?q=#{fql}#{post['id']}",
+         :query=>{access_token:"CAABnZC9SmhE4BACO4oLv15wZCWyhmhNUcBJek9ypNGpKWJGR6oEs2v1P8vibAP0qmsO96mkIaD0EjlxZCEvLTURZAnW6P9ZBMMuZBcTua5k0lKZA0RZAO805GzR6NBCun4ExQDENWM1ySDFTMgVmRpTo3mBEIZBLBZCh1wZCQp4iELYyQDyVx1S43ZC1"})
 
         post = Post.create({
           provider:PROVIDER,
           provider_uid:post["id"],
-          provider_publication_date:Time.at(post["created_time"].to_i).to_datetime,
+          provider_publication_date:post["created_time"],
           provider_raw_data:JSON.parse(post.to_json),
           media_url:post["images"].first["source"],
-          like_count:like_count,
+          like_count:fql_response["data"].first["like_info"]["like_count"].to_i,
           published:company.facebook_auto_publish
          })
         logger.info "Post #{post.id} created"
