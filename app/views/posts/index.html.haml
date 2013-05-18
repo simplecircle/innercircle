@@ -1,0 +1,10 @@
+#post.container-fluid
+  .row-fluid
+    .span12.mobile-padding
+      %h2 Show the world what it's like to work at #{capitalize_phrase(@company.name)}
+      %h4 Select 40 photos that best exemplify your company culture.
+      - @posts.each do |post|
+        .photo_wrapper.thumb.pull-left
+          = link_to("Publish", "#", class:"btn btn-mini")
+          = image_tag(post.media_url)
+        //= post.provider_publication_date

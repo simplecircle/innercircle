@@ -1,3 +1,19 @@
-// Place all the styles related to the posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#post{
+
+  .photo_wrapper{
+    overflow:hidden;
+    position:relative;
+    max-width:225px;
+    height:125px;
+    background:#ccc;
+    margin:5px;
+    .btn{
+      margin:5px;
+      position:absolute;
+    }
+    img{
+      margin-top:-30px;
+      min-width:230px;
+    }
+  }
+}

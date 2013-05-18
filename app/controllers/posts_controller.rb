@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  before_filter :find_resource, only: [:index]
+
   def new
     companies = Company.all
     companies.each do |company|
@@ -21,5 +23,15 @@ class PostsController < ApplicationController
       # end
     end
     render text:"Workers are working"
+  end
+
+  def index
+    @posts = @company.posts.order("provider_publication_date DESC")
+  end
+
+  private
+
+  def find_resource
+    @company = Company.find_by_subdomain!(request.subdomain)
   end
 end
