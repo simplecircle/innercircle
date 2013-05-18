@@ -3,12 +3,15 @@
     .span8.offset2
       %h2.form-section-header Edit Account
       %hr.mtn
-      = form_for(@user, :html=>{:class=> 'form-horizontal'}) do |f|
-        - if current_user.talent?
+      = form_for(@user, :id=> @auth_token, :html=>{:class=> 'form-horizontal'}) do |f|
+        - if @new_user
+          = f.hidden_field :auth_token, :value=>@auth_token
+        - if @user.talent?
           .control-group
             %label.control-label
-            .controls
-              = link_to("Auto-fill with LinkedIn", callback_session_url(id:@user.auth_token, linkedin_callback_page:"users_edit"), class:"btn btn-linkedin btn-large span8")
+            .controls 
+              / - if @new_user
+              = link_to "Auto-fill with LinkedIn", {:controller => "users", :action=> "edit", :id => @auth_token || @user.id, :autofill=>"linkedin"}, {:class=>"btn btn-linkedin btn-large span8"}
         = f.fields_for :profile do |p|
           .control-group
             %label.control-label Name
@@ -17,23 +20,24 @@
               = p.text_field :last_name, class:"span4", placeholder: "Last Name"
               .inline_error= @user.profile.errors[:first_name].first
               .inline_error= @user.profile.errors[:last_name].first
-
-        .control-group
-          %label.control-label{:for=>:email} Email
-          .controls
-            = f.text_field :email, class:"span8", placeholder:"Email"
-            %span.help-block.small= link_to "Reset Password", new_password_reset_path, :id=>"reset-password-link"
-            .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
+        - if !@new_user
+          .control-group
+            %label.control-label{:for=>:email} Email
+            .controls
+              = f.text_field :email, class:"span8", placeholder:"Email"
+              %span.help-block.small= link_to "Reset Password", new_password_reset_path, :id=>"reset-password-link"
+              .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
 
         - if @user.talent?
-          .control-group
-            %label.control-label Skill Categories
-            .controls
-              %p.checkbox-group
-                - CompanyDept.all.each do |dept|
-                  = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_i) if @depts), name:'company_depts[]', class:"pull-left")
-                  = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
-              .inline_error= @user.errors[:categories].first 
+          - if !@new_user
+            .control-group
+              %label.control-label Skill Categories
+              .controls
+                %p.checkbox-group
+                  - CompanyDept.all.each do |dept|
+                    = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_i) if @depts), name:'company_depts[]', class:"pull-left")
+                    = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
+                .inline_error= @user.errors[:categories].first 
           = f.fields_for :profile do |p|
             .control-group
               %label.control-label Ideal Job Title

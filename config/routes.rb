@@ -12,7 +12,6 @@ Innercircle::Application.routes.draw do
   constraints(Subdomain) do
     match 'join' => 'users#new'
     match 'local_join' => 'users#new'
-    resources :profiles, only:[:edit, :update]
   end
 
   constraints(NoSubdomain) do
@@ -21,9 +20,8 @@ Innercircle::Application.routes.draw do
   end
 
   get "dashboard" => "dashboard#index"
-  get "/auth/linkedin/callback"=>"profiles#edit"
+  get "/auth/linkedin/callback"=>"users#edit"
   get "auth/failure"=>"home#index"
-  get "callback_session"=>"profiles#callback_session"
   get "signup"=>"companies#new"
   get "login"=>"sessions#new"
   post "login"=>"sessions#create"
