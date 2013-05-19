@@ -4,16 +4,49 @@
     overflow:hidden;
     position:relative;
     max-width:225px;
-    height:125px;
-    background:#ccc;
+    height:160px;
+    background:white;
     margin:5px;
-    .btn{
-      margin:5px;
-      position:absolute;
+    .photo{
+      border:1px solid #ccc;
+      height:125px;
+      overflow:hidden;
+      img{
+        margin-top:-30px;
+        min-width:230px;
+      }
     }
-    img{
-      margin-top:-30px;
-      min-width:230px;
-    }
+    .select{
+    background-image: asset-url('follow_button_icons.png', image);
+    background-position:60px 0px;
+    background-repeat:no-repeat;
+    border-bottom:1px solid #ccc;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+    -moz-border-radius: 0px 0px 4px 4px;
+    -webkit-border-radius: 0px 0px 4px 4px;
+    border-radius: 0px 0px 3px 3px;
+    font-size:14px;
+    height:20px;
+    padding:4px 0 6px 0;
+    text-align:center;
   }
+  .selected{
+    /*background-color:black;*/
+    border-bottom:1px solid #ccc;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+    display:none;
+    padding:4px 0 6px 0;
+    text-align:center;
+    -moz-border-radius: 0px 0px 4px 4px;
+    -webkit-border-radius: 0px 0px 4px 4px;
+    border-radius: 0px 0px 3px 3px;
+    background-image: asset-url('follow_button_icons.png', image);
+    background-position:-150px -124px;
+    background-repeat:no-repeat;
+    height:15px;
+  }
+  }
+   
 }

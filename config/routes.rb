@@ -13,7 +13,7 @@ Innercircle::Application.routes.draw do
     match 'join' => 'users#new'
     match 'local_join' => 'users#new'
     resources :profiles, only:[:edit, :update]
-    resources :posts, only:[:index]
+    resources :posts, only:[:index, :update, :destroy]
   end
 
   constraints(NoSubdomain) do

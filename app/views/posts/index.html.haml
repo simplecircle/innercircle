@@ -1,10 +1,14 @@
-#post.container-fluid
-  .row-fluid
+#post.container
+  .row
     .span12.mobile-padding
-      %h2 Show the world what it's like to work at #{capitalize_phrase(@company.name)}
-      %h4 Select 40 photos that best exemplify your company culture.
+      %h2 Show off what it’s like to work at #{capitalize_phrase(@company.name)}
+      %h4 Publish 40 photos that best exemplify your company culture.
+      %hr
       - @posts.each do |post|
-        .photo_wrapper.thumb.pull-left
-          = link_to("Publish", "#", class:"btn btn-mini")
-          = image_tag(post.media_url)
-        //= post.provider_publication_date
+        = link_to(post_url(post, subdomain: post.company.subdomain), method:"put", remote:true) do
+          .photo_wrapper.pull-left
+            .photo{id:post.id}
+              = image_tag post.media_url
+            .select Publish
+            .selected
+

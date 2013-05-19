@@ -1,0 +1,3 @@
+$('#<%= @stream.id %>').html('<%= link_to 'Follow', relationships_path(@stream.id), method:"post", remote:true, id:"follow", class:"btn follow_btn" %>');
+$('#follower_count').html('<%= escape_javascript(render("streams/follower_stats"))%>');
+

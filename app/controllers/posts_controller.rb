@@ -25,8 +25,16 @@ class PostsController < ApplicationController
     render text:"Workers are working"
   end
 
+  def update
+    @post = Post.find(params[:id])
+    @post.update_attribute(:published, true)
+  end
+
   def index
     @posts = @company.posts.order("provider_publication_date DESC")
+  end
+
+  def destroy
   end
 
   private
