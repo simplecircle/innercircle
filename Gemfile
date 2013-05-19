@@ -21,6 +21,7 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'httparty'
+gem 'will_paginate', '~> 3.0'
 
 if RUBY_PLATFORM =~ /mingw32/
   gem 'therubyracer','0.11.0beta1' #0.11.0beta5

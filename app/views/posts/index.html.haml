@@ -4,9 +4,9 @@
       %h2 Show off what it’s like to work at #{capitalize_phrase(@company.name)}
       %h4 Publish 40 photos that best exemplify your company culture.
       %hr
-      - @posts.each do |post|
-        = link_to(post_url(post.id, subdomain: post.company.subdomain), method:"#{post.published ? 'delete':'put'}", remote:true, id:post.id, class:"photo-wrapper pull-left") do
-          .photo
-            = image_tag post.media_url_small
-          .cta{class: post.published ? "published" : ""}= post.published ? "✓" : "Publish"
+  .row
+    #collection.span12.mobile-padding
+      = render(@posts)
+    #infinite= will_paginate @posts
+
 
