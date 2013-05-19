@@ -31,7 +31,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = @company.posts.order("provider_publication_date DESC")
+    @posts = @company.posts.includes(:company).select([:media_url_small, :published, :company_id, :id]).order("provider_publication_date DESC")
   end
 
   def destroy

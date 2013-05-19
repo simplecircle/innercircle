@@ -40,6 +40,7 @@ class FacebookWorker
             provider_publication_date:post["created_time"],
             provider_raw_data:JSON.parse(post.to_json),
             media_url:post["images"].first["source"],
+            media_url_small:post["images"][5]["source"],
             like_count:fql_response["data"].first["like_info"]["like_count"].to_i,
             published:company.facebook_auto_publish
            })

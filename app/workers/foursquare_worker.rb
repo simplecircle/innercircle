@@ -36,6 +36,7 @@ class FoursquareWorker
             provider_publication_date:Time.at(post["createdAt"].to_i).to_datetime,
             provider_raw_data:JSON.parse(post.to_json),
             media_url:post["sizes"]["items"][0]["url"],
+            media_url_small:post["sizes"]["items"][1]["url"],
             like_count:0,
             published:company.instagram_username_auto_publish
            })
