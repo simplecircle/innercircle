@@ -38,7 +38,7 @@ class FoursquareWorker
             media_url:post["sizes"]["items"][0]["url"],
             media_url_small:post["sizes"]["items"][1]["url"],
             like_count:0,
-            published:company.instagram_username_auto_publish
+            published:@first_run ? false : company.facebook_auto_publish
            })
           logger.info "Post #{post.id} created"
         end

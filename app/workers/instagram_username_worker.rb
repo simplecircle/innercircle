@@ -46,7 +46,7 @@ class InstagramUsernameWorker
           media_url:post["images"]["standard_resolution"]["url"],
           media_url_small:post["images"]["low_resolution"]["url"],
           like_count:post["likes"]["count"],
-          published:company.instagram_username_auto_publish
+          published:@first_run ? false : company.facebook_auto_publish
          })
         logger.info "#{company.name} -- #{post.id} created"
       end

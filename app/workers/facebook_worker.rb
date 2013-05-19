@@ -42,7 +42,7 @@ class FacebookWorker
             media_url:post["images"].first["source"],
             media_url_small:post["images"][5]["source"],
             like_count:fql_response["data"].first["like_info"]["like_count"].to_i,
-            published:company.facebook_auto_publish
+            published:@first_run ? false : company.facebook_auto_publish
            })
           logger.info "Post #{post.id} created"
         end
