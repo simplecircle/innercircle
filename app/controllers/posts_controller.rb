@@ -35,6 +35,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.update_attribute(:published, false)
   end
 
   private

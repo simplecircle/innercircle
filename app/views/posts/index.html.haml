@@ -5,10 +5,8 @@
       %h4 Publish 40 photos that best exemplify your company culture.
       %hr
       - @posts.each do |post|
-        = link_to(post_url(post, subdomain: post.company.subdomain), method:"put", remote:true) do
-          .photo_wrapper.pull-left
-            .photo{id:post.id}
-              = image_tag post.media_url
-            .select Publish
-            .selected
+        = link_to(post_url(post, subdomain: post.company.subdomain), method:"put", remote:true, id:post.id, class:"photo-wrapper pull-left") do
+          .photo
+            = image_tag post.media_url
+          .cta Publish
 
