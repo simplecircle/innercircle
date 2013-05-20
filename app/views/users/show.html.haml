@@ -1,15 +1,12 @@
 .container-fluid
   .row-fluid
-    .span1
-      &nbsp;
-    .span11
+    .span10.offset1.mobile-padding
+      = render "shared/flash", :flash=>flash unless flash.blank?
       %h3.mbn.mtl.mobile-padding= @user.profile.job_title.capitalize if @user.profile.job_title
 %hr
 .container-fluid
   .row-fluid
-    .span1
-      &nbsp;
-    .span8.mobile-padding
+    .span10.offset1.mobile-padding
       = link_to(@user.profile.url, @user.profile.url, target:"_blank") if @user.profile.url
       %br
       = mail_to(@user.email, nil)
