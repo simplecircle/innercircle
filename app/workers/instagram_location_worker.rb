@@ -23,9 +23,10 @@ class InstagramLocationWorker
 
   def import(company, next_max_id=nil)
     media = self.get_media(company.instagram_location_id, next_max_id)
+
     media["pagination"].empty? ? next_max_id = nil : next_max_id = media["pagination"]["next_max_id"]
     media["data"].each do |post|
-      logger.info "check if post exists"
+      logger.info "#{company.subdomain} -- existing post?"
       unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
         post = company.posts.create({
           provider:PROVIDER,
@@ -36,12 +37,12 @@ class InstagramLocationWorker
           media_url:post["images"]["standard_resolution"]["url"],
           media_url_small:post["images"]["low_resolution"]["url"],
           like_count:post["likes"]["count"],
-          caption:post["caption"]["text"],
+          caption:'#{post["caption"]["text"] if post["caption"]}',
           published:@first_run ? false : company.facebook_auto_publish
          })
-        logger.info "Post #{post.id} created"
+        logger.info "#{company.subdomain} -- #{post.id} created"
       end
-    end
+      end
     if @first_run and next_max_id
       import(company, next_max_id)
     end

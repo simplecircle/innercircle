@@ -18,17 +18,15 @@ class FacebookWorker
   end
 
   def get_albums(page)
-    HTTParty.get("https://graph.facebook.com/#{page}/albums",
-      :query=>{access_token:@access_token, limit:@limit})
+    HTTParty.get("https://graph.facebook.com/#{page}/albums", :query=>{access_token:@access_token, limit:@limit})
   end
 
   def get_media(album, company)
-    media = HTTParty.get("https://graph.facebook.com/#{album}/photos",
-      :query=>{access_token:@access_token, limit:@limit})
+    media = HTTParty.get("https://graph.facebook.com/#{album}/photos", :query=>{access_token:@access_token, limit:@limit})
 
     if media["data"]
       media["data"].each do |post|
-        logger.info "check if post exists"
+        logger.info "#{company.subdomain} -- existing post?"
         unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
           post = company.posts.create({
             provider:PROVIDER,
@@ -41,7 +39,7 @@ class FacebookWorker
             caption:post["name"],
             published:@first_run ? false : company.facebook_auto_publish
            })
-          logger.info "Post #{post.id} created"
+          logger.info "#{company.subdomain} -- #{post.id} created"
         end
       end
     end

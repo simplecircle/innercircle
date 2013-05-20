@@ -33,10 +33,10 @@ class InstagramUsernameWorker
     end
 
     media = self.get_media(company.instagram_uid, next_max_id)
-    media["pagination"].empty? ? next_max_id = nil : next_max_id = media["pagination"]["next_max_id"]
 
+    media["pagination"].empty? ? next_max_id = nil : next_max_id = media["pagination"]["next_max_id"]
     media["data"].each do |post|
-      logger.info "#{company.name} -- provider_id -- #{post["id"]}"
+      logger.info "#{company.subdomain} -- existing post?"
       unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
         post = company.posts.create({
           provider:PROVIDER,
@@ -47,10 +47,10 @@ class InstagramUsernameWorker
           media_url:post["images"]["standard_resolution"]["url"],
           media_url_small:post["images"]["low_resolution"]["url"],
           like_count:post["likes"]["count"],
-          caption:post["caption"]["text"],
+          caption:'#{post["caption"]["text"] if post["caption"]}',
           published:@first_run ? false : company.facebook_auto_publish
          })
-        logger.info "#{company.name} -- #{post.id} created"
+        logger.info "#{company.subdomain} -- #{post.id} created"
       end
     end
     if @first_run and next_max_id

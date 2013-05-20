@@ -24,11 +24,11 @@ class FoursquareWorker
 
   def import(company)
     media = self.get_media(company.foursquare_v2_id, @offset, @limit)
-    photo_count = media["response"]["photos"]["count"].to_i
 
+    photo_count = media["response"]["photos"]["count"].to_i
     unless media["response"]["photos"]["groups"][1].nil?
       media["response"]["photos"]["groups"][1]["items"].each do |post|
-        logger.info "check if post exists"
+        logger.info "#{company.subdomain} -- existing post?"
         unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
           post = company.posts.create({
             provider:PROVIDER,
@@ -40,7 +40,7 @@ class FoursquareWorker
             like_count:0,
             published:@first_run ? false : company.facebook_auto_publish
            })
-          logger.info "Post #{post.id} created"
+          logger.info "#{company.subdomain} -- #{post.id} created"
         end
       end
       if @first_run and @offset < photo_count
