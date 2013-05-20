@@ -54,6 +54,7 @@ class UsersController < ApplicationController
 
   def create
     @user = @company.users.build(params[:user])
+    @user.role = 'talent'
     @user.build_profile
     @depts = params[:company_depts]
     unless @local_join

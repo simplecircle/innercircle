@@ -9,7 +9,6 @@
   .span5.column-center.mobile-padding
     = form_for @user do |f|
       = hidden_field_tag :local_join, @local_join
-      = f.hidden_field :role, value:"talent"
       %p
         .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
         = f.text_field :email, class:"input-block-level", placeholder:"* Email"
