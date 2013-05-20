@@ -3,13 +3,13 @@
     .span8.offset2
       %h2.form-section-header Edit Account
       %hr.mtn
-      = form_for @user, :url => user_path(@auth_token || @user.id), :include_id => false, :html=>{:class=> 'form-horizontal', :id=>"edit_user_#{@auth_token || @user.id}"} do |f|
+      = form_for @user, :url=>user_path(@auth_token || @user.id), :html=>{:class=> 'form-horizontal', :id=>"edit_user_#{@auth_token || @user.id}"} do |f|
         - if @user.talent?
           .control-group
             %label.control-label
             .controls
-              / - if @new_user
-              = link_to "Auto-fill with LinkedIn", {:controller => "users", :action=> "edit", :id => @auth_token || @user.id, :autofill=>"linkedin"}, {:class=>"btn btn-linkedin btn-large span8"}
+              - if @user.profile.linkedin_profile.blank?
+                = link_to "Auto-fill with LinkedIn", {:controller => "users", :action=> "edit", :id => @auth_token || @user.id, :autofill=>"linkedin"}, {:class=>"btn btn-linkedin btn-large span8"}
         = f.fields_for :profile do |p|
           .control-group
             %label.control-label Name
