@@ -31,11 +31,11 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = @company.posts.includes(:company).select([:media_url_small, :published, :company_id, :id]).order("provider_publication_date DESC").paginate(:page => params[:page], per_page:32)
+    @posts = @company.posts.includes(:company).select([:media_url_small, :published, :company_id, :id, :created_at, :provider]).order("provider_publication_date DESC").paginate(:page => params[:page], per_page:32)
     respond_to do |format|
         format.html {render("index")}
         format.js {render("index.js.erb")}
-      end
+    end
   end
 
   def destroy

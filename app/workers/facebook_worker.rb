@@ -30,9 +30,9 @@ class FacebookWorker
       media["data"].each do |post|
         logger.info "check if post exists"
         unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
-          fql = URI::encode("select like_info from photo where object_id=")
-          fql_response = HTTParty.get("https://graph.facebook.com/fql?q=#{fql}#{post['id']}",
-           :query=>{access_token:@access_token})
+          # fql = URI::encode("select like_info from photo where object_id=")
+          # fql_response = HTTParty.get("https://graph.facebook.com/fql?q=#{fql}#{post['id']}",
+          #  :query=>{access_token:@access_token})
 
           post = company.posts.create({
             provider:PROVIDER,
@@ -41,7 +41,7 @@ class FacebookWorker
             provider_raw_data:JSON.parse(post.to_json),
             media_url:post["images"].first["source"],
             media_url_small:post["images"][5]["source"],
-            like_count:fql_response["data"].first["like_info"]["like_count"].to_i,
+            like_count:0, #fql_response["data"].first["like_info"]["like_count"].to_i,
             published:@first_run ? false : company.facebook_auto_publish
            })
           logger.info "Post #{post.id} created"

@@ -3,6 +3,7 @@ $(document).ready ->
       e.preventDefault()
       id = $(this).find(".photo").attr("id")
 
+
   # Infinte scroll
   if $('#infinite .pagination').length
     $(window).scroll ->

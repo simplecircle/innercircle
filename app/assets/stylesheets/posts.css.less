@@ -3,33 +3,36 @@
 @import "variables.css.less";
 
 #post{
-  .photo-wrapper{
-    background:white;
-    border:1px solid #D6D6D6;
-    margin:5px 5px 30px 5px;
-    width:223px;
-    .photo{
-      height:125px;
-      overflow:hidden;
-      img{
-        margin-top:-25px;
-        min-width:230px;
+  li{
+    padding:0;
+    &.photo-wrapper{
+      background:white;
+      border:1px solid #D6D6D6;
+      margin:5px 5px 30px 5px;
+      width:223px;
+      .photo{
+        height:125px;
+        overflow:hidden;
+        img{
+          margin-top:-25px;
+          min-width:230px;
+        }
       }
-    }
-    .cta{
-      border-top:1px solid @grayLight;
-      height:25px;
-      padding-top:4px;
-      text-align:center;
-      &.published{
-        background:@linkColor;
-        border-top:1px solid  darken(@linkColor, 5%);
-        color:white;
-        font-size:18px;
-        font-weight:bold;
-      }
-      &.published:hover{
-        text-decoration:none;
+      .cta{
+        border-top:1px solid @grayLight;
+        height:25px;
+        padding-top:4px;
+        text-align:center;
+        &.published{
+          background:@linkColor;
+          border-top:1px solid  darken(@linkColor, 5%);
+          color:white;
+          font-size:18px;
+          font-weight:bold;
+        }
+        &.published:hover{
+          text-decoration:none;
+        }
       }
     }
   }

@@ -1,4 +1,7 @@
-= link_to(post_url(post.id, subdomain: post.company.subdomain), method:"#{post.published ? 'delete':'put'}", remote:true, id:post.id, class:"photo-wrapper pull-left") do
-  .photo
-    = image_tag post.media_url_small
-  .cta{class: post.published ? "published" : ""}= post.published ? "✓" : "Publish"
+%li{id:post.id, class:"photo-wrapper pull-left"}
+  = link_to(post_url(post.id, subdomain: post.company.subdomain), method:"#{post.published ? 'delete':'put'}", remote:true) do
+    .photo
+      = image_tag post.media_url_small
+    .cta{class: post.published ? "published" : ""}= post.published ? "✓" : "Publish"
+    = post.id
+    = post.provider

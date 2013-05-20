@@ -5,8 +5,9 @@
       %h4 Publish 40 photos that best exemplify your company culture.
       %hr
   .row
-    #collection.span12.mobile-padding
-      = render(@posts)
+    .span12.mobile-padding
+      %ul.inline#collection
+        = render(@posts)
     #infinite= will_paginate @posts
 
 
