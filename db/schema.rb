@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519134219) do
+ActiveRecord::Schema.define(:version => 20130520195225) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -68,11 +68,13 @@ ActiveRecord::Schema.define(:version => 20130519134219) do
     t.text     "provider_raw_data"
     t.string   "media_url"
     t.boolean  "auto_publish"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.boolean  "published",                 :default => true
-    t.integer  "like_count",                :default => 0,    :null => false
+    t.integer  "like_count",                :default => 0,         :null => false
     t.string   "media_url_small"
+    t.text     "caption"
+    t.string   "provider_strategy",         :default => "default"
   end
 
   add_index "posts", ["company_id"], :name => "index_posts_on_company_id"

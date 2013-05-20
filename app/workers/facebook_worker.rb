@@ -38,6 +38,7 @@ class FacebookWorker
             media_url:post["images"].first["source"],
             media_url_small:post["images"][5]["source"],
             like_count:0, #This gets updated when a user publishes an actual photo
+            caption:post["name"],
             published:@first_run ? false : company.facebook_auto_publish
            })
           logger.info "Post #{post.id} created"

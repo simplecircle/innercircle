@@ -40,12 +40,14 @@ class InstagramUsernameWorker
       unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
         post = company.posts.create({
           provider:PROVIDER,
+          provider_strategy:"username",
           provider_uid:post["id"],
           provider_publication_date:Time.at(post["created_time"].to_i).to_datetime,
           provider_raw_data:JSON.parse(post.to_json),
           media_url:post["images"]["standard_resolution"]["url"],
           media_url_small:post["images"]["low_resolution"]["url"],
           like_count:post["likes"]["count"],
+          caption:post["caption"]["text"],
           published:@first_run ? false : company.facebook_auto_publish
          })
         logger.info "#{company.name} -- #{post.id} created"
