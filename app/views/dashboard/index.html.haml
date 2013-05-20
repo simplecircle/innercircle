@@ -84,8 +84,8 @@
                   - else
                     =admin.email
                   - if admin.pending
-                    %span.gray-light
-                      %em - pending
+                    %em
+                      = link_to(" - pending", admin_invite_url(admin.admin_invite_token), :class=>"gray-light")
 
           .row-fluid.dashboard-header.bb-1.mtxl
             .span12

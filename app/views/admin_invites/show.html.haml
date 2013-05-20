@@ -1,0 +1,7 @@
+.container-fluid
+  .row-fluid
+    .span10.offset1.mobile-padding
+      %strong
+        %h4= "#{@user.email} has not accepted their invitation yet"
+        =form_for :admin_invite, :id=>@user.admin_invite_token, :method=>:delete do |f|
+          = f.submit "Revoke Invitation", class:"btn mts"

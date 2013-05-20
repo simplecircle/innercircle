@@ -3,6 +3,21 @@ class AdminInvitesController < ApplicationController
   def new
   end
 
+  def show
+    @user = User.find_by_admin_invite_token(params[:id])
+  end
+
+  def destroy
+    @user = User.find_by_admin_invite_token(params[:id])
+    if current_user.owned_companies.map(&:id).include? @user.companies.first.id #check to see we have the permission to revoke
+      @user.destroy
+      redirect_to dashboard_url, notice: "Invitation revoked"
+    else
+      redirect_to dashboard_url
+    end
+
+  end
+  
   def create
     email = params[:email]
     if email.blank? or email.match(/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i).nil?
