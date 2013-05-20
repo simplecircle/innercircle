@@ -1,7 +1,7 @@
 class Profile < ActiveRecord::Base
 
   serialize :linkedin_data, Hash
-  attr_accessible :first_name, :last_name, :job_title, :url, :user_id, :skills
+  attr_accessible :first_name, :last_name, :job_title, :url, :user_id, :skills, :linkedin_data, :linkedin_profile
 
   belongs_to :user
   has_many :profiles_company_depts
