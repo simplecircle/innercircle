@@ -3,9 +3,15 @@ class CompaniesController < ApplicationController
   layout :choose_layout
 
   def new
-    @company = Company.new
-    @user = @company.users.build
-    @profile = @user.build_profile
+    if current_user && current_user.god?
+      @user = current_user
+      @company = @user.companies.build
+    else
+      @company = Company.new
+      @user = @company.users.build
+      @profile = @user.build_profile
+    end
+    
     @verticals = Vertical.all
     redirect_to signup_url(subdomain: false) if !request.subdomain.empty?
   end
@@ -36,14 +42,19 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(params[:company])
     @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
-    @user = @company.users.first
-    @user.role = 'admin' if @user.role == nil
-    @profile = @user.profile
-
     @verticals = (params[:verticals] || []).map{|v| v.to_i}
+
+    if current_user && current_user.god?
+      @company.users << current_user
+    else
+      @user = @company.users.first
+      @user.role = 'admin' if @user.role == nil
+      @profile = @user.profile
+    end
+
     if @company.save
       save_verticals(@verticals, @company) if @verticals
-      cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all}
+      cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} if @user.admin?
       redirect_to dashboard_url(subdomain: @company.subdomain)
     else
       render "new"

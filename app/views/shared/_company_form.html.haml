@@ -1,5 +1,5 @@
 = form_for(@company, :html=>{multipart:true, :class=> 'form-horizontal'}) do |co|
-  - if @user && @mode != 'update'
+  - if @user && @mode != 'update' && !@user.god?
     = co.fields_for :users, @user do |user|
       %h3.form-section-header Your Info
       %hr.mtn
