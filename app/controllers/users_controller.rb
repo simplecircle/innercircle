@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if User.where(id:id).first != current_user && User.find_by_auth_token(id).blank?
       redirect_to(login_url, alert:"<h3>Please log in</h3>")
     else
-      @user.assign_attributes(params[:user].except("auth_token"))
+      @user.assign_attributes(params[:user])
       @notice = nil
       validate_depts = !@new_user && @user.talent? #only validate depts if an existing user, otherwise it will try to validate page 2 of the signup wizard, which doesn't have any depts on it
 
@@ -85,6 +85,7 @@ class UsersController < ApplicationController
       session[:callback_token] = @user.auth_token
       redirect_to "/auth/linkedin"
     else
+
       @profile = @user.profile
       @depts = @profile.company_depts.map(&:id)
       @incoming_tags = @user.profile.skills.map(&:name).join(',')
