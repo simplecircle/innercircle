@@ -3,5 +3,3 @@
     .photo
       = image_tag post.media_url_small
     .cta{class: post.published ? "published" : ""}= post.published ? "✓" : "Publish"
-    = post.id
-    = post.provider
