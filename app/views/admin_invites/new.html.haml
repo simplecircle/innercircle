@@ -1,0 +1,12 @@
+#user
+  .text-center
+    = render "shared/flash", :flash=>flash
+  - unless flash[:notice]
+    .text-center
+      %h4.mbl Enter the email address for the admin you'd like to invite
+    .span5.column-center
+      .well
+        = form_tag admin_invites_path, :method => :post do
+          %p
+            = text_field_tag(:email, params[:email], class:"input-block-level", placeholder:"Email")
+          = submit_tag "Submit", class:"btn btn-block mbs"

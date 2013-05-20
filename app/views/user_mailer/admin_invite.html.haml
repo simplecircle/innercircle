@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body{style:"font-family:Lucida Grande; line-height:1.3; color:#777; font-size:15px; "}
+    %table{width:"100%",bgcolor:"#F2F2F2"}
+      %tr
+        %td
+          %br
+          %br
+          %table{width:"600px",  align:"center"}
+            %tr
+              %td{align:"center"}
+                = link_to("http://jobcrush.co") do
+                  %img{src:"http://2c97bffff0cd846a6684-2a39f9550587993c48948a67f7aa48eb.r91.cf1.rackcdn.com/puppystream_logo_yellow.jpg", alt:"Puppystream"}
+          %br
+          %table{width:"600px", bgcolor:"white", align:"center", style:"padding:15px 15px 20px 15px; border-bottom:1px solid #ccc;"}
+            %tr
+              %td{width:"100%"}
+                %p{style:"margin:0 0 15px 0;"}
+                  You have been invited as an admin user for #{@company.name}.
+                  %br
+                  %br
+                  = edit_admin_invite_url(@user.admin_invite_token)
+                  %br
+                  %br
+                  If you do not recognize this company, please ignore this email.
+
+          %br
+          %br
+          %br
+          %br
+          %br
+          %br
+          %br
+          %table{width:"600px",  align:"center"}
+            %tr
+              %td{align:"center"}
+                %p{style:"font-size:11px; color:#666;"}
+                  = link_to("JobCrush", "http://jobcrush.co", style:"color:#666")
+                  902 Broadway 4th Flr. New York, NY 10010
+                  %br
+                  %br
+

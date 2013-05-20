@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :company_id, :email, :first_name, :last_name, :password_digest, :password, :password_confirmation, :role, :profile_attributes
+  attr_accessible :company_id, :email, :first_name, :last_name, :password_digest, :password, :password_confirmation, :role, :profile_attributes, :pending
 
   has_many :users_companies
   has_many :companies, through: :users_companies
@@ -18,14 +18,18 @@ class User < ActiveRecord::Base
   validates_format_of :email, with:/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i, message:"Email isn't valid"
   # These password validations are here for password reset functionality.
   validates_presence_of :password, if: :password
-  validates_confirmation_of :password, if: :password
+  validates_confirmation_of :password, if: :password, message:"Passwords do not match"
 
   def self.by_category(subdomain, category)
     joins(:companies, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:first_name)
   end
 
   def owned_companies
-    return companies if admin_or_god?
+    if god?
+      return Company.all
+    elsif admin?
+      return companies
+    end
   end
 
   def admin?
@@ -53,6 +57,18 @@ class User < ActiveRecord::Base
     self.password_reset_sent_at = Time.zone.now
     save!
     UserMailer.password_reset(self).deliver
+  end
+
+  def send_admin_invite(company)
+    generate_token(:admin_invite_token)
+    self.admin_invite_sent_at = Time.zone.now
+    save!
+    UserMailer.admin_invite(self, company).deliver
+  end
+
+  def clear_admin_invite_token
+    self[:admin_invite_token] = nil
+    save!
   end
 
   def generate_token(column)

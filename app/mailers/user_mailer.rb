@@ -10,4 +10,10 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(to:user.email, subject:"Password reset")
   end
+
+  def admin_invite(user, company)
+    @user = user
+    @company = company
+    mail(to:user.email, subject:"Invitation from #{@company.name}")
+  end
 end

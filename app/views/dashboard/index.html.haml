@@ -71,12 +71,21 @@
                 Admins
             .span4
               .dashboard-header-links
-                = link_to("+ Add Admin", '/add-admin')
+                = link_to("+ Add Admin", new_admin_invite_path)
           .row-fluid
             .span12
               %ul.unstyled
                 - @admins.each do |admin|
-                  %li.bb-1.ptl= admin.email
+                  %li.bb-1.ptl
+                  
+                  - if admin.profile.first_name || admin.profile.last_name
+                    = admin.profile.first_name
+                    = admin.profile.last_name
+                  - else
+                    =admin.email
+                  - if admin.pending
+                    %span.gray-light
+                      %em - pending
 
           .row-fluid.dashboard-header.bb-1.mtxl
             .span12

@@ -1,0 +1,23 @@
+#user
+  .span5.column-center
+    .span5.column-center.text-center
+      = render "shared/flash", :flash=>flash
+    - if !@user
+      = render "shared/flash", :flash=>{:alert=>"<h3>Sorry, your invitation has expired. Please request a new one from your company's admin.</h3>"}
+    - else @user
+      .text-center.mbl
+        %h4 Create your new account
+      .well
+        = form_for @user, :url => admin_invite_path(params[:id]), :html=>{:id=>"edit_user_#{params[:id]}"} do |f|
+          %p
+            = f.fields_for :profile do |p|
+              = p.text_field :first_name, class:"input-block-level", placeholder: "First Name"
+              = p.text_field :last_name, class:"input-block-level", placeholder: "Last Name"
+              .inline_error= @user.profile.errors[:first_name].first
+              .inline_error= @user.profile.errors[:last_name].first
+          %p
+            .inline_error= @user.errors[:password].first
+            = f.password_field(:password, class:"input-block-level", placeholder:"New password")
+            = f.password_field(:password_confirmation, class:"input-block-level", placeholder:"New password confirmation")
+          = f.submit "Create Account", class:"btn btn-block mbs"
+
