@@ -5,7 +5,7 @@
     .text-center.mbl
       %h4 Enter your new password below
     .well
-      = form_for @user, :url => password_reset_path(params[:id]) do |f|
+      = form_for @user, :url => password_reset_path(params[:id]), :html=>{:id=>"edit_user_#{params[:id]}"} do |f|
         .inline_error= @user.errors[:password].first
         %p
           = f.password_field(:password, class:"input-block-level", placeholder:"New password")
