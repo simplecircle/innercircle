@@ -4,7 +4,7 @@
       = render "shared/flash", :flash=>flash
     - if !@user
       = render "shared/flash", :flash=>{:alert=>"<h3>Sorry, your invitation has expired. Please request a new one from your company's admin.</h3>"}
-    - else @user
+    - else
       .text-center.mbl
         %h4 Create your new account
       .well
