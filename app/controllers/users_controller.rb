@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   layout :choose_layout
   before_filter :find_resource
-  before_filter :authorize_user, only:[:show, :update]
+  before_filter :authorize_user, only:[:show]
   before_filter :get_user, only:[:edit, :update]
 
   def new
@@ -11,38 +11,43 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.assign_attributes(params[:user].except("auth_token"))
-    @notice = nil
-    validate_depts = !@new_user && @user.talent? #only validate depts if an existing user, otherwise it will try to validate page 2 of the signup wizard, which doesn't have any depts on it
-
-    #Save skill list
-    if !params[:as_values_true].blank?
-      @incoming_tags = params[:as_values_true].split(",").reject(&:empty?).join(",")
-      @user.profile.skill_list = @incoming_tags #Need to define it this way so that tags populate on form reload (i.e. if validation fails)
-    end
-
-    if validate_depts
-      @depts = params[:company_depts]
-      @depts = @depts.map{|x| x.to_i } if !@depts.blank?
-    end
-
-    if @depts.nil? && validate_depts
-      @user.errors.add(:categories, "You have to choose at least one category.")
-      render "edit"
+    id = params[:id]
+    if User.where(id:id).first != current_user && User.find_by_auth_token(id).blank?
+      redirect_to(login_url, alert:"<h3>Please log in</h3>")
     else
-      if @user.save
-        save_departments(@depts, @user.profile) if validate_depts
-        @notice = "Account Updated"
+      @user.assign_attributes(params[:user].except("auth_token"))
+      @notice = nil
+      validate_depts = !@new_user && @user.talent? #only validate depts if an existing user, otherwise it will try to validate page 2 of the signup wizard, which doesn't have any depts on it
 
-        if @new_user
-          redirect_to confirmation_url
-        elsif current_user.god_or_admin?
-          redirect_to dashboard_url, notice: @notice
-        else 
-          redirect_to current_user, notice: @notice
-        end
+      #Save skill list
+      if !params[:as_values_true].blank?
+        @incoming_tags = params[:as_values_true].split(",").reject(&:empty?).join(",")
+        @user.profile.skill_list = @incoming_tags #Need to define it this way so that tags populate on form reload (i.e. if validation fails)
+      end
+
+      if validate_depts
+        @depts = params[:company_depts]
+        @depts = @depts.map{|x| x.to_i } if !@depts.blank?
+      end
+
+      if @depts.nil? && validate_depts
+        @user.errors.add(:categories, "You have to choose at least one category.")
+        render "edit"
       else
-        render 'edit'
+        if @user.save
+          save_departments(@depts, @user.profile) if validate_depts
+          @notice = "Account Updated"
+
+          if @new_user
+            redirect_to confirmation_url
+          elsif current_user.god_or_admin?
+            redirect_to dashboard_url, notice: @notice
+          else 
+            redirect_to current_user, notice: @notice
+          end
+        else
+          render 'edit'
+        end
       end
     end
   end

@@ -18,12 +18,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_user
-    if current_user
-      return if User.find(params[:id]) == current_user #Check to see that they match up with the id being requested
-    elsif params[:user] #No user signed in, so they're in the signup flow
-      return if User.find_by_auth_token(params[:user][:auth_token]) == User.find(request.params[:id])
-    end
-    authorize #if the current user doesn't match the one being requested, check if the current user is and admin or god with rights
+    return if User.find(params[:id]) == current_user #Check to see that they match up with the id being requested
+    authorize #defer to authorize, which checks for admin and god
   end
 
   def belongs_to_current_user?
