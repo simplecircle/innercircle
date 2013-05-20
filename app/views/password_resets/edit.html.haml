@@ -2,14 +2,17 @@
   .span5.column-center
     .span5.column-center.text-center
       = render "shared/flash", :flash=>flash
-    .text-center.mbl
-      %h4 Enter your new password below
-    .well
-      = form_for @user, :url => password_reset_path(params[:id]), :html=>{:id=>"edit_user_#{params[:id]}"} do |f|
-        .inline_error= @user.errors[:password].first
-        %p
-          = f.password_field(:password, class:"input-block-level", placeholder:"New password")
-        %p
-          = f.password_field(:password_confirmation, class:"input-block-level", placeholder:"New password confirmation")
-        = f.submit "Update Password", class:"btn btn-block mbs"
+    -if !@user
+      = render "shared/flash", :flash=>{:alert=>"<h3>Sorry, your password reset has expired.</h3>"}
+    -else
+      .text-center.mbl
+        %h4 Enter your new password below
+      .well
+        = form_for @user, :url => password_reset_path(params[:id]), :html=>{:id=>"edit_user_#{params[:id]}"} do |f|
+          .inline_error= @user.errors[:password].first
+          %p
+            = f.password_field(:password, class:"input-block-level", placeholder:"New password")
+          %p
+            = f.password_field(:password_confirmation, class:"input-block-level", placeholder:"New password confirmation")
+          = f.submit "Update Password", class:"btn btn-block mbs"
 

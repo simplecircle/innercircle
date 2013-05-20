@@ -71,6 +71,11 @@ class User < ActiveRecord::Base
     save!
   end
 
+  def clear_password_reset_token
+    self[:password_reset_token] = nil
+    save!
+  end
+
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64

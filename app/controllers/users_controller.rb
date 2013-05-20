@@ -91,14 +91,18 @@ class UsersController < ApplicationController
 
       if auth = request.env["omniauth.auth"]
         info = auth["info"]
+
+        @profile.update_attributes!(
+          :linkedin_data => JSON.parse(auth.to_json), 
+          :linkedin_profile => info["urls"]["public_profile"]
+        )
+
         @profile.first_name = info["first_name"]
         @profile.last_name = info["last_name"]
         @profile.job_title = info["headline"]
         @profile.url = info["urls"]["public_profile"]
-        @profile.linkedin_profile = info["urls"]["public_profile"]
         @incoming_tags = @incoming_tags + ',' + auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",")
 
-        @profile.linkedin_data = JSON.parse(auth.to_json)
         session[:callback_token] = nil
         if @new_user
           @profile.save
