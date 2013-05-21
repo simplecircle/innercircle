@@ -10,5 +10,5 @@
 
     .span4.mobile-padding
       %h2= link_to(capitalize_phrase(@company.name), @company.website_url, target:"_blank")
-      = link_to("Join the Club", "http://#{@company.subdomain}.jobcrush.local/join", class:"btn btn-large btn-warning")
+      = link_to("Join the Club", join_url(subdomain: @company.subdomain), class:"btn btn-large btn-warning")
 
