@@ -135,7 +135,7 @@ class UsersController < ApplicationController
 
     if @is_new_user
       @auth_token = params[:id] || session[:callback_token] #callback_token will be populated if we're coming back from a linkedin callback
-      @user = User.find_by_auth_token(@auth_token) || User.find(params[:id])
+      @user = User.find_by_auth_token(@auth_token)
     else
       @user = current_user
     end
