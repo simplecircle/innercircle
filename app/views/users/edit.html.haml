@@ -18,7 +18,7 @@
               = p.text_field :last_name, class:"span4", placeholder: "Last Name"
               .inline_error= @user.profile.errors[:first_name].first
               .inline_error= @user.profile.errors[:last_name].first
-        - if !@new_user
+        - if !@is_new_user
           .control-group
             %label.control-label{:for=>:email} Email
             .controls
@@ -27,7 +27,7 @@
               .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
 
         - if @user.talent?
-          - if !@new_user
+          - if !@is_new_user
             .control-group
               %label.control-label Skill Categories
               .controls
