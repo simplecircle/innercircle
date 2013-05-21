@@ -3,26 +3,26 @@ class PostsController < ApplicationController
   before_filter :find_resource, only: [:index]
 
   def new
-    companies = Company.all
-    companies.each do |company|
-      if company.instagram_username
+    if params[:robot] == "true"
+      Company.all.each do |company|
         # Call http://jobcrush.local/posts/new?first_run=true when initializing a new company.
-        InstagramUsernameWorker.perform_async(company.id, params[:first_run])
+        InstagramUsernameWorker.perform_async(company.id, params[:first_run]) if company.instagram_username
+        InstagramLocationWorker.perform_async(company.id, params[:first_run]) if company.instagram_location_id
+        FoursquareWorker.perform_async(company.id, params[:first_run]) if company.foursquare_v2_id
+        FacebookWorker.perform_async(company.id, params[:first_run]) if company.facebook
+        # TumblrWorker.perform_async(company.id, params[:first_run]) if company.tumblr
       end
-      if company.instagram_location_id
-        InstagramLocationWorker.perform_async(company.id, params[:first_run])
-      end
-      if company.foursquare_v2_id
-        FoursquareWorker.perform_async(company.id, params[:first_run])
-      end
-      if company.facebook
-        FacebookWorker.perform_async(company.id, params[:first_run])
-      end
-      # if company.tumblr
-      #   TumblrWorker.perform_async(company.id, params[:first_run])
-      # end
+      render text:"Working..."
+    else
+      company = Company.find_by_subdomain!(request.subdomain)
+      logger.info company.inspect
+      InstagramUsernameWorker.perform_async(company.id, params[:first_run]) if company.instagram_username
+      InstagramLocationWorker.perform_async(company.id, params[:first_run]) if company.instagram_location_id
+      FoursquareWorker.perform_async(company.id, params[:first_run]) if company.foursquare_v2_id
+      FacebookWorker.perform_async(company.id, params[:first_run]) if company.facebook
+      # TumblrWorker.perform_async(company.id, params[:first_run]) if company.tumblr
+      redirect_to posts_url(subdomain: company.subdomain)
     end
-    render text:"Workers are working"
   end
 
   def update

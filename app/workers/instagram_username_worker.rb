@@ -23,13 +23,13 @@ class InstagramUsernameWorker
 
   def get_uid(username)
     HTTParty.get("https://api.instagram.com/v1/users/search?q=#{username}",
-        :query=>{client_id:CLIENT_ID})["data"].first["id"]
+        :query=>{access_token:"20779015.1fb234f.30609b83744b49118a56939d1e492ffe"})["data"].first["id"]
   end
 
   def import(company, next_max_id=nil)
     if company.instagram_uid.nil?
       uid = self.get_uid(company.instagram_username)
-      company.update_attribute!(:instagram_uid, uid)
+      company.update_attribute(:instagram_uid, uid)
     end
 
     media = self.get_media(company.instagram_uid, next_max_id)
