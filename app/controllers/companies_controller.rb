@@ -47,6 +47,7 @@ class CompaniesController < ApplicationController
 
     if current_user && current_user.god?
       @company.users << current_user
+      @user = current_user
     else
       @user = @company.users.first
       @user.role = 'admin' if @user.role == nil
