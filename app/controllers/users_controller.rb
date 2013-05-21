@@ -100,7 +100,6 @@ class UsersController < ApplicationController
 
         @profile.first_name = info["first_name"]
         @profile.last_name = info["last_name"]
-        @profile.job_title = info["headline"]
         @profile.url = info["urls"]["public_profile"]
         @incoming_tags = @incoming_tags + ',' + auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",")
 
