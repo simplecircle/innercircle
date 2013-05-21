@@ -6,7 +6,9 @@ class UsersController < ApplicationController
   before_filter :get_user, only:[:edit, :update]
 
   def new
-    @user = User.new
+    @user = User.new :role=>'talent'
+    @user.build_profile
+
     @depts = CompanyDept.all
   end
 
@@ -52,12 +54,26 @@ class UsersController < ApplicationController
   def create
     @user = @company.users.build(params[:user])
     @user.role = 'talent'
-    @user.build_profile
+    
     @depts = params[:company_depts]
+
+    if current_user && current_user.god_or_admin?
+      @profile = @user.profile
+
+      #Save skill list
+      if !params[:as_values_true].blank?
+        @incoming_tags = params[:as_values_true].split(",").reject(&:empty?).join(",")
+        @user.profile.skill_list = @incoming_tags #Need to define it this way so that tags populate on form reload (i.e. if validation fails)
+      end
+    else
+      @user.build_profile
+    end
+
     unless @local_join
       # Ensure this password doesn't already exist in future iterations before creation
       @user.password = SecureRandom.urlsafe_base64
     end
+
     if @depts.nil?
       @user.valid?
       @user.errors.add(:categories, "You have to choose at least one category.")
@@ -67,7 +83,7 @@ class UsersController < ApplicationController
         @company.users << @user
         save_departments(@depts, @user.profile)
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
-        redirect_to edit_user_url(@user.auth_token)
+        current_user && current_user.god_or_admin? ? redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(edit_user_url(@user.auth_token))
       else
         render "new"
       end
@@ -100,7 +116,6 @@ class UsersController < ApplicationController
 
         @profile.first_name = info["first_name"]
         @profile.last_name = info["last_name"]
-        @profile.job_title = info["headline"]
         @profile.url = info["urls"]["public_profile"]
         @incoming_tags = @incoming_tags + ',' + auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",")
 
@@ -135,7 +150,7 @@ class UsersController < ApplicationController
 
     if @is_new_user
       @auth_token = params[:id] || session[:callback_token] #callback_token will be populated if we're coming back from a linkedin callback
-      @user = User.find_by_auth_token(@auth_token) || User.find(params[:id])
+      @user = User.find_by_auth_token(@auth_token)
     else
       @user = current_user
     end
@@ -148,7 +163,7 @@ class UsersController < ApplicationController
   end
 
   def choose_layout
-    if ['new', 'create', 'confirmation'].include?(action_name) || !cookies[:auth_token]
+    if (['new', 'create', 'confirmation'].include?(action_name) || !cookies[:auth_token]) && !(current_user && current_user.god_or_admin?)
       'onboarding'
     else
       'application'

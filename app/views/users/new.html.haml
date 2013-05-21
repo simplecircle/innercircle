@@ -1,30 +1,64 @@
-.span7.column-center
-  - if @local_join
-    %h3.text-center.mobile-padding.mtxl.mbxl Create a JobCrush account to privately join #{capitalize_phrase(@company.name)}’s talent-community
-  - else
-    %h1.text-center.mobile-padding.mtxl= capitalize_phrase(@company.name)
-    %h4.text-center.mobile-padding.mbxl.lh-24 Privately join our talent-community to receive job opportunities that match your skills
-%hr
-%section.white
-  .span5.column-center.mobile-padding
-    = form_for @user do |f|
-      = hidden_field_tag :local_join, @local_join
-      %p
-        .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
-        = f.text_field :email, class:"input-block-level", placeholder:"* Email"
-      - if @local_join
-        %p
-          .inline_error= @user.errors[:password].first
-          = f.password_field :password, class:"input-block-level", placeholder:"* Password"
-
-      .inline_error= @user.errors[:categories].first
-      .help-block * Which category fits you best?
-      - CompanyDept.all.each do |dept|
-        %p.checkbox-group
-          = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"pull-left")
-          = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
-      = f.submit("Join now", class:"btn btn-large btn-primary btn-block mtxl mbm")
-      .tiny.text-center.mbxl
-        Your membership is private. It’s just between you and #{capitalize_phrase(@company.name)}.
-      .pbm
+.container-fluid
+  .row-fluid
+    - if current_user && current_user.admin_or_god?
+      .span6.column-center.mobile-padding
+        %h3.text-center Add Talent
+    - else
+      .span6.column-center
+        - if @local_join
+          %h3.text-center.mobile-padding.mtm.mbxl Create an InnerCircle account to privately join #{capitalize_phrase(@company.name)}’s talent-community
+        - else
+          %h1.text-center.mobile-padding.mtm= capitalize_phrase(@company.name)
+          %h4.text-center.mobile-padding.mbxl.lh-24 Privately join our talent-community to receive job opportunities that match your skills
+      %hr
+  .row-fluid
+    .span6.column-center.mobile-padding
+      = form_for @user do |f|
+        = hidden_field_tag :local_join, @local_join
+        - if current_user && current_user.admin_or_god?
+          = f.fields_for :profile do |p|
+            .controls.controls-row
+              = p.text_field :first_name, class:"span6", placeholder: "First Name"
+              = p.text_field :last_name, class:"span6", placeholder: "Last Name"
+              .inline_error= @user.profile.errors[:first_name].first
+              .inline_error= @user.profile.errors[:last_name].first
+        .controls
+          .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
+          = f.text_field :email, class:"span12", placeholder:"* Email"
+        - if @local_join
+          %p
+            .inline_error= @user.errors[:password].first
+            = f.password_field :password, class:"span12", placeholder:"* Password"
+        .controls.mtm.mbl
+          .inline_error= @user.errors[:categories].first
+          .help-block
+            %b= current_user && current_user.admin_or_god? ? "* Categories" : "* Which category fits you best?"
+          %p.checkbox-group
+            - CompanyDept.all.each do |dept|
+              = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"pull-left")
+              = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
+        - if current_user && current_user.admin_or_god?
+          = f.fields_for :profile do |p|
+            .controls
+              = p.text_field :job_title, class:"span12", placeholder:"Ideal job title"
+            .controls
+              = p.text_field :url, class:"span12", placeholder:"Site, blog or Linkedin profile"
+              .inline_error= @user.profile.errors[:url].first
+            .controls.skills-control-block
+              :javascript
+                $(document).ready(function() {
+                    $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", startText:"Skills & tools", asHtmlID: true, minChars:2, neverSubmit: true, emptyText: "Separate tags with a comma or tab", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
+                 });
+              = text_field_tag nil, nil, {id:"skills", class:"span12"}
+              %span.help-block.small List a few (e.g., Excel, baking, Ruby, Agile, responsive design)
+          %p
+          .control-group
+            %label.control-label
+            .controls
+              = f.submit "Save", class:"btn btn-large mtl span12"
+        - else
+          = f.submit("Join now", class:"btn btn-large btn-primary btn-block mtxl mbm span12")
+          .tiny.text-center.mbxl
+            Your membership is private. It’s just between you and #{capitalize_phrase(@company.name)}.
+          .pbm
 

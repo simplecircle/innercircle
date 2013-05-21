@@ -59,7 +59,7 @@
                       $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", startText:"Skills & tools", asHtmlID: true, minChars:2, neverSubmit: true, emptyText: "Separate tags with a comma or tab", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
                    });
                 = text_field_tag nil, nil, {id:"skills", class:"span8"}
-                %span.help-block.small List a handful. i.e Excel, baking, Ruby, Agile, responsive design...
+                %span.help-block.small List a few (e.g., Excel, baking, Ruby, Agile, responsive design)
         %p
         .control-group
           %label.control-label

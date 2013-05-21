@@ -7,7 +7,7 @@
           %h2.mbn= "#{capitalize_phrase(@company.name)}’s Dashboard"
         .span5
           .dashboard-header-links
-            = link_to("#{@company.subdomain}.jobcrush.co", root_url(subdomain:@company.subdomain), class:"mrl")
+            = link_to("#{@company.subdomain}.getinnercircle.com", root_url(subdomain:@company.subdomain), class:"mrl")
             = link_to("Edit company profile", :controller => "companies", :action=>"edit", :id=>@company.id)
   .row-fluid
     .span10.offset1.mobile-padding
@@ -31,7 +31,7 @@
               %section.highlight.tal
                 .mbm
                   Share this link with talent you want to invite: 
-                  = link_to("#{@company.subdomain}.jobcrush.co/join", join_url(subdomain:@company.subdomain), target:"_blank")
+                  = link_to("#{@company.subdomain}.getinnercircle.com/join", join_url(subdomain:@company.subdomain), target:"_blank")
                 .mbm.detail-text Invite people you've met at meetups, panels, hackathons, online - anyone you'd like to keep on your watchlist.
           .row-fluid
             .span12#dashboard_index.mtxl
