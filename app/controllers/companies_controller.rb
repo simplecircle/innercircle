@@ -25,7 +25,7 @@ class CompaniesController < ApplicationController
 
   def update
     @notice = nil
-    @company = current_user.owned_companies.find(params[:id])
+    @company = current_user.owned_companies.find {|co| co.id == params[:id].to_i}
     @company.assign_attributes params[:company]
     @verticals = params[:verticals]
     @verticals = @verticals.map{|x| x.to_i } if !@verticals.blank?
