@@ -1,4 +1,8 @@
 .container-fluid
+  - if @notice || @alert
+    .row-fluid
+      .span8.offset2
+        = render "shared/flash", :flash=>{:notice => @notice, :alert => @alert}
   .row-fluid
     .span8.offset2
       %h2.form-section-header Edit Account

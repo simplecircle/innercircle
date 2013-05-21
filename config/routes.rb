@@ -22,7 +22,7 @@ Innercircle::Application.routes.draw do
 
   get "dashboard" => "dashboard#index"
   get "/auth/linkedin/callback"=>"users#edit"
-  get "auth/failure"=>"home#index"
+  get "auth/failure"=>"users#edit"
   get "signup"=>"companies#new"
   get "login"=>"sessions#new"
   post "login"=>"sessions#create"

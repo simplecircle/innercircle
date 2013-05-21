@@ -82,11 +82,13 @@ class UsersController < ApplicationController
     if params[:autofill] == 'linkedin' #The link for the 'autofill with linkedin' button looks like users/token/edit?autofill=linkedin, so this catches that url and redirects to the linkedin auth page
       session[:callback_token] = @user.auth_token
       redirect_to "/auth/linkedin"
-    else
 
+    else
       @profile = @user.profile
       @depts = @profile.company_depts.map(&:id)
       @incoming_tags = @user.profile.skills.map(&:name).join(',')
+
+      @alert = 'Sorry, LinkedIn authorization failed' if params[:strategy] == 'linkedin' && params[:message] == 'invalid_credentials'
 
       if auth = request.env["omniauth.auth"]
         info = auth["info"]
@@ -107,6 +109,7 @@ class UsersController < ApplicationController
           @profile.save
         end
       end
+
     end
   end
 
