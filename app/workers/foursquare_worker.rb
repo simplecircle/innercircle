@@ -6,13 +6,13 @@ class FoursquareWorker
   PROVIDER = "foursquare"
 
   def perform(company_id, first_run=false)
-    @offset = 0
     if first_run
-      @first_run = true
+      @first_run = first_run
       @limit = 200
     else
       @limit = 10
     end
+    @offset = 0
     import(Company.find(company_id))
   end
 
@@ -24,22 +24,23 @@ class FoursquareWorker
 
   def import(company)
     media = self.get_media(company.foursquare_v2_id, @offset, @limit)
-    photo_count = media["response"]["photos"]["count"].to_i
 
+    photo_count = media["response"]["photos"]["count"].to_i
     unless media["response"]["photos"]["groups"][1].nil?
       media["response"]["photos"]["groups"][1]["items"].each do |post|
-        logger.info "check if post exists"
+        logger.info "#{company.subdomain} -- existing post?"
         unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
-          post = Post.create({
+          post = company.posts.create({
             provider:PROVIDER,
             provider_uid:post["id"],
             provider_publication_date:Time.at(post["createdAt"].to_i).to_datetime,
             provider_raw_data:JSON.parse(post.to_json),
             media_url:post["sizes"]["items"][0]["url"],
-            like_count:nil,
-            published:company.instagram_username_auto_publish
+            media_url_small:post["sizes"]["items"][1]["url"],
+            like_count:0,
+            published:@first_run ? false : company.facebook_auto_publish
            })
-          logger.info "Post #{post.id} created"
+          logger.info "#{company.subdomain} -- #{post.id} created"
         end
       end
       if @first_run and @offset < photo_count

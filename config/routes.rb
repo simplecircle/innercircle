@@ -3,16 +3,17 @@ Innercircle::Application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web, at: "/sidekiq"
 
-  root :to => 'home#index'
   resources :users
   resources :companies
-  resources :posts
   resources :password_resets
   resources :admin_invites
 
   constraints(Subdomain) do
+    match '/' => 'companies#show'
     match 'join' => 'users#new'
     match 'local_join' => 'users#new'
+    get "new_from_provider" => "posts#new_from_provider"
+    resources :posts, only:[:index, :update, :destroy]
   end
 
   constraints(NoSubdomain) do
@@ -20,6 +21,7 @@ Innercircle::Application.routes.draw do
     match 'local_join' => 'home#index'
   end
 
+  root :to => 'home#index'
   get "dashboard" => "dashboard#index"
   get "/auth/linkedin/callback"=>"users#edit"
   get "auth/failure"=>"users#edit"
