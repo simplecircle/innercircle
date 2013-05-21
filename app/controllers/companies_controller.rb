@@ -22,8 +22,7 @@ class CompaniesController < ApplicationController
     if @company.save
       save_verticals(@verticals, @company) if @verticals
       cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all}
-      redirect_to new_post_url(subdomain: @company.subdomain, first_run:true)
-      # redirect_to dashboard_url(subdomain: @company.subdomain)
+      redirect_to new_post_url(subdomain: @company.subdomain)
     else
       render "new"
     end

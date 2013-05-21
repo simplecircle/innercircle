@@ -1,28 +1,16 @@
 class PostsController < ApplicationController
 
   before_filter :find_resource, only: [:index]
+  before_filter :authorize
 
   def new
-    if params[:robot] == "true"
-      Company.all.each do |company|
-        # Call http://jobcrush.local/posts/new?first_run=true when initializing a new company.
-        InstagramUsernameWorker.perform_async(company.id, params[:first_run]) if company.instagram_username
-        InstagramLocationWorker.perform_async(company.id, params[:first_run]) if company.instagram_location_id
-        FoursquareWorker.perform_async(company.id, params[:first_run]) if company.foursquare_v2_id
-        FacebookWorker.perform_async(company.id, params[:first_run]) if company.facebook
-        # TumblrWorker.perform_async(company.id, params[:first_run]) if company.tumblr
-      end
-      render text:"Working..."
-    else
-      company = Company.find_by_subdomain!(request.subdomain)
-      logger.info company.inspect
-      InstagramUsernameWorker.perform_async(company.id, params[:first_run]) if company.instagram_username
-      InstagramLocationWorker.perform_async(company.id, params[:first_run]) if company.instagram_location_id
-      FoursquareWorker.perform_async(company.id, params[:first_run]) if company.foursquare_v2_id
-      FacebookWorker.perform_async(company.id, params[:first_run]) if company.facebook
-      # TumblrWorker.perform_async(company.id, params[:first_run]) if company.tumblr
-      redirect_to posts_url(subdomain: company.subdomain)
-    end
+    company = Company.find_by_subdomain!(request.subdomain)
+    InstagramUsernameWorker.perform_async(company.id, first_run=true) if company.instagram_username
+    InstagramLocationWorker.perform_async(company.id, first_run=true) if company.instagram_location_id
+    FoursquareWorker.perform_async(company.id, first_run=true) if company.foursquare_v2_id
+    FacebookWorker.perform_async(company.id, first_run=true) if company.facebook
+    # TumblrWorker.perform_async(company.id, first_run=true) if company.tumblr
+    redirect_to posts_url(subdomain: company.subdomain)
   end
 
   def update
