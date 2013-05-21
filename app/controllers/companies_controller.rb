@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
 
   layout :choose_layout
+  before_filter :find_resource, only: [:show]
 
   def new
     if current_user && current_user.god?
@@ -29,7 +30,7 @@ class CompaniesController < ApplicationController
     @company.assign_attributes params[:company]
     @verticals = params[:verticals]
     @verticals = @verticals.map{|x| x.to_i } if !@verticals.blank?
-    
+
     if @company.save
       save_verticals(@verticals, @company)
       @notice = "Profile Updated"
@@ -55,10 +56,14 @@ class CompaniesController < ApplicationController
     if @company.save
       save_verticals(@verticals, @company) if @verticals
       cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} if @user.admin?
-      redirect_to dashboard_url(subdomain: @company.subdomain)
+      redirect_to new_from_provider_url(subdomain: @company.subdomain)
     else
       render "new"
     end
+  end
+
+  def show
+    @posts = @company.posts.order("provider_publication_date DESC")
   end
 
   def save_verticals(verticals, company)
@@ -74,6 +79,10 @@ class CompaniesController < ApplicationController
   end
 
   private
+
+  def find_resource
+    @company = Company.find_by_subdomain!(request.subdomain)
+  end
 
   def choose_layout
     if ['new', 'create'].include? action_name

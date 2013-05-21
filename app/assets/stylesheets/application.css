@@ -13,6 +13,7 @@
  *= require responsive-767px-max-override
  *= require variables
  *= require users
+ *= require posts
  *= require dashboard
  *= require company
  *= require global

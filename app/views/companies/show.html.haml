@@ -1,0 +1,14 @@
+#company.container
+  .row
+    .span8.mobile-padding
+      - @posts.each do |post|
+        = image_tag(post.media_url)
+        = post.provider_publication_date
+        %br
+        = post.provider
+        %hr
+
+    .span4.mobile-padding
+      %h2= link_to(capitalize_phrase(@company.name), @company.website_url, target:"_blank")
+      = link_to("Join the Club", "http://#{@company.subdomain}.jobcrush.local/join", class:"btn btn-large btn-warning")
+

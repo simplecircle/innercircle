@@ -8,3 +8,6 @@
       %h5
         Not actively looking for work, but care to be privately notified of relavent job openings & events from inspiring companies? Let ’em know by joining their talent-communities.
       %hr
+      - @companies.each do |company|
+        %h3= link_to(capitalize_phrase(company.name), root_url(subdomain:company.subdomain))
+
