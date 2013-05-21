@@ -1,0 +1,13 @@
+#post.container
+  .row
+    .span12.mobile-padding
+      %h2 Show off what it’s like to work at #{capitalize_phrase(@company.name)}
+      %h4 Publish 40 photos that best exemplify your company culture.
+      %hr
+  .row
+    .span12.mobile-padding
+      %ul.inline#collection
+        = render(@posts)
+    #infinite= will_paginate @posts
+
+
