@@ -25,6 +25,7 @@ gem 'httparty'
 if RUBY_PLATFORM =~ /mingw32/
   gem 'therubyracer','0.11.0beta1' #0.11.0beta5
   gem 'libv8', '~> 3.3.8' #3.3.10.4
+  gem 'thin'
 else
   gem 'therubyracer','~> 0.9.8'
   gem 'unicorn'
