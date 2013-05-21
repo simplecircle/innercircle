@@ -1,5 +1,7 @@
 class AdminInvitesController < ApplicationController
 
+  before_filter :authorize, except:[:update, :edit]
+
   def new
   end
 
@@ -15,7 +17,6 @@ class AdminInvitesController < ApplicationController
     else
       redirect_to dashboard_url
     end
-
   end
   
   def create
@@ -24,28 +25,18 @@ class AdminInvitesController < ApplicationController
       redirect_to(new_admin_invite_path, alert:"<h3>Please enter a valid email</h3>")
     else
       company = current_user.owned_companies.find {|co| co.subdomain == request.subdomain}
-      if company #we found a company the current user has permissions to
+      user = User.find_by_email(email)
 
-        @user = User.find_by_email(email)
-
-        if @user.blank? #Need to create a new user
-          @user = company.users.build(:email => email, :role => "admin", :pending => true)
-          @user.build_profile
-          @user.password = SecureRandom.urlsafe_base64
-          if @user.save
-            company.users << @user
-          else
-            redirect_to(new_admin_invite_path, alert:"<h3>Sorry, something went wrong</h3>")
-          end
-        else
-          redirect_to(new_admin_invite_path, alert:"<h3>Sorry, there is already an account registered with that email address</h3>")
-        end
-
-        @user.send_admin_invite(company)
+      if user.nil? #Need to create a new user
+        user = company.users.build(:email => email, :role => "admin", :pending => true)
+        user.build_profile
+        user.password = SecureRandom.urlsafe_base64
+        user.save
+        company.users << user
+        user.send_admin_invite(company)
         redirect_to(dashboard_url, notice:"<h3>#{email} has been invited as an admin</h3>")
-
-      else #we couldn't find a privilege for the company
-        redirect_to(new_admin_invite_path, alert:"<h3>Sorry, you do not have privileges to invite admins</h3>")
+      else
+        redirect_to(new_admin_invite_path, alert:"<h3>Sorry, there is already an account registered with that email address</h3>")
       end
     end
   end
