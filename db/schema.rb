@@ -31,12 +31,12 @@ ActiveRecord::Schema.define(:version => 20130520195225) do
     t.string   "hq_city"
     t.string   "hq_state"
     t.string   "employee_count"
+    t.string   "banner_cache"
     t.string   "foursquare_v2_id"
     t.string   "instagram_uid"
     t.boolean  "instagram_username_auto_publish",               :default => true
     t.boolean  "instagram_location_auto_publish",               :default => true
     t.string   "instagram_location_id"
-    t.string   "banner_cache"
     t.boolean  "facebook_auto_publish",                         :default => true
     t.boolean  "tumblr_auto_publish",                           :default => true
     t.boolean  "twitter_auto_publish",                          :default => true
@@ -129,13 +129,16 @@ ActiveRecord::Schema.define(:version => 20130520195225) do
     t.string   "role"
     t.string   "password_digest"
     t.integer  "company_id"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "auth_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string   "admin_invite_token"
+    t.datetime "admin_invite_sent_at"
+    t.boolean  "pending",                :default => false
   end
 
   add_index "users", ["company_id"], :name => "index_users_on_company_id"
