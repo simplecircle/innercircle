@@ -8,7 +8,7 @@ class FacebookWorker
 
   def perform(company_id, first_run=false)
     if first_run
-      @first_run = true
+      @first_run = first_run
       @limit = 200
     else
       @limit = 25

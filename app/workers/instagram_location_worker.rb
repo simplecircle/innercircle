@@ -7,7 +7,7 @@ class InstagramLocationWorker
 
   def perform(company_id, first_run=false)
     if first_run
-      @first_run = true
+      @first_run = first_run
       @count = 200
     else
       @count = 10

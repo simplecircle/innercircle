@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_filter :find_resource, only: [:index]
   before_filter :authorize
 
-  def new
+  def new_from_provider
     company = Company.find_by_subdomain!(request.subdomain)
     InstagramUsernameWorker.perform_async(company.id, first_run=true) if company.instagram_username
     InstagramLocationWorker.perform_async(company.id, first_run=true) if company.instagram_location_id

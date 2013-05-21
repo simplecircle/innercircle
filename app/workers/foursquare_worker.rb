@@ -6,13 +6,13 @@ class FoursquareWorker
   PROVIDER = "foursquare"
 
   def perform(company_id, first_run=false)
-    @offset = 0
     if first_run
-      @first_run = true
+      @first_run = first_run
       @limit = 200
     else
       @limit = 10
     end
+    @offset = 0
     import(Company.find(company_id))
   end
 

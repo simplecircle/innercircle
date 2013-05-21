@@ -5,13 +5,13 @@ Innercircle::Application.routes.draw do
 
   resources :users
   resources :companies
-  resources :posts, only:[:new]
   resources :password_resets
 
   constraints(Subdomain) do
     match '/' => 'companies#show'
     match 'join' => 'users#new'
     match 'local_join' => 'users#new'
+    get "new_from_provider" => "posts#new_from_provider"
     resources :profiles, only:[:edit, :update]
     resources :posts, only:[:index, :update, :destroy]
   end
