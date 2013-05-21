@@ -21,6 +21,7 @@ class PostsController < ApplicationController
       fql_response = HTTParty.get("https://graph.facebook.com/fql?q=#{fql}#{@post.provider_uid}", :query=>{access_token:@access_token})
       @post.like_count = fql_response["data"].first["like_info"]["like_count"].to_i
     end
+    @post.photo = URLTempfile.new(@post.media_url, Dir.tmpdir, encoding:'ascii-8bit')
     @post.published = true
     @post.save
   end
