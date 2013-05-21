@@ -78,11 +78,10 @@
                 - @admins.each do |admin|
                   %li.bb-1.ptl
                   
-                  - if admin.profile.first_name || admin.profile.last_name
-                    = admin.profile.first_name
-                    = admin.profile.last_name
+                  - if admin.profile.full_name.length > 1
+                    = admin.profile.full_name
                   - else
-                    =admin.email
+                    = admin.email
                   - if admin.pending
                     %em
                       = link_to(" - pending", admin_invite_url(admin.admin_invite_token), :class=>"gray-light")

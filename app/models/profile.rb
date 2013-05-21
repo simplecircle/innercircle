@@ -13,6 +13,10 @@ class Profile < ActiveRecord::Base
   acts_as_taggable_on :skills
   ActsAsTaggableOn.force_lowercase = true
 
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
   private
 
   def add_url_protocol
