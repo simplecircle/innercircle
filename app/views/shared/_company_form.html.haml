@@ -123,7 +123,7 @@
   .control-group
     %label.control-label{:for=>:tumblr} Tumblr
     .controls.controls-row
-      = co.text_field :tumblr, {:class=>'span10', :placeholder=>'tumblr page - don\'t include ".tumblr.com"'}
+      = co.text_field :tumblr, {:class=>'span10', :placeholder=>'tumblr url'}
       %label.span1.radio-label{:for=>"company_tumblr_auto_publish_on"}
         On
         = co.radio_button :tumblr_auto_publish, "on", :checked=> @company.tumblr_auto_publish
