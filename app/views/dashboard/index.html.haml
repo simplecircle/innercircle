@@ -101,26 +101,26 @@
           .row-fluid
             .span12
               %ul.unstyled
-                - unless @company.jobs_page.empty?
+                - unless @company.jobs_page.blank?
                   %li.bb-1.ptl
                     Jobs page:
                     =link_to(@company.jobs_page, "http://instagram.com/#{@company.jobs_page}", target:"_blank")
-                - unless @company.instagram_username.empty? && @company.instagram_uid.empty?
+                - unless @company.instagram_username.blank? && @company.instagram_uid.blank?
                   %li.bb-1.ptl
                     Instagram:
                     =link_to(@company.instagram_username, "http://instagram.com/#{@company.instagram_username}", target:"_blank")
-                    - unless @company.instagram_uid.empty?
+                    - unless @company.instagram_uid.blank?
                       &nbsp;
                       =link_to("location", "http://instagram.com/#{@company.instagram_uid}", target:"_blank")
-                - unless @company.facebook.empty?
+                - unless @company.facebook.blank?
                   %li.bb-1.ptl
                     Facebook:
                     =link_to(@company.facebook, "http://facebook.com/#{@company.facebook}", target:"_blank")
-                - unless @company.tumblr.empty?
+                - unless @company.tumblr.blank?
                   %li.bb-1.ptl
                     Tumblr:
-                    =link_to(@company.tumblr, "http://#{@company.tumblr}.tumblr.com", target:"_blank")
-                - unless @company.foursquare_v2_id.empty?
+                    =link_to(@company.tumblr, "http://#{@company.tumblr}", target:"_blank")
+                - unless @company.foursquare_v2_id.blank?
                   %li.bb-1.ptl
                     Foursquare:
                     =link_to("foursquare page", "https://foursquare.com/v/#{@company.foursquare_v2_id}", target:"_blank")
