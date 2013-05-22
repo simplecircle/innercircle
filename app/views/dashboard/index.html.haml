@@ -84,15 +84,14 @@
             .span12
               %ul.unstyled
                 - @admins.each do |admin|
-                  %li.bb-1.ptl
-                  
-                  - if admin.profile.full_name.length > 1
-                    = admin.profile.full_name
-                  - else
-                    = admin.email
-                  - if admin.pending
-                    %em
-                      = link_to(" - pending", admin_invite_url(admin.admin_invite_token), :class=>"gray-light")
+                  %li.bb-1.ptm
+                    - if admin.profile.full_name.length > 1
+                      = admin.profile.full_name
+                    - else
+                      = admin.email
+                    - if admin.pending
+                      %em
+                        = link_to(" - pending", admin_invite_url(admin.admin_invite_token), :class=>"gray-light")
 
           .row-fluid.dashboard-header.bb-1.mtxl
             .span12
@@ -105,13 +104,14 @@
                   %li.bb-1.ptl
                     Jobs page:
                     =link_to(@company.jobs_page, "http://instagram.com/#{@company.jobs_page}", target:"_blank")
-                - unless @company.instagram_username.blank? && @company.instagram_uid.blank?
+                - unless @company.instagram_username.blank?
                   %li.bb-1.ptl
                     Instagram:
                     =link_to(@company.instagram_username, "http://instagram.com/#{@company.instagram_username}", target:"_blank")
-                    - unless @company.instagram_uid.blank?
-                      &nbsp;
-                      =link_to("location", "http://instagram.com/#{@company.instagram_uid}", target:"_blank")
+                - unless @company.instagram_uid.blank?
+                  %li.bb-1.ptl
+                    Instagram location:
+                    %span.gray-light active
                 - unless @company.facebook.blank?
                   %li.bb-1.ptl
                     Facebook:
