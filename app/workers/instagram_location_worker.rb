@@ -16,7 +16,7 @@ class InstagramLocationWorker
   end
 
   def get_media(location_id, next_max_id=nil)
-    # develop a sustainable access_token strategy!!!
+    # IG's access_token doesn't have an expiration date.
     HTTParty.get("https://api.instagram.com/v1/locations/#{location_id}/media/recent",
       :query=>{access_token:"20779015.1fb234f.30609b83744b49118a56939d1e492ffe", max_id:next_max_id, count:@count})
   end
@@ -28,21 +28,21 @@ class InstagramLocationWorker
     media["data"].each do |post|
       logger.info "#{company.subdomain} -- existing post?"
       unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
-        post = company.posts.create({
-          provider:PROVIDER,
-          provider_strategy:"location",
-          provider_uid:post["id"],
-          provider_publication_date:Time.at(post["created_time"].to_i).to_datetime,
-          provider_raw_data:JSON.parse(post.to_json),
-          media_url:post["images"]["standard_resolution"]["url"],
-          media_url_small:post["images"]["low_resolution"]["url"],
-          like_count:post["likes"]["count"],
-          caption:'#{post["caption"]["text"] if post["caption"]}',
-          published:@first_run ? false : company.facebook_auto_publish
-         })
-        logger.info "#{company.subdomain} -- #{post.id} created"
+        new_post = company.posts.new
+        new_post.provider = PROVIDER
+        new_post.provider_strategy = "location"
+        new_post.provider_uid = post["id"]
+        new_post.provider_publication_date = Time.at(post["created_time"].to_i).to_datetime
+        new_post.provider_raw_data = JSON.parse(post.to_json)
+        new_post.media_url = post["images"]["standard_resolution"]["url"]
+        new_post.media_url_small = post["images"]["low_resolution"]["url"]
+        new_post.like_count = post["likes"]["count"]
+        new_post.caption = post["caption"]["text"] if post["caption"]
+        new_post.published = @first_run ? false : company.facebook_auto_publish
+        new_post.save!
+        logger.info "#{company.subdomain} -- #{new_post.id} created"
       end
-      end
+    end
     if @first_run and next_max_id
       import(company, next_max_id)
     end

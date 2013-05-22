@@ -9,19 +9,19 @@ class PostsController < ApplicationController
     InstagramLocationWorker.perform_async(company.id, first_run=true) if company.instagram_location_id
     FoursquareWorker.perform_async(company.id, first_run=true) if company.foursquare_v2_id
     FacebookWorker.perform_async(company.id, first_run=true) if company.facebook
-    # TumblrWorker.perform_async(company.id, first_run=true) if company.tumblr
+    TumblrWorker.perform_async(company.id, first_run=true) if company.tumblr
     redirect_to posts_url(subdomain: company.subdomain)
   end
 
   def update
     @post = Post.find(params[:id])
+    @post.photo = URLTempfile.new(@post.media_url, Dir.tmpdir, encoding:'ascii-8bit')
     if @post.provider == "facebook"
       @access_token = "CAABnZC9SmhE4BACO4oLv15wZCWyhmhNUcBJek9ypNGpKWJGR6oEs2v1P8vibAP0qmsO96mkIaD0EjlxZCEvLTURZAnW6P9ZBMMuZBcTua5k0lKZA0RZAO805GzR6NBCun4ExQDENWM1ySDFTMgVmRpTo3mBEIZBLBZCh1wZCQp4iELYyQDyVx1S43ZC1"
       fql = URI::encode("select like_info from photo where object_id=")
       fql_response = HTTParty.get("https://graph.facebook.com/fql?q=#{fql}#{@post.provider_uid}", :query=>{access_token:@access_token})
       @post.like_count = fql_response["data"].first["like_info"]["like_count"].to_i
     end
-    @post.photo = URLTempfile.new(@post.media_url, Dir.tmpdir, encoding:'ascii-8bit')
     @post.published = true
     @post.save
   end
