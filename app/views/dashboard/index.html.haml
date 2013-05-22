@@ -41,28 +41,36 @@
               %ul.unstyled
                 - @creative.each do |talent|
                   = link_to user_url(talent) do
-                    %li.bb-1= talent.email
+                    %li.bb-1
+                      = talent.email
+                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
               %h4.bb-1
                 Operations
                 %span.counter.pull-right (#{@operations.count})
               %ul.unstyled
                 - @operations.each do |talent|
                   = link_to user_url(talent) do
-                    %li.bb-1= talent.email
+                    %li.bb-1
+                      = talent.email
+                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
               %h4.bb-1
                 Sales / Marketing
                 %span.counter.pull-right (#{@sales_marketing.count})
               %ul.unstyled
                 - @sales_marketing.each do |talent|
                   = link_to user_url(talent) do
-                    %li.bb-1= talent.email
+                    %li.bb-1
+                      = talent.email
+                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
               %h4.bb-1
                 Technology
                 %span.counter.pull-right (#{@technology.count})
               %ul.unstyled
                 - @technology.each do |talent|
                   = link_to user_url(talent) do
-                    %li.bb-1= talent.email
+                    %li.bb-1
+                      = talent.email
+                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
 
         .span5
           .row-fluid.dashboard-header.bb-1

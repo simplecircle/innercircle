@@ -14,7 +14,8 @@ class Profile < ActiveRecord::Base
   ActsAsTaggableOn.force_lowercase = true
 
   def full_name
-    "#{self.first_name} #{self.last_name}"
+    #always return at least ""
+    (self.first_name || "") + (self.last_name.blank? ? "" : " #{self.last_name}")
   end
 
   private
