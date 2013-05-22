@@ -74,10 +74,10 @@
   .control-group
     %label.control-label * Company logo
     .controls.controls-row
-      = image_tag(@company.banner, :width => 100) if @company.banner?
-      = co.file_field :banner
-      = co.hidden_field :banner_cache, :value => @company.banner_cache
-      .inline_error= @company.errors[:banner].first
+      = image_tag(@company.logo, :width => 100) if @company.logo?
+      = co.file_field :logo
+      = co.hidden_field :logo_cache, :value => @company.logo_cache
+      .inline_error= @company.errors[:logo].first
   
   %h3.form-section-header Content Channels
   %hr.mtn

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class BannerUploader < CarrierWave::Uploader::Base
+class LogoUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
   # Directories where uploaded files will be stored.

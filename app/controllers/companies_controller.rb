@@ -36,6 +36,7 @@ class CompaniesController < ApplicationController
       @notice = "Profile Updated"
       redirect_to dashboard_url, notice: @notice
     else
+      @submit_button_text = "Save" if current_user && current_user.god_or_admin
       render 'edit'
     end
   end
@@ -86,7 +87,7 @@ class CompaniesController < ApplicationController
   end
 
   def choose_layout
-    if ['new', 'create'].include? action_name
+    if ['new', 'create'].include?(action_name) && !(current_user && current_user.god_or_admin?)
       'onboarding'
     else
       'application'
