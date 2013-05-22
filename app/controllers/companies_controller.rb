@@ -68,6 +68,10 @@ class CompaniesController < ApplicationController
     @posts = @company.posts.order("provider_publication_date DESC")
   end
 
+  def index
+    @companies = current_user.owned_companies
+  end
+
   def save_verticals(verticals, company)
     #Destroy vertical association if the user unchecked it in form
     company.verticals.each do |v|

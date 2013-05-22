@@ -1,0 +1,5 @@
+.container-fluid
+  .row-fluid
+    .span8.column-center
+      - @companies.each do |company|
+        %h3= link_to(capitalize_phrase(company.name), dashboard_url(subdomain:company.subdomain))

@@ -12,6 +12,8 @@
           %li
             %h1= @headline
         %ul.nav.pull-right
+          - if current_user && current_user.god?
+            %li= link_to("Companies", companies_url(subdomain:false))
           - if current_user && current_user.admin_or_god?
             %li= link_to("Dashboard", dashboard_url)
           - if current_user
