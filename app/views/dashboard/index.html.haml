@@ -105,14 +105,13 @@
                   %li.bb-1.ptl
                     Jobs page:
                     =link_to(@company.jobs_page, "http://instagram.com/#{@company.jobs_page}", target:"_blank")
-                - unless @company.instagram_username.empty?
+                - unless @company.instagram_username.empty? && @company.instagram_uid.empty?
                   %li.bb-1.ptl
-                    Instagram account:
+                    Instagram:
                     =link_to(@company.instagram_username, "http://instagram.com/#{@company.instagram_username}", target:"_blank")
-                - unless @company.instagram_uid.empty?
-                  %li.bb-1.ptl
-                    Instagram location:
-                    =link_to(@company.instagram_uid, "http://instagram.com/#{@company.instagram_uid}", target:"_blank")
+                    - unless @company.instagram_uid.empty?
+                      &nbsp;
+                      =link_to("location", "http://instagram.com/#{@company.instagram_uid}", target:"_blank")
                 - unless @company.facebook.empty?
                   %li.bb-1.ptl
                     Facebook:
@@ -124,5 +123,5 @@
                 - unless @company.foursquare_v2_id.empty?
                   %li.bb-1.ptl
                     Foursquare:
-                    =link_to(@company.foursquare_v2_id, "https://foursquare.com/v/#{@company.foursquare_v2_id}", target:"_blank")
+                    =link_to("foursquare page", "https://foursquare.com/v/#{@company.foursquare_v2_id}", target:"_blank")
 
