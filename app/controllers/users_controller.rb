@@ -13,6 +13,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    if params[:commit] == "Remove User From My Talent Community"
+      user_to_delete = User.find(params[:id])
+      UsersCompany.where(:company_id => @company.id, :user_id => user_to_delete.id).destroy_all
+      return redirect_to dashboard_url, notice: "#{user_to_delete.email} removed from your talent community"
+    end
+
     @user.assign_attributes(params[:user])
 
     def validate_depts? 

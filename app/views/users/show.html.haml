@@ -21,3 +21,6 @@
       %ul#skills.unstyled
         - @user.profile.skills.each do |skill|
           %li= skill
+      - if current_user.admin_or_god?
+        =form_for @user do |f|
+          = f.submit "Remove User From My Talent Community", class:"btn btn-warning mvl"
