@@ -11,10 +11,9 @@
         = form_for @user, :url => admin_invite_path(params[:id]), :html=>{:id=>"edit_user_#{params[:id]}"} do |f|
           %p
             = f.fields_for :profile do |p|
+              .inline_error= @user.errors[:name].first
               = p.text_field :first_name, class:"input-block-level", placeholder: "First Name"
               = p.text_field :last_name, class:"input-block-level", placeholder: "Last Name"
-              .inline_error= @user.profile.errors[:first_name].first
-              .inline_error= @user.profile.errors[:last_name].first
           %p
             .inline_error= @user.errors[:password].first
             = f.password_field(:password, class:"input-block-level", placeholder:"New password")

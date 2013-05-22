@@ -47,11 +47,16 @@ class AdminInvitesController < ApplicationController
 
   def update
     @user = User.find_by_admin_invite_token(params[:id])
-
+    @user.assign_attributes(params[:user])
     @profile = @user.profile
-    if @user.admin_invite_sent_at < 7.days.ago
+
+    if @user.profile.first_name.blank? || @user.profile.last_name.blank?
+      @user.valid?
+      @user.errors.add(:name, "Please your first and last name")
+      render :edit
+    elsif @user.admin_invite_sent_at < 7.days.ago
       redirect_to(new_admin_invite_path, alert:"<h3>Sorry, your invitation has expired. Please request a new one from your company's admin.</h3>")
-    elsif @user.update_attributes(params[:user])
+    elsif @user.save
       @user.update_attributes(:pending=>false)
       @user.clear_admin_invite_token
       cookies.permanent[:auth_token] = {value:@user.auth_token, domain: :all}
