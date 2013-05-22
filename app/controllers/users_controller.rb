@@ -41,9 +41,9 @@ class UsersController < ApplicationController
         if @is_new_user
           redirect_to confirmation_url
         elsif current_user.god_or_admin?
-          redirect_to dashboard_url, notice: "<h3>Account Updated</h3>"
+          redirect_to dashboard_url, notice: "Account Updated"
         else 
-          redirect_to current_user, notice: "<h3>Account Updated</h3>"
+          redirect_to current_user, notice: "Account Updated"
         end
       else
         render 'edit'
@@ -91,8 +91,6 @@ class UsersController < ApplicationController
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
         
         if @is_admin_adding 
-          logger.info "***"
-          logger.info params.inspect
           params[:commit] == "Save and Add Another" ? redirect_to(join_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
         else 
           redirect_to(edit_user_url(@user.auth_token))
