@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new :role=>'talent'
     @user.build_profile
-
+    @is_admin_adding = current_user && current_user.god_or_admin?
     @depts = CompanyDept.all
   end
 
@@ -54,10 +54,11 @@ class UsersController < ApplicationController
   def create
     @user = @company.users.build(params[:user])
     @user.role = 'talent'
-    
+    form_errors = {}
+    @is_admin_adding = current_user && current_user.god_or_admin?
     @depts = params[:company_depts]
 
-    if current_user && current_user.god_or_admin?
+    if @is_admin_adding
       @profile = @user.profile
 
       #Save skill list
@@ -74,16 +75,21 @@ class UsersController < ApplicationController
       @user.password = SecureRandom.urlsafe_base64
     end
 
-    if @depts.nil?
+    form_errors[:name] = "Please enter first and last name" if @is_admin_adding && (@user.profile.first_name.empty? || @user.profile.last_name.empty?)
+    form_errors[:categories] = "You have to choose at least one category." if @depts.nil?
+
+    if !form_errors.empty?
       @user.valid?
-      @user.errors.add(:categories, "You have to choose at least one category.")
+      form_errors.each do |field, msg|
+        @user.errors.add(field, msg)
+      end
       render "new"
     else
       if @user.save
         @company.users << @user
         save_departments(@depts, @user.profile)
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
-        current_user && current_user.god_or_admin? ? redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(edit_user_url(@user.auth_token))
+        @is_admin_adding ? redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(edit_user_url(@user.auth_token))
       else
         render "new"
       end
