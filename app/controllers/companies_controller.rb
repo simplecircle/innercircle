@@ -30,13 +30,16 @@ class CompaniesController < ApplicationController
     @company.assign_attributes params[:company]
     @verticals = params[:verticals] || []
     @verticals = @verticals.map{|x| x.to_i }
+    instagram_uid = params[:company][:instagram_uid]
+
+    @company.instagram_uid = get_instagram_id(@company.instagram_uid) if @company.instagram_uid.length > 12
 
     if @company.save
       save_verticals(@verticals, @company)
       @notice = "Profile Updated"
       redirect_to dashboard_url, notice: @notice
     else
-      @submit_button_text = "Save" if current_user && current_user.god_or_admin
+      @submit_button_text = "Save" if current_user && current_user.god_or_admin?
       render 'edit'
     end
   end
@@ -55,6 +58,8 @@ class CompaniesController < ApplicationController
       @profile = @user.profile
     end
 
+    @company.instagram_uid = get_instagram_id(@company.instagram_uid) if @company.instagram_uid.length > 12
+
     if @company.save
       save_verticals(@verticals, @company) if @verticals
       cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} if @user.admin?
@@ -70,6 +75,12 @@ class CompaniesController < ApplicationController
 
   def index
     @companies = current_user.owned_companies
+  end
+
+  def get_instagram_id(foursquare_v2_id)
+    data = HTTParty.get("https://api.instagram.com/v1/locations/search?foursquare_v2_id=#{foursquare_v2_id}",
+    :query=>{access_token:"20779015.1fb234f.30609b83744b49118a56939d1e492ffe"})
+    data["data"].empty? ? foursquare_v2_id : data["data"][0]["id"]
   end
 
   def save_verticals(verticals, company)

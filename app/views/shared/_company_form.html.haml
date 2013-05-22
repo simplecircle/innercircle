@@ -103,7 +103,7 @@
   .control-group
     %label.control-label{:for=>:instagram_uid} Instagram location
     .controls.controls-row
-      = co.text_field :instagram_uid, {:class=>'span10', :placeholder=>'instagram location id'}
+      = co.text_field :instagram_uid, {:class=>'span10', :placeholder=>'instagram or foursquare location id'}
       %label.span1.radio-label{:for=>"company_instagram_location_auto_publish_on"}
         On
         = co.radio_button :instagram_location_auto_publish, "on", :checked=> @company.instagram_location_auto_publish
