@@ -1,4 +1,8 @@
 .container-fluid
+  - unless flash.blank?
+    .row-fluid
+      .span4.column-center.mobile-padding
+        = render "shared/flash", :flash=>flash
   .row-fluid
     - if @is_admin_adding
       .span4.column-center.mobile-padding
@@ -51,10 +55,11 @@
               = text_field_tag nil, nil, {id:"skills", class:"span12"}
               %span.help-block.small List a few (e.g., Excel, baking, Ruby, Agile, responsive design)
           %p
-          .control-group
-            %label.control-label
-            .controls
-              = f.submit "Save", class:"btn btn-large mtl span12"
+          .controls
+            = f.submit "Save", class:"btn btn-large mtl span12"
+          .controls
+            = f.submit "Save and Add Another", class:"btn btn-large btn-warning mtl span12"
+
         - else
           = f.submit("Join now", class:"btn btn-large btn-primary btn-block mtxl mbm span12")
           .tiny.text-center.mbxl

@@ -89,7 +89,14 @@ class UsersController < ApplicationController
         @company.users << @user
         save_departments(@depts, @user.profile)
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
-        @is_admin_adding ? redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(edit_user_url(@user.auth_token))
+        
+        if @is_admin_adding 
+          logger.info "***"
+          logger.info params.inspect
+          params[:commit] == "Save and Add Another" ? redirect_to(join_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
+        else 
+          redirect_to(edit_user_url(@user.auth_token))
+        end
       else
         render "new"
       end
