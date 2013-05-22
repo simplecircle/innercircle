@@ -28,8 +28,8 @@ class CompaniesController < ApplicationController
     @notice = nil
     @company = current_user.owned_companies.find {|co| co.id == params[:id].to_i}
     @company.assign_attributes params[:company]
-    @verticals = params[:verticals]
-    @verticals = @verticals.map{|x| x.to_i } if !@verticals.blank?
+    @verticals = params[:verticals] || []
+    @verticals = @verticals.map{|x| x.to_i }
 
     if @company.save
       save_verticals(@verticals, @company)
