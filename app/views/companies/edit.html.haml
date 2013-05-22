@@ -1,9 +1,13 @@
 #signup
   .container-fluid
     .row-fluid
-      .span8.offset2.mobile-padding
-        %h2= @company.name
+      .span6.offset3.mobile-padding
+        .form-horizontal
+          .control-group
+            %label.control-label
+            .controls
+              %h2= @company.name
   .container-fluid
     .row-fluid
-      .span8.offset2
+      .span6.offset3.mobile-padding
         = render 'shared/company_form'

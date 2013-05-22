@@ -41,28 +41,36 @@
               %ul.unstyled
                 - @creative.each do |talent|
                   = link_to user_url(talent) do
-                    %li.bb-1= talent.email
+                    %li.bb-1
+                      = talent.email
+                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
               %h4.bb-1
                 Operations
                 %span.counter.pull-right (#{@operations.count})
               %ul.unstyled
                 - @operations.each do |talent|
                   = link_to user_url(talent) do
-                    %li.bb-1= talent.email
+                    %li.bb-1
+                      = talent.email
+                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
               %h4.bb-1
                 Sales / Marketing
                 %span.counter.pull-right (#{@sales_marketing.count})
               %ul.unstyled
                 - @sales_marketing.each do |talent|
                   = link_to user_url(talent) do
-                    %li.bb-1= talent.email
+                    %li.bb-1
+                      = talent.email
+                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
               %h4.bb-1
                 Technology
                 %span.counter.pull-right (#{@technology.count})
               %ul.unstyled
                 - @technology.each do |talent|
                   = link_to user_url(talent) do
-                    %li.bb-1= talent.email
+                    %li.bb-1
+                      = talent.email
+                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
 
         .span5
           .row-fluid.dashboard-header.bb-1
@@ -93,19 +101,27 @@
           .row-fluid
             .span12
               %ul.unstyled
-                %li.bb-1.ptl
-                  Jobs page:
-                  =link_to(@company.jobs_page, "http://instagram.com/#{@company.jobs_page}", target:"_blank")
-                %li.bb-1.ptl
-                  Instagram:
-                  =link_to(@company.instagram_username, "http://instagram.com/#{@company.instagram_username}", target:"_blank")
-                %li.bb-1.ptl
-                  Facebook:
-                  =link_to(@company.facebook, "http://facebook.com/#{@company.facebook}", target:"_blank")
-                %li.bb-1.ptl
-                  Twitter:
-                  =link_to(@company.twitter, "http://twitter.com/#{@company.twitter}", target:"_blank")
-                %li.bb-1.ptl
-                  Tumblr:
-                  =link_to(@company.tumblr, "http://tumblr.com/#{@company.tumblr}", target:"_blank")
+                - unless @company.jobs_page.empty?
+                  %li.bb-1.ptl
+                    Jobs page:
+                    =link_to(@company.jobs_page, "http://instagram.com/#{@company.jobs_page}", target:"_blank")
+                - unless @company.instagram_username.empty? && @company.instagram_uid.empty?
+                  %li.bb-1.ptl
+                    Instagram:
+                    =link_to(@company.instagram_username, "http://instagram.com/#{@company.instagram_username}", target:"_blank")
+                    - unless @company.instagram_uid.empty?
+                      &nbsp;
+                      =link_to("location", "http://instagram.com/#{@company.instagram_uid}", target:"_blank")
+                - unless @company.facebook.empty?
+                  %li.bb-1.ptl
+                    Facebook:
+                    =link_to(@company.facebook, "http://facebook.com/#{@company.facebook}", target:"_blank")
+                - unless @company.tumblr.empty?
+                  %li.bb-1.ptl
+                    Tumblr:
+                    =link_to(@company.tumblr, "http://#{@company.tumblr}.tumblr.com", target:"_blank")
+                - unless @company.foursquare_v2_id.empty?
+                  %li.bb-1.ptl
+                    Foursquare:
+                    =link_to("foursquare page", "https://foursquare.com/v/#{@company.foursquare_v2_id}", target:"_blank")
 

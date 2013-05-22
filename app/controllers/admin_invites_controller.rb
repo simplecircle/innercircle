@@ -22,7 +22,7 @@ class AdminInvitesController < ApplicationController
   def create
     email = params[:email]
     if email.blank? or email.match(/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i).nil?
-      redirect_to(new_admin_invite_path, alert:"<h3>Please enter a valid email</h3>")
+      redirect_to(new_admin_invite_path, alert:"Please enter a valid email")
     else
       company = current_user.owned_companies.find {|co| co.subdomain == request.subdomain}
       user = User.find_by_email(email)
@@ -34,9 +34,9 @@ class AdminInvitesController < ApplicationController
         user.save
         company.users << user
         user.send_admin_invite(company)
-        redirect_to(dashboard_url, notice:"<h3>#{email} has been invited as an admin</h3>")
+        redirect_to(dashboard_url, notice:"#{email} has been invited as an admin")
       else
-        redirect_to(new_admin_invite_path, alert:"<h3>Sorry, there is already an account registered with that email address</h3>")
+        redirect_to(new_admin_invite_path, alert:"Sorry, there is already an account registered with that email address")
       end
     end
   end
@@ -47,15 +47,20 @@ class AdminInvitesController < ApplicationController
 
   def update
     @user = User.find_by_admin_invite_token(params[:id])
-
+    @user.assign_attributes(params[:user])
     @profile = @user.profile
-    if @user.admin_invite_sent_at < 7.days.ago
-      redirect_to(new_admin_invite_path, alert:"<h3>Sorry, your invitation has expired. Please request a new one from your company's admin.</h3>")
-    elsif @user.update_attributes(params[:user])
+
+    if @user.profile.first_name.blank? || @user.profile.last_name.blank?
+      @user.valid?
+      @user.errors.add(:name, "Please your first and last name")
+      render :edit
+    elsif @user.admin_invite_sent_at < 7.days.ago
+      redirect_to(new_admin_invite_path, alert:"Sorry, your invitation has expired. Please request a new one from your company's admin.")
+    elsif @user.save
       @user.update_attributes(:pending=>false)
       @user.clear_admin_invite_token
       cookies.permanent[:auth_token] = {value:@user.auth_token, domain: :all}
-      redirect_to(dashboard_url, notice:"<h3>Welcome!</h3>")
+      redirect_to(dashboard_url, notice:"Welcome!")
     else
       render :edit
     end

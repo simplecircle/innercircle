@@ -1,10 +1,14 @@
 .container-fluid
+  - unless flash.blank?
+    .row-fluid
+      .span4.column-center.mobile-padding
+        = render "shared/flash", :flash=>flash
   .row-fluid
-    - if current_user && current_user.admin_or_god?
-      .span6.column-center.mobile-padding
+    - if @is_admin_adding
+      .span4.column-center.mobile-padding
         %h3.text-center Add Talent
     - else
-      .span6.column-center
+      .span4.column-center
         - if @local_join
           %h3.text-center.mobile-padding.mtm.mbxl Create an InnerCircle account to privately join #{capitalize_phrase(@company.name)}’s talent-community
         - else
@@ -12,16 +16,15 @@
           %h4.text-center.mobile-padding.mbxl.lh-24 Privately join our talent-community to receive job opportunities that match your skills
       %hr
   .row-fluid
-    .span6.column-center.mobile-padding
+    .span4.column-center.mobile-padding
       = form_for @user do |f|
         = hidden_field_tag :local_join, @local_join
-        - if current_user && current_user.admin_or_god?
+        - if @is_admin_adding
           = f.fields_for :profile do |p|
             .controls.controls-row
-              = p.text_field :first_name, class:"span6", placeholder: "First Name"
-              = p.text_field :last_name, class:"span6", placeholder: "Last Name"
-              .inline_error= @user.profile.errors[:first_name].first
-              .inline_error= @user.profile.errors[:last_name].first
+              .inline_error= @user.errors[:name].first
+              = p.text_field :first_name, class:"span6", placeholder: "* First Name"
+              = p.text_field :last_name, class:"span6", placeholder: "* Last Name"
         .controls
           .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
           = f.text_field :email, class:"span12", placeholder:"* Email"
@@ -32,12 +35,12 @@
         .controls.mtm.mbl
           .inline_error= @user.errors[:categories].first
           .help-block
-            %b= current_user && current_user.admin_or_god? ? "* Categories" : "* Which category fits you best?"
+            %b= @is_admin_adding ? "* Categories" : "* Which category fits you best?"
           %p.checkbox-group
             - CompanyDept.all.each do |dept|
               = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"pull-left")
               = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
-        - if current_user && current_user.admin_or_god?
+        - if @is_admin_adding
           = f.fields_for :profile do |p|
             .controls
               = p.text_field :job_title, class:"span12", placeholder:"Ideal job title"
@@ -52,10 +55,11 @@
               = text_field_tag nil, nil, {id:"skills", class:"span12"}
               %span.help-block.small List a few (e.g., Excel, baking, Ruby, Agile, responsive design)
           %p
-          .control-group
-            %label.control-label
-            .controls
-              = f.submit "Save", class:"btn btn-large mtl span12"
+          .controls
+            = f.submit "Save", class:"btn btn-large mtl span12"
+          .controls
+            = f.submit "Save and Add Another", class:"btn btn-large btn-warning mtl span12"
+
         - else
           = f.submit("Join now", class:"btn btn-large btn-primary btn-block mtxl mbm span12")
           .tiny.text-center.mbxl

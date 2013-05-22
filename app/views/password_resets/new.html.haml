@@ -1,9 +1,11 @@
 #user
-  .text-center
-    = render "shared/flash", :flash=>flash
-  - unless flash[:notice]
+  .span5.column-center
     .text-center
-      %h4.mbl Submit your email for password reset instructions
+      = render "shared/flash", :flash=>flash
+  - unless flash[:notice]
+    .span5.column-center
+      .text-center
+        %h4.mbl Submit your email for password reset instructions
     .span5.column-center
       .well
         = form_tag password_resets_path, :method => :post do

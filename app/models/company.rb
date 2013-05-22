@@ -1,6 +1,6 @@
 class Company < ActiveRecord::Base
 
-  attr_accessible :name, :website_url, :users_attributes, :banner, :banner_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page
+  attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid
 
   has_many :users_companies
   has_many :posts
@@ -9,9 +9,8 @@ class Company < ActiveRecord::Base
   has_many :verticals, through: :companies_verticals
   accepts_nested_attributes_for :users, :users_companies
   after_validation :add_url_protocol
-  mount_uploader :banner, BannerUploader
+  mount_uploader :logo, LogoUploader
 
-  validate :profile_has_names?
   validates :name, presence:true
   validates :name, uniqueness:true
   validates :website_url, presence:true
@@ -20,7 +19,7 @@ class Company < ActiveRecord::Base
   validates_format_of :employee_count, with:/^[\d]+_[\d]+$/, message:"please select a range"
   validates_format_of :hq_state, with:/^[A-Z]{2}$/, message:"please select a state"
   validates_format_of :website_url, with:/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}?/, message:"URL isn't valid"
-  validates :banner, presence:true
+  validates :logo, presence:true
 
 
   def admins
@@ -31,16 +30,6 @@ class Company < ActiveRecord::Base
 
   def self.employee_counts
     [["Select a range", ""], ["0 - 10", "0_10"], ["11 - 50", "11_50"], ["51 - 100", "51_100"], ["101 - 250", "101_250"], ["251 - 500", "251_500"], ["500+", "500_9999"]]
-  end
-
-  def profile_has_names?
-    @profile = users.first.profile
-    if [nil, ""].include? @profile.first_name
-      errors.add("first_name", "Please enter your first name")
-    end
-    if [nil, ""].include? @profile.last_name
-      errors.add("last_name", "Please enter your last name")
-    end
   end
 
   def self.states
