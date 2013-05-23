@@ -18,6 +18,13 @@ class UsersController < ApplicationController
       UsersCompany.where(:company_id => @company.id, :user_id => user_to_delete.id).destroy_all
       return redirect_to dashboard_url, notice: "#{user_to_delete.email} removed from your talent community"
     end
+    if params[:commit] == "Save Rating"
+      user = User.find(params[:id])
+      assoc = UsersCompany.find_by_user_id_and_company_id(user, @company.id)
+      assoc.update_attributes(:star_rating => params[:user][:star_rating].to_i)
+      return redirect_to :back
+    end
+
 
     @user.assign_attributes(params[:user])
 
@@ -109,6 +116,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @star_rating = @user.star_rating(@company.id) if current_user.god_or_admin?
   end
 
   def edit
