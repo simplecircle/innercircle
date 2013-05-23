@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, if: :password, message:"Passwords do not match"
 
   def self.by_category(subdomain, category)
-    joins(:companies, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:first_name)
+    joins(:companies, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order('email')
   end
 
   def star_rating(company_id)

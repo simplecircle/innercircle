@@ -30,6 +30,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def sort_by_star_rating(array, company_id)
+    array.sort {|a, b| b.star_rating(company_id) <=> a.star_rating(company_id)}
+  end
+
   def capitalize_phrase(phrase)
     phrase.split.each{|x|x.capitalize!}.join(" ")
   end
