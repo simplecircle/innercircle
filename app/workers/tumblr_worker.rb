@@ -19,6 +19,7 @@ class TumblrWorker
 
   def get_media(blog, offset, limit)
     # Tumblr's access token is not supposed to expire.
+    # NOTE: There is a required Tumblr application (Like facebook) for this api key that must exist.
     HTTParty.get("https://api.tumblr.com/v2/blog/#{blog}/posts/photo",
       :query=>{api_key:"nqaygyxixa39qotmdmmdbb4gd08tfzlzs3mqgrppwzovl5msmf", offset:offset, limit:limit})
   end

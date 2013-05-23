@@ -12,3 +12,4 @@ public/manifest.yml
 config/database.yml
 .rvmrc
 /nginx/
+dump.rdb

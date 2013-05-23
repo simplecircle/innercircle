@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require placeholder.min
+//= require jquery.wookmark.min
 //= require_tree .
