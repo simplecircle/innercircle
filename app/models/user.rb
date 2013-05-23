@@ -24,6 +24,11 @@ class User < ActiveRecord::Base
     joins(:companies, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order(:first_name)
   end
 
+  def star_rating(company_id)
+    assoc = UsersCompany.find_by_user_id_and_company_id(self.id, company_id)
+    assoc.nil? ? nil : assoc.star_rating
+  end
+
   def owned_companies
     if god?
       return Company.all
