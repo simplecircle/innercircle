@@ -2,6 +2,7 @@
   .row-fluid
     .span10.offset1.mobile-padding
       = render "shared/flash", :flash=>flash unless flash.blank?
+      = link_to "← Back to Dashboard", dashboard_url if current_user.god_or_admin?
       %h3.mtl.mbm= @user.profile.full_name
       - if @star_rating
         =form_for @user do |f|
