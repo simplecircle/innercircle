@@ -4,18 +4,15 @@ $('#collection').append('<%= j render(@posts) %>');
 <% else %>
   $('.pagination').remove();
 <% end %>
-var handler, options;
+
+var handler, options, newItems;
 handler = null;
 options = {
   autoResize: true,
-  container: $('.row'),
-  offset: 20
+  container: $('#collection'),
+  offset:20
 };
-var firstTen, handler, items;
-items = $("#collection li");
-firstTen = items.slice(-2);
-console.log(firstTen.length);
-// $("#collection").append(firstTen.clone());
 handler = $("#collection li");
+newItems = handler.slice(-8);
 handler.wookmark(options);
 
