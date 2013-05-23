@@ -7,7 +7,7 @@
           %h2.mbn= "#{capitalize_phrase(@company.name)}’s Dashboard"
         .span5
           .dashboard-header-links
-            = link_to("#{@company.subdomain}.getinnercircle.com", root_url(subdomain:@company.subdomain), class:"mrl")
+            = link_to("#{@company.subdomain}.getinnercircle.com", root_url(subdomain:@company.subdomain), class:"hidden-phone hidden-tablet mrl")
             = link_to("Edit company profile", :controller => "companies", :action=>"edit", :id=>@company.id)
   .row-fluid
     .span10.offset1.mobile-padding
@@ -42,8 +42,11 @@
                 - @creative.each do |talent|
                   = link_to user_url(talent) do
                     %li.bb-1
-                      = talent.email
+                      %span.talent-email= talent.email
                       %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
+                      %span.rating
+                        - talent.star_rating(@company.id).times do |rating|
+                          %span.rating-star-fixed
               %h4.bb-1
                 Operations
                 %span.counter.pull-right (#{@operations.count})
@@ -53,6 +56,9 @@
                     %li.bb-1
                       = talent.email
                       %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
+                      %span.rating
+                        - talent.star_rating(@company.id).times do |rating|
+                          %span.rating-star-fixed
               %h4.bb-1
                 Sales / Marketing
                 %span.counter.pull-right (#{@sales_marketing.count})
@@ -62,6 +68,9 @@
                     %li.bb-1
                       = talent.email
                       %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
+                      %span.rating
+                        - talent.star_rating(@company.id).times do |rating|
+                          %span.rating-star-fixed
               %h4.bb-1
                 Technology
                 %span.counter.pull-right (#{@technology.count})
@@ -71,8 +80,11 @@
                     %li.bb-1
                       = talent.email
                       %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
+                      %span.rating
+                        - talent.star_rating(@company.id).times do |rating|
+                          %span.rating-star-fixed
 
-        .span5
+        .span5#dashboard-right-column
           .row-fluid.dashboard-header.bb-1
             .span8
               %h3.mbn

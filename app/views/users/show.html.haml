@@ -2,25 +2,40 @@
   .row-fluid
     .span10.offset1.mobile-padding
       = render "shared/flash", :flash=>flash unless flash.blank?
-      %h3.mbn.mtl.mobile-padding= @user.profile.job_title.capitalize if @user.profile.job_title
+      = link_to "← Back to Dashboard", dashboard_url if current_user.god_or_admin?
+      %h3.mtl.mbm= @user.profile.full_name
+      - if @star_rating
+        =form_for @user do |f|
+          %span.rating
+            - [4, 3, 2, 1].each do |rating|
+              =f.radio_button(:star_rating, rating, :checked=> rating==@star_rating, :class=>"rating-input")
+              %label.rating-star{:for=>"user_star_rating_#{rating}"}
+          %span.inline_error.mlm#star-save-error
+      = link_to(@user.profile.url, @user.profile.url, target:"_blank") if @user.profile.url
+      %br
+      = mail_to(@user.email, nil)
+      
 %hr
 .container-fluid
   .row-fluid
     .span10.offset1.mobile-padding
-      = link_to(@user.profile.url, @user.profile.url, target:"_blank") if @user.profile.url
-      %br
-      = mail_to(@user.email, nil)
-      .clearfix
+      .row-fluid
+        .span6
+          - if @user.profile.job_title
+            %h4.mbs Job Title:
+            = @user.profile.job_title.capitalize
 
-      %h4.mtxl Job categories:
-      %ul.unstyled
-        - @user.profile.company_depts.each do |dept|
-          %li= capitalize_phrase(dept.name)
-
-      %h4.mtxl Skills & tools:
-      %ul#skills.unstyled
-        - @user.profile.skills.each do |skill|
-          %li= skill
+          %h4.mbs.mtxl Job categories:
+          %ul.unstyled
+            - @user.profile.company_depts.each do |dept|
+              %li= capitalize_phrase(dept.name)
+        .span6
+          - unless @user.profile.skills.empty?
+            %h4.mbs Skills & tools:
+            %ul#skills.unstyled
+              - @user.profile.skills.each do |skill|
+                %li= skill
       - if current_user.admin_or_god?
         =form_for @user do |f|
           = f.submit "Remove User From My Talent Community", class:"btn btn-warning mvl"
+     

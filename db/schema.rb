@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130522174541) do
+ActiveRecord::Schema.define(:version => 20130523141041) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -153,8 +153,9 @@ ActiveRecord::Schema.define(:version => 20130522174541) do
   create_table "users_companies", :force => true do |t|
     t.integer  "user_id"
     t.integer  "company_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "star_rating", :default => 0
   end
 
   add_index "users_companies", ["company_id"], :name => "index_users_companies_on_company_id"
