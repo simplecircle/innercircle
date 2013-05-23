@@ -1,4 +1,4 @@
-%li{id:post.id, class:"photo-wrapper"}
+%li{id:post.id, class:"photo-wrapper span3"}
   = link_to(post_url(post.id, subdomain: post.company.subdomain), method:"#{post.published ? 'delete':'put'}", remote:true) do
     .photo
       = image_tag post.media_url_small
