@@ -29,8 +29,8 @@ class PostsController < ApplicationController
   def index
     @posts = @company.posts.includes(:company).select([:media_url_small, :published, :company_id, :id, :provider_publication_date, :provider_strategy, :provider]).order("provider_publication_date DESC").paginate(:page => params[:page], per_page:8)
     respond_to do |format|
-        format.html {render("index")}
-        format.js {render("index.js.erb")}
+      format.html {render("index")}
+      format.js {render("unpublished.js.erb")}
     end
   end
 
