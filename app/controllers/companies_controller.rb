@@ -12,9 +12,41 @@ class CompaniesController < ApplicationController
       @user = @company.users.build
       @profile = @user.build_profile
     end
-    
     @verticals = Vertical.all
     redirect_to signup_url(subdomain: false) if !request.subdomain.empty?
+  end
+
+  def create
+    @company = Company.new(params[:company])
+    @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
+    @verticals = (params[:verticals] || []).map{|v| v.to_i}
+
+    if current_user && current_user.god?
+      @company.users << current_user
+      @user = current_user
+    else
+      @user = @company.users.first
+      @user.role = 'admin' if @user.role == nil
+      @profile = @user.profile
+    end
+
+    @company.instagram_uid = get_instagram_id(@company.instagram_uid) if @company.instagram_uid.length > 12
+
+    if @company.save
+      save_verticals(@verticals, @company) if @verticals
+      cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} if @user.admin?
+      redirect_to new_from_provider_url(subdomain: @company.subdomain)
+    else
+      render "new"
+    end
+  end
+
+  def show
+    @posts = @company.posts.where(published:true).order("provider_publication_date DESC")
+  end
+
+  def index
+    @companies = current_user.owned_companies.sort {|a, b| a.name <=> b.name}
   end
 
   def edit
@@ -44,38 +76,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def create
-    @company = Company.new(params[:company])
-    @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
-    @verticals = (params[:verticals] || []).map{|v| v.to_i}
-
-    if current_user && current_user.god?
-      @company.users << current_user
-      @user = current_user
-    else
-      @user = @company.users.first
-      @user.role = 'admin' if @user.role == nil
-      @profile = @user.profile
-    end
-
-    @company.instagram_uid = get_instagram_id(@company.instagram_uid) if @company.instagram_uid.length > 12
-
-    if @company.save
-      save_verticals(@verticals, @company) if @verticals
-      cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} if @user.admin?
-      redirect_to new_from_provider_url(subdomain: @company.subdomain)
-    else
-      render "new"
-    end
-  end
-
-  def show
-    @posts = @company.posts.order("provider_publication_date DESC")
-  end
-
-  def index
-    @companies = current_user.owned_companies.sort {|a, b| a.name <=> b.name}
-  end
 
   def get_instagram_id(foursquare_v2_id)
     data = HTTParty.get("https://api.instagram.com/v1/locations/search?foursquare_v2_id=#{foursquare_v2_id}",
