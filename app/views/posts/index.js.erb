@@ -1,4 +1,4 @@
-$('#collection').append('<%= j render(@posts) %>');
+$('#collection').append('<%= j render("unpublished", posts:@posts) %>');
 <% if @posts.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate(@posts) %>');
 <% else %>

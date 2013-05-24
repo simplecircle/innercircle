@@ -1,0 +1,11 @@
+- posts.each do |post|
+  %li{id:post.id, class:"photo-wrapper"}
+    = link_to(post_url(post.id, subdomain: post.company.subdomain), method:"#{post.published ? 'delete':'put'}", remote:true) do
+      .photo
+        = image_tag post.media_url_small
+      .cta{class: post.published ? "published" : ""}= post.published ? "✓" : "Publish"
+    .info.text-center
+      = "#{post.provider_publication_date.strftime("%b %d") if post.provider_publication_date} - "
+
+      = capitalize_phrase(post.provider)
+      = post.provider_strategy unless post.provider_strategy == "default"

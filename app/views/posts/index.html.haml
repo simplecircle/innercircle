@@ -6,7 +6,7 @@
         %h4 Publish 40 photos that best exemplify your company culture.
         %hr
   %ul#collection.inline
-    = render(@posts)
+    = render("unpublished", posts:@posts)
   #infinite= will_paginate @posts
 
 
