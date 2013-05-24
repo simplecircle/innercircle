@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new :role=>'talent'
     @user.build_profile
     @is_admin_adding = current_user && current_user.god_or_admin?
-    @star_rating = 1
+    @star_rating = 1 if !@is_admin_adding
     @depts = CompanyDept.all
   end
 
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     form_errors = {}
     @is_admin_adding = current_user && current_user.god_or_admin?
     @depts = params[:company_depts]
-    @star_rating = (params[:star_rating] || "1").to_i #Default to one star on adding a new talent user
+    @star_rating = @is_admin_adding ? params[:star_rating].to_i : 1 #Default to one star for new user signing up
 
     if @is_admin_adding
       @profile = @user.profile
@@ -92,6 +92,7 @@ class UsersController < ApplicationController
 
     form_errors[:name] = "Please enter first and last name" if @is_admin_adding && (@user.profile.first_name.empty? || @user.profile.last_name.empty?)
     form_errors[:categories] = "You have to choose at least one category." if @depts.nil?
+    form_errors[:star_rating] = "Please rate the person you are adding" if @star_rating == 0
 
     if !form_errors.empty?
       @user.valid?
@@ -107,7 +108,7 @@ class UsersController < ApplicationController
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
         
         if @is_admin_adding
-          params[:commit] == "Save and Add Another" ? redirect_to(join_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
+          params[:commit] == "Save & Add Another" ? redirect_to(join_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
         else 
           redirect_to(edit_user_url(@user.auth_token))
         end

@@ -42,7 +42,8 @@
               = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
         - if @is_admin_adding
           .controls.mbl
-            %b.pull-left.mrm Star Rating:
+            .inline_error= @user.errors[:star_rating].first
+            %b.pull-left.mrm * Star Rating:
             %span.rating
               - [4, 3, 2, 1].each do |rating|
                 =radio_button_tag(:star_rating, rating, @star_rating && rating==@star_rating, :class=>"rating-input")
