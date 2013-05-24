@@ -3,6 +3,48 @@
 @import "variables.css.less";
 
 #home {
+  @media (max-width: 480px) {
+    .filmstrip-image {
+      min-height: 150px;
+    }
+  }
+  @media (max-width: 570px) and (min-width: 481px) {
+    .filmstrip-image {
+      min-height: 175px;
+    }
+  }
+  @media (max-width: 570px) {
+    .filmstrip-image {
+      // min-height: 175px;
+      &.landscape img {
+        // height: 100%;
+      }
+      &.portrait img {
+        min-width: 100%;
+        max-height: 100%;
+        top: 0 !important;
+      }
+      img {
+        max-width: none;
+        position: absolute;
+      }
+    }
+  }
+  @media (min-width: 571px) {
+    .filmstrip-image {
+      height: 224px;
+      &.landscape img {
+        height: 100%;
+      }
+      &.portrait img {
+        width: 100%;
+      }
+      img {
+        max-width: none;
+        position: absolute;
+      }
+    }
+  }
   .company-wrapper {
     display: block;
     &:hover {
@@ -11,13 +53,21 @@
     }
   }
   .filmstrip-image {
-    width: 33%;
-    float: left;
-    max-height: 224px;
     overflow: hidden;
+    position: relative;
+    margin: 0.5%;
+    width: 32.3%;
+    float: left;
+    &.landscape img {
+      // height: 100%;
+    }
+    &.portrait img {
+      // min-width: 100%;
+      // max-height: 100%;
+    }
     img {
-      min-width: 224px;
-      min-height: 224px;
+      max-width: none;
+      position: absolute;
     }
   }
   .company-name {

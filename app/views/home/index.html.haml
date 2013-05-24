@@ -1,6 +1,6 @@
 .container
   .row#homepage-top
-    .span9.column-center
+    .span9.column-center.mobile-padding
       %h1
         Meet Great Companies in
         %br
@@ -11,10 +11,10 @@
     .span9.column-center
       - @companies.each do |company|
         = link_to(root_url(subdomain:company.subdomain), {:class=>'company-wrapper pam'}) do
-          .filmstrip.mobile-padding
+          .filmstrip
             - company.latest_published_posts(3).each do |post|
-              .filmstrip-image
-                = image_tag post.media_url_small
+              .filmstrip-image{:class=>post.wrapper_class}
+                = image_tag post.media_url_small, :style=>post.offset(224)
             .clearfix
           .company-info
             .pull-left.company-name
