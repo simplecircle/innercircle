@@ -15,18 +15,20 @@ $(document).ready ->
             options =
               itemWidth: 250 # Optional min width of a grid item
               autoResize: true # This will auto-update the layout when the browser window is resized.
-              container: $("#collection") # Optional, used for some extra CSS styling
+              resizeDelay: 50
+              container: $("#masonry") # Optional, used for some extra CSS styling
               offset: 13 # Optional, the distance between grid items
               flexibleWidth: 300 # Optional, the maximum width of a grid item
           else
             options =
               itemWidth: 450
               autoResize: true
-              container: $("#collection")
+              resizeDelay: 50
+              container: $("#masonry")
               offset: 13
               flexibleWidth: 550
 
-          handler = $("#collection li")
+          handler = $("#masonry li")
           newItems = handler.slice(-8)
           handler.wookmark options
 
