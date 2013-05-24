@@ -1,6 +1,6 @@
 - posts.each do |post|
   %li{id:post.id, class:"photo-wrapper"}
     .photo
-      = image_tag post.media_url
+      = image_tag post.photo_url(:large)
     /= "#{post.provider_publication_date.strftime("%b %d") if post.provider_publication_date} - "
 

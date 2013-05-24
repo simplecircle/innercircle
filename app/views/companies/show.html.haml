@@ -2,7 +2,9 @@
   %ul#collection.inline
     = render("posts/published", posts:@posts)
 
+  #infinite= will_paginate @posts
   .span4
     %h2= link_to(capitalize_phrase(@company.name), @company.website_url, target:"_blank")
     = link_to("Join the Club", join_url(subdomain: @company.subdomain), class:"btn btn-large btn-warning")
+
 
