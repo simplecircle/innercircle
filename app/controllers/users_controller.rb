@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @user = User.new :role=>'talent'
     @user.build_profile
     @is_admin_adding = current_user && current_user.god_or_admin?
+    @star_rating = 1 if !@is_admin_adding
     @depts = CompanyDept.all
   end
 
@@ -20,8 +21,8 @@ class UsersController < ApplicationController
     end
     if params[:commit] == "Save Rating"
       user = User.find(params[:id])
-      assoc = UsersCompany.find_by_user_id_and_company_id(user, @company.id)
-      assoc.update_attributes(:star_rating => params[:user][:star_rating].to_i)
+      star_rating = params[:user][:star_rating].to_i
+      save_star_rating(star_rating, user.id, @company.id)
       return redirect_to :back
     end
 
@@ -70,6 +71,7 @@ class UsersController < ApplicationController
     form_errors = {}
     @is_admin_adding = current_user && current_user.god_or_admin?
     @depts = params[:company_depts]
+    @star_rating = @is_admin_adding ? params[:star_rating].to_i : 1 #Default to one star for new user signing up
 
     if @is_admin_adding
       @profile = @user.profile
@@ -90,6 +92,7 @@ class UsersController < ApplicationController
 
     form_errors[:name] = "Please enter first and last name" if @is_admin_adding && (@user.profile.first_name.empty? || @user.profile.last_name.empty?)
     form_errors[:categories] = "You have to choose at least one category." if @depts.nil?
+    form_errors[:star_rating] = "Please rate the person you are adding" if @star_rating == 0
 
     if !form_errors.empty?
       @user.valid?
@@ -101,10 +104,11 @@ class UsersController < ApplicationController
       if @user.save
         @company.users << @user
         save_departments(@depts, @user.profile)
+        save_star_rating(@star_rating, @user.id, @company.id)
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
         
-        if @is_admin_adding 
-          params[:commit] == "Save and Add Another" ? redirect_to(join_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
+        if @is_admin_adding
+          params[:commit] == "Save & Add Another" ? redirect_to(join_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
         else 
           redirect_to(edit_user_url(@user.auth_token))
         end
@@ -157,6 +161,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def save_star_rating(rating, user_id, company_id)
+    UsersCompany.find_by_user_id_and_company_id(user_id, company_id).update_attributes(:star_rating => rating)
+  end
 
   def save_departments(departments, profile)
     #Destroy category association if the user unchecked it in form

@@ -1,12 +1,16 @@
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
-  helper_method :current_user, :capitalize_phrase
+  helper_method :current_user, :capitalize_phrase, :current_company
 
   private
 
   def current_user
     @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
+  end
+
+  def current_company
+    @current_company ||= Company.find_by_subdomain(request.subdomain)    
   end
 
   def authorize
