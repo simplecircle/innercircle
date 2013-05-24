@@ -8,9 +8,11 @@ $('#collection').append('<%= j render(@posts) %>');
 var handler, options, newItems;
 handler = null;
 options = {
-  autoResize: true,
-  container: $('#collection'),
-  offset:20
+  itemWidth: 200, // Optional min width of a grid item
+  autoResize: true, // This will auto-update the layout when the browser window is resized.
+  container: $('#collection'), // Optional, used for some extra CSS styling
+  offset: 13, // Optional, the distance between grid items
+  flexibleWidth: 250 // Optional, the maximum width of a grid item
 };
 handler = $("#collection li");
 newItems = handler.slice(-8);

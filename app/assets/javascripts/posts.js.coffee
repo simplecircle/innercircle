@@ -1,9 +1,11 @@
 $(document).ready ->
   handler = null
   options =
+    itemWidth: 200
     autoResize: true
     container: $('#collection')
-    offset: 20
+    offset: 5
+    flexibleWidth: 250
 
   handler = $('#collection li');
   handler.wookmark(options);
