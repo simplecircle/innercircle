@@ -23,6 +23,7 @@ class PostsController < ApplicationController
       @post.like_count = fql_response["data"].first["like_info"]["like_count"].to_i
     end
     @post.published = true
+    @post.company.touch
     @post.save
   end
 
