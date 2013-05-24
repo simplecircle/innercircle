@@ -1,6 +1,6 @@
 .container
   .row#homepage-top
-    .span10.column-center
+    .span9.column-center
       %h1
         Meet Great Companies in
         %br
@@ -8,16 +8,17 @@
       %h5
         Not actively looking for work, but care to be privately notified of relavent job openings & events from inspiring companies? Let ’em know by joining their talent-communities.
   .row#homepage-bottom
-    .span10.column-center
+    .span9.column-center
       - @companies.each do |company|
-        = link_to(root_url(subdomain:company.subdomain), {:class=>'comapny-wrapper pam'}) do
-          .filmstrip
+        = link_to(root_url(subdomain:company.subdomain), {:class=>'company-wrapper pam'}) do
+          .filmstrip.mobile-padding
             - company.latest_published_posts(3).each do |post|
               .filmstrip-image
-                =post.inspect
+                = image_tag post.media_url_small
+            .clearfix
           .company-info
             .pull-left.company-name
-              %h5= company.name
-            .pull-left.company-hq= company.hq_city
+              %h3.mbn.mtm= company.name
+            .pull-left.company-hq.mlm.mts= company.hq_city
             .clearfix
             .company-description= company.short_description
