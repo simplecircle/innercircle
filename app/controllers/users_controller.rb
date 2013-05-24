@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @user = User.new :role=>'talent'
     @user.build_profile
     @is_admin_adding = current_user && current_user.god_or_admin?
+    @star_rating = 1
     @depts = CompanyDept.all
   end
 
@@ -20,8 +21,8 @@ class UsersController < ApplicationController
     end
     if params[:commit] == "Save Rating"
       user = User.find(params[:id])
-      assoc = UsersCompany.find_by_user_id_and_company_id(user, @company.id)
-      assoc.update_attributes(:star_rating => params[:user][:star_rating].to_i)
+      star_rating = params[:user][:star_rating].to_i
+      save_star_rating(star_rating, user.id, @company.id)
       return redirect_to :back
     end
 
@@ -70,10 +71,10 @@ class UsersController < ApplicationController
     form_errors = {}
     @is_admin_adding = current_user && current_user.god_or_admin?
     @depts = params[:company_depts]
+    @star_rating = (params[:star_rating] || "1").to_i #Default to one star on adding a new talent user
 
     if @is_admin_adding
       @profile = @user.profile
-      @star_rating = params[:star_rating].to_i
 
       #Save skill list
       if !params[:as_values_true].blank?
@@ -102,11 +103,10 @@ class UsersController < ApplicationController
       if @user.save
         @company.users << @user
         save_departments(@depts, @user.profile)
+        save_star_rating(@star_rating, @user.id, @company.id)
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
         
         if @is_admin_adding
-          assoc = UsersCompany.find_by_user_id_and_company_id(@user, @company.id)
-          assoc.update_attributes(:star_rating => params[:star_rating].to_i)
           params[:commit] == "Save and Add Another" ? redirect_to(join_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
         else 
           redirect_to(edit_user_url(@user.auth_token))
@@ -160,6 +160,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def save_star_rating(rating, user_id, company_id)
+    UsersCompany.find_by_user_id_and_company_id(user_id, company_id).update_attributes(:star_rating => rating)
+  end
 
   def save_departments(departments, profile)
     #Destroy category association if the user unchecked it in form
