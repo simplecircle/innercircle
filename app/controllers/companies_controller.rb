@@ -74,7 +74,7 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @companies = current_user.owned_companies
+    @companies = current_user.owned_companies.sort {|a, b| a.name <=> b.name}
   end
 
   def get_instagram_id(foursquare_v2_id)
