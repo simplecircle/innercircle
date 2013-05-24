@@ -1,14 +1,14 @@
 $(document).ready ->
-  handler = null
-  options =
-    itemWidth: 200
-    autoResize: true
-    container: $('#collection')
-    offset: 5
-    flexibleWidth: 250
+  # handler = null
+  # options =
+  #   itemWidth: 200
+  #   autoResize: true
+  #   container: $('#collection')
+  #   offset: 5
+  #   flexibleWidth: 250
 
-  handler = $('#collection li');
-  handler.wookmark(options);
+  # handler = $('#collection li');
+  # handler.wookmark(options);
 
 
   $(".photo-wrapper").live "ajax:before", ->
