@@ -41,6 +41,13 @@
               = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"pull-left")
               = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
         - if @is_admin_adding
+          .controls.mbl
+            %b.pull-left.mrm Star Rating:
+            %span.rating
+              - [4, 3, 2, 1].each do |rating|
+                =radio_button_tag(:star_rating, rating, @star_rating && rating==@star_rating, :class=>"rating-input")
+                %label.rating-star{:for=>"star_rating_#{rating}"}
+            .clearfix
           = f.fields_for :profile do |p|
             .controls
               = p.text_field :job_title, class:"span12", placeholder:"Ideal job title"

@@ -73,6 +73,7 @@ class UsersController < ApplicationController
 
     if @is_admin_adding
       @profile = @user.profile
+      @star_rating = params[:star_rating].to_i
 
       #Save skill list
       if !params[:as_values_true].blank?
@@ -103,7 +104,9 @@ class UsersController < ApplicationController
         save_departments(@depts, @user.profile)
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
         
-        if @is_admin_adding 
+        if @is_admin_adding
+          assoc = UsersCompany.find_by_user_id_and_company_id(@user, @company.id)
+          assoc.update_attributes(:star_rating => params[:star_rating].to_i)
           params[:commit] == "Save and Add Another" ? redirect_to(join_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
         else 
           redirect_to(edit_user_url(@user.auth_token))
