@@ -8,7 +8,7 @@ class HomeController < ApplicationController
       redirect_to dashboard_url(subdomain: current_user.companies.first.subdomain)
     else #not an immediate redirect (ie no src query string), so we should clear the redirect source
       session[:redirect_source] = nil
-      @companies = Company.all
+      @companies = Company.order('updated_at DESC')
     end
   end
 end

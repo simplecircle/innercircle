@@ -1,3 +1,51 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins.less";
+@import "variables.css.less";
+
+#home {
+  @media (max-width: 570px) {
+    .filmstrip-image img {
+      left: 0 !important;
+      top: 0 !important;
+    }
+  }
+  .filmstrip-image {
+    height: 0;
+    padding-bottom: 32.3%;
+    overflow: hidden;
+    position: relative;
+    margin: 0.5%;
+    width: 32.3%;
+    float: left;
+    &.landscape img {
+      height: 100%;
+    }
+    &.portrait img {
+      width: 100%;
+    }
+    img {
+      max-width: none;
+      position: absolute;
+    }
+  }
+  .company-wrapper {
+    display: block;
+    &:hover {
+      background-color: #cdcdcd;
+      text-decoration: none;
+    }
+  }
+  .company-name {
+    h3 {
+      line-height: 1;
+    }
+  }
+  .company-hq {
+    margin-top: 11px;
+    color: @grayLight;
+  }
+  .company-info {
+    color: @bodyColor;
+    margin: 0.5%;
+  }
+}
