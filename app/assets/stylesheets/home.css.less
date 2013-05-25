@@ -3,46 +3,29 @@
 @import "variables.css.less";
 
 #home {
-  @media (max-width: 480px) {
-    .filmstrip-image {
-      min-height: 150px;
-    }
-  }
-  @media (max-width: 570px) and (min-width: 481px) {
-    .filmstrip-image {
-      min-height: 175px;
-    }
-  }
   @media (max-width: 570px) {
-    .filmstrip-image {
-      // min-height: 175px;
-      &.landscape img {
-        // height: 100%;
-      }
-      &.portrait img {
-        min-width: 100%;
-        max-height: 100%;
-        top: 0 !important;
-      }
-      img {
-        max-width: none;
-        position: absolute;
-      }
+    .filmstrip-image img {
+      left: 0 !important;
+      top: 0 !important;
     }
   }
-  @media (min-width: 571px) {
-    .filmstrip-image {
-      height: 224px;
-      &.landscape img {
-        height: 100%;
-      }
-      &.portrait img {
-        width: 100%;
-      }
-      img {
-        max-width: none;
-        position: absolute;
-      }
+  .filmstrip-image {
+    height: 0;
+    padding-bottom: 32.3%;
+    overflow: hidden;
+    position: relative;
+    margin: 0.5%;
+    width: 32.3%;
+    float: left;
+    &.landscape img {
+      height: 100%;
+    }
+    &.portrait img {
+      width: 100%;
+    }
+    img {
+      max-width: none;
+      position: absolute;
     }
   }
   .company-wrapper {
@@ -52,34 +35,17 @@
       text-decoration: none;
     }
   }
-  .filmstrip-image {
-    overflow: hidden;
-    position: relative;
-    margin: 0.5%;
-    width: 32.3%;
-    float: left;
-    &.landscape img {
-      // height: 100%;
-    }
-    &.portrait img {
-      // min-width: 100%;
-      // max-height: 100%;
-    }
-    img {
-      max-width: none;
-      position: absolute;
-    }
-  }
   .company-name {
     h3 {
       line-height: 1;
     }
   }
   .company-hq {
-    margin-top: 16px;
+    margin-top: 11px;
     color: @grayLight;
   }
   .company-info {
     color: @bodyColor;
+    margin: 0.5%;
   }
 }
