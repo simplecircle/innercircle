@@ -26,6 +26,10 @@ class Company < ActiveRecord::Base
     users.where(:role=>"admin")
   end
 
+  def latest_published_posts(count=3)
+    posts.where(:published=>true).order("updated_at DESC").select([:media_url_small, :company_id, :id, :provider_publication_date, :provider_strategy, :provider, :height, :width]).limit(count)
+  end
+
   private
 
   def self.employee_counts
