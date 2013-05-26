@@ -1,34 +1,9 @@
 $(document).ready ->
 
-  $("#masonry").width($(window).width()-340)
+  $("#masonry.constrained").width($(window).width()-340)
   $(window).resize ->
-    $("#masonry").width($(window).width()-340)
+    $("#masonry.constrained").width($(window).width()-340)
 
-  # handler = null
-  # console.log "initial success"
-  # url = $('.pagination .next_page').attr('href')
-  # if url.indexOf("posts") == 1
-  #   options =
-  #     itemWidth: 250 # Optional min width of a grid item
-  #     autoResize: true # This will auto-update the layout when the browser window is resized.
-  #     resizeDelay: 50
-  #     container: $("#masonry") # Optional, used for some extra CSS styling
-  #     offset: 13 # Optional, the distance between grid items
-  #     flexibleWidth: 300 # Optional, the maximum width of a grid item
-  # else
-  #   options =
-  #     itemWidth: 450
-  #     autoResize: true
-  #     resizeDelay: 50
-  #     container: $("#masonry")
-  #     offset: 13
-  #     flexibleWidth: 550
-
-  # handler = $("#masonry li")
-  # newItems = handler.slice(-8)
-  # handler.wookmark options
-
-  
   # Infinte scroll
   if $('#infinite .pagination').length
     $(window).scroll ->
@@ -40,7 +15,6 @@ $(document).ready ->
 
         success = ->
           handler = null
-          console.log "success"
           if url.indexOf("posts") == 1
             options =
               itemWidth: 250 # Optional min width of a grid item
