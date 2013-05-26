@@ -2,51 +2,51 @@
 @import "twitter/bootstrap/mixins.less";
 @import "variables.css.less";
 
-#company{
+#companies{
+  background:white;
   #sidebar{
-    width:200px;
-    width:25%;
-    background:#ccc;
-    position:fixed;
+    background:#F2F2F2;
+    bottom: 0px;
+    padding:100px 20px 0 20px;
+    position: fixed;
+    top: 0px;
+    width:250px;
   }
   #masonry{
     position: relative;
-    /*padding-right:11px;*/
-    padding:0 15px 0 15px;
-    width:75%;
     background:white;
-
-  }
-  li{
-    /*display:none;*/
-    padding:0;
-    border:1px solid #D6D6D6;
-    &.photo-wrapper{
-      background:white;
-      margin:5px 5px 55px 5px;
-      .cta{
-        border-top:1px solid @grayLighter;
-        height:25px;
-        padding-top:4px;
-        text-align:center;
-        &.published{
-          background:@linkColor;
-          border-top:1px solid  darken(@linkColor, 5%);
-          color:white;
-          font-size:18px;
-          font-weight:bold;
+    left:310px;
+    width:30%;
+    > li{
+      padding:0;
+      border:1px solid #D6D6D6;
+      &.photo-wrapper{
+        backgroundground:white;
+        margin:5px 5px 55px 5px;
+        .cta{
+          border-top:1px solid @grayLighter;
+          height:25px;
+          padding-top:4px;
+          text-align:center;
+          &.published{
+            background:@linkColor;
+            border-top:1px solid  darken(@linkColor, 5%);
+            color:white;
+            font-size:18px;
+            font-weight:bold;
+          }
         }
-      }
-      .info{
-        background:white;
-        color:@grayLight;
-        font-size:11px;
-        padding:5px 0 5px 0;
-      }
-      .photo{
-        overflow:hidden;
-        img{
-          min-width:100%;
+        .info{
+          background:white;
+          color:@grayLight;
+          font-size:11px;
+          padding:5px 0 5px 0;
+        }
+        .photo{
+          overflow:hidden;
+          img{
+            min-width:100%;
+          }
         }
       }
     }

@@ -1,10 +1,15 @@
-#company
-  #sidebar
-    %h2= link_to(capitalize_phrase(@company.name), @company.website_url, target:"_blank")
+#sidebar
+  %h2= link_to(capitalize_phrase(@company.name), @company.website_url, target:"_blank")
+  %h5= @company.short_description
+  %p= "#{@company.hq_city}, #{@company.hq_state}"
+  .well
+    Not actively looking for work?
+    Join Kickstarter’s talent-community to be notified of future job openings that match your skills. Looking now?  View their current openings.
+    %br
     = link_to("Join the Club", join_url(subdomain: @company.subdomain), class:"btn btn-large btn-warning")
 
-  %ul#masonry.inline.pull-right
-    = render("posts/published", posts:@posts)
-  #infinite= will_paginate @posts
+%ul#masonry.inline
+  = render("posts/published", posts:@posts)
+#infinite= will_paginate @posts
 
 
