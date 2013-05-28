@@ -9,11 +9,12 @@
           .dashboard-header-links
             = link_to("#{@company.subdomain}.circ.co", root_url(subdomain:@company.subdomain), class:"hidden-phone hidden-tablet mrl")
             = link_to("Edit company profile", :controller => "companies", :action=>"edit", :id=>@company.id)
-  .row-fluid
-    .span10.offset1.mobile-padding
-      %section#awaiting-approval-box.highlight.tac
-        %h4#awaiting-approval-message.mrl 6 posts awaiting approval
-        %button.btn.btn-warning.btn-large Review now
+  -if @company.posts_to_review_count > 0
+    .row-fluid
+      .span10.offset1.mobile-padding
+        %section#awaiting-approval-box.highlight.tac
+          %h4#awaiting-approval-message.mrl= "#{@company.posts_to_review_count} posts awaiting approval"
+          =link_to("Review now", posts_url, :class=>"btn btn-warning btn-large")
 
   .row-fluid.mtxl
     .span10.offset1.mobile-padding
