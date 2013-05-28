@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130524152413) do
+ActiveRecord::Schema.define(:version => 20130528181307) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20130524152413) do
     t.boolean  "tumblr_auto_publish",                           :default => true
     t.boolean  "twitter_auto_publish",                          :default => true
     t.boolean  "foursquare_auto_publish",                       :default => true
+    t.string   "hex_code"
   end
 
   add_index "companies", ["subdomain"], :name => "index_companies_on_subdomain", :unique => true

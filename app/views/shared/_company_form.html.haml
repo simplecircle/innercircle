@@ -75,7 +75,14 @@
           %label.checkbox{:for=>"vertical_#{v.id.to_s}", :class=>"two-column-checkbox-label span6"}
             = check_box_tag("vertical_#{v.id.to_s}", v.id, (@verticals.include?(v.id) if @verticals), name: 'verticals[]')
             = v.name
-        
+  .control-group
+    %label.control-label{:for=>:hex_code} Main accent color
+    .controls.controls-row
+      -if !@company.hex_code.blank? && @company.errors[:hex_code].blank?
+        .company-form-accent-color.span1.mvs{style:"background-color:#{@company.hex_code};"}
+      = co.text_field :hex_code, {:class=>'span11', :placeholder=>'Hex code'}
+      .inline_error= @company.errors[:hex_code].first
+
   .control-group
     %label.control-label * Company logo
     .controls.controls-row

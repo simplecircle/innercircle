@@ -1,6 +1,5 @@
 class Company < ActiveRecord::Base
-
-  attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid
+  attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code
 
   has_many :users_companies
   has_many :posts
@@ -10,7 +9,9 @@ class Company < ActiveRecord::Base
   accepts_nested_attributes_for :users, :users_companies
   after_validation :add_url_protocol
   mount_uploader :logo, LogoUploader
-
+  
+  before_validation :add_hash_symbol_to_hex_code
+  validate :validate_hex_code
   validates :name, presence:true
   validates :name, uniqueness:true
   validates :website_url, presence:true
@@ -21,7 +22,6 @@ class Company < ActiveRecord::Base
   validates_format_of :website_url, with:/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}?/, message:"URL isn't valid"
   validates :logo, presence:true
 
-
   def admins
     users.where(:role=>"admin")
   end
@@ -31,6 +31,19 @@ class Company < ActiveRecord::Base
   end
 
   private
+
+  def validate_hex_code
+    return if hex_code.blank?
+    if hex_code.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/).nil?
+      errors.add(:hex_code, "Hex code must be between #000000 and #FFFFFF")
+    end
+  end
+
+  def add_hash_symbol_to_hex_code
+    if !self.hex_code.blank? && self.hex_code.match(/\#/).nil?
+      self.hex_code = "#" + self.hex_code
+    end
+  end
 
   def self.employee_counts
     [["Select a range", ""], ["0 - 10", "0_10"], ["11 - 50", "11_50"], ["51 - 100", "51_100"], ["101 - 250", "101_250"], ["251 - 500", "251_500"], ["500+", "500_9999"]]

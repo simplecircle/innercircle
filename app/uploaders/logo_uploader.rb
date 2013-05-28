@@ -28,8 +28,8 @@ class LogoUploader < CarrierWave::Uploader::Base
       img.auto_orient!
       img.change_geometry!('600x600^') { |cols, rows, img| img.resize!(cols, rows)}
       # Persist width and height of the "large" image and not the orig version.
-      model.width = img.columns
-      model.height = img.rows
+      # model.width = img.columns
+      # model.height = img.rows
       img
     end
   end
