@@ -15,7 +15,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.photo = URLTempfile.new(@post.media_url, Dir.tmpdir, encoding:'ascii-8bit')
+    @post.remote_photo_url = @post.media_url
     if @post.provider == "facebook"
       @access_token = "CAABnZC9SmhE4BACO4oLv15wZCWyhmhNUcBJek9ypNGpKWJGR6oEs2v1P8vibAP0qmsO96mkIaD0EjlxZCEvLTURZAnW6P9ZBMMuZBcTua5k0lKZA0RZAO805GzR6NBCun4ExQDENWM1ySDFTMgVmRpTo3mBEIZBLBZCh1wZCQp4iELYyQDyVx1S43ZC1"
       fql = URI::encode("select like_info from photo where object_id=")

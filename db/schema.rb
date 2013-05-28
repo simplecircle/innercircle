@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528211028) do
+ActiveRecord::Schema.define(:version => 20130528233514) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -29,12 +29,12 @@ ActiveRecord::Schema.define(:version => 20130528211028) do
     t.string   "hq_city"
     t.string   "hq_state"
     t.string   "employee_count"
+    t.string   "logo_cache"
     t.string   "foursquare_v2_id"
     t.string   "instagram_uid"
     t.boolean  "instagram_username_auto_publish",               :default => true
     t.boolean  "instagram_location_auto_publish",               :default => true
     t.string   "instagram_location_id"
-    t.string   "logo_cache"
     t.boolean  "facebook_auto_publish",                         :default => true
     t.boolean  "tumblr_auto_publish",                           :default => true
     t.boolean  "twitter_auto_publish",                          :default => true
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20130528211028) do
     t.string   "photo"
     t.integer  "width"
     t.integer  "height"
+    t.string   "remote_photo_url"
   end
 
   add_index "posts", ["company_id"], :name => "index_posts_on_company_id"
