@@ -33,14 +33,14 @@ class Company < ActiveRecord::Base
   private
 
   def validate_hex_code
-    return if hex_code.empty?
+    return if hex_code.blank?
     if hex_code.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/).nil?
       errors.add(:hex_code, "Hex code must be between #000000 and #FFFFFF")
     end
   end
 
   def add_hash_symbol_to_hex_code
-    if !self.hex_code.empty? && self.hex_code.match(/\#/).nil?
+    if !self.hex_code.blank? && self.hex_code.match(/\#/).nil?
       self.hex_code = "#" + self.hex_code
     end
   end
