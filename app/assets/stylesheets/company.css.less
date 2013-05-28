@@ -4,13 +4,25 @@
 
 #companies{
   background:white;
+  .navbar{
+    z-index: 3;
+    position:relative;
+    .navbar-inner{
+    }
+  }
+  #company-info{
+    padding:0px 0 0 20px;
+    position:relative;
+    width:250px;
+    z-index: 2;
+  }
   #sidebar{
+    z-index: 1;
     background:#F2F2F2;
     bottom: 0px;
-    padding:100px 20px 0 20px;
     position: fixed;
     top: 0px;
-    width:250px;
+    width:290px;
   }
   #masonry{
     position: relative;

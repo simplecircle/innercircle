@@ -7,6 +7,11 @@ $(document).ready ->
   # Infinte scroll
   if $('#infinite .pagination').length
     $(window).scroll ->
+      if $(window).scrollTop() >= 70
+        $("#company-info").css({ position: 'fixed', top: 0 })
+      else
+        $("#company-info").css({ position: 'relative'})
+
       url = $('.pagination .next_page').attr('href')
       # The offset needs to be at least over 190px for it to work on the iphone!
       if url && $(window).scrollTop() >= $(document).height() - $(window).height() - 700

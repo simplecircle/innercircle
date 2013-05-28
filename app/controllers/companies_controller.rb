@@ -43,6 +43,7 @@ class CompaniesController < ApplicationController
 
   def show
     @posts = @company.posts.where(published:true).order("provider_publication_date DESC").paginate(:page => params[:page], per_page:8)
+    @is_not_fixed = true
     respond_to do |format|
       format.html {render("show")}
       format.js {render("posts/published.js.erb")}

@@ -53,7 +53,7 @@
 
 body {
   background:#F2F2F2;
-  padding-top: 66px;
+  /*padding-top: 66px;*/
 }
 
 /*@import "twitter/bootstrap/responsive";*/
@@ -181,11 +181,8 @@ input[type="file"]{
   }
 }
 .navbar{
-  h1{
-    padding-left:10px;
-  }
+  border-top:2px solid @accentColor;
   .brand {
-    /*margin-right:-5px;*/
     margin-left:0;
     padding:14px 0px 0 0px;
   }
@@ -198,12 +195,11 @@ input[type="file"]{
     font-size:15px;
     text-shadow:none;
   }
-}
-.navbar-fixed-top {
-  border-top:2px solid @accentColor;
-}
-.navbar-fixed-top .navbar-inner{
-  box-shadow:none;
+  .navbar-inner{
+    .box-shadow(none);
+    .border-radius(0px);
+    padding:0 15px 0 15px;
+  }
 }
 .well{
   .box-sizing(border-box);
