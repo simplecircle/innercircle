@@ -3,6 +3,51 @@
 @import "variables.css.less";
 
 #post{
+  .published {
+    .photo-overlay {
+      opacity: 0.6;
+    }
+    .photo-overlay-text {
+      opacity: 1;
+    }
+  }
+
+  .unpublished {
+    &:hover, &.publishing {
+      .photo-overlay {opacity: 0.2;}
+      .photo-overlay-text {opacity: 1;}
+    }
+    .photo-overlay {
+      transition: opacity 0.2s;
+    }
+    .photo-overlay-text {
+      transition: opacity 0.3s;
+    }
+  }
+
+  .photo-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left:0;
+    background-color: @linkColor;
+    opacity: 0;
+  }
+  .photo-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    z-index: 2;
+    opacity: 0;
+  }
+
   #masonry{
     position: relative;
     padding-right:11px;
@@ -36,6 +81,8 @@
       }
       .photo{
         overflow:hidden;
+        position: relative;
+        .photo-overlay-text img {min-width: 0;}
         img{
           min-width:100%;
         }
