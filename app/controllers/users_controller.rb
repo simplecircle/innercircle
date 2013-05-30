@@ -69,7 +69,7 @@ class UsersController < ApplicationController
     @user = @company.users.build(params[:user])
     @user.role = 'talent'
     form_errors = {}
-    @is_admin_adding = params[:is_admin_adding] && current_user && current_user.god_or_admin?
+    @is_admin_adding = (params[:is_admin_adding]=="true") && current_user && current_user.god_or_admin?
     @depts = params[:company_depts]
     @star_rating = @is_admin_adding ? params[:star_rating].to_i : 1 #Default to one star for new user signing up
 
