@@ -6,12 +6,17 @@ $(document).ready ->
   unpublishedContainerWidth = unpublishedContainer.width()
 
   if unpublishedContainer.length == 1
-    console.log unpublishedContainer
-    unpublishedContainer.imagesLoaded ->
-      unpublishedContainer.masonry
-        itemSelector: 'li'
-        columnWidth: (unpublishedContainerWidth ) ->
-         unpublishedContainerWidth / 4
+    if $(window).width() > 600
+      unpublishedContainer.imagesLoaded ->
+        unpublishedContainer.masonry
+          columnWidth: (unpublishedContainerWidth ) ->
+           unpublishedContainerWidth / 4
+    else
+      unpublishedContainer.imagesLoaded ->
+        unpublishedContainer.masonry
+          columnWidth: (unpublishedContainerWidth ) ->
+           unpublishedContainerWidth / 2
+      $(unpublishedContainer).find("li").css('width', '44%')
   else
     container.width($(window).width()-323)
     $(window).resize ->
@@ -44,6 +49,11 @@ $(document).ready ->
               newItems = items.slice(offset)
             else
               newItems = items.slice(-8)
+            if $(window).width() < 600
+              unpublishedContainer.masonry
+                columnWidth: (unpublishedContainerWidth ) ->
+                  unpublishedContainerWidth / 2
+              $(unpublishedContainer).find("li").css('width', '44%')
             container.masonry( 'appended', newItems );
 
         $.ajax
