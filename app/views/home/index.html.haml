@@ -1,26 +1,30 @@
-.container
-  .row#homepage-top
-    .span10.column-center.mobile-padding
-      %h1
-        Meet Great Companies in
-        %br
-        Creative & Tech
+%section.container-fluid#homepage-top
+  .row
+    .span12.mobile-padding.phl.ptl.pbxl.column-center
+      %h1.mbxl
+        Meet Great Companies in Creative & Tech
       %h5
         Not actively looking for work, but care to be privately notified of relavent job openings & events from inspiring companies? Let ’em know by joining their talent-communities.
-  .row#homepage-bottom
-    .span10.column-center
+      #homepage-top-tertiary-links
+        Don't see your favorite companies? 
+        =link_to "Tell us who you love", "https://docs.google.com/forms/d/168opPx2WH0TvstcC4SVQ9fxCQB5Xg-1iz_LT-tkyPhM/viewform", :target=>"_blank"
+        so we can fix that.
+
+%section.container-fluid#homepage-bottom
+  .row-fluid
+    .span12.pal
       - @companyrows.each do |companyrow|
         .row-fluid
           - companyrow.each do |company|
             = link_to(root_url(subdomain:company.subdomain), {:class=>'company-wrapper pam span6'}) do
-              .filmstrip
+              .filmstrip.mbs{:style=>"border-bottom-color:#{company.hex_code};"}
                 - company.latest_published_posts(3).each do |post|
                   .filmstrip-image{:class=>post.wrapper_class}
-                    = image_tag post.photo_url(:medium), :style=>post.offset(224)
+                    = image_tag post.photo_url(:medium), :style=>post.offset(140)
                 .clearfix
               .company-info
-                .pull-left.company-name
-                  %h3.mbn.mts= company.name
-                .pull-left.company-hq.mlm.mts= company.hq_city
+                .pull-right.company-last-updated-time= company.last_published_time
+                .pull-left.company-name.mbn.mts= company.name
+                .pull-left.company-hq.mll.mts= company.hq_city
                 .clearfix
                 .company-description= company.short_description

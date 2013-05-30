@@ -9,11 +9,20 @@
       top: 0 !important;
     }
   }
+  #homepage-bottom {
+    border-top: 1px @grayLight solid;
+  }
+  #homepage-top {
+    text-align: center;
+    background-color: white;
+  }
   .filmstrip-image {
     height: 0;
     padding-bottom: 32.3%;
     overflow: hidden;
     position: relative;
+    border-bottom: 3px solid;
+    border-bottom-color: inherit;
     margin: 0.5%;
     width: 32.3%;
     float: left;
@@ -31,17 +40,16 @@
   .company-wrapper {
     display: block;
     &:hover {
-      background-color: #cdcdcd;
+      background-color: #ddd;
       text-decoration: none;
     }
   }
   .company-name {
-    h3 {
-      line-height: 1;
-    }
+    font-size: 24.5px;
+
   }
-  .company-hq {
-    margin-top: 11px;
+  .company-hq, .company-last-updated-time {
+    margin-top: 9px;
     color: @grayLight;
   }
   .company-info {
