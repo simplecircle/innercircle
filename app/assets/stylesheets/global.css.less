@@ -11,20 +11,6 @@ form{
   outline-color: transparent;
   outline-style: none;
 }
-@yellow: #FFF8C2;
-
-.no-text-select {
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  -o-user-select: none;
-  user-select: none;
-}
-
-#signup, #users, #dashboard {
-  .no-text-select;
-}
-
 section {
   &.gray{
     background:@grayLighter;
@@ -44,6 +30,44 @@ section {
    }
   }
 }
+
+@yellow: #FFF8C2;
+
+#flash-alert{
+  color:red;
+  font-weight:bold;
+  padding:20px;
+}
+#flash-notice{
+  color:green;
+  font-weight:bold;
+  padding:20px;
+}
+#infinite{
+  height:200px;
+  .pagination{
+    display:none;
+    border-top:1px solid @grayLighter;
+    padding:80px 0 0 60%;
+   }
+ }
+#masonry{
+  margin:0;
+  position:relative;
+  li{
+    list-style:none;
+    img{
+      min-width:100%;
+    }
+  }
+}
+#signup, #users, #dashboard {
+  .no-text-select;
+}
+.column-center{
+  float:none !important;
+  margin:0 auto !important;
+}
 .checkbox-group{
   label{
     color:@grayLight;
@@ -55,30 +79,6 @@ section {
   margin: 50px 0 0 0;
   line-height: 1.5;
   text-align: center;
-}
-.column-center{
-  float:none !important;
-  margin:0 auto !important;
-}
-#flash-alert{
-  color:red;
-  font-weight:bold;
-  padding:20px;
-}
-#flash-notice{
-  color:green;
-  font-weight:bold;
-  padding:20px;
-}
-#masonry{
-  margin:0;
-  position:relative;
-  li{
-    list-style:none;
-    img{
-      min-width:100%;
-    }
-  }
 }
 .gray{
   color:@gray;
@@ -103,10 +103,13 @@ section {
 .field_with_errors input{
   border:2px solid red;
 }
-.tiny{
-  font-size:11px;
+.no-text-select {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  -o-user-select: none;
+  user-select: none;
 }
-
 .rating {
   overflow: hidden;
   display: inline-block;
@@ -135,6 +138,9 @@ section {
     position: absolute;
     left: 0;
     top: -50px;
+}
+.tiny{
+  font-size:11px;
 }
 
 /* borders */

@@ -12,6 +12,7 @@ $(document).ready ->
           columnWidth: (unpublishedContainerWidth ) ->
            unpublishedContainerWidth / 4
     else
+      # two columns for phones please
       unpublishedContainer.imagesLoaded ->
         unpublishedContainer.masonry
           columnWidth: (unpublishedContainerWidth ) ->
@@ -36,7 +37,7 @@ $(document).ready ->
 
       url = $('.pagination .next_page').attr('href')
       # The offset needs to be at least over 190px for it to work on the iphone!
-      if url && $(window).scrollTop() >= $(document).height() - $(window).height() - 300
+      if url && $(window).scrollTop() >= $(document).height() - $(window).height() - 200
         $('.pagination').html('<img src="http://06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com/loader.gif" width="16px" height="11px" />')
         $('.pagination').show()
         existingItems = $("#masonry li")
@@ -45,11 +46,13 @@ $(document).ready ->
           container.imagesLoaded ->
             items = $("#masonry li")
             offset = existingItems.length - items.length
+            console.log offset
             if offset  != -8
               newItems = items.slice(offset)
             else
               newItems = items.slice(-8)
             if $(window).width() < 600
+              # two columns for phones please
               unpublishedContainer.masonry
                 columnWidth: (unpublishedContainerWidth ) ->
                   unpublishedContainerWidth / 2
