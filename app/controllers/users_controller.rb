@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new :role=>'talent'
     @user.build_profile
-    @is_admin_adding = current_user && current_user.god_or_admin?
+    @is_admin_adding = request.fullpath == '/add-talent' && current_user && current_user.god_or_admin?
     @star_rating = 1 if !@is_admin_adding
     @depts = CompanyDept.all
   end
@@ -69,7 +69,7 @@ class UsersController < ApplicationController
     @user = @company.users.build(params[:user])
     @user.role = 'talent'
     form_errors = {}
-    @is_admin_adding = current_user && current_user.god_or_admin?
+    @is_admin_adding = params[:is_admin_adding] && current_user && current_user.god_or_admin?
     @depts = params[:company_depts]
     @star_rating = @is_admin_adding ? params[:star_rating].to_i : 1 #Default to one star for new user signing up
 
@@ -108,7 +108,7 @@ class UsersController < ApplicationController
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
         
         if @is_admin_adding
-          params[:commit] == "Save & Add Another" ? redirect_to(join_url, :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
+          params[:commit] == "Save & Add Another" ? redirect_to('/add-talent', :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
         else 
           redirect_to(edit_user_url(@user.auth_token))
         end
@@ -179,7 +179,7 @@ class UsersController < ApplicationController
   end
 
   def get_user
-    @is_new_user = !cookies[:auth_token]
+    @is_new_user = !cookies[:auth_token] || !User.find_by_auth_token(params[:id]).nil? #first case is if they're not logged in, second case is if they are logged in but editing a user based on auth token (which happens if they're at the /join link)
 
     if @is_new_user
       @auth_token = params[:id] || session[:callback_token] #callback_token will be populated if we're coming back from a linkedin callback

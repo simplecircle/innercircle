@@ -18,6 +18,7 @@
   .row-fluid
     .span4.column-center.mobile-padding
       = form_for @user do |f|
+        = hidden_field_tag :is_admin_adding, @is_admin_adding
         = hidden_field_tag :local_join, @local_join
         - if @is_admin_adding
           = f.fields_for :profile do |p|
@@ -34,7 +35,7 @@
             = f.password_field :password, class:"span12", placeholder:"* Password"
         .controls.mtm.mbl
           .inline_error= @user.errors[:categories].first
-          .help-block
+          .help-block.mbs
             %b= @is_admin_adding ? "* Categories" : "* Which category fits you best?"
           %p.checkbox-group
             - CompanyDept.all.each do |dept|
@@ -55,11 +56,12 @@
             .controls
               = p.text_field :url, class:"span12", placeholder:"Site, blog or Linkedin profile"
               .inline_error= @user.profile.errors[:url].first
-            .controls.skills-control-block
+            .controls.skills-control-block.mts
               :javascript
                 $(document).ready(function() {
                     $("#skills").autoSuggest($.parseJSON('#{@tags}'), {preFill:"#{@incoming_tags}", startText:"Skills & tools", asHtmlID: true, minChars:2, neverSubmit: true, emptyText: "Separate tags with a comma or tab", keyDelay:"50", selectedItemProp: "name", searchObjProps: "name", selectedValuesProp: "name"});
                  });
+              %b Skills & Tools
               = text_field_tag nil, nil, {id:"skills", class:"span12"}
               %span.help-block.small List a few (e.g., Excel, baking, Ruby, Agile, responsive design)
           %p
@@ -68,7 +70,7 @@
             = f.submit "Save & Add Another", class:"btn btn-large mtl span6"
 
         - else
-          = f.submit("Join now", class:"btn btn-large btn-primary btn-block mtxl mbm span12")
+          = f.submit("Join now", class:"btn btn-large btn-primary btn-block mvm span12")
           .tiny.text-center.mbxl
             Your membership is private. It’s just between you and #{capitalize_phrase(@company.name)}.
           .pbm
