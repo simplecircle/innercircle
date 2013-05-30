@@ -1,4 +1,4 @@
-$('#masonry-published').append('<%= j render("posts/published", posts:@posts) %>');
+$('#masonry').append('<%= j render("posts/published", posts:@posts) %>');
 <% if @posts.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate(@posts) %>');
 <% else %>

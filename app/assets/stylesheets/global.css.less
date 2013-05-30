@@ -70,6 +70,26 @@ section {
   font-weight:bold;
   padding:20px;
 }
+#masonry{
+  margin:0;
+  position:relative;
+  li{
+    list-style:none;
+    margin-bottom:9px;
+    width:49%;
+    img{
+      min-width:100%;
+      border:1px solid @grayLighter;
+      .border-radius(4px);
+    }
+  }
+}
+.masonry-published{
+  left:310px;
+}
+.masonry-unpublished{
+  /*left:0;*/
+}
 .gray{
   color:@gray;
 }
