@@ -1,4 +1,5 @@
 #sidebar
+  #infinite= will_paginate @posts
 #company-info.pull-left
   %h2= capitalize_phrase(@company.name)
   %h5= @company.short_description
@@ -9,6 +10,6 @@
     %br
     = link_to("Join talent-community", join_url(subdomain: @company.subdomain), class:"btn btn-large btn-warning")
 
-%ul#masonry.constrained.inline
+
+#masonry-published
   = render("posts/published", posts:@posts)
-#infinite= will_paginate @posts

@@ -1,8 +1,13 @@
 $(document).ready ->
 
-  $("#masonry.constrained").width($(window).width()-340)
+  container = $("#masonry-published")
+  container.width($(window).width()-340)
   $(window).resize ->
-    $("#masonry.constrained").width($(window).width()-340)
+    container.width($(window).width()-340)
+
+  container.imagesLoaded ->
+    container.masonry
+      itemSelector: ".span6"
 
   # Infinte scroll
   if $('#infinite .pagination').length
@@ -13,39 +18,25 @@ $(document).ready ->
         $("#company-info").css({ position: 'relative'})
 
       url = $('.pagination .next_page').attr('href')
-      # The offset needs to be at least over 190px for it to work on the iphone!
-      if url && $(window).scrollTop() >= $(document).height() - $(window).height() - 700
+      # # The offset needs to be at least over 190px for it to work on the iphone!
+      if url && $(window).scrollTop() >= $(document).height() - $(window).height() - 300
+        console.log "in scroll zone"
         $('.pagination').html('<img src="http://06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com/loader.gif" width="16px" height="11px" />')
         $('.pagination').show()
+        existingItems = $("#masonry-published .span6")
 
         success = ->
-          handler = null
-          if url.indexOf("posts") == 1
-            options =
-              itemWidth: 250 # Optional min width of a grid item
-              autoResize: true # This will auto-update the layout when the browser window is resized.
-              resizeDelay: 50
-              container: $("#masonry") # Optional, used for some extra CSS styling
-              offset: 13 # Optional, the distance between grid items
-              flexibleWidth: 300 # Optional, the maximum width of a grid item
-          else
-            options =
-              itemWidth: 450
-              autoResize: true
-              resizeDelay: 50
-              container: $("#masonry")
-              offset: 13
-              flexibleWidth: 550
-
-          handler = $("#masonry li")
-          newItems = handler.slice(-8)
-          handler.wookmark options
+          container.imagesLoaded ->
+            items = $("#masonry-published .span6")
+            offset = existingItems.length - items.length
+            if offset  != -8
+              newItems = items.slice(offset)
+            else
+              newItems = items.slice(-8)
+            container.masonry( 'appended', newItems );
 
         $.ajax
           url: url
           dataType: "script"
           success: success
           async: true
-  $(window).scroll()
-
-  # $('#masonry').trigger('refreshWookmark');

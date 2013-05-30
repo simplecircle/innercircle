@@ -1,8 +1,13 @@
 @import "twitter/bootstrap/variables";
 @import "twitter/bootstrap/mixins.less";
 @import "variables.css.less";
-
-#companies{
+/* #infinite{
+    position:fixed;
+    background:red;
+    top:40;
+    position:4;
+  }
+*/#companies{
   background:white;
   padding-top:0;
   .company-form-accent-color {
@@ -22,6 +27,7 @@
     width:250px;
     z-index: 2;
   }
+ 
   #sidebar{
     z-index: 1;
     background:#F2F2F2;
@@ -30,12 +36,20 @@
     top: 0px;
     width:290px;
   }
-  #masonry{
+  #masonry-published{
+   position: relative;
+    background:yellow;
+    left:310px;
+    > .span6{
+      margin-bottom:10px;
+    }
+
+  }
+/*  #masonry{
     position: relative;
     background:white;
     left:310px;
-    width:30%;
-    > li{
+    > .span3{
       padding:0;
       border:1px solid #D6D6D6;
       &.photo-wrapper{
@@ -69,7 +83,7 @@
       }
     }
   }
-}
+*/}
 #signup {
 
   background-color: @tableBackgroundHover;

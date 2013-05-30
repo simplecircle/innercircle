@@ -26,7 +26,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   def large
     manipulate! do |img|
       img.auto_orient!
-      img.change_geometry!('612x612^') { |cols, rows, img| img.resize!(cols, rows)}
+      img.change_geometry!('550') { |cols, rows, img| img.resize!(cols, rows)}
       # Persist width and height of the "large" image and not the orig version.
       model.width = img.columns
       model.height = img.rows
