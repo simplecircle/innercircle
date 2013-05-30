@@ -16,7 +16,7 @@
               .filmstrip
                 - company.latest_published_posts(3).each do |post|
                   .filmstrip-image{:class=>post.wrapper_class}
-                    = image_tag post.media_url_small, :style=>post.offset(224)
+                    = image_tag post.photo_url(:medium), :style=>post.offset(224)
                 .clearfix
               .company-info
                 .pull-left.company-name
