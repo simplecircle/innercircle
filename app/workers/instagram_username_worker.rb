@@ -19,12 +19,12 @@ class InstagramUsernameWorker
   def get_media(uid, next_max_id=nil)
     # IG's access_token doesn't have an expiration date.
     HTTParty.get("https://api.instagram.com/v1/users/#{uid}/media/recent",
-      :query=>{access_token:"20779015.1fb234f.30609b83744b49118a56939d1e492ffe", max_id:next_max_id, count:@count})
+      :query=>{access_token:Settings.tokens.instagram, max_id:next_max_id, count:@count})
   end
 
   def get_uid(username)
     HTTParty.get("https://api.instagram.com/v1/users/search?q=#{username}",
-        :query=>{access_token:"20779015.1fb234f.30609b83744b49118a56939d1e492ffe"})["data"].first["id"]
+        :query=>{access_token:Settings.tokens.instagram})["data"].first["id"]
   end
 
   def import(company, next_max_id=nil)

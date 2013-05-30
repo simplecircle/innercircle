@@ -17,8 +17,8 @@ class FacebookWorker
   end
 
   def get_token(company_id)
-    app_id ="536278593078079"
-    app_secret = "adf706e8ec8c2b5ce63c41814e908d34"
+    app_id = Settings.tokens.facebook_app_id
+    app_secret = Settings.tokens.facebook_app_secret
     token_url = "https://graph.facebook.com/oauth/access_token?client_id=#{app_id}&client_secret=#{app_secret}&grant_type=client_credentials"
     uri = URI.parse(token_url)
     http = Net::HTTP.new(uri.host, uri.port)
