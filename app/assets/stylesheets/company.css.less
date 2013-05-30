@@ -1,13 +1,7 @@
 @import "twitter/bootstrap/variables";
 @import "twitter/bootstrap/mixins.less";
 @import "variables.css.less";
-/* #infinite{
-    position:fixed;
-    background:red;
-    top:40;
-    position:4;
-  }
-*/#companies{
+#companies{
   background:white;
   padding-top:0;
   .company-form-accent-color {
@@ -18,8 +12,6 @@
   .navbar{
     z-index: 3;
     position:relative;
-    .navbar-inner{
-    }
   }
   #company-info{
     padding:0px 0 0 20px;
@@ -27,7 +19,14 @@
     width:250px;
     z-index: 2;
   }
- 
+  #infinite{
+    height:12px;
+    .pagination{
+      border-top:1px solid @grayLighter;
+      padding:40px 0 0 60%;
+      height:100px;
+     }
+   }
   #sidebar{
     z-index: 1;
     background:#F2F2F2;
@@ -37,13 +36,19 @@
     width:290px;
   }
   #masonry-published{
-   position: relative;
-    background:yellow;
     left:310px;
-    > .span6{
-      margin-bottom:10px;
+    margin:0;
+    position:relative;
+    li{
+      list-style:none;
+      margin-bottom:9px;
+      width:49%;
+      img{
+        min-width:100%;
+        border:1px solid @grayLighter;
+       .border-radius(4px);
+      }
     }
-
   }
 /*  #masonry{
     position: relative;
