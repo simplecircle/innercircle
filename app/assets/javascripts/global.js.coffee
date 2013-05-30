@@ -1,14 +1,25 @@
 $(document).ready ->
   container = $("#masonry")
-  containerWidth  = container.width()
-  container.width($(window).width()-323)
-  $(window).resize ->
-    container.width($(window).width()-323)
+  unpublishedContainer = $("#masonry.masonry-unpublished")
 
-  container.imagesLoaded ->
-    container.masonry
-      columnWidth: (containerWidth ) ->
-       containerWidth / 2
+  containerWidth = container.width()
+  unpublishedContainerWidth = unpublishedContainer.width()
+
+  if unpublishedContainer.length == 1
+    console.log unpublishedContainer
+    unpublishedContainer.imagesLoaded ->
+      unpublishedContainer.masonry
+        itemSelector: 'li'
+        columnWidth: (unpublishedContainerWidth ) ->
+         unpublishedContainerWidth / 4
+  else
+    container.width($(window).width()-323)
+    $(window).resize ->
+      container.width($(window).width()-323)
+    container.imagesLoaded ->
+      container.masonry
+        columnWidth: (containerWidth ) ->
+         containerWidth / 2
 
   # Infinite scroll
   if $('#infinite .pagination').length

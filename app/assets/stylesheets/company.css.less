@@ -4,15 +4,6 @@
 #companies{
   background:white;
   padding-top:0;
-  .company-form-accent-color {
-    height: 30px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  .navbar{
-    z-index: 3;
-    position:relative;
-  }
   #company-info{
     padding:0px 0 0 20px;
     position:relative;
@@ -35,31 +26,52 @@
     top: 0px;
     width:290px;
   }
-}
-.photo-overlay-text {
-  position: absolute;
-  transition: opacity 0.7s ease-in ;
-  opacity: 0;
-  color: white;
-  top: 50%;
-  text-align: center;
-  width: 100%;
-}
-.photo-overlay {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top:0;
-  left:0;
-  transition: background-color 0.4s ease-in;
-  &:hover{
-    .photo-overlay-text { opacity: 1; }
-    background-color: rgba(0,0,0,0.5);
+  .company-form-accent-color {
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .masonry-published{
+    left:310px;
+    li{
+      margin-bottom:9px;
+      width:49%;
+      img{
+        min-width:100%;
+        border:1px solid @grayLighter;
+        .border-radius(4px);
+      }
+    }
+  }
+  .navbar{
+    z-index: 3;
+    position:relative;
+  }
+  .photo-overlay-text {
+    position: absolute;
+    transition: opacity 0.7s ease-in ;
+    opacity: 0;
+    color: white;
+    top: 50%;
+    text-align: center;
+    width: 100%;
+  }
+  .photo-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left:0;
+    transition: background-color 0.4s ease-in;
+    &:hover{
+      .photo-overlay-text { opacity: 1; }
+      background-color: rgba(0,0,0,0.5);
+    }
   }
 }
 
-#signup {
 
+#signup {
   background-color: @tableBackgroundHover;
   h1 {
     margin-top: 20px;

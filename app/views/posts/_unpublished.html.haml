@@ -6,7 +6,7 @@
     = link_to(post_url(post.id, subdomain: post.company.subdomain), method:"#{post.published ? 'delete':'put'}", remote:true) do
       .photo
         .photo-overlay
-        .photo-overlay-text= post.published ? "✓" : "publish"
+        .photo-overlay-text= post.published ? "✓" : "Publish"
         = image_tag post.media_url_small
     .info.text-center
       = "#{post.provider_publication_date.strftime("%b %d") if post.provider_publication_date} - "
