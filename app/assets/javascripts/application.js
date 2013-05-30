@@ -16,5 +16,6 @@
 //= require twitter/bootstrap/bootstrap-dropdown
 //= require twitter/bootstrap/bootstrap-tooltip
 //= require twitter/bootstrap/bootstrap-button
+//= require twitter/bootstrap/bootstrap-collapse
 //= require placeholder.min
 //= require_tree .
