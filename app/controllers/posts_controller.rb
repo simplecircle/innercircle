@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.remote_photo_url = @post.media_url
     if @post.provider == "facebook"
-      @access_token = "CAABnZC9SmhE4BACO4oLv15wZCWyhmhNUcBJek9ypNGpKWJGR6oEs2v1P8vibAP0qmsO96mkIaD0EjlxZCEvLTURZAnW6P9ZBMMuZBcTua5k0lKZA0RZAO805GzR6NBCun4ExQDENWM1ySDFTMgVmRpTo3mBEIZBLBZCh1wZCQp4iELYyQDyVx1S43ZC1"
+      @access_token = Settings.tokens.facebook
       fql = URI::encode("select like_info from photo where object_id=")
       fql_response = HTTParty.get("https://graph.facebook.com/fql?q=#{fql}#{@post.provider_uid}", :query=>{access_token:@access_token})
       @post.like_count = fql_response["data"].first["like_info"]["like_count"].to_i

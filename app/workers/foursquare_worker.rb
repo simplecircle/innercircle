@@ -19,7 +19,7 @@ class FoursquareWorker
   def get_media(foursquare_v2_id, offset, limit)
     # Foursquare access token are not SUPPOSED to expire.
     HTTParty.get("https://api.foursquare.com/v2/venues/#{foursquare_v2_id}/photos",
-      :query=>{oauth_token:"NDY4W2WJO2SW5PVDFYP4NEAOEM5LWKVTAEDYSAQPRHMO0XAV", offset:offset, limit:limit})
+      :query=>{oauth_token:Settings.tokens.foursquare, offset:offset, limit:limit})
 
   end
 

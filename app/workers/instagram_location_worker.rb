@@ -18,7 +18,7 @@ class InstagramLocationWorker
   def get_media(location_id, next_max_id=nil)
     # IG's access_token doesn't have an expiration date.
     HTTParty.get("https://api.instagram.com/v1/locations/#{location_id}/media/recent",
-      :query=>{access_token:"20779015.1fb234f.30609b83744b49118a56939d1e492ffe", max_id:next_max_id, count:@count})
+      :query=>{access_token:Settings.tokens.instagram, max_id:next_max_id, count:@count})
   end
 
   def import(company, next_max_id=nil)

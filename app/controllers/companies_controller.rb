@@ -84,7 +84,7 @@ class CompaniesController < ApplicationController
 
   def get_instagram_id(foursquare_v2_id)
     data = HTTParty.get("https://api.instagram.com/v1/locations/search?foursquare_v2_id=#{foursquare_v2_id}",
-    :query=>{access_token:"20779015.1fb234f.30609b83744b49118a56939d1e492ffe"})
+    :query=>{access_token:Settings.tokens.instagram})
     data["data"].empty? ? foursquare_v2_id : data["data"][0]["id"]
   end
 
