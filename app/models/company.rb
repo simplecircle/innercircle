@@ -1,11 +1,12 @@
 class Company < ActiveRecord::Base
-  attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code
+  attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at
 
   has_many :users_companies
   has_many :posts
   has_many :users, through: :users_companies
   has_many :companies_verticals
   has_many :verticals, through: :companies_verticals
+  before_create :set_last_reviewed_posts_at
   accepts_nested_attributes_for :users, :users_companies
   after_validation :add_url_protocol
   mount_uploader :logo, LogoUploader
@@ -30,7 +31,15 @@ class Company < ActiveRecord::Base
     posts.where(:published=>true).order("updated_at DESC").select([:media_url_small, :company_id, :id, :provider_publication_date, :provider_strategy, :provider, :height, :width]).limit(count)
   end
 
+  def posts_to_review_count
+    posts.where('posts.created_at > ?', last_reviewed_posts_at).count
+  end
+
   private
+
+  def set_last_reviewed_posts_at
+    self.last_reviewed_posts_at = Time.now
+  end
 
   def validate_hex_code
     return if hex_code.blank?

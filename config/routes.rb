@@ -11,6 +11,7 @@ Innercircle::Application.routes.draw do
   constraints(Subdomain) do
     match '/' => 'companies#show'
     match 'join' => 'users#new'
+    match 'add-talent' => 'users#new'
     match 'local_join' => 'users#new'
     get "new_from_provider" => "posts#new_from_provider"
     resources :posts, only:[:index, :update, :destroy]
