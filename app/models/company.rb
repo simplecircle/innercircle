@@ -1,5 +1,5 @@
 class Company < ActiveRecord::Base
-  attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at
+  attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at, :last_published_posts_at
 
   has_many :users_companies
   has_many :posts
@@ -27,6 +27,25 @@ class Company < ActiveRecord::Base
     users.where(:role=>"admin")
   end
 
+  def last_published_time
+    return "" if last_published_posts_at.nil?
+
+    minutes = ((Time.now - last_published_posts_at) / 60).to_i
+    if minutes == 0
+      return "just now"
+    elsif minutes < 60
+      return "#{minutes}min"
+    elsif minutes < 1440
+      hours = (minutes/60)
+      return "#{hours}hr#{'s' unless hours==1}"
+    elsif minutes < 1440 * 6
+      days = (minutes / 1440)
+      return "#{days}day#{'s' unless days==1}"
+    else
+      return last_published_posts_at.strftime("%b %e")
+    end
+  end
+
   def latest_published_posts(count=3)
     posts.where(:published=>true).order("updated_at DESC").select([:company_id, :id, :provider_publication_date, :provider_strategy, :provider, :height, :width, :photo]).limit(count)
   end
@@ -35,11 +54,15 @@ class Company < ActiveRecord::Base
     posts.where('posts.created_at > ?', last_reviewed_posts_at).count
   end
 
-  private
+  def set_last_published_posts_at
+    self.update_attribute(:last_published_posts_at, Time.now)
+  end
 
   def set_last_reviewed_posts_at
     self.last_reviewed_posts_at = Time.now
   end
+
+  private
 
   def validate_hex_code
     return if hex_code.blank?
