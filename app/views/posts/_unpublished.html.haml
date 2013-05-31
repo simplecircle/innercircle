@@ -20,4 +20,5 @@
         .tumblr_logo_gray.pull-left
       - when "foursquare"
         .foursquare_logo_gray.pull-left
-      .date= post.provider_publication_date.strftime("%b %d")
+
+      .date= render('shared/pretty_publication_date', post:post)

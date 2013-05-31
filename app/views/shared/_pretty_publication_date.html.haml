@@ -1,0 +1,12 @@
+- elapsed_time = Time.now.to_i - post.provider_publication_date.to_i
+- if elapsed_time < 60
+  Just now
+- elsif elapsed_time >= 60 and elapsed_time < 3600
+  = "#{pluralize(elapsed_time/60, 'minute')} ago"
+- elsif elapsed_time >= 3600 and elapsed_time < 86400
+  = "#{pluralize(elapsed_time/3600, 'hour')} ago"
+- elsif elapsed_time >= 86400 and elapsed_time < 604800
+  = "#{pluralize(elapsed_time/86400, 'day')} ago"
+- else elapsed_time >= 604800
+  = post.provider_publication_date.strftime("%b #{post.provider_publication_date.day.ordinalize}")
+  = post.provider_publication_date.strftime("%Y") if post.provider_publication_date.year != Time.now.year

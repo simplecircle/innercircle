@@ -4,14 +4,14 @@
       .post-info-bar
         - case post.provider
         - when "facebook"
-          .facebook_logo.pull-left
+          .facebook_logo_gray.pull-left
         - when "instagram"
-          .instagram_logo.pull-left
+          .instagram_logo_gray.pull-left
         - when "tumblr"
-          .tumblr_logo.pull-left
+          .tumblr_logo_gray.pull-left
         - when "foursquare"
-          .foursquare_logo.pull-left
-        .date= "#{post.provider_publication_date.strftime("%b %d") if post.provider_publication_date}"
+          .foursquare_logo_gray.pull-left
+        .date= render('shared/pretty_publication_date', post:post)
       -if !post.caption.blank?
         .photo-overlay
           %h4.photo-overlay-text= post.caption
