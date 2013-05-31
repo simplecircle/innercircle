@@ -107,7 +107,10 @@ class CompaniesController < ApplicationController
   end
 
   def choose_layout
-    if ['new', 'create'].include?(action_name) && !(current_user && current_user.god_or_admin?)
+    referrer = request.env["HTTP_REFERER"]
+    if action_name == "show" && (referrer.nil? || referrer.match(/(innercircle\.)|(\.circ\.)/i).nil?) #Test if coming from non-innercircle host or directly typing in
+      'onboarding'
+    elsif ['new', 'create'].include?(action_name) && !(current_user && current_user.god_or_admin?)
       'onboarding'
     else
       'application'
