@@ -1,5 +1,5 @@
 class Company < ActiveRecord::Base
-  attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at, :last_published_posts_at
+  attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at, :last_published_posts_at, :instagram_location_id
 
   has_many :users_companies
   has_many :posts
@@ -9,6 +9,7 @@ class Company < ActiveRecord::Base
   before_create :set_last_reviewed_posts_at
   accepts_nested_attributes_for :users, :users_companies
   after_validation :add_url_protocol
+  after_save :load_new_provider_content
   mount_uploader :logo, LogoUploader
   
   before_validation :add_hash_symbol_to_hex_code
@@ -25,6 +26,18 @@ class Company < ActiveRecord::Base
 
   def admins
     users.where(:role=>"admin")
+  end
+
+  def self.provider_fields
+    ["foursquare_v2_id", "facebook", "tumblr", "instagram_location_id", "instagram_username"]
+  end
+
+  def load_new_provider_content
+    changed_providers = []
+    self.changes.each do |field, change|
+      changed_providers << field if !change[1].blank? && Company.provider_fields.include?(field)
+    end
+    Post.new_from_provider(self, changed_providers) unless changed_providers.length == 0
   end
 
   def last_published_time

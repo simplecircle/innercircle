@@ -5,11 +5,7 @@ class PostsController < ApplicationController
 
   def new_from_provider
     company = Company.find_by_subdomain!(request.subdomain)
-    InstagramUsernameWorker.perform_async(company.id, first_run=true) if company.instagram_username
-    InstagramLocationWorker.perform_async(company.id, first_run=true) if company.instagram_location_id
-    FoursquareWorker.perform_async(company.id, first_run=true) if company.foursquare_v2_id
-    FacebookWorker.perform_async(company.id, first_run=true) if company.facebook
-    TumblrWorker.perform_async(company.id, first_run=true) if company.tumblr
+    Post.new_from_provider(company)
     redirect_to posts_url(subdomain: company.subdomain)
   end
 
