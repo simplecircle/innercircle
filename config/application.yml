@@ -1,12 +1,12 @@
 # config/application.yml
 defaults: &defaults
   tokens:
-    instagram: 20779015.1fb234f.30609b83744b49118a56939d1e492ffe
-    foursquare: NDY4W2WJO2SW5PVDFYP4NEAOEM5LWKVTAEDYSAQPRHMO0XAV
-    facebook: CAABnZC9SmhE4BACO4oLv15wZCWyhmhNUcBJek9ypNGpKWJGR6oEs2v1P8vibAP0qmsO96mkIaD0EjlxZCEvLTURZAnW6P9ZBMMuZBcTua5k0lKZA0RZAO805GzR6NBCun4ExQDENWM1ySDFTMgVmRpTo3mBEIZBLBZCh1wZCQp4iELYyQDyVx1S43ZC1
-    facebook_app_id: 536278593078079
-    facebook_app_secret: adf706e8ec8c2b5ce63c41814e908d34
-    tumblr: nqaygyxixa39qotmdmmdbb4gd08tfzlzs3mqgrppwzovl5msmf
+    instagram: "20779015.1fb234f.30609b83744b49118a56939d1e492ffe"
+    foursquare: "NDY4W2WJO2SW5PVDFYP4NEAOEM5LWKVTAEDYSAQPRHMO0XAV"
+    facebook: "CAABnZC9SmhE4BACO4oLv15wZCWyhmhNUcBJek9ypNGpKWJGR6oEs2v1P8vibAP0qmsO96mkIaD0EjlxZCEvLTURZAnW6P9ZBMMuZBcTua5k0lKZA0RZAO805GzR6NBCun4ExQDENWM1ySDFTMgVmRpTo3mBEIZBLBZCh1wZCQp4iELYyQDyVx1S43ZC1"
+    facebook_app_id: "536278593078079"
+    facebook_app_secret: "adf706e8ec8c2b5ce63c41814e908d34"
+    tumblr: "nqaygyxixa39qotmdmmdbb4gd08tfzlzs3mqgrppwzovl5msmf" 
 
 development:
   <<: *defaults

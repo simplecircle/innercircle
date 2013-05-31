@@ -1,6 +1,6 @@
 - posts.each do |post|
   %li{id:post.id, class:"photo-wrapper#{post.published ? ' published' : ' unpublished'}"}
-    - if post.created_at > @last_reviewed_time
+    - if !post.published && post.created_at > @last_reviewed_time
       .new-post-ribbon-wrapper
         .new-post-ribbon NEW
     = link_to(post_url(post.id, subdomain: post.company.subdomain), method:"#{post.published ? 'delete':'put'}", remote:true) do

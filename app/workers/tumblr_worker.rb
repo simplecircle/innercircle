@@ -42,6 +42,7 @@ class TumblrWorker
           new_post.like_count = post["note_count"]
           new_post.caption = post["caption"]
           new_post.published = @first_run ? false : company.tumblr_auto_publish
+          new_post.remote_photo_url = @first_run || !company.tumblr_auto_publish ? nil : post["photos"][0]["alt_sizes"][0]["url"]
           new_post.save
           logger.info "#{company.subdomain} -- #{new_post.id} created"
         end

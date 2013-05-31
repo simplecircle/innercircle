@@ -47,6 +47,7 @@ class FacebookWorker
         logger.info "#{company.subdomain} -- existing post?"
         unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
           # Occasional fb images won't have the smaller thumb I want. In that case skip em'!
+
           if post["images"][5]
             post = company.posts.create({
               provider:PROVIDER,
@@ -57,7 +58,8 @@ class FacebookWorker
               media_url_small:post["images"][5]["source"],
               like_count:0, #This gets updated when a user publishes an actual photo
               caption:post["name"],
-              published:@first_run ? false : company.facebook_auto_publish
+              published: @first_run ? false : company.facebook_auto_publish,
+              remote_photo_url: @first_run || !company.facebook_auto_publish ? nil : post["images"].first["source"]
              })
             logger.info "#{company.subdomain} -- #{post.id} created"
           end

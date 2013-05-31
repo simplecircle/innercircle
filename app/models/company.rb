@@ -51,7 +51,7 @@ class Company < ActiveRecord::Base
   end
 
   def posts_to_review_count
-    posts.where('posts.created_at > ?', last_reviewed_posts_at).count
+    posts.where(:published=>false).where('posts.created_at > ?', last_reviewed_posts_at).count
   end
 
   def set_last_published_posts_at
