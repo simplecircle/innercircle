@@ -34,6 +34,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def referrer
+    referrer = request.env["HTTP_REFERER"]
+    (referrer.nil? || referrer.match(/(innercircle\.)|(\.circ\.)/i).nil?) ? "external" : "internal"
+  end
+
   def sort_by_star_rating(array, company_id)
     array.sort {|a, b| b.star_rating(company_id) <=> a.star_rating(company_id)}
   end
