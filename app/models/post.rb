@@ -5,6 +5,14 @@ class Post < ActiveRecord::Base
   belongs_to :company
   mount_uploader :photo, PhotoUploader
 
+  def self.new_from_provider(company, providers=["foursquare_v2_id", "facebook", "tumblr", "instagram_location_id", "instagram_username"])
+    InstagramUsernameWorker.perform_async(company.id, first_run=true) if company.instagram_username && providers.include?('instagram_username')
+    InstagramLocationWorker.perform_async(company.id, first_run=true) if company.instagram_location_id && providers.include?('instagram_location_id')
+    FoursquareWorker.perform_async(company.id, first_run=true) if company.foursquare_v2_id && providers.include?('foursquare_v2_id')
+    FacebookWorker.perform_async(company.id, first_run=true) if company.facebook && providers.include?('facebook')
+    TumblrWorker.perform_async(company.id, first_run=true) if company.tumblr && providers.include?('tumblr')
+  end
+
   def landscape?
     height < width
   end

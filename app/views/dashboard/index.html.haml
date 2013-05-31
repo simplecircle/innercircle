@@ -121,7 +121,7 @@
                   %li.bb-1.ptl
                     Instagram:
                     =link_to(@company.instagram_username, "http://instagram.com/#{@company.instagram_username}", target:"_blank")
-                - unless @company.instagram_uid.blank?
+                - unless @company.instagram_location_id.blank?
                   %li.bb-1.ptl
                     Instagram location:
                     %span.gray-light active

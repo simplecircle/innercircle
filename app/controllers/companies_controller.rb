@@ -30,7 +30,7 @@ class CompaniesController < ApplicationController
       @profile = @user.profile
     end
 
-    @company.instagram_uid = get_instagram_id(@company.instagram_uid) if @company.instagram_uid.length > 12
+    @company.instagram_location_id = get_instagram_location_id(@company.instagram_location_id) if @company.instagram_location_id.length > 12
 
     if @company.save
       save_verticals(@verticals, @company) if @verticals
@@ -68,9 +68,8 @@ class CompaniesController < ApplicationController
     @company.assign_attributes params[:company]
     @verticals = params[:verticals] || []
     @verticals = @verticals.map{|x| x.to_i }
-    instagram_uid = params[:company][:instagram_uid]
 
-    @company.instagram_uid = get_instagram_id(@company.instagram_uid) if @company.instagram_uid.length > 12
+    @company.instagram_location_id = get_instagram_location_id(@company.instagram_location_id) if @company.instagram_location_id.length > 12
 
     if @company.save
       save_verticals(@verticals, @company)
@@ -83,7 +82,7 @@ class CompaniesController < ApplicationController
   end
 
 
-  def get_instagram_id(foursquare_v2_id)
+  def get_instagram_location_id(foursquare_v2_id)
     data = HTTParty.get("https://api.instagram.com/v1/locations/search?foursquare_v2_id=#{foursquare_v2_id}",
     :query=>{access_token:Settings.tokens.instagram})
     data["data"].empty? ? foursquare_v2_id : data["data"][0]["id"]
