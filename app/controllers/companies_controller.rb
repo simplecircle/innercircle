@@ -44,6 +44,7 @@ class CompaniesController < ApplicationController
   def show
     @posts = @company.posts.where(published:true).order("provider_publication_date DESC").paginate(:page => params[:page], per_page:8)
     @is_not_fixed = true
+    @referrer = referrer
     respond_to do |format|
       format.html {render("show")}
       format.js {render("posts/published.js.erb")}
@@ -107,7 +108,9 @@ class CompaniesController < ApplicationController
   end
 
   def choose_layout
-    if ['new', 'create'].include?(action_name) && !(current_user && current_user.god_or_admin?)
+    if action_name == "show" && referrer == "external" #Test if coming from non-innercircle host or directly typing in url
+      'onboarding'
+    elsif ['new', 'create'].include?(action_name) && !(current_user && current_user.god_or_admin?)
       'onboarding'
     else
       'application'

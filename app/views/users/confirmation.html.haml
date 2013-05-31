@@ -1,10 +1,8 @@
 .container-fluid
   .row-fluid
-    .span12.text-center
+    .span8.text-center.column-center.mobile-padding
       %h1 Thanks, you’re all set!
       %h4.mbxl We'll be in touch with relevant updates & opportunities.
       %p.mtxl
-        Inner Circle is making it easier to connect with the companies you love.
-        %br
-        Questions? 
-        = mail_to("getinnercircle@gmail.com")
+        Not actively looking for work, but want to discover more great companies?
+      =link_to "Check out other inspiring companies", root_url(subdomain:false), :class=>"btn btn-large"
