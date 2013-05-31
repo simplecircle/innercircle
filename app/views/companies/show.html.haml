@@ -1,13 +1,14 @@
 #sidebar
 #company-info.pull-left
-  %h2= capitalize_phrase(@company.name)
-  %h5= @company.short_description
-  %p= "#{@company.hq_city}, #{@company.hq_state}"
+  #logo= image_tag(@company.logo_url(:large))
+  %p= @company.short_description
+  %p
+    = "#{@company.hq_city}, #{@company.hq_state} - #{@company.employee_count.gsub(/_/, "-")} employees"
   .well.mbs
-    Not actively looking for work?
-    Join Kickstarter’s talent-community to be notified of future job openings that match your skills. Looking now?  View their current openings.
-    %br
-    = link_to("Join talent-community", join_url(subdomain: @company.subdomain), class:"btn btn-large btn-warning", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+    %p
+      Join Kickstarter’s talent-community to be notified of future job openings that match your skills. Looking now?  View their current openings.
+      %br
+      = link_to("Join talent-community", join_url(subdomain: @company.subdomain), class:"btn btn-large btn-warning", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
   - if @referrer == "external"
     .powered-by
       Powered by 

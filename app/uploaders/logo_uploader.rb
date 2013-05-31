@@ -26,10 +26,7 @@ class LogoUploader < CarrierWave::Uploader::Base
   def large
     manipulate! do |img|
       img.auto_orient!
-      img.change_geometry!('600x600^') { |cols, rows, img| img.resize!(cols, rows)}
-      # Persist width and height of the "large" image and not the orig version.
-      # model.width = img.columns
-      # model.height = img.rows
+      img.change_geometry!('500') { |cols, rows, img| img.resize!(cols, rows)}
       img
     end
   end
@@ -37,12 +34,12 @@ class LogoUploader < CarrierWave::Uploader::Base
   def medium
     manipulate! do |img|
       img.auto_orient!
-      img.change_geometry!('300x300^') { |cols, rows, img| img.resize!(cols, rows)}
+      img.change_geometry!('250') { |cols, rows, img| img.resize!(cols, rows)}
     end
   end
 
    def extension_white_list
-     %w(jpg jpeg)
+     %w(jpg jpeg png)
    end
 
   # Choose what kind of storage to use for this uploader:
