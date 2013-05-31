@@ -1,9 +1,15 @@
 - posts.each do |post|
   %li{id:post.id}
     .photo
+      .post-info-bar
+        - case post.provider
+        - when "facebook"
+          .facebook_logo.pull-left
+        - when "instagram"
+          .instagram_logo.pull-left
+        .date= "#{post.provider_publication_date.strftime("%b %d") if post.provider_publication_date}"
       -if !post.caption.blank?
         .photo-overlay
           %h4.photo-overlay-text= post.caption
       = image_tag post.photo_url(:large)
-    /= "#{post.provider_publication_date.strftime("%b %d") if post.provider_publication_date} - "
 
