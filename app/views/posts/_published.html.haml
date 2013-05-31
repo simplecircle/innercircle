@@ -7,6 +7,10 @@
           .facebook_logo.pull-left
         - when "instagram"
           .instagram_logo.pull-left
+        - when "tumblr"
+          .tumblr_logo.pull-left
+        - when "foursquare"
+          .foursquare_logo.pull-left
         .date= "#{post.provider_publication_date.strftime("%b %d") if post.provider_publication_date}"
       -if !post.caption.blank?
         .photo-overlay

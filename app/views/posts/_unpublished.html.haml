@@ -8,8 +8,16 @@
         .photo-overlay
         .photo-overlay-text= post.published ? "✓" : "Publish"
         = image_tag post.media_url_small
-    .info.text-center
-      = "#{post.provider_publication_date.strftime("%b %d") if post.provider_publication_date} - "
-
-      = capitalize_phrase(post.provider)
-      = post.provider_strategy unless post.provider_strategy == "default"
+    .info
+      - case post.provider
+      - when "facebook"
+        .facebook_logo_gray.pull-left
+      - when "instagram"
+        .instagram_logo_gray.pull-left
+        - if post.provider_strategy == "location"
+          .location_pin_gray.pull-left
+      - when "tumblr"
+        .tumblr_logo_gray.pull-left
+      - when "foursquare"
+        .foursquare_logo_gray.pull-left
+      .date= post.provider_publication_date.strftime("%b %d")
