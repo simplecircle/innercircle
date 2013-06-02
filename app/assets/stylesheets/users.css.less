@@ -3,16 +3,8 @@
 @import "variables.css.less";
 
 #users {
-  img{
-    &.banner{
-      border:10px solid black;
-      .border-radius(@borderRadiusLarge);
-      box-sizing:border-box;
-      margin-top:-50px;
-    }
-  }
-  .rating{
-    float: left;
+  #logo{
+    width:250px;
   }
   #star-save-error {
     line-height: 1;
@@ -20,15 +12,18 @@
   .as-input {
     margin-bottom: 10px;
   }
+  .checkbox-group {
+    padding-left: 20px;
+    label { line-height: 30px; }
+  }
   .controls .as-selections {
     width: 65.95744680851064%;
     box-sizing: border-box;
   }
+  .rating{
+    float: left;
+  }
   .skills-control-block .as-selections {
     width: 100%;
-  }
-  .checkbox-group {
-    padding-left: 20px;
-    label { line-height: 30px; }
   }
 }

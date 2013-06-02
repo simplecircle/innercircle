@@ -11,6 +11,7 @@ $(document).ready ->
         unpublishedContainer.masonry
           columnWidth: (unpublishedContainerWidth ) ->
            unpublishedContainerWidth / 4
+        $(unpublishedContainer).find("li").fadeIn("fast")
     else
       # two columns for phones please
       unpublishedContainer.imagesLoaded ->
@@ -18,6 +19,7 @@ $(document).ready ->
           columnWidth: (unpublishedContainerWidth ) ->
            unpublishedContainerWidth / 2
       $(unpublishedContainer).find("li").css('width', '44%')
+      $(unpublishedContainer).find("li").fadeIn("fast")
   else
     container.width($(window).width()-323)
     $(window).resize ->
@@ -26,6 +28,7 @@ $(document).ready ->
       container.masonry
         columnWidth: (containerWidth ) ->
          containerWidth / 2
+      $(container).find("li").fadeIn("fast")
 
   # Infinite scroll
   if $('#infinite .pagination').length
@@ -58,6 +61,7 @@ $(document).ready ->
                   unpublishedContainerWidth / 2
               $(unpublishedContainer).find("li").css('width', '44%')
             container.masonry( 'appended', newItems );
+            newItems.show()
 
         $.ajax
           url: url
