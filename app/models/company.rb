@@ -63,8 +63,12 @@ class Company < ActiveRecord::Base
     posts.where(:published=>true).order("updated_at DESC").select([:company_id, :id, :provider_publication_date, :provider_strategy, :provider, :height, :width, :photo]).limit(count)
   end
 
-  def posts_to_review_count
-    posts.where(:published=>false).where('posts.created_at > ?', last_reviewed_posts_at).count
+  def posts_to_review_count(since = last_reviewed_posts_at)
+    posts.where(:published=>false).where('posts.created_at > ?', since).count
+  end
+
+  def posts_auto_published_count(since = 1.day.ago)
+    posts.where(:auto_published=>true).where('posts.created_at > ?', since).count
   end
 
   def set_last_published_posts_at

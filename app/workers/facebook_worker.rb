@@ -58,9 +58,10 @@ class FacebookWorker
               media_url_small:post["images"][5]["source"],
               like_count:0, #This gets updated when a user publishes an actual photo
               caption:post["name"],
+              auto_published: @first_run ? false : company.facebook_auto_publish,
               published: @first_run ? false : company.facebook_auto_publish,
               remote_photo_url: @first_run || !company.facebook_auto_publish ? nil : post["images"].first["source"]
-             })
+            })
             logger.info "#{company.subdomain} -- #{post.id} created"
           end
         end

@@ -1,9 +1,15 @@
 class Post < ActiveRecord::Base
   serialize :provider_raw_data, Hash
-  attr_accessible :provider, :provider_strategy, :provider_uid, :provider_publication_date, :provider_raw_data, :media_url, :media_url_small, :like_count, :published, :caption, :width, :height, :remote_photo_url
+  attr_accessible :provider, :provider_strategy, :provider_uid, :provider_publication_date, :provider_raw_data, :media_url, :media_url_small, :like_count, :published, :caption, :width, :height, :remote_photo_url, :auto_published
 
   belongs_to :company
   mount_uploader :photo, PhotoUploader
+  before_save :check_auto_published
+
+  def check_auto_published
+    auto_published = false if published == false
+    return true
+  end
 
   def self.new_from_provider(company, providers=Company.provider_fields)
     InstagramUsernameWorker.perform_async(company.id, first_run=true) if company.instagram_username && providers.include?('instagram_username')

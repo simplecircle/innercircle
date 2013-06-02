@@ -38,7 +38,8 @@ class InstagramLocationWorker
         new_post.media_url_small = post["images"]["low_resolution"]["url"]
         new_post.like_count = post["likes"]["count"]
         new_post.caption = post["caption"]["text"] if post["caption"]
-        new_post.published = @first_run ? false : company.instagram_location_auto_publish,
+        new_post.auto_published = @first_run ? false : company.instagram_location_auto_publish
+        new_post.published = @first_run ? false : company.instagram_location_auto_publish
         new_post.remote_photo_url = @first_run || !company.instagram_location_auto_publish ? nil : post["images"]["standard_resolution"]["url"]
         new_post.save!
         logger.info "#{company.subdomain} -- #{new_post.id} created"
