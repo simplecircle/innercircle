@@ -1,18 +1,22 @@
 #sidebar
 #company-info.pull-left
-  #logo= image_tag(@company.logo_url(:large))
-  %p= @company.short_description
-  %p
-    = "#{@company.hq_city}, #{@company.hq_state} - #{@company.employee_count.gsub(/_/, "-")} employees"
-  .well.mbs
+  %section
+    #logo= image_tag(@company.logo_url(:large))
+    = @company.short_description
+    .tiny.gray-light= "#{@company.hq_city}, #{@company.hq_state} - #{@company.employee_count.gsub(/_/, "-")} employees"
+  %hr
+  %section
     %p
-      Join Kickstarter’s talent-community to be notified of future job openings that match your skills. Looking now?  View their current openings.
+      Privately join #{capitalize_phrase(@company.name)}’s talent-community to be notified of future job openings that match your skills.
       %br
-      = link_to("Join talent-community", join_url(subdomain: @company.subdomain), class:"btn btn-large btn-warning", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
-  - if @referrer == "external"
-    .powered-by
-      Powered by 
-      =link_to("Inner Circle", root_url(subdomain: false))
+      = link_to("Join talent-community", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+
+  %hr
+  %section
+    - if @referrer == "external"
+      .powered-by
+        Powered by
+        =link_to("Inner Circle", root_url(subdomain: false))
 
 
 %ul#masonry.masonry-published

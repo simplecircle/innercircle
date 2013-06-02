@@ -5,24 +5,25 @@
   background:white;
   padding-top:0;
   #company-info{
-    padding:0px 0 0 20px;
     position:relative;
-    width:250px;
+    width:290px;
     z-index: 2;
+    hr{
+      border-top:1px solid darken(@grayLighter, 7%);
+      border-bottom:none;
+    }
+    section{
+      .box-sizing(border-box);
+      padding:0 20px 0 20px;
+    }
     #logo{
       padding:10px 0 10px 0;
+      width:240px;
     }
-    .well{
-      background:#E3E3E3;
-      margin-top:30px;
-      padding:10px;
-      .btn{
-        margin-top:10px;
-      }
-    }
-  }
-  .powered-by {
-    font-size: 12px;
+    .powered-by {
+      color:@grayLight;
+      font-size:11px;
+   }
   }
   #sidebar{
     z-index: 1;
