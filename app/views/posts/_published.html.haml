@@ -14,6 +14,6 @@
         .date= render('shared/pretty_publication_date', post:post)
       -if !post.caption.blank?
         .photo-overlay
-          %h4.photo-overlay-text= post.caption
+          %h4.photo-overlay-text= strip_tags(post.caption)
       = image_tag post.photo_url(:large)
 
