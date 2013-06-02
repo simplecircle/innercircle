@@ -71,6 +71,10 @@ class Company < ActiveRecord::Base
     posts.where(:auto_published=>true).where('posts.created_at > ?', since).count
   end
 
+  def send_content_update
+    admins.each {|admin| UserMailer.content_update(admin, self).deliver }
+  end
+
   def set_last_published_posts_at
     self.update_attribute(:last_published_posts_at, Time.now)
   end
