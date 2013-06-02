@@ -32,7 +32,7 @@ class FacebookWorker
 
   def import(company)
     albums = self.get_albums(company.facebook)
-    albums["data"].each{|album| get_media(album["id"], company)}
+    albums["data"].each{|album| get_media(album["id"], company) unless album["name"] == "Cover Photos" }
   end
 
   def get_albums(page)
