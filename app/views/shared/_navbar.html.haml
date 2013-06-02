@@ -1,10 +1,10 @@
-.navbar{:class => ("navbar-fixed-top" unless @is_not_fixed)}
+.navbar{:class => ("navbar-fixed-top" unless @is_not_fixed), style:"border-color:#{@company.hex_code if @company};"}
   .navbar-inner
     %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    = link_to(image_tag("logo_small_gray.jpg"), root_url(subdomain:false, src:"nav"), :class=>"brand")
+    = link_to(image_tag("inner_circle_logo.png"), root_url(subdomain:false, src:"nav"), :class=>"brand")
     .nav-collapse.collapse
       %ul.nav.pull-right
         - if current_user && current_user.god?

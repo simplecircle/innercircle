@@ -34,7 +34,7 @@ $(document).ready ->
   if $('#infinite .pagination').length
     $(window).scroll ->
       if $(window).scrollTop() >= 70
-        $("#company-info").css({ position: 'fixed', top: 0 })
+        $("#company-info").css({ position: 'fixed', top:20 })
       else
         $("#company-info").css({ position: 'relative'})
 

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
-  helper_method :current_user, :capitalize_phrase, :current_company
+  helper_method :current_user, :capitalize_phrase, :current_company, :referrer
 
   private
 
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_company
-    @current_company ||= Company.find_by_subdomain(request.subdomain)    
+    @current_company ||= Company.find_by_subdomain(request.subdomain)
   end
 
   def authorize
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
 
   def referrer
     referrer = request.env["HTTP_REFERER"]
-    (referrer.nil? || referrer.match(/(innercircle\.)|(\.circ\.)/i).nil?) ? "external" : "internal"
+    (referrer.nil? || referrer.match(/(jobcrush\.)|(innercircle\.)|(\.circ\.)/i).nil?) ? "external" : "internal"
   end
 
   def sort_by_star_rating(array, company_id)
