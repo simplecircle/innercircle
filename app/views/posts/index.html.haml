@@ -1,9 +1,9 @@
 #post
-  .container
-    .row
+  .container-fluid
+    .row-fluid
       .span12.mobile-padding
-        %h2 Show off what it’s like to work at #{capitalize_phrase(@company.name)}
-        %h4 Publish 40 photos that best exemplify your company culture.
+        %h2 Content library
+        %h4 Publish great photos that show what it’s like to work at #{capitalize_phrase(@company.name)}
         %hr
   %ul#masonry.masonry-unpublished
     = render("unpublished", posts:@posts)

@@ -44,7 +44,7 @@
                   = link_to user_url(talent) do
                     %li.bb-1
                       %span.talent-email= talent.email
-                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
+                      %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
                       %span.rating
                         - talent.star_rating(@company.id).times do |rating|
                           %span.rating-star-fixed
@@ -56,7 +56,7 @@
                   = link_to user_url(talent) do
                     %li.bb-1
                       = talent.email
-                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
+                      %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
                       %span.rating
                         - talent.star_rating(@company.id).times do |rating|
                           %span.rating-star-fixed
@@ -68,7 +68,7 @@
                   = link_to user_url(talent) do
                     %li.bb-1
                       = talent.email
-                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
+                      %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
                       %span.rating
                         - talent.star_rating(@company.id).times do |rating|
                           %span.rating-star-fixed
@@ -80,13 +80,49 @@
                   = link_to user_url(talent) do
                     %li.bb-1
                       = talent.email
-                      %span.gray-light= " - #{talent.profile.full_name}" if !talent.profile.full_name.empty?
+                      %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
                       %span.rating
                         - talent.star_rating(@company.id).times do |rating|
                           %span.rating-star-fixed
 
         .span5#dashboard-right-column
           .row-fluid.dashboard-header.bb-1
+            .span8
+              %h3.mbn
+                Content
+            .span4
+              .dashboard-header-links
+                = link_to("+ View content library", posts_url(subdomain:@company.subdomain))
+          .row-fluid
+            .span12
+              %ul.unstyled
+                - unless @company.jobs_page.blank?
+                  %li.bb-1.ptl
+                    Jobs page:
+                    =link_to(@company.jobs_page, "http://instagram.com/#{@company.jobs_page}", target:"_blank")
+                - unless @company.instagram_username.blank?
+                  %li.bb-1.ptl
+                    Instagram:
+                    =link_to(@company.instagram_username, "http://instagram.com/#{@company.instagram_username}", target:"_blank")
+                - unless @company.instagram_location_id.blank?
+                  %li.bb-1.ptm
+                    Instagram location:
+                    %span.gray-light active
+                - unless @company.facebook.blank?
+                  %li.bb-1.ptm
+                    Facebook:
+                    =link_to(@company.facebook, "http://facebook.com/#{@company.facebook}", target:"_blank")
+                - unless @company.tumblr.blank?
+                  %li.bb-1.ptm
+                    Tumblr:
+                    =link_to(@company.tumblr, "http://#{@company.tumblr}", target:"_blank")
+                - unless @company.foursquare_v2_id.blank?
+                  %li.bb-1.ptm
+                    Foursquare:
+                    =link_to("foursquare page", "https://foursquare.com/v/#{@company.foursquare_v2_id}", target:"_blank")
+
+
+          .row-fluid.dashboard-header.bb-1.mtxl
             .span8
               %h3.mbn
                 Admins
@@ -105,36 +141,4 @@
                     - if admin.pending
                       %em
                         = link_to(" - pending", admin_invite_url(admin.admin_invite_token), :class=>"gray-light")
-
-          .row-fluid.dashboard-header.bb-1.mtxl
-            .span12
-              %h3.mbn
-                Content Channels
-          .row-fluid
-            .span12
-              %ul.unstyled
-                - unless @company.jobs_page.blank?
-                  %li.bb-1.ptl
-                    Jobs page:
-                    =link_to(@company.jobs_page, "http://instagram.com/#{@company.jobs_page}", target:"_blank")
-                - unless @company.instagram_username.blank?
-                  %li.bb-1.ptl
-                    Instagram:
-                    =link_to(@company.instagram_username, "http://instagram.com/#{@company.instagram_username}", target:"_blank")
-                - unless @company.instagram_location_id.blank?
-                  %li.bb-1.ptl
-                    Instagram location:
-                    %span.gray-light active
-                - unless @company.facebook.blank?
-                  %li.bb-1.ptl
-                    Facebook:
-                    =link_to(@company.facebook, "http://facebook.com/#{@company.facebook}", target:"_blank")
-                - unless @company.tumblr.blank?
-                  %li.bb-1.ptl
-                    Tumblr:
-                    =link_to(@company.tumblr, "http://#{@company.tumblr}", target:"_blank")
-                - unless @company.foursquare_v2_id.blank?
-                  %li.bb-1.ptl
-                    Foursquare:
-                    =link_to("foursquare page", "https://foursquare.com/v/#{@company.foursquare_v2_id}", target:"_blank")
 
