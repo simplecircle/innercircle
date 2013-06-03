@@ -18,7 +18,7 @@
           - companyrow.each do |company|
             = link_to(root_url(subdomain:company.subdomain), {:class=>'company-wrapper pam span6'}) do
               .filmstrip.mbs{:style=>"border-bottom-color:#{company.hex_code};"}
-                - company.latest_published_posts(3).each do |post|
+                - company.latest_posts_by_provider_date(3).each do |post|
                   .filmstrip-image{:class=>post.wrapper_class}
                     = image_tag post.photo_url(:medium), :style=>post.offset(140)
                 .clearfix
