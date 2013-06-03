@@ -109,7 +109,7 @@ class CompaniesController < ApplicationController
   def choose_layout
     if action_name == "show" && referrer == "external" #Test if coming from non-innercircle host or directly typing in url
       'onboarding'
-    elsif ['new', 'create'].include?(action_name) && !(current_user && current_user.god_or_admin?)
+    elsif ['create'].include?(action_name) && !(current_user && current_user.god_or_admin?)
       'onboarding'
     else
       'application'

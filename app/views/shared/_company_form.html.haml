@@ -1,10 +1,7 @@
 = form_for(@company, :html=>{multipart:true, :class=> 'form-horizontal'}) do |co|
   - if @user && @mode != 'update' && !@user.god?
     = co.fields_for :users, @user do |user|
-      .control-group.control-group-header-label
-        %label.control-label
-        .controls
-          %h3 Your Info
+      %h3.mtxl Your Info
       %hr.mtn
       .control-group
         %label.control-label{:for=>:first_name} * First Name
@@ -27,10 +24,7 @@
         .controls
           = user.password_field :password, :class=>'span12'
           .inline_error= @company.users.first.errors[:password].first
-  .control-group.control-group-header-label
-    %label.control-label
-    .controls
-      %h3 Company Info
+  %h3.mtxl Company Info
   %hr.mtn
 
   .control-group
@@ -90,11 +84,8 @@
       = co.file_field :logo
       = co.hidden_field :logo_cache, :value => @company.logo_cache
       .inline_error= @company.errors[:logo].first
-  
-  .control-group.control-group-header-label
-    %label.control-label
-    .controls
-      %h3 Content Channels
+
+  %h3 Content Channels
   %hr.mtn
 
   .control-group
@@ -147,13 +138,6 @@
       %label.span1.radio-label{:for=>"company_foursquare_auto_publish_off"}
         Off
         = co.radio_button :foursquare_auto_publish, "off", :checked=> !@company.foursquare_auto_publish
-  .control-group
-    %label.control-label{:for=>:jobs_page} Jobs Page
-    .controls
-      = co.text_field :jobs_page, {:class=>'span12', :placeholder=>'jobs.company.com'}
+  .span10.offset2.mbxl.mtl
+    = co.submit @submit_button_text || "Create account", class:"btn btn-large span10"
 
-  %p
-  .control-group
-    %label.control-label
-    .controls
-      = co.submit @submit_button_text || "Create account", class:"btn btn-large mtl span12"

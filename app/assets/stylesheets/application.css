@@ -9,10 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require variables
  *= require bootstrap_and_overrides
  *= require responsive-767px-max-override
  *= require icons
- *= require variables
  *= require users
  *= require posts
  *= require home
