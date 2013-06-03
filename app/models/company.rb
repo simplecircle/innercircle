@@ -2,7 +2,7 @@ class Company < ActiveRecord::Base
   attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at, :last_published_posts_at, :instagram_location_id
 
   has_many :users_companies
-  has_many :posts
+  has_many :posts, :dependent => :destroy
   has_many :users, through: :users_companies
   has_many :companies_verticals
   has_many :verticals, through: :companies_verticals
@@ -63,8 +63,16 @@ class Company < ActiveRecord::Base
     posts.where(:published=>true).order("updated_at DESC").select([:company_id, :id, :provider_publication_date, :provider_strategy, :provider, :height, :width, :photo]).limit(count)
   end
 
-  def posts_to_review_count
-    posts.where(:published=>false).where('posts.created_at > ?', last_reviewed_posts_at).count
+  def posts_to_review_count(since = last_reviewed_posts_at)
+    posts.where(:published=>false).where('posts.created_at > ?', since).count
+  end
+
+  def posts_auto_published_count(since = 1.day.ago)
+    posts.where(:auto_published=>true).where('posts.created_at > ?', since).count
+  end
+
+  def send_content_update
+    admins.each {|admin| UserMailer.content_update(admin, self).deliver }
   end
 
   def set_last_published_posts_at

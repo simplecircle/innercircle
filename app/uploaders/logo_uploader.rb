@@ -39,7 +39,7 @@ class LogoUploader < CarrierWave::Uploader::Base
   end
 
    def extension_white_list
-     %w(jpg jpeg png)
+     %w(jpg jpeg png gif)
    end
 
   # Choose what kind of storage to use for this uploader:

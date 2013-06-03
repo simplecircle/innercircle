@@ -39,7 +39,8 @@ class FoursquareWorker
             media_url:post["sizes"]["items"][0]["url"],
             media_url_small:post["sizes"]["items"][1]["url"],
             like_count:0,
-            published:@first_run ? false : company.foursquare_auto_publish,
+            auto_published: @first_run ? false : company.foursquare_auto_publish,
+            published: @first_run ? false : company.foursquare_auto_publish,
             remote_photo_url: @first_run || !company.foursquare_auto_publish ? nil : post["sizes"]["items"][0]["url"]
            })
           logger.info "#{company.subdomain} -- #{post.id} created"
