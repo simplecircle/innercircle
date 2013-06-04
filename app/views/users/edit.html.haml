@@ -43,7 +43,7 @@
       .span8.offset2.mobile-padding
         .form-section-header
         = form_for @user, :url=>user_path(@auth_token || @user.id), :html=>{:class=> 'form-horizontal', :id=>"edit_user_#{@auth_token || @user.id}"} do |f|
-          - if @user.profile.linkedin_profile.blank?
+          - if @user.profile.linkedin_profile.blank? && @user.talent?
             .control-group
               %label.control-label
               .controls
