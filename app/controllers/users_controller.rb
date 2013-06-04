@@ -13,58 +13,6 @@ class UsersController < ApplicationController
     @depts = CompanyDept.all
   end
 
-  def update
-    if params[:commit] == "Remove User From My Talent Community"
-      user_to_delete = User.find(params[:id])
-      UsersCompany.where(:company_id => @company.id, :user_id => user_to_delete.id).destroy_all
-      return redirect_to dashboard_url, notice: "#{user_to_delete.email} removed from your talent community"
-    end
-    if params[:commit] == "Save Rating"
-      user = User.find(params[:id])
-      star_rating = params[:user][:star_rating].to_i
-      save_star_rating(star_rating, user.id, @company.id)
-      return redirect_to :back
-    end
-
-
-    @user.assign_attributes(params[:user])
-
-    def validate_depts? 
-      #only validate depts if an existing user, otherwise it will try to validate page 2 of the signup wizard, which doesn't have any depts on it
-      !@is_new_user && @user.talent? 
-    end
-
-    #Save skill list
-    if !params[:as_values_true].blank?
-      @incoming_tags = params[:as_values_true].split(",").reject(&:empty?).join(",")
-      @user.profile.skill_list = @incoming_tags #Need to define it this way so that tags populate on form reload (i.e. if validation fails)
-    end
-
-    if validate_depts?
-      @depts = params[:company_depts]
-      @depts = @depts.map{|x| x.to_i } if !@depts.blank?
-    end
-
-    if @depts.nil? && validate_depts?
-      @user.errors.add(:categories, "You have to choose at least one category.")
-      render "edit"
-    else
-      if @user.save
-        save_departments(@depts, @user.profile) if validate_depts?
-
-        if @is_new_user
-          redirect_to confirmation_url
-        elsif current_user.god_or_admin?
-          redirect_to dashboard_url, notice: "Account Updated"
-        else 
-          redirect_to current_user, notice: "Account Updated"
-        end
-      else
-        render 'edit'
-      end
-    end
-  end
-
   def create
     @user = @company.users.build(params[:user])
     @user.role = 'talent'
@@ -106,10 +54,9 @@ class UsersController < ApplicationController
         save_departments(@depts, @user.profile)
         save_star_rating(@star_rating, @user.id, @company.id)
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
-        
         if @is_admin_adding
-          params[:commit] == "Save & Add Another" ? redirect_to('/add-talent', :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
-        else 
+          params[:commit] == "Save & add another" ? redirect_to('/add-talent', :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
+        else
           redirect_to(edit_user_url(@user.auth_token))
         end
       else
@@ -153,7 +100,56 @@ class UsersController < ApplicationController
           @profile.save
         end
       end
+    end
+  end
 
+  def update
+    if params[:commit] == "Remove User From My Talent Community"
+      user_to_delete = User.find(params[:id])
+      UsersCompany.where(:company_id => @company.id, :user_id => user_to_delete.id).destroy_all
+      return redirect_to dashboard_url, notice: "#{user_to_delete.email} removed from your talent community"
+    end
+    if params[:commit] == "Save Rating"
+      user = User.find(params[:id])
+      star_rating = params[:user][:star_rating].to_i
+      save_star_rating(star_rating, user.id, @company.id)
+      return redirect_to :back
+    end
+    @user.assign_attributes(params[:user])
+
+    def validate_depts?
+      #only validate depts if an existing user, otherwise it will try to validate page 2 of the signup wizard, which doesn't have any depts on it
+      !@is_new_user && @user.talent?
+    end
+
+    #Save skill list
+    if !params[:as_values_true].blank?
+      @incoming_tags = params[:as_values_true].split(",").reject(&:empty?).join(",")
+      @user.profile.skill_list = @incoming_tags #Need to define it this way so that tags populate on form reload (i.e. if validation fails)
+    end
+
+    if validate_depts?
+      @depts = params[:company_depts]
+      @depts = @depts.map{|x| x.to_i } if !@depts.blank?
+    end
+
+    if @depts.nil? && validate_depts?
+      @user.errors.add(:categories, "You have to choose at least one category.")
+      render "edit"
+    else
+      if @user.save
+        save_departments(@depts, @user.profile) if validate_depts?
+
+        if @is_new_user
+          redirect_to confirmation_url
+        elsif current_user.god_or_admin?
+          redirect_to dashboard_url, notice: "Account Updated"
+        else
+          redirect_to current_user, notice: "Account Updated"
+        end
+      else
+        render 'edit'
+      end
     end
   end
 
@@ -196,7 +192,7 @@ class UsersController < ApplicationController
   end
 
   def choose_layout
-    if (['new', 'create', 'confirmation'].include?(action_name) || !cookies[:auth_token]) && !(current_user && current_user.god_or_admin?)
+    if (['new', 'create', 'confirmation'].include?(action_name) || !cookies[:auth_token]) && !@is_admin_adding
       'onboarding'
     else
       'application'

@@ -10,7 +10,10 @@
     %p
       Privately join #{capitalize_phrase(@company.name)}’s talent-community to be notified of future job openings that match your skills.
       %br
-      = link_to("Join talent-community", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+      - if @referrer == "external"
+        = link_to("Join talent-community", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+      - else
+        = link_to("Join talent-community", join_url(subdomain: @company.subdomain, local_join:"true"), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
 
   %hr
   %section

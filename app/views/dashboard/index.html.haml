@@ -32,7 +32,7 @@
               %section.highlight.tal
                 .mbm
                   Share this link with talent you want to invite: 
-                  = link_to("#{@company.subdomain}.circ.co/join", join_url(subdomain:@company.subdomain), target:"_blank")
+                  = link_to("#{@company.subdomain}.circ.co/join", join_url(subdomain:@company.subdomain))
                 .mbm.detail-text Invite people you've met at meetups, panels, hackathons, online - anyone you'd like to keep on your watchlist.
           .row-fluid
             .span12#dashboard_index.mtxl
@@ -135,7 +135,7 @@
                 - @admins.each do |admin|
                   %li.bb-1.ptm
                     - if admin.profile.full_name.length > 1
-                      = admin.profile.full_name
+                      = capitalize_phrase(admin.profile.full_name)
                     - else
                       = admin.email
                     - if admin.pending

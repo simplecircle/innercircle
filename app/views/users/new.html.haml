@@ -5,12 +5,12 @@
         = render "shared/flash", :flash=>flash
   .row-fluid
     - if @is_admin_adding
-      .span4.column-center.mobile-padding
-        %h3.text-center Add Talent
+      .span4.column-center.mobile-padding.mtxl
     - else
-      .span4.column-center
+      .span5.column-center
         - if @local_join
-          %h3.text-center.mobile-padding.mtm.mbxl Create an InnerCircle account to privately join #{capitalize_phrase(@company.name)}’s talent-community
+          #logo.column-center.mtm.mbs= image_tag(@company.logo_url(:large))
+          %h4.text-center.mobile-padding.mtm.mbxl.lh-24 Create an <i>inner circle</i> account to privately join #{capitalize_phrase(@company.name)}’s talent-community
         - else
           #logo.column-center.mtm.mbs= image_tag(@company.logo_url(:large))
           %h4.text-center.mobile-padding.mbxl.lh-24 Privately join our talent-community to receive job opportunities that match your skills
@@ -44,7 +44,7 @@
         - if @is_admin_adding
           .controls.mbl
             .inline_error= @user.errors[:star_rating].first
-            %b.pull-left.mrm * Star Rating:
+            %b.help-block.pull-left.mrm * Star Rating:
             %span.rating
               - [4, 3, 2, 1].each do |rating|
                 =radio_button_tag(:star_rating, rating, @star_rating && rating==@star_rating, :class=>"rating-input")
@@ -57,15 +57,14 @@
               = p.text_field :url, class:"span12", placeholder:"Site, blog or Linkedin profile"
               .inline_error= @user.profile.errors[:url].first
             .controls.skills-control-block.mts
-              %b Skills & Tools
               = text_field_tag nil, nil, {id:"skills", class:"span12"}
               %span.help-block.small List a few (e.g., Excel, baking, Ruby, Agile, responsive design)
               %span#incoming-tags{style:"display:none;"}= @incoming_tags
               %span#existing-tags{style:"display:none;"}= @tags
           %p
           .controls
-            = f.submit "Save", class:"btn btn-large mtl span6"
-            = f.submit "Save & Add Another", class:"btn btn-large mtl span6"
+            = f.submit "Save", class:"btn btn-large mtl span4"
+            = f.submit "Save & add another", class:"btn btn-large mtl span8"
 
         - else
           = f.submit("Join now", class:"btn btn-large btn-primary btn-block mvm span12")
