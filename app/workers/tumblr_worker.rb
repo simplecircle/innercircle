@@ -26,6 +26,7 @@ class TumblrWorker
 
   def import(company)
     media = self.get_media(company.tumblr, @offset, @limit)["response"]
+    return if media.empty?
 
     photo_count = media["blog"]["posts"].to_i
       media["posts"].each do |post|
