@@ -1,15 +1,17 @@
 %section.container-fluid#homepage-top
   .row
-    .span12.mobile-padding.phl.ptl.pbm.column-center
-      %h1.mbl.mtl
+    .span12.mobile-padding.phl.ptl.column-center
+      %h1.mtl
         Meet Great Companies in Creative & Tech
-      %h5.hidden-phone
+  .row
+    .span9.column-center
+      %h2.hidden-phone
         Not actively looking for work, but care to be privately notified of relavent job openings & events from inspiring companies? Let ’em know by joining their talent-communities.
       #homepage-top-tertiary-links.pbxl
         Don't see your favorite companies? 
         =link_to "Tell us who you love", "https://docs.google.com/forms/d/168opPx2WH0TvstcC4SVQ9fxCQB5Xg-1iz_LT-tkyPhM/viewform", :target=>"_blank"
         so we can fix that.
-      .pbl
+      .pbxl
 
 %section.container#homepage-bottom
   .row
@@ -23,9 +25,9 @@
                   .filmstrip-image{:class=>post.wrapper_class}
                     = image_tag post.photo_url(:medium), :style=>post.offset(140)
                 .clearfix
-              .company-info
-                .pull-right.company-last-updated-time.hidden-phone= company.last_published_time
+              .company-info.pbl
+                .pull-right.company-last-updated-time= company.last_published_time
                 .pull-left.company-name.mbn.mts= capitalize_phrase(company.name)
-                .pull-left.company-hq.mll.mts.hidden-phone= company.hq_city
+                .pull-left.company-hq.mlm.mts= company.hq_city
                 .clearfix
                 .company-description= company.short_description

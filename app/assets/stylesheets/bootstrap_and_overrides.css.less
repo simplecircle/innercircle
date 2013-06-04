@@ -53,6 +53,7 @@
 
 body {
   background:@bodyBackground;
+  font-family:Lucida Grande;
   padding-top: 48px;
 }
 
@@ -81,9 +82,34 @@ body {
 @navbarLinkColor: #68b4fd;
 @navbarLinkColor: @grayLight;
 
+@font-face {
+  font-family: 'gibsonregular';
+  src: asset-url('gibson-regular-webfont.eot');
+  src: asset-url('gibson-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       asset-url('gibson-regular-webfont.woff') format('woff'),
+       asset-url('gibson-regular-webfont.ttf') format('truetype'),
+       asset-url('gibson-regular-webfont.svg#gibsonregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'gibsonsemibold';
+  src: asset-url('gibson-semibold-webfont.eot');
+  src: asset-url('gibson-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+       asset-url('gibson-semibold-webfont.woff') format('woff'),
+       asset-url('gibson-semibold-webfont.ttf') format('truetype'),
+       asset-url('gibson-semibold-webfont.svg#gibsonsemibold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 // Navbar
 // -------------------------
 @navbarCollapseWidth:             570px;
+
+h1{
+ font-family: 'gibsonsemibold';
+}
 hr{
   border-top:1px solid darken(@bodyBackground, 6%);
   border-bottom:1px solid @bodyBackground;
