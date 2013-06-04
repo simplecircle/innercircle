@@ -69,7 +69,7 @@
               .controls
                 %p.checkbox-group
                   - CompanyDept.all.each do |dept|
-                    = check_box_tag("category_#{dept.id.to_s}", dept.id, (@depts.include?(dept.id.to_i) if @depts), name:'company_depts[]', class:"pull-left")
+                    = radio_button_tag("category", dept.id, (@depts.include?(dept.id.to_i) if @depts), name:'company_depts[]', class:"pull-left")
                     = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
                 .inline_error= @user.errors[:categories].first 
             = f.fields_for :profile do |p|
