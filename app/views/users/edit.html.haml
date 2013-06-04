@@ -5,11 +5,11 @@
         = render "shared/flash", :flash=>{:notice => @notice, :alert => @alert}
   - if @is_new_user
     .row-fluid
-      .span6.column-center.mobile-padding
-        %h2.form-section-header Share a little more information so we can match you with relevant opportunities
-        %hr
+      .span5.column-center.mobile-padding
+        %h4.text-center Share a little info so we can match you with more relevant opportunities
+    %hr
     .row-fluid
-      .span4.column-center.mobile-padding
+      .span5.column-center.mobile-padding
         = form_for @user, :url=>user_path(@auth_token), :html=>{:id=>"edit_user_#{@auth_token}", :class=>"user-onboarding-form"} do |f|
           -if !current_user
             .controls
@@ -37,12 +37,11 @@
           .control-group
             %label.control-label
             .controls
-              = f.submit "Save", class:"btn btn-large mtl span12"
+              = f.submit("Save", class:"btn btn-large mtl span12" , style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
   - else
     .row-fluid
       .span8.offset2.mobile-padding
-        %h2.form-section-header Edit Account
-        %hr
+        .form-section-header
         = form_for @user, :url=>user_path(@auth_token || @user.id), :html=>{:class=> 'form-horizontal', :id=>"edit_user_#{@auth_token || @user.id}"} do |f|
           - if @user.profile.linkedin_profile.blank?
             .control-group

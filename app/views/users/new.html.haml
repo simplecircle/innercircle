@@ -5,19 +5,18 @@
         = render "shared/flash", :flash=>flash
   .row-fluid
     - if @is_admin_adding
-      .span5.column-center.text-center
-        %h2.mtxl.mbl Add Talent
+      .mtxl
     - else
       .span5.column-center
         - if @local_join
-          #logo.column-center.mtm.mbs= image_tag(@company.logo_url(:large))
+          #logo.column-center.mtm.mbm= image_tag(@company.logo_url(:large))
           %h4.text-center.mobile-padding.mtm.mbxl.lh-24 Create an <i>inner circle</i> account to privately join #{capitalize_phrase(@company.name)}’s talent-community
         - else
-          #logo.column-center.mtm.mbs= image_tag(@company.logo_url(:large))
-          %h4.text-center.mobile-padding.mbxl.lh-24 Privately join our talent-community to receive job opportunities that match your skills
+          #logo.column-center.mtm= image_tag(@company.logo_url(:large))
+          %h4.text-center.mobile-padding.mbxl.ptl.lh-24 Privately join our talent-community to receive job opportunities that match your skills
       %hr
   .row-fluid
-    .span4.column-center.mobile-padding
+    .span5.column-center.mobile-padding
       = form_for @user do |f|
         = hidden_field_tag :is_admin_adding, @is_admin_adding
         = hidden_field_tag :local_join, @local_join
