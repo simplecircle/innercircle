@@ -1,3 +1,4 @@
+= render 'shared/social_tag_script'
 %section.container-fluid#homepage-top
   .row
     .span12.mobile-padding.phl.ptl.column-center
@@ -7,11 +8,12 @@
     .span9.column-center
       %h2.hidden-phone
         Not actively looking for work, but care to be privately notified of relavent job openings & events from inspiring companies? Let ’em know by joining their talent-communities.
-      #homepage-top-tertiary-links.pbxl
+      #homepage-top-tertiary-links.pbm
         Don't see your favorite companies? 
         =link_to "Tell us who you love", "https://docs.google.com/forms/d/168opPx2WH0TvstcC4SVQ9fxCQB5Xg-1iz_LT-tkyPhM/viewform", :target=>"_blank"
         so we can fix that.
-      .pbxl
+      .social-links.pbm
+        = render 'shared/social_tags', url:"http://getinnercircle.com"
 
 %section.container#homepage-bottom
   .row

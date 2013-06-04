@@ -5,7 +5,8 @@
         = render "shared/flash", :flash=>flash
   .row-fluid
     - if @is_admin_adding
-      .mtxl
+      .span5.column-center.text-center
+        %h2.mtxl.mbl Add Talent
     - else
       .span5.column-center
         - if @local_join
