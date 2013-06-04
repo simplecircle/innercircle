@@ -1,0 +1,16 @@
+%title= content_for?(:title) ? yield(:title) : 'inner circle - Meet Great Companies in Creative and Tech'
+= stylesheet_link_tag  "application", :media => "all"
+= csrf_meta_tags
+/[if IE]
+  %script{src:"http://html5shim.googlecode.com/svn/trunk/html5.js"}
+%meta{content:"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0", name:"viewport"}
+%meta{property:"fb:app_id",content:"536278593078079"}
+%meta{property:"og:type",content:"website"}
+%meta{property:"og:site_name", content:"inner circle"}
+- if content_for?(:og_tags)
+  = yield :og_tags
+- else
+  %meta{property:"og:url", content:root_url(subdomain:false)}
+  %meta{property:"og:image", content:"http://fbb10cc56329cb5ea057-4ca1418a7613371d048778718c3acae9.r81.cf1.rackcdn.com/inner_circle_logo.png"}
+  %meta{property:"og:title", content:"inner circle"}
+  %meta{property:"og:description", content:"Meet Great Companies in Creative and Tech"}
