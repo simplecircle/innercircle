@@ -1,7 +1,10 @@
 .container-fluid
   .row-fluid
     .span8.text-center.column-center.mobile-padding
+      - if @is_admin_adding
+        .maxl
       %h1 Thanks, you’re all set!
       %h4.mbxl We'll be in touch with relevant updates & opportunities.
       %p.mtxl
-      =link_to "Check out other inspiring companies", root_url(subdomain:false), :class=>"btn btn-large"
+      =link_to "Check out other inspiring companies", root_url(subdomain:false), :class=>"btn btn-large" unless @is_admin_adding
+      =link_to "New signup", join_url if @is_admin_adding

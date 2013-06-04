@@ -154,6 +154,7 @@ class UsersController < ApplicationController
   end
 
   def confirmation
+    @is_admin_adding = current_user && current_user.god_or_admin?
   end
 
   private
@@ -192,7 +193,11 @@ class UsersController < ApplicationController
   end
 
   def choose_layout
-    if (['new', 'create', 'confirmation'].include?(action_name) || !cookies[:auth_token]) && !@is_admin_adding
+    if !cookies[:auth_token] || action_name == "confirmation" #always onboarding if not logged in or are on the confirmation page
+      'onboarding'
+    elsif ['update', 'edit'].include?(action_name) && @is_new_user
+      'onboarding'
+    elsif ['new', 'create'].include?(action_name) && !@is_admin_adding
       'onboarding'
     else
       'application'
