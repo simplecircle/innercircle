@@ -4,7 +4,8 @@
       = render "shared/flash", :flash=>flash unless flash.blank?
       .row-fluid.dashboard-header.bb-1
         .span7
-          %h2.mbn.ptl= "Dashboard"
+          .gears.mtl.mrm.pull-left
+          %h2.mbn.ptl= capitalize_phrase(@company.name)
         .span5
           .dashboard-header-links
             = link_to("#{@company.subdomain}.circ.co", root_url(subdomain:@company.subdomain), class:"hidden-phone hidden-tablet mrl")

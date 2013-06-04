@@ -54,6 +54,7 @@
 body {
   background:@bodyBackground;
   font-family:Lucida Grande;
+  font-size:13px;
   padding-top: 48px;
 }
 
@@ -70,17 +71,16 @@ body {
 @import "variables.css.less";
 
 
-// Set the correct sprite paths
-/*@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
-@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');*/
 // Custom colors
 // -------------------------
 @linkColor:#53AEFC;
 @navbarBackground:@bodyBackground;
 @navbarBackgroundHighlight:@bodyBackground;
-@navbarText: #666666;
-@navbarLinkColor: #68b4fd;
-@navbarLinkColor: @grayLight;
+@navbarLinkColor:@grayLight;
+
+// Navbar
+// -------------------------
+@navbarCollapseWidth:             570px;
 
 @font-face {
   font-family: 'gibsonregular';
@@ -103,12 +103,11 @@ body {
   font-style: normal;
 }
 
-// Navbar
-// -------------------------
-@navbarCollapseWidth:             570px;
-
-h1{
+h1, h2{
  font-family: 'gibsonsemibold';
+}
+h3, h4, h5{
+ font-family: 'gibsonregular';
 }
 hr{
   border-top:1px solid darken(@bodyBackground, 6%);
@@ -123,6 +122,7 @@ input[type="password"]{
   /*.box-shadow(0px 1px 1px #EDEDED);*/
   .box-sizing(border-box);
   font-size:16px;
+  font-family: 'gibsonregular';
   height:40px;
   &:focus {
     border-color: @linkColor;
@@ -146,6 +146,8 @@ input[type="file"]{
   color:white !important;
   cursor: pointer;
   display: inline-block;
+  font-family: 'gibsonregular';
+  font-size:16px;
   line-height: @baseLineHeight;
   margin-bottom: 0; // For input.btn
   padding: 7px 16px;
@@ -219,10 +221,15 @@ input[type="file"]{
     height:50px;
   }
   .nav > li > a {
-    color:#BFBFBF;
-    font-size:15px;
+    font-size:13px;
     padding-top:15px;
     text-shadow:none;
+    &.company-cta{
+      background:#FFF0B0;
+      margin-top:12px;
+      height:10px;
+      padding:3px 5px 12px 5px;
+    }
   }
   .navbar-inner{
     border-bottom:none;

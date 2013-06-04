@@ -19,13 +19,13 @@
       - @companyrows.each do |companyrow|
         .row-fluid
           - companyrow.each do |company|
-            = link_to(root_url(subdomain:company.subdomain), {:class=>'company-wrapper pam span6'}) do
+            = link_to(root_url(subdomain:company.subdomain), {:class=>'company-wrapper mbxl span6'}) do
               .filmstrip.mbs{:style=>"border-bottom-color:#{company.hex_code};"}
                 - company.latest_posts_by_provider_date(3).each do |post|
                   .filmstrip-image{:class=>post.wrapper_class}
                     = image_tag post.photo_url(:medium), :style=>post.offset(140)
                 .clearfix
-              .company-info.pbl
+              .company-info.mbl
                 .pull-right.company-last-updated-time= company.last_published_time
                 .pull-left.company-name.mbn.mts= capitalize_phrase(company.name)
                 .pull-left.company-hq.mlm.mts= company.hq_city

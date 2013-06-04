@@ -24,5 +24,5 @@
               %li= link_to "Edit Your Profile", :controller => "users", :action=> "edit", :id => current_user.id
               %li= link_to "Logout", logout_url(subdomain:false)
         - else
-          %li= link_to("Hiring? Learn how we can help.", for_companies_url(subdomain:false), class:"company-cta")
+          %li= link_to("Hiring? Learn how we can help.", for_companies_url(subdomain:false), class:"#{'company-cta' if controller.controller_name == 'home'}")
           %li= link_to "Login", login_url
