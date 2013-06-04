@@ -59,8 +59,12 @@ class Company < ActiveRecord::Base
     end
   end
 
-  def latest_published_posts(count=3)
+  def latest_posts_by_publish_date(count=3)
     posts.where(:published=>true).order("updated_at DESC").select([:company_id, :id, :provider_publication_date, :provider_strategy, :provider, :height, :width, :photo]).limit(count)
+  end
+
+  def latest_posts_by_provider_date(count=3)
+    posts.where(:published=>true).order("provider_publication_date DESC").select([:company_id, :id, :provider_publication_date, :provider_strategy, :provider, :height, :width, :photo]).limit(count)
   end
 
   def posts_to_review_count(since = last_reviewed_posts_at)

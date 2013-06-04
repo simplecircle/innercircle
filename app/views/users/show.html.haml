@@ -37,5 +37,5 @@
                 %li= skill
       - if current_user.admin_or_god?
         =form_for @user do |f|
-          = f.submit "Remove User From My Talent Community", class:"btn btn-warning mvl"
+          = f.submit "Remove User From My Talent Community", class:"btn btn-warning mvl", onclick:"return confirm('Are you sure?');"
      

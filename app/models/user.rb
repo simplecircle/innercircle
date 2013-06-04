@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   validates :email, presence:true
   validates :email, uniqueness:true
-  validates_format_of :email, with:/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i, message:"Email isn't valid"
+  validates_format_of :email, with:/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i, message:"Email isn't valid. Please make sure there are no spaces"
   # These password validations are here for password reset functionality.
   validates_presence_of :password, if: :password
   validates_confirmation_of :password, if: :password, message:"Passwords do not match"
