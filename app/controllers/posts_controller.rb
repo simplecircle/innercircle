@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_filter :authorize
 
   def new_from_provider
-    company = Company.find_by_subdomain!(request.subdomain)
+    company = current_company
     Post.new_from_provider(company)
     redirect_to posts_url(subdomain: company.subdomain)
   end
@@ -41,6 +41,6 @@ class PostsController < ApplicationController
   private
 
   def find_resource
-    @company = Company.find_by_subdomain!(request.subdomain)
+    @company = current_company
   end
 end

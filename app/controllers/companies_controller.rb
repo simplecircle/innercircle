@@ -1,7 +1,8 @@
 class CompaniesController < ApplicationController
 
   layout :choose_layout
-  before_filter :find_resource, only: [:show]
+  before_filter :find_resource, only: [:show, :edit, :update]
+  before_filter :authorize, only: [:edit, :update]
 
   def new
     if current_user && current_user.god?
@@ -57,14 +58,12 @@ class CompaniesController < ApplicationController
 
   def edit
     @mode = 'update'
-    @company = Company.find_by_subdomain!(request.subdomain)
     @verticals = @company.verticals.map(&:id)
     @submit_button_text = "Save"
   end
 
   def update
     @notice = nil
-    @company = current_user.owned_companies.find {|co| co.id == params[:id].to_i}
     @company.assign_attributes params[:company]
     @verticals = params[:verticals] || []
     @verticals = @verticals.map{|x| x.to_i }
@@ -103,7 +102,7 @@ class CompaniesController < ApplicationController
   private
 
   def find_resource
-    @company = Company.find_by_subdomain!(request.subdomain)
+    @company = current_company
   end
 
   def choose_layout

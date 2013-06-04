@@ -16,7 +16,7 @@ class DashboardController < ApplicationController
   private
 
   def find_resource
-    @company = Company.find_by_subdomain!(request.subdomain)
+    @company = current_company
   end
 
   def ensure_proper_subdomain

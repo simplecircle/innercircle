@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   layout :choose_layout
   before_filter :find_resource
+  # auth handled through get_user
   before_filter :authorize_user, only:[:show]
   before_filter :get_user, only:[:edit, :update]
 
@@ -187,7 +188,7 @@ class UsersController < ApplicationController
   end
 
   def find_resource
-    @company = request.subdomain.empty? ? current_user.companies.first : Company.find_by_subdomain!(request.subdomain)
+    @company = request.subdomain.empty? ? current_user.companies.first : current_company
     @local_join= true if params[:local_join] == "true"
     @tags = ActsAsTaggableOn::Tag.all.to_json(only: :name)
   end
