@@ -2,7 +2,7 @@
 #sidebar
 #company-info{class:"pull-left", style:"position:#{'fixed !important;' if referrer == "external"};"}
   %section
-    #logo= image_tag(@company.logo_url(:large))
+    #logo= link_to(image_tag(@company.logo_url(:large)), @company.website_url, target:"blank")
     = @company.short_description
     .tiny.gray-light= "#{@company.hq_city}, #{@company.hq_state} - #{@company.employee_count.gsub(/_/, "-")} employees"
   %hr
