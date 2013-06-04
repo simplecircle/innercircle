@@ -5,7 +5,7 @@
         = render "shared/flash", :flash=>flash
   .row-fluid
     - if @is_admin_adding
-      .span4.column-center.mobile-padding.mtxl
+      .mtxl
     - else
       .span5.column-center
         - if @local_join
@@ -67,7 +67,7 @@
             = f.submit "Save & add another", class:"btn btn-large mtl span8"
 
         - else
-          = f.submit("Join now", class:"btn btn-large btn-primary btn-block mvm span12")
+          = f.submit("Join now", class:"btn btn-large btn-primary btn-block mvm span12", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
           .tiny.text-center.mbxl
             Your membership is private. It’s just between you and #{capitalize_phrase(@company.name)}.
           .pbm
