@@ -16,7 +16,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: innercircle_development
-  pool: 30
+  pool: 25
   host: localhost
   username: postgres
   password: postgres
@@ -25,7 +25,7 @@ production:
   adapter: postgresql
   encoding: unicode
   database: innercircle_production
-  pool: 5
+  pool: 25
   username: postgres
   password: postgres
 

@@ -2,6 +2,7 @@ production:
   adapter: postgresql
   encoding: unicode
   database: innercircle_production
+  pool: 25
   host: localhost
   port: 5432
   username: postgres
@@ -11,6 +12,7 @@ staging:
   adapter: postgresql
   encoding: unicode
   database: innercircle_staging
+  pool: 25
   host: localhost
   port: 5432
   username: postgres
