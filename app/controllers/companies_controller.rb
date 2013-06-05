@@ -63,6 +63,11 @@ class CompaniesController < ApplicationController
   end
 
   def update
+    if params[:commit] == "Delete company"
+      company_name = current_company.name
+      current_company.destroy
+      return redirect_to companies_url(subdomain:false), notice:"#{company_name} destroyed"
+    end
     @notice = nil
     @company.assign_attributes params[:company]
     @verticals = params[:verticals] || []

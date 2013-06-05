@@ -142,4 +142,8 @@
                     - if admin.pending
                       %em
                         = link_to(" - pending", admin_invite_url(admin.admin_invite_token), :class=>"gray-light")
-
+          - if current_user.god?
+            .row-fluid
+              .span12
+                =form_for @company, :html=>{:class=>"delete-company-form"} do |f|
+                  = f.submit "Delete company", class:"btn btn-warning", onclick:"return confirm('Are you sure?');"
