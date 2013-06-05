@@ -15,15 +15,19 @@ class ApplicationController < ActionController::Base
 
   def authorize
     if current_user
-      return if current_user.god?
-      Company.find_by_subdomain!(request.subdomain).users.select("users.id").where(role:"admin").each {|user| return if user.id == current_user.id} #Get list of all admins for the company being accessed (through the subdomain) and make sure the current user is an admin for that company
+      #God users included in has_privileges_to logic
+      return if current_user.has_privileges_to(current_company.id)
     end
     redirect_to(login_url)
   end
 
   def authorize_user
-    return if User.find(params[:id]) == current_user #Check to see that they match up with the id being requested
-    authorize #defer to authorize, which checks for admin and god
+    return if User.find(params[:id]) == current_user
+
+    # Check if user is admin/god and they have access to the user
+    return if current_user.has_privileges_to(current_company.id) && current_company.users.map(&:id).include?(params[:id].to_i)
+
+    redirect_to(login_url)
   end
 
   def belongs_to_current_user?

@@ -29,11 +29,17 @@ class User < ActiveRecord::Base
     assoc.nil? ? nil : assoc.star_rating
   end
 
+  def has_privileges_to(company_id)
+    owned_companies.map(&:id).include?(company_id)
+  end
+
   def owned_companies
     if god?
       return Company.all
     elsif admin?
       return companies
+    else
+      return []
     end
   end
 

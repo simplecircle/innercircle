@@ -12,5 +12,10 @@ namespace :content do
       TumblrWorker.perform_async(company.id) if !company.tumblr.blank?
     end
   end
+  task :send_updates => :environment do
+    Company.all.each do |company|
+      company.send_content_update
+    end
+  end
 end
 
