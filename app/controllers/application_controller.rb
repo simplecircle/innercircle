@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
 
   def referrer
     referrer = request.env["HTTP_REFERER"]
-    (referrer.nil? || referrer.match(/(jobcrush\.)|(innercircle\.)|(\.circ\.)/i).nil?) ? "external" : "internal"
+    (referrer.nil? || referrer.match(/(simplestream\.)|(jobcrush\.)|(innercircle\.)|(\.circ\.)/i).nil?) ? "external" : "internal"
   end
 
   def sort_by_star_rating(array, company_id)
