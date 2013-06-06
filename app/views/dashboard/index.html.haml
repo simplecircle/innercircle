@@ -143,7 +143,20 @@
                       %em
                         = link_to(" - pending", admin_invite_url(admin.admin_invite_token), :class=>"gray-light")
           - if current_user.god?
+            .row-fluid.dashboard-header.bb-1.mtxl
+              .span8
+                %h3.mbn
+                  God Actions
             .row-fluid
               .span12
-                =form_for @company, :method=>"delete" do |f|
+                = form_for @company, :html=>{:class=>"mtl company-show-in-index-form"} do |f|
+                  %strong Show in index?
+                  %label.inline-radio-label.mlm{:for=>"company_show_in_index_true"}
+                    = f.radio_button :show_in_index, true, :checked=> @company.show_in_index
+                    Yes
+                  %label.inline-radio-label.mlm{:for=>"company_show_in_index_false"}
+                    = f.radio_button :show_in_index, false, :checked=> !@company.show_in_index
+                    No
+                  %span.save-callback-message.mll
+                = form_for @company, :method=>"delete" do |f|  
                   = f.submit "Delete company", class:"btn btn-warning", onclick:"return confirm('Are you sure?');"

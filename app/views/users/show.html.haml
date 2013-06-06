@@ -10,7 +10,7 @@
             - [4, 3, 2, 1].each do |rating|
               =f.radio_button(:star_rating, rating, :checked=> rating==@star_rating, :class=>"rating-input")
               %label.rating-star{:for=>"user_star_rating_#{rating}"}
-          %span.inline_error.mlm#star-save-error
+          %span.mlm#star-save-error
       = link_to(@user.profile.url, @user.profile.url, target:"_blank") if @user.profile.url
       %br
       = mail_to(@user.email, nil)

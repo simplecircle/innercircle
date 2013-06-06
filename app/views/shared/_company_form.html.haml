@@ -92,52 +92,52 @@
     %label.control-label{:for=>:instagram_username} Instagram username
     .controls.controls-row
       = co.text_field :instagram_username, {:class=>'span10', :placeholder=>'username'}
-      %label.span1.radio-label{:for=>"company_instagram_username_auto_publish_on"}
+      %label.span1.radio-label{:for=>"company_instagram_username_auto_publish_true"}
         On
-        = co.radio_button :instagram_username_auto_publish, "on", :checked=> @company.instagram_username_auto_publish
-      %label.span1.radio-label{:for=>"company_instagram_username_auto_publish_off"}
+        = co.radio_button :instagram_username_auto_publish, true, :checked=> @company.instagram_username_auto_publish
+      %label.span1.radio-label{:for=>"company_instagram_username_auto_publish_false"}
         Off
-        = co.radio_button :instagram_username_auto_publish, "off", :checked=> !@company.instagram_username_auto_publish
+        = co.radio_button :instagram_username_auto_publish, false, :checked=> !@company.instagram_username_auto_publish
   .control-group
     %label.control-label{:for=>:instagram_location_id} Instagram location
     .controls.controls-row
       = co.text_field :instagram_location_id, {:class=>'span10', :placeholder=>'instagram or foursquare location id'}
-      %label.span1.radio-label{:for=>"company_instagram_location_auto_publish_on"}
+      %label.span1.radio-label{:for=>"company_instagram_location_auto_publish_true"}
         On
-        = co.radio_button :instagram_location_auto_publish, "on", :checked=> @company.instagram_location_auto_publish
-      %label.span1.radio-label{:for=>"company_instagram_location_auto_publish_off"}
+        = co.radio_button :instagram_location_auto_publish, true, :checked=> @company.instagram_location_auto_publish
+      %label.span1.radio-label{:for=>"company_instagram_location_auto_publish_false"}
         Off
-        = co.radio_button :instagram_location_auto_publish, "off", :checked=> !@company.instagram_location_auto_publish
+        = co.radio_button :instagram_location_auto_publish, false, :checked=> !@company.instagram_location_auto_publish
   .control-group
     %label.control-label{:for=>:facebook} Facebook
     .controls.controls-row
       = co.text_field :facebook, {:class=>'span10', :placeholder=>'username'}
-      %label.span1.radio-label{:for=>"company_facebook_auto_publish_on"}
+      %label.span1.radio-label{:for=>"company_facebook_auto_publish_true"}
         On
-        = co.radio_button :facebook_auto_publish, "on", :checked=> @company.facebook_auto_publish
-      %label.span1.radio-label{:for=>"company_facebook_auto_publish_off"}
+        = co.radio_button :facebook_auto_publish, true, :checked=> @company.facebook_auto_publish
+      %label.span1.radio-label{:for=>"company_facebook_auto_publish_false"}
         Off
-        = co.radio_button :facebook_auto_publish, "off", :checked=> !@company.facebook_auto_publish
+        = co.radio_button :facebook_auto_publish, false, :checked=> !@company.facebook_auto_publish
   .control-group
     %label.control-label{:for=>:tumblr} Tumblr
     .controls.controls-row
       = co.text_field :tumblr, {:class=>'span10', :placeholder=>'tumblr url'}
-      %label.span1.radio-label{:for=>"company_tumblr_auto_publish_on"}
+      %label.span1.radio-label{:for=>"company_tumblr_auto_publish_true"}
         On
-        = co.radio_button :tumblr_auto_publish, "on", :checked=> @company.tumblr_auto_publish
-      %label.span1.radio-label{:for=>"company_tumblr_auto_publish_off"}
+        = co.radio_button :tumblr_auto_publish, true, :checked=> @company.tumblr_auto_publish
+      %label.span1.radio-label{:for=>"company_tumblr_auto_publish_false"}
         Off
-        = co.radio_button :tumblr_auto_publish, "off", :checked=> !@company.tumblr_auto_publish
+        = co.radio_button :tumblr_auto_publish, false, :checked=> !@company.tumblr_auto_publish
   .control-group
     %label.control-label{:for=>:foursquare_v2_id} Foursquare
     .controls.controls-row
       = co.text_field :foursquare_v2_id, {:class=>'span10', :placeholder=>'foursquare location id'}
-      %label.span1.radio-label{:for=>"company_foursquare_auto_publish_on"}
+      %label.span1.radio-label{:for=>"company_foursquare_auto_publish_true"}
         On
-        = co.radio_button :foursquare_auto_publish, "on", :checked=> @company.foursquare_auto_publish
-      %label.span1.radio-label{:for=>"company_foursquare_auto_publish_off"}
+        = co.radio_button :foursquare_auto_publish, true, :checked=> @company.foursquare_auto_publish
+      %label.span1.radio-label{:for=>"company_foursquare_auto_publish_false"}
         Off
-        = co.radio_button :foursquare_auto_publish, "off", :checked=> !@company.foursquare_auto_publish
+        = co.radio_button :foursquare_auto_publish, false, :checked=> !@company.foursquare_auto_publish
   .span10.offset2.mbxl.mtl
     = co.submit @submit_button_text || "Create account", class:"btn btn-large span10"
 

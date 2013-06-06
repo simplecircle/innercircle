@@ -8,13 +8,11 @@ class CompaniesController < ApplicationController
     if current_user && current_user.god?
       @user = current_user
       @company = @user.companies.build
+      @verticals = Vertical.all
+      redirect_to signup_url(subdomain: false) if !request.subdomain.empty?
     else
-      @company = Company.new
-      @user = @company.users.build
-      @profile = @user.build_profile
+      return redirect_to root_url
     end
-    @verticals = Vertical.all
-    redirect_to signup_url(subdomain: false) if !request.subdomain.empty?
   end
 
   def create
@@ -63,6 +61,11 @@ class CompaniesController < ApplicationController
   end
 
   def update
+    if params[:commit] == "update_show_in_index"
+      current_company.update_attribute(:show_in_index, params[:company][:show_in_index]) if current_user.god?
+      return render :nothing => true
+    end
+
     @notice = nil
     @company.assign_attributes params[:company]
     @verticals = params[:verticals] || []
@@ -81,6 +84,7 @@ class CompaniesController < ApplicationController
   end
 
   def destroy
+    return if !current_user.god?
     company_name = current_company.name
     current_company.destroy
     redirect_to companies_url(subdomain:false), notice:"#{company_name} destroyed"

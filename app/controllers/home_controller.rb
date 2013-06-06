@@ -11,7 +11,7 @@ class HomeController < ApplicationController
       
       @companyrows = []
       currentrow = []
-      Company.order('last_published_posts_at DESC').each do |co|
+      Company.where(:show_in_index=>true).order('last_published_posts_at DESC').each do |co|
         if currentrow.length > 1
           @companyrows << currentrow
           currentrow = []
