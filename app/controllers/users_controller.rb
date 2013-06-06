@@ -114,7 +114,7 @@ class UsersController < ApplicationController
       user = User.find(params[:id])
       star_rating = params[:user][:star_rating].to_i
       save_star_rating(star_rating, user.id, @company.id)
-      return redirect_to :back
+      return render :nothing => true
     end
     @user.assign_attributes(params[:user])
 
