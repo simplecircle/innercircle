@@ -8,13 +8,11 @@ class CompaniesController < ApplicationController
     if current_user && current_user.god?
       @user = current_user
       @company = @user.companies.build
+      @verticals = Vertical.all
+      redirect_to signup_url(subdomain: false) if !request.subdomain.empty?
     else
-      @company = Company.new
-      @user = @company.users.build
-      @profile = @user.build_profile
+      return redirect_to root_url
     end
-    @verticals = Vertical.all
-    redirect_to signup_url(subdomain: false) if !request.subdomain.empty?
   end
 
   def create
