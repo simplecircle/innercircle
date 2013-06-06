@@ -44,7 +44,7 @@
                 - @creative.each do |talent|
                   = link_to user_url(talent) do
                     %li.bb-1
-                      %span.talent-email= talent.email
+                      = talent.email.downcase
                       %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
                       %span.rating
                         - talent.star_rating(@company.id).times do |rating|
@@ -56,7 +56,7 @@
                 - @operations.each do |talent|
                   = link_to user_url(talent) do
                     %li.bb-1
-                      = talent.email
+                      = talent.email.downcase
                       %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
                       %span.rating
                         - talent.star_rating(@company.id).times do |rating|
@@ -68,7 +68,7 @@
                 - @sales_marketing.each do |talent|
                   = link_to user_url(talent) do
                     %li.bb-1
-                      = talent.email
+                      = talent.email.downcase
                       %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
                       %span.rating
                         - talent.star_rating(@company.id).times do |rating|
@@ -80,7 +80,7 @@
                 - @technology.each do |talent|
                   = link_to user_url(talent) do
                     %li.bb-1
-                      = talent.email
+                      = talent.email.downcase
                       %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
                       %span.rating
                         - talent.star_rating(@company.id).times do |rating|
