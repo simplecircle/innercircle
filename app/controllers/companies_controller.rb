@@ -83,7 +83,7 @@ class CompaniesController < ApplicationController
   def destroy
     company_name = current_company.name
     current_company.destroy
-    return redirect_to companies_url(subdomain:false), notice:"#{company_name} destroyed"
+    redirect_to companies_url(subdomain:false), notice:"#{company_name} destroyed"
   end
 
   def get_instagram_location_id(foursquare_v2_id)
