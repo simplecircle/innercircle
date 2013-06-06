@@ -145,5 +145,5 @@
           - if current_user.god?
             .row-fluid
               .span12
-                =form_for @company, :html=>{:class=>"delete-company-form"} do |f|
+                =form_for @company, :method=>"delete" do |f|
                   = f.submit "Delete company", class:"btn btn-warning", onclick:"return confirm('Are you sure?');"
