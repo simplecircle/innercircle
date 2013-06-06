@@ -4,7 +4,7 @@ class Profile < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :job_title, :url, :user_id, :skills, :linkedin_data, :linkedin_profile
 
   belongs_to :user
-  has_many :profiles_company_depts
+  has_many :profiles_company_depts, :dependent => :destroy
   has_many :company_depts, through: :profiles_company_depts
   after_validation :add_url_protocol
 

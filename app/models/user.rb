@@ -2,9 +2,10 @@ class User < ActiveRecord::Base
 
   attr_accessible :company_id, :email, :first_name, :last_name, :password_digest, :password, :password_confirmation, :role, :profile_attributes, :pending
 
-  has_many :users_companies
+  has_many :users_companies, :dependent => :destroy
   has_many :companies, through: :users_companies
   has_one :profile, :dependent => :destroy
+  
   accepts_nested_attributes_for :profile, :users_companies
   before_create { generate_token(:auth_token) }
 
