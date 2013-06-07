@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606182225) do
+ActiveRecord::Schema.define(:version => 20130607162049) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -29,12 +29,12 @@ ActiveRecord::Schema.define(:version => 20130606182225) do
     t.string   "hq_city"
     t.string   "hq_state"
     t.string   "employee_count"
-    t.string   "logo_cache"
     t.string   "foursquare_v2_id"
     t.string   "instagram_uid"
     t.boolean  "instagram_username_auto_publish",               :default => true
     t.boolean  "instagram_location_auto_publish",               :default => false
     t.string   "instagram_location_id"
+    t.string   "logo_cache"
     t.boolean  "facebook_auto_publish",                         :default => true
     t.boolean  "tumblr_auto_publish",                           :default => true
     t.boolean  "twitter_auto_publish",                          :default => true
@@ -135,7 +135,6 @@ ActiveRecord::Schema.define(:version => 20130606182225) do
     t.string   "email"
     t.string   "role"
     t.string   "password_digest"
-    t.integer  "company_id"
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
     t.string   "first_name"
@@ -148,7 +147,6 @@ ActiveRecord::Schema.define(:version => 20130606182225) do
     t.boolean  "pending",                :default => false
   end
 
-  add_index "users", ["company_id"], :name => "index_users_on_company_id"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["first_name"], :name => "index_users_on_first_name"
   add_index "users", ["last_name"], :name => "index_users_on_last_name"
