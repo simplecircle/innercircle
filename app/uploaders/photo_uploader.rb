@@ -25,9 +25,11 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   def large
     manipulate! do |img|
-      img.auto_orient!
-      img.change_geometry!('550') { |cols, rows, img| img.resize!(cols, rows)}
-      # Persist width and height of the "large" image and not the orig version.
+      unless img.format == "GIF"
+        img.auto_orient!
+        img.change_geometry!('550') { |cols, rows, img| img.resize!(cols, rows)}
+        # Persist width and height of the "large" image and not the orig version.
+      end
       model.width = img.columns
       model.height = img.rows
       img
@@ -36,8 +38,11 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   def medium
     manipulate! do |img|
-      img.auto_orient!
-      img.change_geometry!('300x300^') { |cols, rows, img| img.resize!(cols, rows)}
+      unless img.format == "GIF"
+        img.auto_orient!
+        img.change_geometry!('300x300^') { |cols, rows, img| img.resize!(cols, rows)}
+      end
+      img
     end
   end
 

@@ -3,7 +3,7 @@ module CarrierWave
 
     def quality(percentage)
       manipulate! do |img|
-        img.write(current_path){ self.quality = percentage } unless img.quality == percentage
+        img.write(current_path){ self.quality = percentage } unless img.quality == percentage || img.format == "GIF"
         img = yield(img) if block_given?
         img
       end
