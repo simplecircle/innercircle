@@ -6,13 +6,14 @@ class Company < ActiveRecord::Base
   has_many :users, through: :users_companies
   has_many :companies_verticals, :dependent => :destroy
   has_many :verticals, through: :companies_verticals
-  
+
   before_create :set_last_reviewed_posts_at
   accepts_nested_attributes_for :users, :users_companies
   after_validation :add_url_protocol
-  after_save :load_new_provider_content
+  after_update :update_provider_content
+  after_commit :create_provider_content, on: :create
   mount_uploader :logo, LogoUploader
-  
+
   before_validation :add_hash_symbol_to_hex_code
   validate :validate_hex_code
   validates :name, presence:true
@@ -29,16 +30,20 @@ class Company < ActiveRecord::Base
     users.where(:role=>"admin")
   end
 
+  def create_provider_content
+    Post.import_from_provider(self)
+  end
+
   def self.provider_fields
     ["foursquare_v2_id", "facebook", "tumblr", "instagram_location_id", "instagram_username"]
   end
 
-  def load_new_provider_content
+  def update_provider_content
     changed_providers = []
     self.changes.each do |field, change|
       changed_providers << field if !change[1].blank? && Company.provider_fields.include?(field)
     end
-    Post.new_from_provider(self, changed_providers) unless changed_providers.length == 0
+    Post.import_from_provider(self, changed_providers) unless changed_providers.length == 0
   end
 
   def last_published_time

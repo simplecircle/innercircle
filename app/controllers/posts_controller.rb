@@ -3,12 +3,6 @@ class PostsController < ApplicationController
   before_filter :find_resource, only: [:index]
   before_filter :authorize
 
-  def new_from_provider
-    company = current_company
-    Post.new_from_provider(company)
-    redirect_to posts_url(subdomain: company.subdomain)
-  end
-
   def update
     @post = Post.find(params[:id])
     @post.remote_photo_url = @post.media_url

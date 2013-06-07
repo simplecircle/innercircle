@@ -42,6 +42,13 @@ class LogoUploader < CarrierWave::Uploader::Base
      %w(jpg jpeg png gif)
    end
 
+  def remove!
+    begin
+      super
+    rescue Fog::Storage::Rackspace::NotFound
+    end
+  end
+
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
     CarrierWave.configure do |config|
