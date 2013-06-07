@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :company_id, :email, :first_name, :last_name, :password_digest, :password, :password_confirmation, :role, :profile_attributes, :pending
+  attr_accessible :email, :first_name, :last_name, :password_digest, :password, :password_confirmation, :role, :profile_attributes, :pending
 
   has_many :users_companies, :dependent => :destroy
   has_many :companies, through: :users_companies

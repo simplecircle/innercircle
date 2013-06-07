@@ -94,7 +94,7 @@ class UsersController < ApplicationController
         @profile.first_name = info["first_name"]
         @profile.last_name = info["last_name"]
         @profile.url = info["urls"]["public_profile"]
-        @incoming_tags = @incoming_tags + ',' + auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",")
+        @incoming_tags = @incoming_tags + ',' + auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",") unless auth["extra"]["raw_info"]["skills"].nil?
 
         session[:callback_token] = nil
         if @is_new_user
