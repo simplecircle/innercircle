@@ -23,8 +23,9 @@ class InstagramLocationWorker
 
   def import(company, next_max_id=nil)
     media = self.get_media(company.instagram_location_id, next_max_id)
+    return if media.blank?
 
-    media["pagination"].empty? ? next_max_id = nil : next_max_id = media["pagination"]["next_max_id"]
+    media["pagination"].blank? ? next_max_id = nil : next_max_id = media["pagination"]["next_max_id"]
     media["data"].each do |post|
       logger.info "#{company.subdomain} -- existing post?"
       unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
