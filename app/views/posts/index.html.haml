@@ -2,7 +2,9 @@
   .container-fluid
     .row-fluid
       .span12.mobile-padding
-        %h2 Content library
+        %h2 
+          Content library
+          = link_to "Show Profile", root_url, class:"btn pull-right"
         %h4 Publish great photos that show what it’s like to work at #{capitalize_phrase(@company.name)}
         %hr
   %ul#masonry.masonry-unpublished

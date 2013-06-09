@@ -4,7 +4,9 @@
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
+    .nav-collapse-border-div.pull-right
     = link_to(image_tag("inner_circle_logo.png"), root_url(subdomain:false, src:"nav"), :class=>"brand")
+    = image_tag(@company.logo_url(:large), :class=>"navbar-company-logo") if @company && @referrer && @referrer == "internal"
     .nav-collapse.collapse
       %ul.nav.pull-right
         - if current_user && current_user.god?
@@ -24,5 +26,5 @@
               %li= link_to "Edit Your Profile", :controller => "users", :action=> "edit", :id => current_user.id
               %li= link_to "Logout", logout_url(subdomain:false)
         - else
-          %li= link_to("Hiring? Learn how we can help.", for_companies_url(subdomain:false), class:"#{'company-cta' if controller.controller_name == 'home'}")
+          %li= link_to("Hiring?", for_companies_url(subdomain:false), class:"#{'company-cta' if controller.controller_name == 'home'}")
           %li= link_to "Login", login_url
