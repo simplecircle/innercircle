@@ -40,6 +40,8 @@ class TumblrWorker
         new_post.media_url = post["photos"][0]["alt_sizes"][0]["url"]
         new_post.media_url_small = post["photos"][0]["alt_sizes"][0]["url"]
         new_post.media_url_small = !post["photos"][0]["alt_sizes"][3].blank? ? post["photos"][0]["alt_sizes"][3]["url"] : post["photos"][0]["alt_sizes"][2]["url"]
+        new_post.width = post["photos"][0]["alt_sizes"][3]["width"]
+        new_post.height = post["photos"][0]["alt_sizes"][3]["height"]
         new_post.like_count = post["note_count"]
         new_post.caption = post["caption"]
         new_post.auto_published = @first_run ? false : company.tumblr_auto_publish

@@ -38,6 +38,8 @@ class FoursquareWorker
             provider_raw_data:JSON.parse(post.to_json),
             media_url:post["sizes"]["items"][0]["url"],
             media_url_small:post["sizes"]["items"][1]["url"],
+            width:post["sizes"]["items"][1]["width"],
+            height:post["sizes"]["items"][1]["height"],
             like_count:0,
             auto_published: @first_run ? false : company.foursquare_auto_publish,
             published: @first_run ? false : company.foursquare_auto_publish,

@@ -56,6 +56,8 @@ class FacebookWorker
               provider_raw_data:JSON.parse(post.to_json),
               media_url:post["images"].first["source"],
               media_url_small:post["images"][5]["source"],
+              width:post["images"][5]["width"],
+              height:post["images"][5]["height"],
               like_count:0, #This gets updated when a user publishes an actual photo
               caption:post["name"],
               auto_published: @first_run ? false : company.facebook_auto_publish,

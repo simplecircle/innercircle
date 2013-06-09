@@ -37,6 +37,8 @@ class InstagramLocationWorker
         new_post.provider_raw_data = JSON.parse(post.to_json)
         new_post.media_url = post["images"]["standard_resolution"]["url"]
         new_post.media_url_small = post["images"]["low_resolution"]["url"]
+        new_post.width = post["images"]["low_resolution"]["width"]
+        new_post.height = post["images"]["low_resolution"]["height"]
         new_post.like_count = post["likes"]["count"]
         new_post.caption = post["caption"]["text"] if post["caption"]
         new_post.auto_published = @first_run ? false : company.instagram_location_auto_publish
