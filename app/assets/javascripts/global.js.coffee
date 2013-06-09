@@ -8,8 +8,12 @@ $(document).ready ->
 
   setHeight = (columnCount, containerWidth, items) ->
     $.each items, ->
-      width = containerWidth/columnCount
-      $(this).height(width * $(this).data("aspect-ratio"))
+      width = (containerWidth/columnCount)
+      if mode == "unpublished"
+        # Add some padding for the info bar
+        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+20)
+      else
+        $(this).height(Math.round(width * $(this).data("aspect-ratio")))
 
   if mode == "unpublished"
     items = $(unpublishedContainer).find("li")
@@ -73,9 +77,10 @@ $(document).ready ->
                 columnWidth: (unpublishedContainerWidth ) ->
                   unpublishedContainerWidth / 2
               $(unpublishedContainer).find("li").css('width', '44%')
-
-            setHeight(4, unpublishedContainerWidth, newItems)
-            unpublishedContainer.masonry( 'appended', newItems );
+              setHeight(2, unpublishedContainerWidth, newItems)
+            else
+              setHeight(4, unpublishedContainerWidth, newItems)
+            unpublishedContainer.masonry( 'appended', newItems);
           else
             setHeight(2, containerWidth, newItems)
             container.masonry( 'appended', newItems );
