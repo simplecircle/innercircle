@@ -1,5 +1,5 @@
 - posts.each do |post|
-  %li{id:post.id}
+  %li{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}"}}
     .photo
       .post-info-bar
         - case post.provider
