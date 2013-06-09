@@ -38,11 +38,11 @@ $(document).ready ->
     # $(window).resize ->
       # container.width($(window).width()-323)
     columnCount = 2
+    items = $(container).find("li")
+    setHeight(columnCount, containerWidth, items)
     container.masonry
       columnWidth: (containerWidth ) ->
        containerWidth/columnCount
-    items = $(container).find("li")
-    setHeight(columnCount, containerWidth, items)
     items.fadeIn("fast")
 
 
