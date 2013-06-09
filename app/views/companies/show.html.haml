@@ -7,7 +7,7 @@
   %meta{property:"og:description", content:"See what it's like to work at #{@company.name} and get updates on relevant opportunities"}
 = render 'shared/social_tag_script'
 .mbl
-#sidebar
+/ #sidebar
 #company-info{class:"pull-left", style:"position:#{'fixed !important;' if referrer == "external"};"}
   %section
     #logo= link_to(image_tag(@company.logo_url(:large)), @company.website_url, target:"blank")

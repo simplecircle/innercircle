@@ -25,14 +25,14 @@ class Post < ActiveRecord::Base
   def portrait?
     height > width
   end
-  def height_to_width
+  def aspect_ratio
     width > 0 ? height.to_f / width.to_f : 1
   end
   def wrapper_class
     landscape? ? 'landscape' : 'portrait'
   end
   def offset(wrapper_width)
-    offset_val = ([height_to_width, 1 / height_to_width].max * wrapper_width - wrapper_width) / 2
+    offset_val = ([aspect_ratio, 1 / aspect_ratio].max * wrapper_width - wrapper_width) / 2
     "#{landscape? ? 'left' : 'top'}:-#{offset_val}px;"
   end
 end
