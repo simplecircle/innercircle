@@ -6,15 +6,13 @@
   %meta{property:"og:title", content:"#{@company.name} on inner circle - Find Great Companies in Creative and Tech"}
   %meta{property:"og:description", content:"See what it's like to work at #{@company.name} and get updates on relevant opportunities"}
 = render 'shared/social_tag_script'
-.mbl
-/ #sidebar
-#company-info{class:"pull-left", style:"position:#{'fixed !important;' if referrer == "external"};"}
-  %section
-    #logo= link_to(image_tag(@company.logo_url(:large)), @company.website_url, target:"blank")
+#company-info
+  %section.mobile-padding
+    #logo{:class=>"#{@referrer}"}= link_to(image_tag(@company.logo_url(:large)), @company.website_url, target:"blank")
     = @company.short_description
     .tiny.gray-light= "#{@company.hq_city}, #{@company.hq_state} - #{@company.employee_count.gsub(/_/, "-")} employees"
   %hr
-  %section
+  %section.mobile-padding
     %p
       Privately join #{capitalize_phrase(@company.name)}’s talent-community to be notified of future job openings that match your skills.
       %br
@@ -22,14 +20,17 @@
         = link_to("Join talent-community", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
       - else
         = link_to("Join talent-community", join_url(subdomain: @company.subdomain, local_join:"true"), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+      .powered-by.visible-phone
+        Powered by
+        =link_to(image_tag("inner_circle_logo.png"), root_url(subdomain: false))
 
   %hr
   - if @referrer == "external"
-    %section
+    %section.mobile-padding.hidden-phone
       .powered-by
         Powered by
         =link_to(image_tag("inner_circle_logo.png"), root_url(subdomain: false))
-  %section.social-links.tac.mtl
+  %section.social-links.tac.mtl.hidden-phone
     = render 'shared/social_tags', url:root_url
 
 %ul#masonry.masonry-published
