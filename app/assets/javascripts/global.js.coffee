@@ -17,22 +17,13 @@ $(document).ready ->
 
   if mode == "unpublished"
     items = $(unpublishedContainer).find("li")
-    if window.innerWidth > 768
-      columnCount = 4
-      setHeight(columnCount, unpublishedContainerWidth, items)
-      unpublishedContainer.masonry
-        columnWidth: (unpublishedContainerWidth ) ->
-         unpublishedContainerWidth/columnCount
-      items.fadeIn("fast")
-    else
-      # Two columns for phones please
-      columnCount = 2
-      setHeight(columnCount, unpublishedContainerWidth, items)
-      unpublishedContainer.masonry
-        columnWidth: (unpublishedContainerWidth ) ->
-         unpublishedContainerWidth/columnCount
-      items.css('width', '44%')
-      items.fadeIn("fast")
+    columnCount = if window.innerWidth > 768 then 4 else 2
+    setHeight(columnCount, unpublishedContainerWidth, items)
+    unpublishedContainer.masonry
+      columnWidth: (unpublishedContainerWidth ) ->
+       unpublishedContainerWidth/columnCount
+    if window.innerWidth <= 768 then items.css('width', '44%')
+    items.fadeIn("fast")
   else
     columnCount = if window.innerWidth > 570 then 2 else 1
     items = $(container).find("li")
