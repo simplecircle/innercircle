@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
       .nav-collapse-border-div.pull-right
-    = link_to(image_tag("inner_circle_logo.png"), root_url(subdomain:false, src:"nav"), :class=>"brand")
+    = link_to(image_tag("inner_circle_logo.png"), root_url(subdomain:false, src:"nav"), :class=>"brand#{' hidden-phone' if @hide_logo_on_mobile}")
     = image_tag(@company.logo_url(:large), :class=>"navbar-company-logo") if @company && @referrer && @referrer == "internal"
     - if current_user
       .nav-collapse.collapse
