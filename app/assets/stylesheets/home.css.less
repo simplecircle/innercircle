@@ -3,14 +3,9 @@
 @import "variables.css.less";
 
 #home {
-  @media (max-width: 570px) {
-    .filmstrip-image img {
-      left: 0 !important;
-      top: 0 !important;
-    }
-  }
   #homepage-bottom {
     background-color: white;
+    box-sizing: border-box;
     padding:15px 15px 30px 15px;
   }
   #homepage-top {
@@ -83,5 +78,17 @@
   .social-links {
     text-align: center;
     height: 20px;
+  }
+  @media (max-width: 570px) {
+    .filmstrip-image img {
+      left: 0 !important;
+      top: 0 !important;
+    }
+    #homepage-top {
+      text-align: left;
+    }
+    #homepage-bottom {
+      padding: 5px;
+    }
   }
 }

@@ -1,6 +1,6 @@
-.container-fluid
+.container
   .row-fluid
-    .span10.offset1.mobile-padding.white-background.mtxl
+    .span12.mobile-padding.white-background.mtxl
       = render "shared/flash", :flash=>flash unless flash.blank?
       .row-fluid.dashboard-header.bb-1
         .span7
@@ -12,13 +12,13 @@
             = link_to("Edit company profile", :controller => "companies", :action=>"edit", :id=>@company.id)
   -if @company.posts_to_review_count > 0
     .row-fluid
-      .span10.offset1.mobile-padding.white-background
+      .span12.mobile-padding.white-background
         %section#awaiting-approval-box.highlight.tac
           %h4#awaiting-approval-message.mrl= "#{@company.posts_to_review_count} posts awaiting approval"
           =link_to("Review now", posts_url, :class=>"btn btn-warning btn-large")
 
   .row-fluid
-    .span10.offset1.mobile-padding.ptxl.white-background
+    .span12.mobile-padding.ptxl.white-background
       .row-fluid
         .span7
           .row-fluid.dashboard-header.bb-1
@@ -159,4 +159,4 @@
                     No
                   %span.save-callback-message.mll
                 = form_for @company, :method=>"delete" do |f|  
-                  = f.submit "Delete company", class:"btn btn-warning", onclick:"return confirm('Are you sure?');"
+                  = f.submit "Delete company", class:"btn btn-mini btn-warning", onclick:"return confirm('Are you sure?');"
