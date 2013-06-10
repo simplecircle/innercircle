@@ -248,12 +248,14 @@ input[type="file"]{
 .nav-collapse-border-div {
   border-left: 1px solid #cecece;
   width: 1px;
-  height: 40px;
+  height: 60px;
   position: absolute;
   right: 50px;
+  transition: opacity, height 0.5s;
 }
-.navbar-inner.collapsed .nav-collapse-border-div {
-  height: 60px;
+.navbar-inner.expanded .nav-collapse-border-div {
+  height: 40px;
+  opacity: 0;
 }
 .form-row {
   max-width: 529px;

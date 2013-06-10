@@ -57,6 +57,25 @@
       margin-right: 0 !important;
     }
   }
+  .nav-collapse {
+    .nav {
+      margin-bottom: 0;
+      & > li {
+        border-bottom: 1px solid #ddd;
+        &:nth-last-child(1) { border-bottom: none;}
+        & > a {
+          padding: 7px;
+          font-weight: normal;
+        }
+      }
+    }
+    .dropdown-menu {
+      a {
+        font-weight: normal;
+        border-radius: 0;
+      }
+    }
+  }
   .nav-no-collapse a {
     font-size: 13px !important;
     padding-top:10px !important;
@@ -65,11 +84,6 @@
     margin:0;
     .navbar-inner{
       background-image:none;
-    }
-    .nav > li > a {
-      padding-top:7px;
-      font-size:20px;
-      color:@gray;
     }
   }
   /*This fixes rotation bug on mobile views that have form fields*/

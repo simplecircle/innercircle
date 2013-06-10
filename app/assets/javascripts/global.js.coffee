@@ -17,12 +17,12 @@ $(document).ready ->
 
   if mode == "unpublished"
     items = $(unpublishedContainer).find("li")
-    columnCount = if window.innerWidth > 768 then 4 else 2
+    columnCount = if window.innerWidth > 570 then 4 else 2
     setHeight(columnCount, unpublishedContainerWidth, items)
     unpublishedContainer.masonry
       columnWidth: (unpublishedContainerWidth ) ->
        unpublishedContainerWidth/columnCount
-    if window.innerWidth <= 768 then items.css('width', '44%')
+    if window.innerWidth <= 570 then items.css('width', '44%')
     items.fadeIn("fast")
   else
     columnCount = if window.innerWidth > 570 then 2 else 1
@@ -84,3 +84,6 @@ $(document).ready ->
           dataType: "script"
           success: success
           async: true
+
+  #Nav collapse fix
+  $('[data-target=".nav-collapse"]').click () -> $('.navbar-inner').toggleClass('expanded')
