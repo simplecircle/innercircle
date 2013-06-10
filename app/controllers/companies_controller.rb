@@ -42,6 +42,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
+    @hide_logo_on_mobile = true
     @posts = @company.posts.where(published:true).order("provider_publication_date DESC").paginate(:page => params[:page], per_page:8)
     @is_not_fixed = true
     @referrer = referrer

@@ -1,13 +1,12 @@
-.container-fluid
-  - unless flash.blank?
-    .row-fluid
-      .span4.column-center.mobile-padding
-        = render "shared/flash", :flash=>flash
+.container
+  = render "shared/flash", :flash=>flash unless flash.blank?
+  .row-fluid
+    .span12.mtm.placeholder.visible-phone
   .row-fluid
     - if @is_admin_adding
       .mtxl
     - else
-      .span5.column-center
+      .span12.form-row-narrow.column-center
         - if @local_join
           #logo.column-center.mtm.mbm= image_tag(@company.logo_url(:large))
           %h4.text-center.mobile-padding.mtm.mbxl.lh-24 Create an <i>inner circle</i> account to privately join #{capitalize_phrase(@company.name)}’s talent-community
@@ -16,7 +15,7 @@
           %h4.text-center.mobile-padding.mbxl.ptl.lh-24 Privately join our talent-community to receive job opportunities that match your skills
       %hr
   .row-fluid
-    .span5.column-center.mobile-padding
+    .span12.form-row-narrow.column-center.mobile-padding
       = form_for @user do |f|
         = hidden_field_tag :is_admin_adding, @is_admin_adding
         = hidden_field_tag :local_join, @local_join
