@@ -1,15 +1,14 @@
-.container-fluid
-  - if @notice || @alert
-    .row-fluid
-      .span8.offset2
-        = render "shared/flash", :flash=>{:notice => @notice, :alert => @alert}
+.container
+  = render "shared/flash", :flash=>flash unless flash.blank?
   - if @is_new_user
     .row-fluid
-      .span5.column-center.mobile-padding
+      .span12.placeholder.visible-phone
+    .row-fluid
+      .span12.form-row-narrow.column-center.mobile-padding
         %h4.text-center Share a little info so we can match you with more relevant opportunities
     %hr
     .row-fluid
-      .span5.column-center.mobile-padding
+      .span12.form-row-narrow.column-center.mobile-padding
         = form_for @user, :url=>user_path(@auth_token), :html=>{:id=>"edit_user_#{@auth_token}", :class=>"user-onboarding-form"} do |f|
           -if !current_user
             .controls
@@ -40,26 +39,25 @@
               = f.submit("Save", class:"btn btn-large mtl span12" , style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
   - else
     .row-fluid
-      .span8.offset2.mobile-padding
-        .form-section-header
-        = form_for @user, :url=>user_path(@auth_token || @user.id), :html=>{:class=> 'form-horizontal', :id=>"edit_user_#{@auth_token || @user.id}"} do |f|
+      .span12.form-row.mobile-padding.column-center
+        = form_for @user, :url=>user_path(@auth_token || @user.id), :html=>{:class=> 'form-horizontal mtxl', :id=>"edit_user_#{@auth_token || @user.id}"} do |f|
           - if @user.profile.linkedin_profile.blank? && @user.talent?
             .control-group
               %label.control-label
               .controls
-                = link_to "Auto-fill with LinkedIn", {:controller => "users", :action=> "edit", :id => @user.id, :autofill=>"linkedin"}, {:class=>"btn btn-linkedin btn-large span8"}
+                = link_to "Auto-fill with LinkedIn", {:controller => "users", :action=> "edit", :id => @user.id, :autofill=>"linkedin"}, {:class=>"btn btn-linkedin btn-large span12"}
           = f.fields_for :profile do |p|
             .control-group
               %label.control-label Name
               .controls.controls-row
-                = p.text_field :first_name, class:"span4", placeholder: "First Name"
-                = p.text_field :last_name, class:"span4", placeholder: "Last Name"
+                = p.text_field :first_name, class:"span6", placeholder: "First Name"
+                = p.text_field :last_name, class:"span6", placeholder: "Last Name"
                 .inline_error= @user.profile.errors[:first_name].first
                 .inline_error= @user.profile.errors[:last_name].first
           .control-group
             %label.control-label{:for=>:email} Email
             .controls
-              = f.text_field :email, class:"span8", placeholder:"Email"
+              = f.text_field :email, class:"span12", placeholder:"Email"
               %span.help-block.small= link_to "Reset Password", send_password_reset_path, :id=>"reset-password-link"
               .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
 
@@ -76,17 +74,17 @@
               .control-group
                 %label.control-label Ideal Job Title
                 .controls
-                  = p.text_field :job_title, class:"span8", placeholder:"Ideal job title"
+                  = p.text_field :job_title, class:"span12", placeholder:"Ideal job title"
               .control-group
                 %label.control-label Website
                 .controls
-                  = p.text_field :url, class:"span8", placeholder:"Your site, blog or Linkedin profile"
+                  = p.text_field :url, class:"span12", placeholder:"Your site, blog or Linkedin profile"
                   %span.help-block.small Your site, blog or Linkedin profile
                   .inline_error= @user.profile.errors[:url].first
               .control-group
                 %label.control-label Skills & tools
                 .controls
-                  = text_field_tag nil, nil, {id:"skills", class:"span8"}
+                  = text_field_tag nil, nil, {id:"skills", class:"span12"}
                   %span.help-block.small List a few (e.g., Excel, baking, Ruby, Agile, responsive design)
                   %span#incoming-tags{style:"display:none;"}= @incoming_tags
                   %span#existing-tags{style:"display:none;"}= @tags
@@ -94,4 +92,4 @@
           .control-group
             %label.control-label
             .controls
-              = f.submit "Save", class:"btn btn-large mtl span8"
+              = f.submit "Save", class:"btn btn-large mtl span12"

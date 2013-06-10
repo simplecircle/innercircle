@@ -1,13 +1,19 @@
 #user
-  .span5.column-center
-    .span5.column-center.text-center
-      = render "shared/flash", :flash=>flash
-    .well
-      = form_tag login_url do
-        %p
-          = text_field_tag :email, params[:email], class:"input-block-level", placeholder:"Email"
-        %p
-          = password_field_tag :password, nil, class:"input-block-level", placeholder:"Password"
-        = submit_tag("Login", class:"btn btn-primary btn-block mbl")
-        = link_to("Forgot password?", new_password_reset_path)
+  .container
+    - if !flash.blank?
+      .row-fluid
+        .span12.form-row-narrow.column-center.mobile-padding
+          = render "shared/flash", :flash=>flash
+    .row-fluid
+      .span12.placeholder.visible-phone
+    .row-fluid
+      .span12.form-row-narrow.column-center.mobile-padding
+        .well
+          = form_tag login_url do
+            %p
+              = text_field_tag :email, params[:email], class:"input-block-level", placeholder:"Email"
+            %p
+              = password_field_tag :password, nil, class:"input-block-level", placeholder:"Password"
+            = submit_tag("Login", class:"btn btn-primary span12 mbl")
+            = link_to("Forgot password?", new_password_reset_path)
 

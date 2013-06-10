@@ -1,6 +1,6 @@
-.container-fluid
-  .row-fluid
-    .span10.offset1.mobile-padding
+.container
+  .row-fluid.mtl
+    .span12.column-center.mobile-padding.phxl
       %strong
         %h4= "#{@user.email} has not accepted their invitation yet"
         =form_for :admin_invite, :id=>@user.admin_invite_token, :method=>:delete do |f|

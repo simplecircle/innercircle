@@ -138,6 +138,5 @@
       %label.span1.radio-label{:for=>"company_foursquare_auto_publish_false"}
         Off
         = co.radio_button :foursquare_auto_publish, false, :checked=> !@company.foursquare_auto_publish
-  .span10.offset2.mbxl.mtl
-    = co.submit @submit_button_text || "Create account", class:"btn btn-large span10"
+  = co.submit @submit_button_text || "Create account", class:"btn btn-large span12 mtl"
 
