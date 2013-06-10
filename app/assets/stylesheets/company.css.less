@@ -9,11 +9,6 @@
     height: 20px;
     overflow: hidden;
   }
-  #masonry{
-    /*padding:20px;*/
-    background:white;
-    width:870px;
-  }
   #company-info{
     margin-top:20px;
     .box-sizing(border-box);
@@ -32,7 +27,35 @@
         margin-top:-3px;
         width:65px;
       }
-   }
+    }
+  }
+  #masonry{
+    background:white;
+    /*width:870px;*/
+    width:70%;
+    height:800px;
+    &.masonry-published{
+      border:15px solid white;
+      left:310px;
+      .box-sizing(border-box);
+      li{
+        width:50%;
+        width:49.5%;
+        margin-bottom:10px;
+        .box-sizing(border-box);
+        img{
+          min-width:100%;
+          border:1px solid @grayLighter;
+          .border-radius(4px);
+        }
+      }
+      li:nth-child(odd){
+        padding-right:5px;
+      }
+      li:nth-child(even){
+        padding-left:5px;
+      }
+    }
   }
   #sidebar{
     z-index: 1;
@@ -46,25 +69,6 @@
     height: 30px;
     margin-top: 5px;
     margin-bottom: 5px;
-  }
-  .masonry-published{
-    left:310px;
-      /*padding:5px;*/
-      .box-sizing(border-box);
-    li{
-      background:yellow;
-      /*margin-bottom:9px;*/
-      width:45.5%;
-      width:50%;
-      /*padding:5px;*/
-      .box-sizing(border-box);
-      /*padding-right:10px;*/
-      img{
-        min-width:100%;
-        border:1px solid @grayLighter;
-        .border-radius(4px);
-      }
-    }
   }
   .navbar{
     z-index: 3;

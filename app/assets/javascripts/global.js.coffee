@@ -10,10 +10,10 @@ $(document).ready ->
     $.each items, ->
       width = (containerWidth/columnCount)
       if mode == "unpublished"
-        # Add some padding for the info bar
-        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+20)
+        # Target img instead of li so info bar will be correctly placed
+        $(this).find('.photo img').height(Math.round(width * $(this).data("aspect-ratio")))
       else
-        $(this).height(Math.round(width * $(this).data("aspect-ratio")))
+        $(this).find('.photo img').height(Math.round(width * $(this).data("aspect-ratio")))
 
   if mode == "unpublished"
     items = $(unpublishedContainer).find("li")
@@ -34,16 +34,18 @@ $(document).ready ->
       items.css('width', '44%')
       items.fadeIn("fast")
   else
-    # container.width($(window).width()-323)
-    # $(window).resize ->
-      # container.width($(window).width()-323)
     columnCount = 2
     items = $(container).find("li")
-    setHeight(columnCount, containerWidth, items)
-    container.masonry
-      columnWidth: (containerWidth ) ->
-       containerWidth/columnCount
+    initPublished = ->
+      setHeight(columnCount, container.width(), items)
+      container.masonry
+        columnWidth: ->
+         container.width()/columnCount
+    initPublished()
     items.fadeIn("fast")
+
+    $(window).resize ->
+      initPublished()
 
 
 
