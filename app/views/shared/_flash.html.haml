@@ -1,9 +1,9 @@
 - unless flash[:notice].blank?
-  .alert.alert-success.mtm
+  .alert.alert-success.mtm.mobile-padding
     %h4
       = raw flash.notice
 
 - unless flash[:alert].blank?
-  .alert.alert-error.mtm
+  .alert.alert-error.mtm.mobile-padding
     %h4
       = raw flash[:alert]

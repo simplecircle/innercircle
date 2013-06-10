@@ -1,15 +1,16 @@
 .container
+  = render "shared/flash", :flash=>flash unless flash.blank?
   .row-fluid
-    .span12.mobile-padding.white-background.mtxl
-      = render "shared/flash", :flash=>flash unless flash.blank?
+    .span12.mtl.placeholder.hidden-phone
+  .row-fluid
+    .span12.mobile-padding.white-background
       .row-fluid.dashboard-header.bb-1
         .span7
           .gears.mtl.mrm.pull-left
           %h2.mbn.ptl= capitalize_phrase(@company.name)
-        .span5
-          .dashboard-header-links
-            = link_to("#{@company.subdomain}.circ.co", root_url(subdomain:@company.subdomain), class:"hidden-phone hidden-tablet mrl")
-            = link_to("Edit company profile", :controller => "companies", :action=>"edit", :id=>@company.id)
+        .span5.dashboard-header-links
+          = link_to("#{@company.subdomain}.circ.co", root_url(subdomain:@company.subdomain), class:"hidden-phone hidden-tablet company-profile-link mrl")
+          = link_to("Edit company profile", :controller => "companies", :action=>"edit", :id=>@company.id)
   -if @company.posts_to_review_count > 0
     .row-fluid
       .span12.mobile-padding.white-background
@@ -25,9 +26,8 @@
             .span8
               %h3.mbn
                 Talent Community
-            .span4
-              .dashboard-header-links
-                = link_to("+ Add Talent", '/add-talent')
+            .span4.dashboard-header-links
+              = link_to("+ Add Talent", '/add-talent')
           .row-fluid
             .span12
               %section.highlight.tal
@@ -91,9 +91,8 @@
             .span8
               %h3.mbn
                 Content
-            .span4
-              .dashboard-header-links
-                = link_to("+ View content library", posts_url(subdomain:@company.subdomain))
+            .span4.dashboard-header-links
+              = link_to("+ View content library", posts_url(subdomain:@company.subdomain))
           .row-fluid
             .span12
               %ul.unstyled
@@ -127,9 +126,8 @@
             .span8
               %h3.mbn
                 Admins
-            .span4
-              .dashboard-header-links
-                = link_to("+ Add Admin", new_admin_invite_path)
+            .span4.dashboard-header-links
+              = link_to("+ Add Admin", new_admin_invite_path)
           .row-fluid
             .span12
               %ul.unstyled
