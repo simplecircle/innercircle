@@ -19,18 +19,18 @@ $(document).ready ->
     items = $(unpublishedContainer).find("li")
     if $(window).width() > 600
       columnCount = 4
+      setHeight(columnCount, unpublishedContainerWidth, items)
       unpublishedContainer.masonry
         columnWidth: (unpublishedContainerWidth ) ->
          unpublishedContainerWidth/columnCount
-      setHeight(columnCount, unpublishedContainerWidth, items)
       items.fadeIn("fast")
     else
       # Two columns for phones please
       columnCount = 2
+      setHeight(columnCount, unpublishedContainerWidth, items)
       unpublishedContainer.masonry
         columnWidth: (unpublishedContainerWidth ) ->
          unpublishedContainerWidth/columnCount
-      setHeight(columnCount, unpublishedContainerWidth, items)
       items.css('width', '44%')
       items.fadeIn("fast")
   else
