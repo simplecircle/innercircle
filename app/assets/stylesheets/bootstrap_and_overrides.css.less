@@ -253,9 +253,14 @@ input[type="file"]{
   right: 50px;
   transition: opacity, height 0.5s;
 }
-.navbar-inner.expanded .nav-collapse-border-div {
-  height: 40px;
-  opacity: 0;
+.navbar-inner.expanded {
+  .btn-navbar {
+    background-color: #ccc;
+  }
+  .nav-collapse-border-div {
+    height: 40px;
+    opacity: 0;
+  }
 }
 .form-row {
   max-width: 529px;
