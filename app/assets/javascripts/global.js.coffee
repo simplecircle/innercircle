@@ -10,10 +10,13 @@ $(document).ready ->
     $.each items, ->
       width = (containerWidth/columnCount)
       if mode == "unpublished"
-        # Target img instead of li so info bar will be correctly placed
+        # Both image and parent li need their height set to work in FF
         $(this).find('.photo img').height(Math.round(width * $(this).data("aspect-ratio")))
+        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+30)
       else
+        # Both image and parent li need their height set to work in FF
         $(this).find('.photo img').height(Math.round(width * $(this).data("aspect-ratio")))
+        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+15)
 
   if mode == "unpublished"
     items = $(unpublishedContainer).find("li")
