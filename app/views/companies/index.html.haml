@@ -1,7 +1,7 @@
-.container-fluid
+.container
   = render "shared/flash", :flash=>flash unless flash.blank?
   .row-fluid
-    .span8.column-center
+    .span8.column-center.mobile-padding
       %h2.mbxl All Companies
       - @companies.each do |company|
         %h3= link_to(capitalize_phrase(company.name), dashboard_url(subdomain:company.subdomain))
