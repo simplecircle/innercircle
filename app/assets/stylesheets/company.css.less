@@ -47,6 +47,7 @@
           min-width:100%;
           border:1px solid @grayLighter;
           .border-radius(4px);
+          box-sizing: border-box;
         }
       }
     }
@@ -75,6 +76,7 @@
     padding:0 0 7px 10px;
     position: absolute;
     width:100%;
+    box-sizing: border-box;
     .date{
       color:#D1D1D1;
       display:inline-block;
@@ -101,7 +103,7 @@
     top:0;
     width: 100%;
     transition: background-color 0.4s ease-in;
-    padding-left: 1px; //to solve quirk where there was a right-hand margin of 1px where the overlay wasn't covering the photo
+    // padding-left: 1px; //to solve quirk where there was a right-hand margin of 1px where the overlay wasn't covering the photo
     &:hover{
       .photo-overlay-text { opacity: 1; }
       background-color: rgba(0,0,0,0.6);
