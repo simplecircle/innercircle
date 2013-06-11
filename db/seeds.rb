@@ -20,6 +20,7 @@ Vertical.create([
   { name: 'Fashion' },
   { name: 'Travel' },
   { name: 'Social Impact' }
+  { name: 'Consumer Goods' }
 ])
 
 CompanyDept.create([{name: 'operations'}, {name: 'creative'}, {name: 'sales & marketing'}, {name: 'technology'}])
