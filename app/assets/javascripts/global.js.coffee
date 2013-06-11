@@ -89,4 +89,4 @@ $(document).ready ->
           async: true
 
   #Nav collapse fix
-  $('[data-target=".nav-collapse"]').click () -> $('.navbar-inner').toggleClass('expanded')
+  $('[data-target=".nav-collapse"]').click () -> $('.navbar-inner').toggleClass('expanded collapsed')
