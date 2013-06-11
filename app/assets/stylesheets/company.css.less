@@ -4,6 +4,9 @@
 
 #companies{
   padding-top:0;
+  .content-no-nav {
+    margin-top:0;
+  }
   .social-links {
     width: 100%;
     height: 20px;
@@ -143,20 +146,30 @@
         margin-top:0;
       }
     }
+    .masonry-wrapper {
+      background: white;
+      padding:5px;
+    }
     #masonry.masonry-published {
       width: 100%;
-      margin: -20px 0 0 0;
+      border:none;
       left: 0;
       li {
         width: 49.5%;
       }
     }
   }
+  //iPad portrait to iPad landscape
+  @media (min-width: 769px) and (max-width: 1024px) {
+    #masonry.masonry-published {
+      max-width: 680px;
+    }
+  }
   //Mobile
   @media (max-width: 570px) {
     #company-info {
       &.external {
-        margin-top:10px;
+        margin-top:0;
       }
       &.internal {
         margin-top:74px;
