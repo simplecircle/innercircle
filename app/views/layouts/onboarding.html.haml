@@ -4,5 +4,6 @@
     = render 'shared/head'
 
   %body{:id => controller_name }
-    = yield
+    .content-no-nav
+      = yield
     = javascript_include_tag "application"
