@@ -6,7 +6,7 @@
   %meta{property:"og:title", content:"#{@company.name} on inner circle - Find Great Companies in Creative and Tech"}
   %meta{property:"og:description", content:"See what it's like to work at #{@company.name} and get updates on relevant opportunities"}
 = render 'shared/social_tag_script'
-#company-info
+#company-info{:class=>"#{@referrer}"}
   %section.mobile-padding
     #logo{:class=>"#{@referrer}"}= link_to(image_tag(@company.logo_url(:large)), @company.website_url, target:"blank")
     = @company.short_description
@@ -30,7 +30,7 @@
       .powered-by
         Powered by
         =link_to(image_tag("inner_circle_logo.png"), root_url(subdomain: false))
-  %section.social-links.tac.mtl.hidden-phone.hidden-tablet
+  %section.social-links.tac.mtl.hidden-phone
     = render 'shared/social_tags', url:root_url
 
 %ul#masonry.masonry-published
