@@ -73,12 +73,12 @@ $(document).ready ->
                 columnWidth: (unpublishedContainerWidth ) ->
                   unpublishedContainerWidth / 2
               $(unpublishedContainer).find("li").css('width', '44%')
-              setHeight(2, unpublishedContainerWidth, newItems)
+              setHeight(columnCount, unpublishedContainerWidth, newItems)
             else
-              setHeight(4, unpublishedContainerWidth, newItems)
+              setHeight(columnCount, unpublishedContainerWidth, newItems)
             unpublishedContainer.masonry( 'appended', newItems);
           else
-            setHeight(2, containerWidth, newItems)
+            setHeight(columnCount, containerWidth, newItems)
             container.masonry( 'appended', newItems );
           newItems.fadeIn("fast")
 
