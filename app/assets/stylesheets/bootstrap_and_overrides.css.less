@@ -148,7 +148,7 @@ input[type="file"]{
   background:@linkColor;
   border: 1px solid @linkColor;
   .border-radius(@baseBorderRadius);
-  box-sizing: border-box;
+  .box-sizing(border-box);
   color:white !important;
   cursor: pointer;
   display: inline-block;
@@ -163,6 +163,9 @@ input[type="file"]{
   &:hover{
     background: darken(@linkColor, 4%);
     text-decoration:none;
+  }
+  &.disabled {
+    cursor: default;
   }
   &.btn-warning {
     background: @accentRed;
