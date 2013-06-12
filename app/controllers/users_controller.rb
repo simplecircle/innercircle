@@ -215,7 +215,7 @@ class UsersController < ApplicationController
 
   def find_resource
     @company = request.subdomain.empty? ? current_user.companies.first : current_company
-    @local_join= true if params[:local_join] == "true"
+    @local_join= true if params[:local_join] == "true" && true == false
     @tags = ActsAsTaggableOn::Tag.all.to_json(only: :name)
   end
 

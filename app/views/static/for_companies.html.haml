@@ -1,11 +1,14 @@
 .container
   .row-fluid
-    .span12.column-center.mobile-padding
-      %h1.text-center
-        Promote your company’s culture and attract top talent
-      .text-center
-        %h5
-          InnerCircle is helping select companies grow talent-communities by promoting their culture in a unique way. If you’re an employer and want to be part of something special—request an invite today.
-        .company-signup-wrapper.mtxl
-          = text_field_tag 'email', nil, placeholder:"email", class:"tar"
-          .btn.mbm Sign up for beta
+    .span12.column-center.mobile-padding.ptl.phl.text-center
+      %h1.mtl
+        Market your way to top talent
+  .row-fluid
+    .span9.column-center.mobile-padding.text-center
+      %h4
+        Find out how Inner Circle can help you build a community of high quality talent and convert them into the leads you need, now
+  .row-fluid
+    .span12.column-center.mobile-padding.text-center
+      .company-signup-wrapper.mtxl
+        = text_field_tag 'email', nil, placeholder:"email", class:"tar"
+        .btn.mbm Sign up for beta

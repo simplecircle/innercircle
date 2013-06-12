@@ -7,12 +7,8 @@
       .mtxl
     - else
       .span12.form-row-narrow.column-center
-        - if @local_join
-          #logo.column-center.mtm.mbm= image_tag(@company.logo_url(:large))
-          %h4.text-center.mobile-padding.mtm.mbxl.lh-24 Create an <i>inner circle</i> account to privately join #{capitalize_phrase(@company.name)}’s talent-community
-        - else
-          #logo.column-center.mtm= image_tag(@company.logo_url(:large))
-          %h4.text-center.mobile-padding.mbxl.ptl.lh-24 Privately join our talent-community to receive job opportunities that match your skills
+        #logo.column-center.mtm.mbm= image_tag(@company.logo_url(:large))
+        %h4.text-center.mobile-padding.mvl.lh-24= "We'll send a twice-monthly email about what's new at #{@company.name}"
       %hr
   .row-fluid
     .span12.form-row-narrow.column-center.mobile-padding
@@ -66,8 +62,7 @@
             = f.submit "Save & add another", class:"btn btn-large mtl span8"
 
         - else
-          = f.submit("Join now", class:"btn btn-large btn-primary btn-block mvm span12", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+          = f.submit("Subscribe", class:"btn btn-large btn-primary btn-block mvm span12", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
           .tiny.text-center.mbxl
-            Your membership is private. It’s just between you and #{capitalize_phrase(@company.name)}.
+            Your subscription is private and we'll never spam you.
           .pbm
-

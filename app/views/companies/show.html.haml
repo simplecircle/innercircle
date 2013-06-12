@@ -14,15 +14,15 @@
   %hr
   %section.mobile-padding
     %p
-      Privately join #{capitalize_phrase(@company.name)}’s talent-community to be notified of future job openings that match your skills.
+      Get updates on opportunities and work life at #{capitalize_phrase(@company.name)}
       %br
       = render "shared/flash", :flash=>flash unless flash.blank?
       - if @has_current_user_already_joined
-        .btn.btn-block.disabled.mtm{style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};"} ✓&nbsp;&nbsp;Joined
+        .btn.btn-block.disabled.mtm{style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};"} ✓&nbsp;&nbsp;Subscribed
       - elsif @referrer == "external"
-        = link_to("Join talent-community", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+        = link_to("Subscribe", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
       - else
-        = link_to("Join talent-community", join_url(subdomain: @company.subdomain, local_join:"true"), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+        = link_to("Subscribe", join_url(subdomain: @company.subdomain, local_join:"true"), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
       .powered-by.visible-phone
         Powered by
         =link_to(image_tag("inner_circle_logo.png"), root_url(subdomain: false))
