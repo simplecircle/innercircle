@@ -1,16 +1,18 @@
-.navbar{:class => ("navbar-fixed-top" unless @is_not_fixed), style:"border-color:#{@company.hex_code if @company};"}
+.navbar{:class => "navbar-fixed-top #{'has-company-logo' if @has_company_logo}", style:"border-color:#{@company.hex_code if @company};"}
   .navbar-inner.collapsed
-    - if current_user
-      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      .nav-collapse-border-div
-    = link_to(image_tag("inner_circle_logo.png"), root_url(subdomain:false, src:"nav"), :class=>"brand#{' hidden-phone' if @hide_logo_on_mobile}")
-    = image_tag(@company.logo_url(:large), :class=>"navbar-company-logo") if @company && @referrer && @referrer == "internal"
-    - if current_user
-      .nav-collapse.collapse
-        %ul.nav.pull-right
+    %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    .nav-collapse-border-div
+    = link_to(image_tag("inner_circle_logo.png"), root_url(subdomain:false, src:"nav"), :class=>"brand#{' hidden-phone' if @has_company_logo}")
+    - if @has_company_logo
+      .navbar-company-logo-wrapper
+        .navbar-vertical-align-helper
+        = image_tag(@company.logo_url(:large), :class=>"navbar-company-logo")
+    .nav-collapse.collapse
+      %ul.nav.pull-right
+        - if current_user
           - if current_user.god?
             %li= link_to("Companies", companies_url(subdomain:false))
             %li= link_to("#{capitalize_phrase(current_company.name)}’s Dashboard", dashboard_url) if current_company
@@ -26,9 +28,8 @@
             %ul.dropdown-menu
               %li= link_to "Edit Your Profile", :controller => "users", :action=> "edit", :id => current_user.id
               %li= link_to "Logout", logout_url(subdomain:false)
-    - else
-      %ul.nav.pull-right.nav-no-collapse
-        %li
-          = link_to(for_companies_url(subdomain:false), class:"pull-right") do
-            %span.company-cta Hiring?
-        %li= link_to "Login", login_url
+        - else
+          %li
+            = link_to(for_companies_url(subdomain:false), class:"pull-right") do
+              %span.company-cta Hiring?
+          %li= link_to "Login", login_url, class:"pull-right"

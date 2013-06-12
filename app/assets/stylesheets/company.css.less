@@ -4,10 +4,14 @@
 
 #companies{
   padding-top:0;
+  .content-no-nav {
+    margin-top:0;
+  }
   .social-links {
     width: 100%;
     height: 20px;
     overflow: hidden;
+    box-sizing: border-box;
   }
   #company-info{
     margin-top:20px;
@@ -47,6 +51,7 @@
           min-width:100%;
           border:1px solid @grayLighter;
           .border-radius(4px);
+          box-sizing: border-box;
         }
       }
     }
@@ -64,10 +69,6 @@
     margin-top: 5px;
     margin-bottom: 5px;
   }
-  .navbar{
-    z-index: 3;
-    position:relative;
-  }
   .post-info-bar{
     color: white;
     bottom:0;
@@ -75,6 +76,7 @@
     padding:0 0 7px 10px;
     position: absolute;
     width:100%;
+    box-sizing: border-box;
     .date{
       color:#D1D1D1;
       display:inline-block;
@@ -101,41 +103,77 @@
     top:0;
     width: 100%;
     transition: background-color 0.4s ease-in;
-    padding-left: 1px; //to solve quirk where there was a right-hand margin of 1px where the overlay wasn't covering the photo
+    // padding-left: 1px; //to solve quirk where there was a right-hand margin of 1px where the overlay wasn't covering the photo
     &:hover{
       .photo-overlay-text { opacity: 1; }
       background-color: rgba(0,0,0,0.6);
     }
   }
-  .navbar-company-logo {
-    max-height: 40px;
-    padding: 10px 0;
-    max-width: 235px;
+  .has-company-logo {
+    .navbar-company-logo-wrapper {
+      float: left;
+      height: 60px;
+    }
+    .btn-navbar {
+      height: 60px;
+      padding: 19px 0px 19px 9px;
+    }
+    .nav-collapse-border-div {
+      height: 60px;
+    }
+    .navbar-company-logo {
+      max-height: 40px;
+      max-width: 225px;
+      vertical-align: middle;
+      display: inline-block;
+    }
   }
   //between mobile and iPad
   @media (min-width: 571px) and (max-width: 768px) {
     section {
       padding:0 15px;
     }
-    .navbar-company-logo {
-      display: none;
+    .has-company-logo {
+      .navbar-company-logo-wrapper {
+        display: none;
+      }
     }
     #company-info {
-      margin-top: -20px;
+      &.external {
+        margin-top:10px;
+      }
+      &.internal {
+        margin-top:0;
+      }
+    }
+    .masonry-wrapper {
+      background: white;
+      padding:5px;
     }
     #masonry.masonry-published {
       width: 100%;
-      margin: -20px 0 0 0;
+      border:none;
       left: 0;
       li {
         width: 49.5%;
       }
     }
   }
+  //iPad portrait to iPad landscape
+  @media (min-width: 769px) and (max-width: 1024px) {
+    #masonry.masonry-published {
+      max-width: 680px;
+    }
+  }
   //Mobile
   @media (max-width: 570px) {
     #company-info {
-      margin-top:10px;
+      &.external {
+        margin-top:0;
+      }
+      &.internal {
+        margin-top:74px;
+      }
     }
     #logo.internal {
       display: none;
@@ -164,7 +202,11 @@
       width:290px;
       z-index: 2;
     }
-    .navbar-company-logo {
+    .navbar{
+      z-index: 3;
+      position:relative;
+    }
+    .navbar-company-logo-wrapper {
       display: none;
     }
     #masonry.masonry-published {

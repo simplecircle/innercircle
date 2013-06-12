@@ -17,6 +17,9 @@
   .nav-collapse-border-div {
     display: none;
   }
+  .navbar-fixed-top {
+    position: static;
+  }
 }
 @media (max-width:570px) {
   h1{
@@ -26,6 +29,16 @@
   h2{
     font-size:26px;
     line-height:32px;
+  }
+  .alert {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .content-with-nav {
+    margin-top: 44px;
+  }
+  .navbar-fixed-top {
+    position: fixed;
   }
   #users{
     img{
@@ -48,29 +61,33 @@
   }
   .navbar-inner {
     padding: 0 5px !important;
-    overflow: hidden;
-    position: relative;
   }
   .navbar {
     margin-bottom: 0 !important;
     .btn-navbar {
-      margin-right: 0 !important;
       background: transparent;
-      border:none;
+      border: none;
       border-radius: 0;
+      margin: 0 -5px 0 0;
+      width: 50px;
+      height: 40px;
+      padding: 9px 0px 9px 9px;
     }
   }
-
   .navbar .btn-navbar .icon-bar {
     background: @accentColor;
-    border-radius: 3px;
-    height: 3px;
+    border-radius: 2px;
+    height: 4px;
     box-shadow: none;
     &:nth-child(1) {
-      width:22px;
+      width:32px;
+    }
+    &:nth-child(2) {
+      width:24px;
+      margin: 5px 0;
     }
     &:nth-child(3) {
-      width:20px;
+      width:28px;
     }
   }
   .nav-collapse {
@@ -108,6 +125,11 @@
   }
   .well{
     .border-radius(0);
+  }
+}
+@media (max-width: 768px) {
+  .content-no-nav {
+    margin-top:15px;
   }
 }
 @media (max-width: 940px) and (min-width: 571px) {

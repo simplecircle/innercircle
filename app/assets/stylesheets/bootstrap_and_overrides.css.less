@@ -55,7 +55,6 @@ body {
   background:@bodyBackground;
   font-family:Lucida Grande, Lucida Sans Unicode;
   font-size:13px;
-  padding-top: 48px;
 }
 
 /*@import "twitter/bootstrap/responsive";*/
@@ -245,20 +244,27 @@ input[type="file"]{
   padding: 3px;
   color: @linkColor;
 }
+.content-no-nav {
+  margin-top:48px;
+}
+.navbar-vertical-align-helper {
+  vertical-align: middle;
+  height: 100%;
+  display: inline-block
+}
 .nav-collapse-border-div {
   border-left: 1px solid #cecece;
   width: 1px;
-  height: 60px;
+  height: 40px;
   position: absolute;
   right: 50px;
-  transition: opacity, height 0.5s;
+  transition: opacity 0.5s;
 }
 .navbar-inner.expanded {
   .btn-navbar {
-    background-color: #ccc;
+    background-color: #e0e0e0;
   }
   .nav-collapse-border-div {
-    height: 40px;
     opacity: 0;
   }
 }
