@@ -26,10 +26,10 @@ class PasswordResetsController < ApplicationController
     elsif @user.update_attributes(:password=>params[:user][:password], :password_confirmation=>params[:user][:password_confirmation])
       cookies.permanent[:auth_token] = {value:@user.auth_token, domain: :all}
       @user.clear_password_reset_token
-      redirect_to(user_path(id:@user.id), notice:"Your password has been reset")
+      @user.update_attribute(:has_set_own_password, true)
+      redirect_to(user_path(id:@user.id), notice:"Your password has been set")
     else
       render :edit
     end
   end
-
 end

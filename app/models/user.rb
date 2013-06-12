@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :email, :first_name, :last_name, :password_digest, :password, :password_confirmation, :role, :profile_attributes, :pending
+  attr_accessible :email, :first_name, :last_name, :password_digest, :password, :password_confirmation, :role, :profile_attributes, :pending, :has_set_own_password
 
   has_many :users_companies, :dependent => :destroy
   has_many :companies, through: :users_companies
@@ -34,6 +34,14 @@ class User < ActiveRecord::Base
     owned_companies.map(&:id).include?(company_id)
   end
 
+  def member_of?(company_id)
+    companies.map(&:id).include?(company_id)
+  end
+
+  def has_filled_out_profile
+    !profile.full_name.empty? && !profile.job_title.blank?
+  end
+
   def owned_companies
     if god?
       return Company.all
@@ -65,10 +73,14 @@ class User < ActiveRecord::Base
   end
 
   def send_password_reset
+    set_password_reset_token
+    UserMailer.password_reset(self).deliver
+  end
+
+  def set_password_reset_token
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.password_reset(self).deliver
   end
 
   def send_admin_invite(company)
