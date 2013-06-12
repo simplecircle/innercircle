@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607190557) do
+ActiveRecord::Schema.define(:version => 20130612150530) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -31,13 +31,13 @@ ActiveRecord::Schema.define(:version => 20130607190557) do
     t.string   "employee_count"
     t.string   "foursquare_v2_id"
     t.string   "instagram_uid"
-    t.boolean  "instagram_username_auto_publish",               :default => true
+    t.boolean  "instagram_username_auto_publish",               :default => false
     t.boolean  "instagram_location_auto_publish",               :default => false
     t.string   "instagram_location_id"
     t.string   "logo_cache"
-    t.boolean  "facebook_auto_publish",                         :default => true
-    t.boolean  "tumblr_auto_publish",                           :default => true
-    t.boolean  "twitter_auto_publish",                          :default => true
+    t.boolean  "facebook_auto_publish",                         :default => false
+    t.boolean  "tumblr_auto_publish",                           :default => false
+    t.boolean  "twitter_auto_publish",                          :default => false
     t.boolean  "foursquare_auto_publish",                       :default => false
     t.string   "hex_code"
     t.datetime "last_reviewed_posts_at"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20130607190557) do
     t.string   "admin_invite_token"
     t.datetime "admin_invite_sent_at"
     t.boolean  "pending",                :default => false
+    t.boolean  "has_set_own_password",   :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

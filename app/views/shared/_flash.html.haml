@@ -1,7 +1,7 @@
 - unless flash[:notice].blank?
   .alert.alert-success.mtm
     %h4
-      = raw flash.notice
+      = raw flash[:notice]
 
 - unless flash[:alert].blank?
   .alert.alert-error.mtm

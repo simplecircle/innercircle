@@ -1,12 +1,15 @@
 .container
   .row-fluid
-    .span12.placeholder.visible-phone
-  .row-fluid
     .span12.text-center.column-center.mobile-padding
+      = render "shared/flash", :flash=>flash unless flash.blank?
       - if @is_admin_adding
         .maxl
       %h1 Thanks, you’re all set!
-      %h4.mbxl We'll be in touch with relevant updates & opportunities.
-      %p.mtxl
-      =link_to "Check out other inspiring companies", root_url(subdomain:false), :class=>"btn btn-large" unless @is_admin_adding
+      %h4.mbl We'll be in touch with relevant updates & opportunities.
+      =link_to "Check out other inspiring companies", root_url(subdomain:false), :class=>"#{'btn btn-large mtl' if current_user && current_user.talent? && current_user.has_set_own_password}" unless @is_admin_adding
       =link_to "New signup", join_url if @is_admin_adding
+      - if current_user && current_user.talent? && !current_user.has_set_own_password
+        .well.mtxl
+          %h4.mtl.mbm Want to keep on joining talent communities?
+          %p Create an account to easily join other companies' communities and manage the information you share
+          =link_to "Create account", edit_password_reset_url(current_user.password_reset_token), class:"btn mvm"
