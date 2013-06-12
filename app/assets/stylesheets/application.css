@@ -19,6 +19,7 @@
  *= require dashboard
  *= require company
  *= require global
+ *= require static
  *= require autoSuggest
  *= require media_query_overrides
  *= require responsive-utilities

@@ -1,11 +1,11 @@
 .container
-  .row
-    .span8.column-center
+  .row-fluid
+    .span12.column-center.mobile-padding
       %h1.text-center
         Promote your company’s culture and attract top talent
       .text-center
         %h5
           InnerCircle is helping select companies grow talent-communities by promoting their culture in a unique way. If you’re an employer and want to be part of something special—request an invite today.
-        %hr.mbxl
-        = link_to("Request Invite", signup_url, class:"btn btn-large btn-warning")
-        /= link_to("here.", "http://yourfuture.getinnercircle.com/join")
+        .company-signup-wrapper.mtxl
+          = text_field_tag 'email', nil, placeholder:"email", class:"tar"
+          .btn.mbm Sign up for beta
