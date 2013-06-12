@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       UsersCompany.create(user_id: current_user.id, company_id: @company.id)
 
       if !current_user.has_filled_out_profile
-        return redirect_to edit_user_url(current_user.auth_token)
+        return redirect_to edit_user_url(current_user.auth_token), notice: "You've joined #{@company.name}'s talent community!"
       else
         #Set password reset token so that the user can click "Create account" and set their password
         current_user.set_password_reset_token if !current_user.has_set_own_password
@@ -33,6 +33,10 @@ class UsersController < ApplicationController
   end
 
   def create
+    existing_user = User.find_by_email(params[:user][:email])
+    if existing_user
+      return redirect_to login_url(email: params[:user][:email], redirect_back: existing_user.talent? ? join_url : root_url(subdomain:false)), notice: "There's already an account with this email address.<p></p>Please log in or set your password below:"
+    end
     @user = @company.users.build(params[:user])
     @user.role = 'talent'
     form_errors = {}

@@ -14,4 +14,4 @@
               = password_field_tag :password, nil, class:"input-block-level", placeholder:"Password"
             = submit_tag("Login", class:"btn btn-primary span12 mbl")
             = link_to("Forgot password?", new_password_reset_path)
-
+            = hidden_field_tag :redirect_back, params[:redirect_back]
