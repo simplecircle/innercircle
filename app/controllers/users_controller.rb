@@ -117,6 +117,7 @@ class UsersController < ApplicationController
 
         @profile.first_name = info["first_name"]
         @profile.last_name = info["last_name"]
+        @profile.job_title = info["headline"]
         @profile.url = info["urls"]["public_profile"]
         @incoming_tags = @incoming_tags + ',' + auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",") unless auth["extra"]["raw_info"]["skills"].nil?
 
@@ -166,8 +167,6 @@ class UsersController < ApplicationController
         save_departments(@depts, @user.profile) if validate_depts?
 
         if @is_new_user
-          #Set password reset token so that the user can click "Create account" and set their password
-          current_user.set_password_reset_token if current_user.talent? && !current_user.has_set_own_password
           redirect_to confirmation_url
         elsif current_user.god_or_admin?
           redirect_to dashboard_url, notice: "Account Updated"
