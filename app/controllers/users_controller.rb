@@ -15,11 +15,9 @@ class UsersController < ApplicationController
       UsersCompany.create(user_id: current_user.id, company_id: @company.id)
 
       if !current_user.has_filled_out_profile
-        return redirect_to edit_user_url(current_user.auth_token), notice: "You've joined #{@company.name}'s talent community!"
+        redirect_to edit_user_url(current_user.auth_token), notice: "You've joined #{@company.name}'s talent community!"
       else
-        #Set password reset token so that the user can click "Create account" and set their password
-        current_user.set_password_reset_token if !current_user.has_set_own_password
-        return redirect_to confirmation_url
+        redirect_to confirmation_url
       end
     elsif current_user && current_user.admin? && @company != current_user.companies.first
       redirect_to :back, alert: "You're currently logged in as an admin. Please log out to join another company's talent community"
@@ -54,12 +52,6 @@ class UsersController < ApplicationController
       end
     else
       @user.build_profile
-    end
-
-    unless @local_join
-      # Ensure this password doesn't already exist in future iterations before creation
-      @user.password = SecureRandom.urlsafe_base64
-      @user.has_set_own_password = false
     end
 
     form_errors[:name] = "Please enter first and last name" if @is_admin_adding && (@user.profile.first_name.empty? || @user.profile.last_name.empty?)
@@ -214,7 +206,6 @@ class UsersController < ApplicationController
 
   def find_resource
     @company = request.subdomain.empty? ? current_user.companies.first : current_company
-    @local_join= true if params[:local_join] == "true" && true == false
     @tags = ActsAsTaggableOn::Tag.all.to_json(only: :name)
   end
 

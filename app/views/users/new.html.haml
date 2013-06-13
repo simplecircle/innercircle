@@ -14,7 +14,6 @@
     .span12.form-row-narrow.column-center.mobile-padding
       = form_for @user do |f|
         = hidden_field_tag :is_admin_adding, @is_admin_adding
-        = hidden_field_tag :local_join, @local_join
         - if @is_admin_adding
           = f.fields_for :profile do |p|
             .controls.controls-row
@@ -24,10 +23,6 @@
         .controls
           .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
           = f.text_field :email, class:"span12", placeholder:"* Email"
-        - if @local_join
-          %p
-            .inline_error= @user.errors[:password].first
-            = f.password_field :password, class:"span12", placeholder:"* Password"
         .controls.mtm.mbl
           .inline_error= @user.errors[:categories].first
           .help-block.mbs
