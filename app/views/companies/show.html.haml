@@ -1,5 +1,5 @@
 - content_for :title do
-  #{@company.name} on inner circle - Find Great Companies in Creative and Tech
+  #{@company.name} on inner circle - Don’t miss your dream job
 - content_for :og_tags do
   %meta{property:"og:url", content:root_url}
   %meta{property:"og:image", content:@company.logo.url}
@@ -14,12 +14,14 @@
   %hr
   %section.mobile-padding
     %p
-      Privately join #{capitalize_phrase(@company.name)}’s talent-community to be notified of future job openings that match your skills.
-      %br
-      - if @referrer == "external"
-        = link_to("Join talent-community", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+      = render "shared/flash", :flash=>flash unless flash.blank?
+      - if @has_current_user_already_joined
+        .btn.btn-block.disabled.mtm{style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};"} ✓&nbsp;&nbsp;Subscribed
+      - elsif @referrer == "external"
+        = link_to("Subscribe", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
       - else
-        = link_to("Join talent-community", join_url(subdomain: @company.subdomain, local_join:"true"), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+        = link_to("Subscribe", join_url(subdomain: @company.subdomain, local_join:"true"), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+      .mts Get updates on opportunities and work life at #{capitalize_phrase(@company.name)}
       .powered-by.visible-phone
         Powered by
         =link_to(image_tag("inner_circle_logo.png"), root_url(subdomain: false))

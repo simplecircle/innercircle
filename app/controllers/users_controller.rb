@@ -7,14 +7,36 @@ class UsersController < ApplicationController
   before_filter :get_user, only:[:edit, :update]
 
   def new
-    @user = User.new :role=>'talent'
-    @user.build_profile
-    @is_admin_adding = request.fullpath == '/add-talent' && current_user && current_user.god_or_admin?
-    @star_rating = 1 if !@is_admin_adding
-    @depts = CompanyDept.all
+    #User is already a member
+    if current_user && current_user.talent? 
+      return redirect_to root_url if current_user.member_of?(@company.id)
+
+      #Add user to company's talent community
+      UsersCompany.create(user_id: current_user.id, company_id: @company.id)
+
+      if !current_user.has_filled_out_profile
+        return redirect_to edit_user_url(current_user.auth_token), notice: "You've joined #{@company.name}'s talent community!"
+      else
+        #Set password reset token so that the user can click "Create account" and set their password
+        current_user.set_password_reset_token if !current_user.has_set_own_password
+        return redirect_to confirmation_url
+      end
+    elsif current_user && current_user.admin? && @company != current_user.companies.first
+      redirect_to :back, alert: "You're currently logged in as an admin. Please log out to join another company's talent community"
+    else
+      @user = User.new :role=>'talent'
+      @user.build_profile
+      @is_admin_adding = request.fullpath == '/add-talent' && current_user && current_user.god_or_admin?
+      @star_rating = 1 if !@is_admin_adding
+      @depts = CompanyDept.all
+    end
   end
 
   def create
+    existing_user = User.find_by_email(params[:user][:email])
+    if existing_user
+      return redirect_to login_url(email: params[:user][:email], redirect_back: existing_user.talent? ? join_url : root_url(subdomain:false)), notice: "There's already an account with this email address.<p></p>Please log in or set your password below:"
+    end
     @user = @company.users.build(params[:user])
     @user.role = 'talent'
     form_errors = {}
@@ -37,6 +59,7 @@ class UsersController < ApplicationController
     unless @local_join
       # Ensure this password doesn't already exist in future iterations before creation
       @user.password = SecureRandom.urlsafe_base64
+      @user.has_set_own_password = false
     end
 
     form_errors[:name] = "Please enter first and last name" if @is_admin_adding && (@user.profile.first_name.empty? || @user.profile.last_name.empty?)
@@ -58,6 +81,8 @@ class UsersController < ApplicationController
         if @is_admin_adding
           params[:commit] == "Save & add another" ? redirect_to('/add-talent', :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
         else
+          #log in user if there's no current user
+          cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} unless current_user
           redirect_to(edit_user_url(@user.auth_token))
         end
       else
@@ -75,7 +100,6 @@ class UsersController < ApplicationController
     if params[:autofill] == 'linkedin' #The link for the 'autofill with linkedin' button looks like users/token/edit?autofill=linkedin, so this catches that url and redirects to the linkedin auth page
       session[:callback_token] = @user.auth_token
       redirect_to "/auth/linkedin"
-
     else
       @profile = @user.profile
       @depts = @profile.company_depts.map(&:id)
@@ -142,6 +166,8 @@ class UsersController < ApplicationController
         save_departments(@depts, @user.profile) if validate_depts?
 
         if @is_new_user
+          #Set password reset token so that the user can click "Create account" and set their password
+          current_user.set_password_reset_token if current_user.talent? && !current_user.has_set_own_password
           redirect_to confirmation_url
         elsif current_user.god_or_admin?
           redirect_to dashboard_url, notice: "Account Updated"
@@ -189,7 +215,7 @@ class UsersController < ApplicationController
 
   def find_resource
     @company = request.subdomain.empty? ? current_user.companies.first : current_company
-    @local_join= true if params[:local_join] == "true"
+    @local_join= true if params[:local_join] == "true" && true == false
     @tags = ActsAsTaggableOn::Tag.all.to_json(only: :name)
   end
 

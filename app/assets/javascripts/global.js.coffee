@@ -6,6 +6,10 @@ $(document).ready ->
   unpublishedContainerWidth = unpublishedContainer.width()
   mode = "unpublished" if unpublishedContainer.length == 1
 
+  validateEmail = (email) -> 
+    re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    re.test(email)
+
   setHeight = (columnCount, containerWidth, items) ->
     $.each items, ->
       width = (containerWidth/columnCount)
@@ -87,6 +91,27 @@ $(document).ready ->
           dataType: "script"
           success: success
           async: true
+
+  #company beta signup form
+  $('.company-signup-wrapper input').keyup (e) ->
+    if (e.which && e.which == 13) then submitSignupForm()
+
+  $('.company-signup-wrapper .btn').click () -> submitSignupForm()
+
+  submitSignupForm = () ->
+    email = $('#email').val().trim()
+    if !validateEmail(email)
+      return alert "That is not a valid email address, please correct it and try again"
+
+    callback = () -> $('.company-signup-wrapper').html('<h4>Thanks, we\'ll be in touch!</h4><br><a href="/">Back to home page</a>')
+    $.ajax
+      type:"POST"
+      url: "https://docs.google.com/forms/d/1kPGuifUaBA6ihrZ8RUklZ-Zrsdfk_1vb34MgIWDY1qI/formResponse"
+      data: 
+        'entry.1170793925': email
+      success: callback
+      error: callback
+
 
   #Nav collapse fix
   $('[data-target=".nav-collapse"]').click () -> $('.navbar-inner').toggleClass('expanded collapsed')
