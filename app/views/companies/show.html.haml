@@ -19,6 +19,7 @@
         .btn.btn-block.disabled.mtm{style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};"} ✓&nbsp;&nbsp;Subscribed
       - else
         = link_to("Subscribe", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+      .mts Get updates on opportunities and work life at #{capitalize_phrase(@company.name)}
       .powered-by.visible-phone
         Powered by
         =link_to(image_tag("inner_circle_logo.png"), root_url(subdomain: false))
