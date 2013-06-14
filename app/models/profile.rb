@@ -3,6 +3,8 @@ class Profile < ActiveRecord::Base
   serialize :linkedin_data, Hash
   attr_accessible :first_name, :last_name, :job_title, :url, :user_id, :skills, :linkedin_data, :linkedin_profile
 
+  strip_attributes :only => [:job_title, :first_name, :last_name, :url]
+
   belongs_to :user
   has_many :profiles_company_depts, :dependent => :destroy
   has_many :company_depts, through: :profiles_company_depts

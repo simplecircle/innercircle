@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :first_name, :last_name, :password_digest, :password, :password_confirmation, :role, :profile_attributes, :pending, :has_set_own_password
 
+  strip_attributes :only => [:email, :first_name, :last_name]
+
   has_many :users_companies, :dependent => :destroy
   has_many :companies, through: :users_companies
   has_one :profile, :dependent => :destroy
