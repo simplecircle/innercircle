@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   
   accepts_nested_attributes_for :profile, :users_companies
   before_create { generate_token(:auth_token) }
+  before_save { self.email = self.email.downcase }
 
   # override has_secure_password forced validation.
   require 'bcrypt'
