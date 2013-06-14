@@ -12,13 +12,11 @@ Innercircle::Application.routes.draw do
     match '/' => 'companies#show'
     match 'join' => 'users#new'
     match 'add-talent' => 'users#new'
-    match 'local_join' => 'users#new'
     resources :posts, only:[:index, :update, :destroy]
   end
 
   constraints(NoSubdomain) do
     match 'join' => 'home#index'
-    match 'local_join' => 'home#index'
   end
 
   root :to => 'home#index'

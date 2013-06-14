@@ -54,6 +54,8 @@ class UsersController < ApplicationController
       @user.build_profile
     end
 
+    @user.password = SecureRandom.urlsafe_base64
+
     form_errors[:name] = "Please enter first and last name" if @is_admin_adding && (@user.profile.first_name.empty? || @user.profile.last_name.empty?)
     form_errors[:categories] = "You have to choose at least one category." if @depts.nil?
     form_errors[:star_rating] = "Please rate the person you are adding" if @star_rating == 0
