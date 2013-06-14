@@ -18,7 +18,7 @@ class AdminInvitesController < ApplicationController
       redirect_to dashboard_url
     end
   end
-  
+
   def create
     email = params[:email]
     if email.blank? or email.match(/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i).nil?

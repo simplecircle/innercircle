@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def new
     #User is already a member
-    if current_user && current_user.talent? 
+    if current_user && current_user.talent?
       return redirect_to root_url if current_user.member_of?(@company.id)
 
       #Add user to company's talent community
@@ -75,6 +75,8 @@ class UsersController < ApplicationController
         else
           #log in user if there's no current user
           cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} unless current_user
+          @user.set_password_reset_token
+          UserMailer.welcome(@user, capitalize_phrase(@company.name)).deliver
           redirect_to(edit_user_url(@user.auth_token))
         end
       else
