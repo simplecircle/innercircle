@@ -3,3 +3,7 @@ production: # Rails env
   api_key: "fb5ad52cca76511498bb79eda91cefcf"
   container: "production_innercircle" # Optional, default is to use your railsenv_applicationname, e.g. production_example_application
 
+staging:
+  username: "elliottg"
+  api_key: "fb5ad52cca76511498bb79eda91cefcf"
+  container: "staging_innercircle" # Optional, default is to use your railsenv_applicationname, e.g. production_example_application
