@@ -67,8 +67,7 @@ namespace :unicorn do
 
   desc "Start unicorn"
   task :start, :roles => :app do
-    run "cd #{current_path} && bundle exec unicorn_rails -E production -D -c #{current_path}/config/unicorn.rb"
-    # run "cd #{current_path} && bundle exec unicorn_rails -E #{stage} -D -c #{current_path}/config/unicorn.rb"
+    run "cd #{current_path} && bundle exec unicorn_rails -E #{stage} -D -c #{current_path}/config/unicorn.rb"
   end
 
   desc "Restart unicorn"

@@ -79,7 +79,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
         :rackspace_servicenet => Rails.env.staging?
       }
       config.fog_directory = "staging_innercircle_media"
-      config.asset_host = "http://db32ab1e937965fd76a9-6283d20fe675d8c76c27a22322e7037e.r14.cf1.rackcdn.com"
+      config.asset_host = "https://2a9d1df1fe2fde1a6919-6283d20fe675d8c76c27a22322e7037e.ssl.cf1.rackcdn.com"
       config.storage = :fog
     end
   else
