@@ -57,7 +57,7 @@
             = f.submit "Save & add another", class:"btn btn-large mtl span8"
 
         - else
-          = f.submit("Subscribe", class:"btn btn-large btn-primary btn-block mvm span12", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+          = f.submit("Subscribe", class:"btn btn-large btn-primary btn-block mvm span12", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};", onclick:"_gaq.push(['_trackEvent', 'Companies', 'Signup', '#{@company.subdomain}']);")
           .tiny.text-center.mbxl
             Your subscription is private and we'll never spam you.
           .pbm

@@ -36,7 +36,7 @@
           .control-group
             %label.control-label
             .controls
-              = f.submit("Save", class:"btn btn-large mtl span12" , style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
+              = f.submit("Save", class:"btn btn-large mtl span12", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};", onclick:"_gaq.push(['_trackEvent', 'Companies', 'Signup - Add More Info', '#{@company.subdomain}']);")
   - else
     .row-fluid
       .span12.form-row.mobile-padding.column-center
