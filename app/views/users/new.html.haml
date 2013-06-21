@@ -36,8 +36,11 @@
             %b= @is_admin_adding ? "* Categories" : "* Which category fits you best?"
           %p.checkbox-group.mobile-checkbox-group
             - CompanyDept.all.each do |dept|
-              = radio_button_tag("category", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"pull-left")
-              = label_tag("category_#{dept.id.to_s}", capitalize_phrase(dept.name))
+              = radio_button_tag("category", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"pull-left #{dept.name}-radio-tag")
+              = label_tag "category_#{dept.id.to_s}" do
+                = capitalize_phrase(dept.name)
+                = text_field("other_job_category", nil, value: @other_job_category, class:"mlm", placeholder:"* Job category") if dept.name == "other"
+          .inline_error= @user.errors[:other_job_category].first
         - if @is_admin_adding
           .controls.mbl
             .inline_error= @user.errors[:star_rating].first

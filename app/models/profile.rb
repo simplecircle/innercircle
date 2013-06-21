@@ -20,6 +20,12 @@ class Profile < ActiveRecord::Base
     (self.first_name || "") + (self.last_name.blank? ? "" : " #{self.last_name}")
   end
 
+  def job_category
+    category_name = company_depts.first.name
+    category_name = profiles_company_depts.first.other_job_category if category_name == "other"
+    category_name
+  end
+
   private
 
   def add_url_protocol
@@ -32,5 +38,4 @@ class Profile < ActiveRecord::Base
      end
    end
   end
-
 end

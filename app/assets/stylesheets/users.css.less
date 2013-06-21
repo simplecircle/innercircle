@@ -14,6 +14,20 @@
   #logo{
     width:250px;
   }
+  .other-radio-tag {
+    &+label input {
+      display: none;
+    }
+    &:checked {
+      margin-top: 11px;
+      &+label input {
+        display: inline-block;
+      }
+    }
+  }
+  label input {
+    margin-bottom: 0;
+  }
   .email-description {
     font-weight: 400;
     li {
