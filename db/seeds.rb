@@ -19,7 +19,7 @@ Vertical.create([
   { name: 'Government / Politics' },
   { name: 'Fashion' },
   { name: 'Travel' },
-  { name: 'Social Impact' }
+  { name: 'Social Impact' },
   { name: 'Consumer Goods' }
 ])
 
