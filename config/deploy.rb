@@ -42,7 +42,7 @@ after "deploy:update_code".to_sym do
   upload "config/database.yml.cap", "#{release_path}/config/database.yml", :mode => 0444
   system "bundle exec rake assets:precompile"
   upload "public/manifest.yml", "#{release_path}/public/manifest.yml" ,:mode => 0444
-  system "bundle exec rake RAILS_ENV=production assets:sync"
+  system "bundle exec rake RAILS_ENV=#{stage} assets:sync"
 end
 
 

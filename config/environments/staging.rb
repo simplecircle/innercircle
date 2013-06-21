@@ -34,6 +34,8 @@ Innercircle::Application.configure do
   # This prevents it from being pushed up to Cloudfiles with all the other things in public/assets
   config.assets.manifest = Rails.root.join("public/")
 
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
