@@ -7,6 +7,9 @@ class HomeController < ApplicationController
     elsif current_user && current_user.role == 'admin' && current_user.companies.first != nil && session[:redirect_source] == nil #admin logged in and not being redirected
       redirect_to dashboard_url(subdomain: current_user.companies.first.subdomain)
     else #not an immediate redirect (ie no src query string), so we should clear the redirect source
+      @user = User.new :role=>'talent'
+      @user.build_profile
+
       session[:redirect_source] = nil
       
       @companyrows = []

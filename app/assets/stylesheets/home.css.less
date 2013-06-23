@@ -16,6 +16,29 @@
       font-size:16px;
       font-weight:normal;
       line-height:23px;
+      margin-bottom: 20px;
+    }
+    form {
+      text-align: left;
+    }
+    label {
+      display: inline-block;
+      padding-left: 5px;
+    }
+    input[type="radio"] {
+      margin-top: -5px;
+    }
+
+  }
+  .other-radio-tag {
+    &+label input {
+      display: none;
+    }
+    &:checked {
+      margin-top: 11px;
+      &+label input {
+        display: inline-block;
+      }
     }
   }
   .company-wrapper {
@@ -76,6 +99,17 @@
     text-align: center;
     height: 20px;
   }
+  #user_email {
+    margin-bottom: 0;
+    height: 36px;
+  }
+  @media (min-width: 570px) {
+    .checkbox-group {
+      margin: 0 auto;
+      width: 320px;
+      text-align: left;
+    }
+  }
   @media (max-width: 570px) {
     .filmstrip-image img {
       left: 0 !important;
@@ -92,6 +126,9 @@
       text-overflow: ellipsis;
       height: 20px;
       white-space: nowrap;
+    }
+    form .btn {
+      margin-top: 5px;
     }
   }
 }
