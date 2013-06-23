@@ -11,7 +11,6 @@ $('#user_email').keyup (e) ->
       $('body').animate({scrollTop: $('#new_user').position().top - 60}, 400)
 
 $('#new_user').bind "ajax:success", (evt, xhr, status, error) ->
-  console.log xhr
   $('.inline_error').hide()
   if xhr.success
     window.location = xhr.success

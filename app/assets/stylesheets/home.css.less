@@ -17,6 +17,10 @@
       font-weight:normal;
       line-height:23px;
       margin-bottom: 20px;
+      text-align: left;
+      li {
+        line-height: 25px;
+      }
     }
     form {
       text-align: left;
@@ -29,6 +33,24 @@
       margin-top: -5px;
     }
 
+  }
+  .email-preview-image-wrapper {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    position: relative;
+  }
+  .email-preview-image-wrapper-overlay {
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    img {
+      width: 100%
+    }
+  }
+  .email-preview-image {
+    width: 80%;
+    border: 1px solid #dedede;
   }
   .other-radio-tag {
     &+label input {

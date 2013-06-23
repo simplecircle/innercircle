@@ -6,43 +6,47 @@
   %meta{property:"og:title", content:"inner circle"}
   %meta{property:"og:description", content:"Don’t miss out on your dream job"}
 = render 'shared/social_tag_script'
-%section.container-fluid#homepage-top
+%section.container#homepage-top
   .row-fluid
     .span12.mobile-padding.phl.ptl.column-center
       %h1.mtl
         Don’t miss out on your dream job
   .row-fluid
-    .span8.mobile-padding.column-center
-      %h2
-        %b Sign up to get a twice-weekly email with:
-        %br
-        \- A feature on a new, inspiring company
-        %br 
-        \- Top 10 jobs relevant to you
-  .row-fluid 
-    .span12.column-center.mobile-padding.form-row-narrow
-      = form_for @user, remote:true do |f|
-        =hidden_field_tag :digest_subscription, "true"
-        .controls
-          .inline_error#email-error{style:"display:none;"}
-          = f.text_field :email, placeholder:"Email", class:"span8"
-          = f.submit("Subscribe", class:"btn btn-primary span4", onclick:"_gaq.push(['_trackEvent', 'Digest', 'Signup']);")
-        .tiny.text-center.gray-light
-          Your subscription is private and we'll never spam you.
-        .controls.mtl.well.other-job-category-section.inactive{style:"display:none;"}
-          .inline_error#categories-error{style:"display:none;"}
-          .inline_error#other_job_category-error{style:"display:none;"}
-          .help-block.mbs
-            %b Which category fits you best?
-          %p.checkbox-group.mobile-checkbox-group
-            - CompanyDept.all.each do |dept|
-              = radio_button_tag("category", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"#{dept.name}-radio-tag")
-              = label_tag "category_#{dept.id.to_s}" do
-                = capitalize_phrase(dept.name)
-                - if dept.name == "other"
-                  %br.visible-phone
-                  = text_field("other_job_category", nil, value: @other_job_category, class:"mlm #{'field_with_errors' if @user.errors[:other_job_category].first}", placeholder:"* Job category")
-              %br
+    .span9.mobile-padding.column-center.ptl
+      .row-fluid
+        .span7.mobile-padding
+          %h2
+            %b Sign up to get a twice-weekly email with:
+            %ul
+              %li A feature on a new, inspiring company
+              %li Top 10 jobs relevant to you
+          = form_for @user, remote:true do |f|
+            =hidden_field_tag :digest_subscription, "true"
+            .controls
+              .inline_error#email-error{style:"display:none;"}
+              = f.text_field :email, placeholder:"Email", class:"span8"
+              = f.submit("Subscribe", class:"btn btn-primary span4", onclick:"_gaq.push(['_trackEvent', 'Digest', 'Signup']);")
+            .tiny.text-center.gray-light
+              Your subscription is private and we'll never spam you.
+            .controls.mtl.well.other-job-category-section.inactive{style:"display:none;"}
+              .inline_error#categories-error{style:"display:none;"}
+              .inline_error#other_job_category-error{style:"display:none;"}
+              .help-block.mbs
+                %b Which category fits you best?
+              %p.checkbox-group.mobile-checkbox-group
+                - CompanyDept.all.each do |dept|
+                  = radio_button_tag("category", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"#{dept.name}-radio-tag")
+                  = label_tag "category_#{dept.id.to_s}" do
+                    = capitalize_phrase(dept.name)
+                    - if dept.name == "other"
+                      %br.visible-phone
+                      = text_field("other_job_category", nil, value: @other_job_category, class:"mlm #{'field_with_errors' if @user.errors[:other_job_category].first}", placeholder:"* Job category")
+                  %br
+        .span5.mobile-padding
+          .email-preview-image-wrapper
+            .email-preview-image-wrapper-overlay
+              = image_tag("shade.png")
+            = image_tag("digest_mockup_small.png", class:"email-preview-image")
   .row-fluid
     .span8.mobile-padding.column-center
       .mbm.visible-phone.placeholder
