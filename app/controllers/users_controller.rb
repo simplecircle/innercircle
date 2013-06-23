@@ -101,7 +101,7 @@ class UsersController < ApplicationController
     else
       @profile = @user.profile
       @depts = @profile.company_depts.map(&:id)
-      @other_job_category = @profile.profiles_company_depts.first.other_job_category
+      @other_job_category = @profile.profiles_company_depts.empty? ? nil : @profile.profiles_company_depts.first.other_job_category
       @incoming_tags = @user.profile.skills.map(&:name).join(',')
 
       @alert = 'Sorry, LinkedIn authorization failed' if params[:strategy] == 'linkedin' && params[:message] == 'invalid_credentials'

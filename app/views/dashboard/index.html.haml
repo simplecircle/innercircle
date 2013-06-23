@@ -85,6 +85,18 @@
                       %span.rating
                         - talent.star_rating(@company.id).times do |rating|
                           %span.rating-star-fixed
+              %h4.bb-1
+                Other
+                %span.counter.pull-right (#{@other.count})
+              %ul.unstyled
+                - @other.each do |talent|
+                  = link_to user_url(talent) do
+                    %li.bb-1
+                      = talent.email.downcase
+                      %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
+                      %span.rating
+                        - talent.star_rating(@company.id).times do |rating|
+                          %span.rating-star-fixed
 
         .span5#dashboard-right-column
           .row-fluid.dashboard-header.bb-1
