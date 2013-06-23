@@ -48,6 +48,6 @@ class ApplicationController < ActionController::Base
   end
 
   def capitalize_phrase(phrase)
-    phrase.split.each{|x|x.capitalize!}.join(" ")
+    phrase.nil? ? nil : phrase.split.each{|x|x.capitalize!}.join(" ")
   end
 end
