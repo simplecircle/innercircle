@@ -7,4 +7,7 @@
       %h1 Thanks, you’re all set!
       %h4.mbl We'll be in touch with relevant updates & opportunities.
       =link_to "Check out other inspiring companies", root_url(subdomain:false), :class=>"btn btn-large mtl" unless @is_admin_adding
-      =link_to "New signup", join_url if @is_admin_adding
+      - if @is_admin_adding
+        =link_to "New signup", join_url, class:"btn btn-small mvl"
+        %br
+        =link_to "Back to dashboard", dashboard_url

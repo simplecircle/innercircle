@@ -31,7 +31,8 @@
           %h4.mbs.mtm Job category:
           %ul.unstyled
             - @user.profile.company_depts.each do |dept|
-              %li= capitalize_phrase(dept.name)
+              %li= capitalize_phrase(dept.name == "other" ? @user.profile.profiles_company_depts.first.other_job_category : dept.name)
+
         .span6
           - unless @user.profile.skills.empty?
             %h4.mbs Skills & tools:

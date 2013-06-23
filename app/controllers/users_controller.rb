@@ -40,6 +40,7 @@ class UsersController < ApplicationController
     form_errors = {}
     @is_admin_adding = (params[:is_admin_adding]=="true") && current_user && current_user.god_or_admin?
     @depts = params[:company_depts]
+    @other_job_category = params[:other_job_category].first
     @star_rating = @is_admin_adding ? params[:star_rating].to_i : 1 #Default to one star for new user signing up
 
     if @is_admin_adding
@@ -58,6 +59,7 @@ class UsersController < ApplicationController
 
     form_errors[:name] = "Please enter first and last name" if @is_admin_adding && (@user.profile.first_name.empty? || @user.profile.last_name.empty?)
     form_errors[:categories] = "You have to choose at least one category." if @depts.nil?
+    form_errors[:other_job_category] = "Please tell us which category fits you best" if !@depts.nil? && CompanyDept.find(@depts.first.to_i).name == "other" && @other_job_category.blank?
     form_errors[:star_rating] = "Please rate the person you are adding" if @star_rating == 0
 
     if !form_errors.empty?
@@ -69,7 +71,7 @@ class UsersController < ApplicationController
     else
       if @user.save
         @company.users << @user
-        save_departments(@depts, @user.profile)
+        save_departments(@depts, @user.profile, @other_job_category)
         save_star_rating(@star_rating, @user.id, @company.id)
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
         if @is_admin_adding
@@ -99,6 +101,7 @@ class UsersController < ApplicationController
     else
       @profile = @user.profile
       @depts = @profile.company_depts.map(&:id)
+      @other_job_category = @profile.profiles_company_depts.empty? ? nil : @profile.profiles_company_depts.first.other_job_category
       @incoming_tags = @user.profile.skills.map(&:name).join(',')
 
       @alert = 'Sorry, LinkedIn authorization failed' if params[:strategy] == 'linkedin' && params[:message] == 'invalid_credentials'
@@ -153,14 +156,24 @@ class UsersController < ApplicationController
     if validate_depts?
       @depts = params[:company_depts]
       @depts = @depts.map{|x| x.to_i } if !@depts.blank?
+      @other_job_category = params[:other_job_category].first
     end
 
-    if @depts.nil? && validate_depts?
+    #
+    if validate_depts? && @depts.nil?
       @user.errors.add(:categories, "You have to choose at least one category.")
+      throw_err = true
+    end
+    #Check if user selected "other" but didn't specify
+    if validate_depts? && !@depts.nil? && CompanyDept.find(@depts.first.to_i).name == "other" && @other_job_category.blank?
+      @user.errors.add(:other_job_category, "Please tell us which category fits you best") if 
+      throw_err = true
+    end
+    if throw_err  
       render "edit"
     else
       if @user.save
-        save_departments(@depts, @user.profile) if validate_depts?
+        save_departments(@depts, @user.profile, @other_job_category) if validate_depts?
 
         if @is_new_user
           redirect_to confirmation_url
@@ -185,7 +198,7 @@ class UsersController < ApplicationController
     UsersCompany.find_by_user_id_and_company_id(user_id, company_id).update_attributes(:star_rating => rating)
   end
 
-  def save_departments(departments, profile)
+  def save_departments(departments, profile, other_job_category)
     #Destroy category association if the user unchecked it in form
     profile.company_depts.each do |dept|
       if !departments.include? dept.id.to_s
@@ -193,7 +206,8 @@ class UsersController < ApplicationController
       end
     end
     departments.each do |dept|
-      ProfilesCompanyDept.find_or_create_by_profile_id_and_company_dept_id(profile.id, dept)
+      pcd = ProfilesCompanyDept.find_or_create_by_profile_id_and_company_dept_id(profile.id, dept)
+      pcd.update_attribute(:other_job_category, other_job_category) if pcd.company_dept.name == "other"
     end
   end
 

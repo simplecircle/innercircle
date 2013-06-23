@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
     @operations = sort_by_star_rating(User.by_category(@company.subdomain, "operations"), @company.id)
     @sales_marketing = sort_by_star_rating(User.by_category(@company.subdomain, "sales & marketing"), @company.id)
     @technology = sort_by_star_rating(User.by_category(@company.subdomain, "technology"), @company.id)
+    @other = sort_by_star_rating(User.by_category(@company.subdomain, "other"), @company.id)
     @admins = @company.users.where(role:"admin")
   end
 
