@@ -24,7 +24,7 @@
             =hidden_field_tag :digest_subscription, "true"
             .controls
               .inline_error#email-error{style:"display:none;"}
-              = f.text_field :email, placeholder:"Email", class:"span8"
+              = f.email_field :email, placeholder:"Email", class:"span8"
               = f.submit("Subscribe", class:"btn btn-primary span4", onclick:"_gaq.push(['_trackEvent', 'Digest', 'Signup']);")
             .tiny.text-center.gray-light
               Your subscription is private and we'll never spam you.
