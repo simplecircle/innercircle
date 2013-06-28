@@ -1,7 +1,55 @@
-.container
-  = render "shared/flash", :flash=>flash unless flash.blank?
-  .row-fluid
-    .span8.column-center.mobile-padding
-      %h2.mbxl All Companies
-      - @companies.each do |company|
-        %h3= link_to(capitalize_phrase(company.name), dashboard_url(subdomain:company.subdomain))
+-if current_user && current_user.god? 
+  .container
+    = render "shared/flash", :flash=>flash unless flash.blank?
+    .row-fluid
+      .span8.column-center.mobile-padding
+        %h2.mbxl All Companies
+        - @companies.each do |company|
+          %h3= link_to(capitalize_phrase(company.name), dashboard_url(subdomain:company.subdomain))
+-else
+  #company-index
+    - content_for :title do
+      inner circle - Don’t miss out on your dream job
+    - content_for :og_tags do
+      %meta{property:"og:url", content:root_url(subdomain:false)}
+      %meta{property:"og:image", content:"http://fbb10cc56329cb5ea057-4ca1418a7613371d048778718c3acae9.r81.cf1.rackcdn.com/inner_circle_logo.png"}
+      %meta{property:"og:title", content:"inner circle"}
+      %meta{property:"og:description", content:"Don’t miss out on your dream job"}
+    = render 'shared/social_tag_script'
+    %section.container-fluid#company-index-top
+      .row-fluid
+        .span12.mobile-padding.phl.ptl.column-center
+          %h1.mtl
+            Don’t miss out on your dream job
+      .row-fluid
+        .span9.column-center.mobile-padding
+          %h2
+            Stay updated on opportunities and work life at these inspiring companies
+          .mbm.visible-phone.placeholder
+          .social-links.mtl.mbxl.hidden-phone
+            = render 'shared/social_tags', url:"http://getinnercircle.com"
+
+    %section.container#company-index-bottom.mtxl
+      .row-fluid
+        .span12
+          - @companyrows.each do |companyrow|
+            .row-fluid
+              - companyrow.each do |company|
+                = link_to(root_url(subdomain:company.subdomain), {:class=>'company-wrapper mbxl span6'}) do
+                  .filmstrip.mbs{:style=>"border-bottom-color:#{company.hex_code};"}
+                    - company.latest_posts_by_provider_date(3).each do |post|
+                      .filmstrip-image{:class=>post.wrapper_class}
+                        = image_tag post.photo_url(:medium), :style=>post.offset(140)
+                    .clearfix
+                  .company-info.mbl
+                    .pull-right.company-last-updated-time= company.last_published_time
+                    .pull-left.company-name.mbn.mts= capitalize_phrase(company.name)
+                    .pull-left.company-hq.mlm.mts= company.hq_city
+                    .clearfix
+                    .company-description= company.short_description
+    %section.container.mtl
+      .row-fluid
+        .span12.column-center.mobile-padding.ptm.pbxl.text-center
+          Don’t see your favorite companies?
+          =link_to "Tell us who you love", "https://docs.google.com/forms/d/168opPx2WH0TvstcC4SVQ9fxCQB5Xg-1iz_LT-tkyPhM/viewform", :target=>"_blank"
+          so we can fix that.

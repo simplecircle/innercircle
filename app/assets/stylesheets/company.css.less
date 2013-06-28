@@ -2,6 +2,100 @@
 @import "twitter/bootstrap/mixins.less";
 @import "variables.css.less";
 
+
+#company-index {
+  #company-index-bottom {
+    background-color: white;
+    .box-sizing(border-box);
+    padding:15px 15px 30px 15px;
+  }
+  #company-index-top {
+    text-align: center;
+    h2{
+      color:darken(@grayLight, 10%);
+      font-family:Lucida Grande, Lucida Sans Unicode;
+      font-size:16px;
+      font-weight:normal;
+      line-height:23px;
+    }
+  }
+  .company-wrapper {
+    display: block;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .company-description{
+    font-size:13px;
+    color: lighten(black, 30%);
+  }
+  .company-name {
+    font-size: 20px;
+    font-family: 'gibsonregular';
+  }
+  .company-hq{
+    color: @grayLight;
+    font-size:11px;
+    margin-top:8px;
+  }
+  .company-last-updated-time {
+    color: @grayLight;
+    font-size:11px;
+    margin-top:7px;
+  }
+  .company-info {
+    color: @bodyColor;
+    margin: 0.5%;
+  }
+  .fb-like {
+    min-height: 25px;
+  }
+  .filmstrip-image {
+    background:@bodyBackground;
+    height: 0;
+    padding-bottom: 32.3%;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 3px solid;
+    border-bottom-color: inherit;
+    .border-radius(3px);
+    margin: 0.5%;
+    width: 32.3%;
+    float: left;
+    &.landscape img {
+      height: 100%;
+    }
+    &.portrait img {
+      width: 100%;
+    }
+    img {
+      max-width: none;
+      position: absolute;
+    }
+  }
+  .social-links {
+    text-align: center;
+    height: 20px;
+  }
+  @media (max-width: 570px) {
+    .filmstrip-image img {
+      left: 0 !important;
+      top: 0 !important;
+    }
+    #company-index-top {
+      text-align: left;
+    }
+    #company-index-bottom {
+      padding: 5px;
+    }
+    .company-description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 20px;
+      white-space: nowrap;
+    }
+  }
+}
 #companies{
   padding-top:0;
   .content-no-nav {

@@ -5,41 +5,64 @@
   %meta{property:"og:image", content:"http://fbb10cc56329cb5ea057-4ca1418a7613371d048778718c3acae9.r81.cf1.rackcdn.com/inner_circle_logo.png"}
   %meta{property:"og:title", content:"inner circle"}
   %meta{property:"og:description", content:"Don’t miss out on your dream job"}
-= render 'shared/social_tag_script'
-%section.container-fluid#homepage-top
+.homepage-top-hero-image
+%section.homepage-top
+  .container
+    .row-fluid
+      .span12.mobile-padding.homepage-top-text
+        %h1
+          %span.white-text-background
+            We're <span class="accent-blue">inner circle</span>.
+          .mts
+          .hidden-tablet.hidden-phone
+            %span.white-text-background We help companies market their 
+            .mts
+            %span.white-text-background way to top talent.
+          .visible-tablet.visible-phone
+            %span.white-text-background We help companies market their way to top talent.
+        .mtxl
+        %h2.white-text-background
+          Our team serves as an extra hand for hiring, helping you brand and market your company to potential hires
+%section.homepage-how-we-do.container
   .row-fluid
-    .span12.mobile-padding.phl.ptl.column-center
-      %h1.mtl
-        Don’t miss out on your dream job
+    .span12.mobile-padding
+      %h2 How we do it:
+      %ul
+        %li <b>Discovery session</b> to identify your company positioning, culture, and idea marketing channels to potential hires
+        %li We provide you with a <b>branded culture landing page</b> that invites passive candidates to join your <em>talent community</em>, which lets your track them and signs them up for company updates
+        %li Delight your talent community members with <b>beautifully crafted bi-weekly email campaigns</b> showcasing your company culture, news, and current openings
+        %li We set up a simple way for current and past employees to spread the good word for you (we know that <b>referral hires</b> are the most successful)
+        %li <b>We'll add your existing prospects</b>, employees, and alumni to your inner circle talent community
+%section.homepage-contact-block.container-fluid
   .row-fluid
-    .span9.column-center.mobile-padding
-      %h2
-        Stay updated on opportunities and work life at these inspiring companies
-      .mbm.visible-phone.placeholder
-      .social-links.mtl.mbxl.hidden-phone
-        = render 'shared/social_tags', url:"http://getinnercircle.com"
-
-%section.container#homepage-bottom.mtxl
+    .span12.mobile-padding
+      %h2 Let us help you market your way to top talent
+      %h4.mtl Email or call us to learn how we can help you brand and market your company
+      .mtxl
+        =link_to "hello@getinnercircle.com", "mailto:hello@getinnercircle.com"
+        %span.hidden-phone 
+          |
+        %span.hidden-phone 917.880.2147
+        =link_to "917-880-2147", "tel:1-917-880-2147", :class=>"visible-phone"
+        %span.hidden-phone
+          |
+        902 Broadway 4th Fl, New York, NY
+.down-arrow
+%section.homepage-team-block.container
   .row-fluid
-    .span12
-      - @companyrows.each do |companyrow|
-        .row-fluid
-          - companyrow.each do |company|
-            = link_to(root_url(subdomain:company.subdomain), {:class=>'company-wrapper mbxl span6'}) do
-              .filmstrip.mbs{:style=>"border-bottom-color:#{company.hex_code};"}
-                - company.latest_posts_by_provider_date(3).each do |post|
-                  .filmstrip-image{:class=>post.wrapper_class}
-                    = image_tag post.photo_url(:medium), :style=>post.offset(140)
-                .clearfix
-              .company-info.mbl
-                .pull-right.company-last-updated-time= company.last_published_time
-                .pull-left.company-name.mbn.mts= capitalize_phrase(company.name)
-                .pull-left.company-hq.mlm.mts= company.hq_city
-                .clearfix
-                .company-description= company.short_description
-%section.container.mtl
-  .row-fluid
-    .span12.column-center.mobile-padding.ptm.pbxl.text-center
-      Don’t see your favorite companies?
-      =link_to "Tell us who you love", "https://docs.google.com/forms/d/168opPx2WH0TvstcC4SVQ9fxCQB5Xg-1iz_LT-tkyPhM/viewform", :target=>"_blank"
-      so we can fix that.
+    .span12.mobile-padding
+      %h2 Meet the team
+      .row-fluid.headshots-container
+        .span3.headshot
+          =image_tag "kenny.png", class:"headshot-image"
+          .headshot-name Patti
+        .span3.headshot
+          =image_tag "kenny.png", class:"headshot-image"
+          .headshot-name Patti
+        .span3.headshot
+          =image_tag "kenny.png", class:"headshot-image"
+          .headshot-name Patti
+        .span3.headshot
+          =image_tag "kenny.png", class:"headshot-image"
+          .headshot-name Patti
+      =image_tag("inner_circle_logo.png", class:"mtxl")
