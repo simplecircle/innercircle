@@ -2,10 +2,52 @@
 @import "twitter/bootstrap/mixins.less";
 @import "variables.css.less";
 
-#home {
- 
+#digest {
+  #new_user {
+    margin-top: 50px;
+  }
+  #user_email {
+    margin-bottom: 0;
+    height: 44px;
+    padding-left: 10px;
+    font-size: 18px;
+  }
+  .digest-signup {
+    .tiny {
+      padding-left: 10px;
+    }
+  }
+  .other-job-category-section {
+    padding-top: 13px;
+    input {
+      margin-top: 6px;
+    }
+    label {
+      line-height: 24px;
+      height: 30px;
+      margin-bottom: 0;
+    }
+    #other_job_category_ {
+      height: 30px;
+      margin: 0 10px;
+    }
+  }
+  .other-radio-tag {
+    &+label input {
+      display: none;
+    }
+    &:checked {
+      &+label input {
+        display: inline-block;
+      }
+    }
+  }
   @media (min-width: 571px) {
-   
+    section {
+      .box-sizing(border-box);
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
   @media (max-width: 941px) {
     
