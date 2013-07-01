@@ -20,6 +20,7 @@ Innercircle::Application.routes.draw do
   end
 
   root :to => 'home#index'
+  get "digest" => "digest#index"
   get "send_password_reset" => "password_resets#create"
   get "dashboard" => "dashboard#index"
   get "/auth/linkedin/callback"=>"users#edit"

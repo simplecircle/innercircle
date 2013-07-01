@@ -16,6 +16,7 @@
  *= require users
  *= require posts
  *= require home
+ *= require digest
  *= require dashboard
  *= require company
  *= require global
