@@ -67,7 +67,13 @@ class UsersController < ApplicationController
       form_errors.each do |field, msg|
         @user.errors.add(field, msg)
       end
-      render "new"
+      if request.xhr?
+        respond_to do |format|
+          format.json { render :json => @user.errors.to_json }
+        end
+      else
+        render "new"
+      end
     else
       if @user.save
         @company.users << @user
@@ -81,10 +87,22 @@ class UsersController < ApplicationController
           cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} unless current_user
           @user.set_password_reset_token
           UserMailer.welcome(@user, capitalize_phrase(@company.name)).deliver
-          redirect_to(edit_user_url(@user.auth_token))
+          if request.xhr?
+            respond_to do |format|
+              format.json { render :json => {:success=>edit_user_url(@user.auth_token) }}
+            end
+          else
+            redirect_to(edit_user_url(@user.auth_token))
+          end
         end
       else
-        render "new"
+        if request.xhr?
+          respond_to do |format|
+            format.json { render :json => @user.errors.to_json }
+          end
+        else
+          render "new"
+        end
       end
     end
   end
@@ -223,7 +241,12 @@ class UsersController < ApplicationController
   end
 
   def find_resource
-    @company = request.subdomain.empty? ? current_user.companies.first : current_company
+    @digest_subscription = params[:digest_subscription] == "true"
+    if @digest_subscription
+      @company = Company.find_by_subdomain('talent')
+    else
+      @company = request.subdomain.empty? ? current_user.companies.first : current_company
+    end
     @tags = ActsAsTaggableOn::Tag.all.to_json(only: :name)
   end
 

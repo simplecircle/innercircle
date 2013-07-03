@@ -5,25 +5,28 @@
   %meta{property:"og:image", content:"http://fbb10cc56329cb5ea057-4ca1418a7613371d048778718c3acae9.r81.cf1.rackcdn.com/inner_circle_logo.png"}
   %meta{property:"og:title", content:"inner circle"}
   %meta{property:"og:description", content:"Don’t miss out on your dream job"}
-%section.digest-top
+%section.digest-h1-section
   .container
     .row-fluid
       .span12.mobile-padding.text-center
         .mtxl.hidden-phone
         %h1 We've got our ears to the ground for the coolest companies in NYC.
         %h1.mtl Each week we'll send you the top 3.
-%section.digest-signup
+%section.digest-signup-section
   .container
-    = form_for @user, remote:true do |f|
+    = form_for @user, remote:true, html:{class:"mobile-padding"} do |f|
       .row-fluid
         .span7.offset1
           =hidden_field_tag :digest_subscription, "true"
           .inline_error#email-error{style:"display:none;"}
           = f.email_field :email, placeholder:"Email", class:"span12 mbn"
-          .tiny.gray-light
+          .tiny.gray-light.hidden-phone
             Your subscription is private and we'll never spam you.
+          .mts.visible-phone
         .span3
           = f.submit("Subscribe", class:"btn btn-primary btn-large span12", onclick:"_gaq.push(['_trackEvent', 'Digest', 'Signup']);")
+          .tiny.gray-light.visible-phone
+            Your subscription is private. We'll never spam you.
       .row-fluid
         .span10.offset1
           .well.controls.other-job-category-section.inactive{style:"display:none;"}
@@ -39,3 +42,334 @@
                   - if dept.name == "other"
                     %br.visible-phone
                     = text_field("other_job_category", nil, value: @other_job_category, class:"mlm #{'field_with_errors' if @user.errors[:other_job_category].first}", placeholder:"* Job category")
+%section.digest-preview-section
+  .container
+    .row-fluid
+      .span12#digest-preview
+        .digest-preview-wrapper
+          .preview-badge
+            .preview-badge-text Sample newsletter!
+          :plain
+          <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateContainer" style="border: 1px solid #ededed;background-color: #ededed;">
+                          <tbody><tr>
+                            <td align="center" valign="top">
+                              <!-- // Begin Template Header \\ -->
+                              <table border="0" cellpadding="15" cellspacing="0" width="100%" id="templateHeader" style="background-color: #ededed;border-bottom: 0;margin-top: 20px;">
+                                <tbody><tr>
+                                  <td class="headerContent" width="460" style="color: #333333;font-family: Arial;font-size: 34px;font-weight: bold;line-height: 100%;text-align: center;vertical-align: middle;">
+                                    <h1 mc:label="header_text" style="color: #333333;display: block;font-family: Arial;font-size: 24px;font-weight: bold;line-height: 100%;text-align: left;margin: 0;">
+                                      Keep these companies on your radar:
+                                    </h1>
+                                  </td>
+                                  <td width="80">
+                                    <!-- // Begin Module: Standard Header Image \\ -->
+                                    <img src="https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/fbb10cc56329cb5ea057-4ca1418a7613371d048778718c3acae9.r81.cf1.rackcdn.com/assets/inner_circle_logo-3b105e1bf418a07b540d5fc1e9414b99.png" alt="" border="0" style="margin: 0;padding: 0;width: 80px;border: none;font-size: 14px;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;max-width: 600px !important;" id="headerImage">
+                                    <!-- // End Module: Standard Header Image \\ -->
+                                  </td>
+                                </tr>
+                              </tbody></table>
+                              <!-- // End Template Header \\ -->
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center" valign="top">
+
+                              <!-- // Begin Template Body Variant: Photos and Jobs\\ -->
+                              <table border="0" cellpadding="15" cellspacing="0" width="600" id="templateBody" mc:repeatable="repeat_1" mc:variant="Photos Only" mc:repeatindex="0">
+                                <tbody><tr>
+                                  <td valign="top" class="bodyContent" style="background-color: #ededed;font-size: 14px;color: #333333;font-family: Arial;text-align: left;">
+                                    <!-- // Begin Module: Standard Content \\ -->
+
+                                  
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                      <tbody><tr>
+                                        <td valign="top">
+                                          <table border="0" cellpadding="15" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                            <tbody><tr class="companyBannerSection">
+                                              <td>
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                                  <tbody><tr height="40">
+                                                    <td width="115" style="border-right:1px solid #dedede;padding-right:15px;margin-right:20px;line-height:1;">
+                                                      <img src="https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/gallery.mailchimp.com/d4f0d06b354e24a967bc1aa7e/images/large_huge_logo918e99.1.png" alt="Huge Inc" border="0" style="border: px none;border-color: ;border-style: none;border-width: px;height: 34px;width: 100px;margin: 0;padding: 0;font-size: 14px;font-weight: bold;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;display: inline;" width="100" height="34">
+                                                    </td>
+                                                    <td style="padding-left:15px;">
+                                                      <div class="h3" style="margin-bottom: 5px;font-size: 16px;color: #333333;display: block;font-family: Arial;font-weight: bold;line-height: 100%;text-align: left;background-color: #FFFFFF;">Huge is a full-service digital agency.<br>
+          Make something you love.</div>
+                                                      <p class="detail" style="margin: 0;color: #707070;line-height: 1.3;font-family: Arial;font-size: 12px;">
+                                                        New York, NY / 51-100 employees
+                                                      </p>
+                                                    </td>
+                                                  </tr>
+                                                </tbody></table>
+                                              </td>
+                                            </tr>
+                                            <tr class="companyDescription">
+                                              <td style="border-top:1px solid #dedede">
+                                                <p style="color: #707070;line-height: 1.3;margin: 0;"><span style="font-family: arial, sans-serif;">Huge's Brooklyn office is home to more than 500 of the world's best visual and interactive designers, creatives, technologists, researchers, strategists and digital program managers. Brooklyn employees work on many of the company's largest accounts and have produced some of the most groundbreaking work in the industry. The office delivers everything from transformational digital business strategy, to design and development, to the conceptualization and implementation of digital marketing programs.</span></p>
+                                              </td>
+                                            </tr>
+                                            <!-- Begin Company Photos -->
+                                            <tr class="companyPhotosLeadIn">
+                                              <td style="padding:10px 15px 0 15px;">
+                                                <strong>
+                                                  What's it like to work here?
+                                                </strong>
+                                              </td>
+                                            </tr>
+                                            <tr class="companyPhotos">
+                                              <td style="padding-top:5px;">
+                                                <table cellspacing="0" cellpadding="0" border="0" style="background-color: #FFFFFF;">
+                                                  <tbody><tr>
+                                                    <td>
+                                                      <img src="https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/gallery.mailchimp.com/d4f0d06b354e24a967bc1aa7e/images/large_bb79f64ed1f211e292d022000a1fcc15_7.1.jpg" alt="See what it's like to work here!" border="0" style="border: px none;border-color: ;border-style: none;border-width: px;height: 130px;width: 130px;margin: 0;padding: 0;font-size: 14px;font-weight: bold;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;display: inline;max-width: 130px;max-height: 130px;" width="130" height="130">
+                                                      <img src="https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/gallery.mailchimp.com/d4f0d06b354e24a967bc1aa7e/images/large_f1eab54abceb11e2983d22000a9f199e_7.jpg" alt="See what it's like to work here!" border="0" style="border: px none;border-color: ;border-style: none;border-width: px;height: 130px;width: 130px;margin: 0;padding: 0;font-size: 14px;font-weight: bold;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;display: inline;max-width: 130px;max-height: 130px;" width="130" height="130">
+                                                      <img src="https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/gallery.mailchimp.com/d4f0d06b354e24a967bc1aa7e/images/large_7c9644facbe411e2b5c422000a1f9a53_76a9d3b.1.1.1.jpg" alt="See what it's like to work here!" border="0" style="border: px none;border-color: ;border-style: none;border-width: px;height: 130px;width: 130px;margin: 0;padding: 0;font-size: 14px;font-weight: bold;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;display: inline;max-width: 130px;max-height: 130px;" width="130" height="130">
+                                                      <img src="https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com/photo/21124/large_2403_UIsu2KCWBlJQQr_SwqVJcFxDwph4zxHywV7qQYSfN4s.jpg" alt="See what it's like to work here!" border="0" style="margin: 0;padding: 0;border: none;font-size: 14px;font-weight: bold;height: 130px;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;display: inline;max-width: 130px;max-height: 130px;width: 130px;">
+                                                    </td>
+                                                  </tr>
+                                                </tbody></table>
+                                              </td>
+                                            </tr>
+                                            <!-- End Company Photos -->
+
+                                            <!-- Begin CTA Button -->
+                                            <tr class="companyCTA">
+                                              <td style="padding-top:0;">
+                                                <table cellspacing="0" cellpadding="0" border="0" class="CTAButton1" style="border-radius: 2px;border-width: 1px;border-style: solid;padding: 8px 15px 8px 15px;background-color: #FFFFFF;background: #0088cc !important;border-color: #0088cc !important;">
+                                                 <tbody><tr>
+                                                  <td style="color: #ffffff; text-align: center;"><a href="http://hugeinc.getinnercircle.com" style="text-decoration: none; color: #ffffff;font-weight:bold;" target="_blank">See more Huge → </a> </td>
+                                                 </tr>
+                                                </tbody></table>
+                                              </td>
+                                            </tr>
+                                            <!-- End CTA Button -->
+                                          
+                                          </tbody></table>
+                                        </td>
+                                      </tr>
+                                    </tbody></table>
+                                    
+                                    <!-- // End Module: Standard Content \\ -->
+
+                                  </td>
+                                </tr>
+                              </tbody></table><table border="0" cellpadding="15" cellspacing="0" width="600" id="templateBody" mc:repeatable="repeat_1" mc:variant="Photos Only" mc:repeatindex="1">
+                                <tbody><tr>
+                                  <td valign="top" class="bodyContent" style="background-color: #ededed;font-size: 14px;color: #333333;font-family: Arial;text-align: left;">
+                                    <!-- // Begin Module: Standard Content \\ -->
+
+                                  
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                      <tbody><tr>
+                                        <td valign="top">
+                                          <table border="0" cellpadding="15" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                            <tbody><tr class="companyBannerSection">
+                                              <td>
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                                  <tbody><tr height="40">
+                                                    <td width="135" style="border-right:1px solid #dedede;padding-right:15px;margin-right:20px;line-height:1;">
+                                                      <img src="https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/gallery.mailchimp.com/d4f0d06b354e24a967bc1aa7e/images/squarespace.png" alt="Huge Inc" border="0" style="border: px none;border-color: ;border-style: none;border-width: px;height: 20px;width: 120px;margin: 0;padding: 0;font-size: 14px;font-weight: bold;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;display: inline;" width="140" height="20">
+                                                    </td>
+                                                    <td style="padding-left:15px;">
+                                                      <div class="h3" style="margin-bottom: 5px;font-size: 16px;color: #333333;display: block;font-family: Arial;font-weight: bold;line-height: 100%;text-align: left;background-color: #FFFFFF;">Providing creative tools that power the future of the web </div>
+                                                      <p class="detail" style="margin: 0;color: #707070;line-height: 1.3;font-family: Arial;font-size: 12px;">
+                                                        New York, NY / 51-100 employees
+                                                      </p>
+                                                    </td>
+                                                  </tr>
+                                                </tbody></table>
+                                              </td>
+                                            </tr>
+                                            <tr class="companyDescription">
+                                              <td style="border-top:1px solid #dedede">
+                                                <p style="color: #707070;line-height: 1.3;margin: 0;"><span style="font-family: arial, sans-serif;">Squarespace was rated the #2 place to work in NYC by Crain's, owing to our employees' drive to provide creative tools that power the future of the web. Each employee is taken care of at our vibrant SoHo office, with catered lunches, Aeron chairs, and First Tuesdays, where the team has been found in SoHo lofts and on boats, mountains, bowling alleys, and roller coasters.</span></p>
+                                              </td>
+                                            </tr>
+                                            <!-- Begin Company Photos -->
+                                            <tr class="companyPhotosLeadIn">
+                                              <td style="padding:10px 15px 0 15px;">
+                                                <strong>
+                                                  What's it like to work here?
+                                                </strong>
+                                              </td>
+                                            </tr>
+                                            <tr class="companyPhotos">
+                                              <td style="padding-top:5px;">
+                                                <table cellspacing="0" cellpadding="0" border="0" style="background-color: #FFFFFF;">
+                                                  <tbody><tr>
+                                                    <td>
+                                                      <img src="https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/gallery.mailchimp.com/d4f0d06b354e24a967bc1aa7e/images/large_3c113a26ac3011e28e0922000a9f1335_7.jpg" alt="See what it's like to work here!" border="0" style="border: px none;border-color: ;border-style: none;border-width: px;height: 130px;width: 130px;margin: 0;padding: 0;font-size: 14px;font-weight: bold;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;display: inline;max-width: 130px;max-height: 130px;" width="130" height="130">
+                                                      <img src="https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/gallery.mailchimp.com/d4f0d06b354e24a967bc1aa7e/images/large_42906039_Yh6lcAapVvXxDICRXKX_Da3lrZ8_8oEx2N_D1mrysco.jpg" alt="See what it's like to work here!" border="0" style="border: px none;border-color: ;border-style: none;border-width: px;height: 130px;width: 130px;margin: 0;padding: 0;font-size: 14px;font-weight: bold;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;display: inline;max-width: 130px;max-height: 130px;" width="130" height="130">
+                                                      <img src="https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/gallery.mailchimp.com/d4f0d06b354e24a967bc1aa7e/images/large_d4ca399cb8e311e2a57122000a1fbe0e_7.jpg" alt="See what it's like to work here!" border="0" style="border: px none;border-color: ;border-style: none;border-width: px;height: 130px;width: 130px;margin: 0;padding: 0;font-size: 14px;font-weight: bold;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;display: inline;max-width: 130px;max-height: 130px;" width="130" height="130">
+                                                      <img src="https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/gallery.mailchimp.com/d4f0d06b354e24a967bc1aa7e/images/large_18577108_R3eSaCExBLvd6e56kx3yTKO0crb0mT2_xxZtEXzjT6w47019a.1.jpg" alt="See what it's like to work here!" border="0" style="border: px none;border-color: ;border-style: none;border-width: px;height: 130px;width: 130px;margin: 0;padding: 0;font-size: 14px;font-weight: bold;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;display: inline;max-width: 130px;max-height: 130px;" width="130" height="130">
+                                                    </td>
+                                                  </tr>
+                                                </tbody></table>
+                                              </td>
+                                            </tr>
+                                            <!-- End Company Photos -->
+
+                                            <!-- Begin CTA Button -->
+                                            <tr class="companyCTA">
+                                              <td style="padding-top:0;">
+                                                <table cellspacing="0" cellpadding="0" border="0" class="CTAButton1" style="border-radius: 2px;border-width: 1px;border-style: solid;padding: 8px 15px 8px 15px;background-color: #FFFFFF;background: #0088cc !important;border-color: #0088cc !important;">
+                                                 <tbody><tr>
+                                                  <td style="color: #ffffff; text-align: center;"><a href="http://squarespace.getinnercircle.com" style="text-decoration: none; color: #ffffff;font-weight:bold;" target="_blank">See more Squarespace → </a> </td>
+                                                 </tr>
+                                                </tbody></table>
+                                              </td>
+                                            </tr>
+                                            <!-- End CTA Button -->
+                                          
+                                          </tbody></table>
+                                        </td>
+                                      </tr>
+                                    </tbody></table>
+                                    
+                                    <!-- // End Module: Standard Content \\ -->
+
+                                  </td>
+                                </tr>
+                              </tbody></table><table border="0" cellpadding="15" cellspacing="0" width="600" id="templateBody" mc:repeatable="repeat_1" mc:variant="Top Jobs" mc:repeatindex="2">
+                                <tbody><tr>
+                                  <td valign="top" class="bodyContent" style="background-color: #ededed;font-size: 14px;color: #333333;font-family: Arial;text-align: left;">
+                                    <!-- // Begin Module: Standard Content \\ -->
+
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                      <tbody><tr>
+                                        <td valign="top">
+                                          <!-- Begin Jobs -->
+                                          <table border="0" cellpadding="15" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                            <tbody><tr>
+                                              <td style="padding:10px 15px 5px 15px;border-bottom:1px solid #dedede;" colspan="2">
+                                                <strong>Top Senior Tech opportunities </strong>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="padding:5px 0 0 0;" colspan="2">
+                                              </td>
+                                            </tr>
+                                            <tr mc:repeatable="repeat_1:2:repeat_1" mc:repeatindex="0">
+                                              <td style="padding:7px 5px 7px 15px;width:20px;">
+                                                <strong>1.</strong>
+                                              </td>
+                                              <td style="padding:7px 15px 7px 5px;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                                  <tbody><tr>
+                                                    <td><a class="jobLink" href="http://www.squarespace.com/career-openings" style="text-decoration: none !important;font-weight: bold !important;color: #0088cc !important;line-height: 1 !important;" target="_blank">Platform Software Engineer</a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Squarespace (NY) </span> </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Squarespace is pushing the envelope in user-interface design &amp; experience, web-services, distributed caching and grid computing. You'll be working with other engineers with years of startup experience developing and integrating large-scale backend systems powering highly interactive web applications.</td>
+                                                  </tr>
+                                                </tbody></table>
+                                              </td>
+                                            </tr><tr mc:repeatable="repeat_1:2:repeat_1" mc:repeatindex="1">
+                                              <td style="padding:7px 5px 7px 15px;width:20px;">
+                                                <strong>2.</strong>
+                                              </td>
+                                              <td style="padding:7px 15px 7px 5px;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                                  <tbody><tr>
+                                                    <td><a class="jobLink" href="/" style="text-decoration: none !important;font-weight: bold !important;color: #0088cc !important;line-height: 1 !important;" target="_blank">Experience Director </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Huge Inc (NY) </span> </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Our Experience Directors lead our most complex and innovative projects, creating products used by millions of people every day. Directors often own multiple projects at the same time or oversee and drive a multi-track account with a UX team supporting.<br>
+          <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;">Req: At least 5+ years of user interface design experience</span> </td>
+                                                  </tr>
+                                                </tbody></table>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="padding:5px 0 0 0;" colspan="2">
+                                              </td>
+                                            </tr>
+                                          </tbody></table>
+                                          <!-- End Jobs -->
+                                        </td>
+                                      </tr>
+                                    </tbody></table>
+                                    
+                                    <!-- // End Module: Standard Content \\ -->
+
+                                  </td>
+                                </tr>
+                              </tbody></table><table border="0" cellpadding="15" cellspacing="0" width="600" id="templateBody" mc:repeatable="repeat_1" mc:variant="Top Jobs" mc:repeatindex="3">
+                                <tbody><tr>
+                                  <td valign="top" class="bodyContent" style="background-color: #ededed;font-size: 14px;color: #333333;font-family: Arial;text-align: left;">
+                                    <!-- // Begin Module: Standard Content \\ -->
+
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                      <tbody><tr>
+                                        <td valign="top">
+                                          <!-- Begin Jobs -->
+                                          <table border="0" cellpadding="15" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                            <tbody><tr>
+                                              <td style="padding:10px 15px 5px 15px;border-bottom:1px solid #dedede;" colspan="2">
+                                                <strong>Top Junior Tech opportunities</strong>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="padding:5px 0 0 0;" colspan="2">
+                                              </td>
+                                            </tr>
+                                            <tr mc:repeatable="repeat_1:3:repeat_1" mc:repeatindex="0">
+                                              <td style="padding:7px 5px 7px 15px;width:20px;">
+                                                <strong>1.</strong>
+                                              </td>
+                                              <td style="padding:7px 15px 7px 5px;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                                  <tbody><tr>
+                                                    <td><a class="jobLink" href="/" style="text-decoration: none !important;font-weight: bold !important;color: #0088cc !important;line-height: 1 !important;" target="_blank">Data Visualization Software Engineer </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Squarespace (NY) </span> </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Build amazing data visualization dashboards and applications using advanced HTML, CSS, and JavaScript, using open-source tools (d3, nvd3, etc.)</td>
+                                                  </tr>
+                                                </tbody></table>
+                                              </td>
+                                            </tr><tr mc:repeatable="repeat_1:3:repeat_1" mc:repeatindex="1">
+                                              <td style="padding:7px 5px 7px 15px;width:20px;">
+                                                <strong>2.</strong>
+                                              </td>
+                                              <td style="padding:7px 15px 7px 5px;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                                  <tbody><tr>
+                                                    <td><a class="jobLink" href="http://www.squarespace.com/career-openings" style="text-decoration: none !important;font-weight: bold !important;color: #0088cc !important;line-height: 1 !important;" target="_blank">Data Team Engineer </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Squarespace (NY) </span> </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>You will be working with software engineers with years of startup experience developing and integrating complex systems. You'll design and implement processes to extract, transform, and load (ETL) data from a wide variety of sources (relational, NoSQL, web services, flat files).</td>
+                                                  </tr>
+                                                </tbody></table>
+                                              </td>
+                                            </tr><tr mc:repeatable="repeat_1:3:repeat_1" mc:repeatindex="2">
+                                              <td style="padding:7px 5px 7px 15px;width:20px;">
+                                                <strong>3.</strong>
+                                              </td>
+                                              <td style="padding:7px 15px 7px 5px;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
+                                                  <tbody><tr>
+                                                    <td><a class="jobLink" href="http://www.hugeinc.com/careers/job-335-oCUdVfwo" style="text-decoration: none !important;font-weight: bold !important;color: #0088cc !important;line-height: 1 !important;" target="_blank">Web Developer </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Huge Inc (NY) </span> </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Huge Web Developers work with account team, interaction designers, and graphic designers to create interactive solutions for clients as well as internal HUGE projects.</td>
+                                                  </tr>
+                                                </tbody></table>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="padding:5px 0 0 0;" colspan="2">
+                                              </td>
+                                            </tr>
+                                          </tbody></table>
+                                          <!-- End Jobs -->
+                                        </td>
+                                      </tr>
+                                    </tbody></table>
+                                    
+                                    <!-- // End Module: Standard Content \\ -->
+
+                                  </td>
+                                </tr>
+                              </tbody></table>
+                            </td>
+                          </tr>
+                        </tbody></table>
