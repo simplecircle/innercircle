@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :email, :first_name, :last_name, :password_digest, :password, :password_confirmation, :role, :profile_attributes, :pending
+  attr_accessible :email, :first_name, :last_name, :password_newsletter, :password, :password_confirmation, :role, :profile_attributes, :pending
 
   strip_attributes :only => [:email, :first_name, :last_name]
 

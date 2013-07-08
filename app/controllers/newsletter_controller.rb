@@ -1,4 +1,4 @@
-class DigestController < ApplicationController
+class NewsletterController < ApplicationController
   # layout 'marketing'
   def index
     @user = User.new :role=>'talent'

@@ -241,8 +241,8 @@ class UsersController < ApplicationController
   end
 
   def find_resource
-    @digest_subscription = params[:digest_subscription] == "true"
-    if @digest_subscription
+    @newsletter_subscription = params[:newsletter_subscription] == "true"
+    if @newsletter_subscription
       @company = Company.find_by_subdomain('talent')
     else
       @company = request.subdomain.empty? ? current_user.companies.first : current_company

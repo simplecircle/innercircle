@@ -2,10 +2,10 @@
 @import "twitter/bootstrap/mixins.less";
 @import "variables.css.less";
 
-#digest-preview {
+#newsletter-preview {
   text-align: center;
   padding: 20px 0 60px 0;
-  .digest-preview-wrapper {
+  .newsletter-preview-wrapper {
     position: relative;
     margin:0 auto;
     width: 600px;
@@ -16,22 +16,9 @@
     position: absolute;
     top:-90px;
     left:10px;
-    background: @accentYellow;
-    height: 120px;
-    width: 120px;
-    border-radius: 60px;
   }
-  .preview-badge-text {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top:38px;
-    margin-left: -5px;
-    color: @gray;
-    .rotate(-20deg);
-  }
-
   @media all and (max-width: 550px){
-    .digest-preview-wrapper {
+    .newsletter-preview-wrapper {
       width: 100%;
     }
   }
@@ -172,32 +159,32 @@
   .jobLink{
     text-decoration:none !important;
     font-weight:bold !important;
-    color:#0088cc !important;
+    color:#0096ff !important;
     line-height:1 !important;
   }
   .CTAButton1{
-    background:#0088cc !important;
+    background:#0096ff !important;
     border-radius:2px;
     border-width:1px;
     border-style:solid;
-    border-color:#0088cc !important;
+    border-color:#0096ff !important;
   }
   .CTAButton1,.CTAButton2,.CTAButton3{
     padding:8px 15px 8px 15px;
   }
   .CTAButton2{
-    background:#0088cc !important;
+    background:#0096ff !important;
     border-radius:2px;
     border-width:1px;
     border-style:solid;
-    border-color:#0088cc !important;
+    border-color:#0096ff !important;
   }
   .CTAButton3{
-    background:#0088cc !important;
+    background:#0096ff !important;
     border-radius:2px;
     border-width:1px;
     border-style:solid;
-    border-color:#0088cc !important;
+    border-color:#0096ff !important;
   }
   #templateFooter{
     background-color:#ededed;
@@ -287,11 +274,13 @@
   }
 }
 
-#digest {
-  .digest-h1-section {
-    h1 {
-      font-size: 30px;
-    }
+#newsletter {
+  input[disabled] {
+    background-color: #3fa5fc;
+  }
+  .newsletter-signup-wrapper {
+    width: 600px;
+    margin: 0 auto;
   }
   #new_user {
     margin-top: 50px;
@@ -302,18 +291,22 @@
     padding-left: 10px;
     font-size: 18px;
   }
-  .digest-signup-section {
+  .newsletter-signup-section {
     .tiny {
       padding-left: 10px;
     }
   }
-  .digest-preview-section {
+  .newsletter-preview-section {
     padding-top: 80px;
-    border-top: 1px solid @grayLight;
+    border-top: 1px solid #dedede;
     background: white;
     * {
       .box-sizing(border-box);
     }
+  }
+  .tiny {
+    padding-top: 5px;
+    line-height: 1.2;
   }
   .other-job-category-section {
     padding-top: 13px;
@@ -351,19 +344,9 @@
       padding-right: 10px;
     }
   }
-  @media (max-width: 941px) {
-    
-  }
   @media (max-width: 570px) {
-   
-  }
-  @media (max-width: 768px) {
-
-  }
-
-  /*between mobile and iPad*/
-  @media (min-width: 571px) and (max-width: 768px) {
-
-
+    .newsletter-signup-wrapper {
+      width: 100%;
+    }
   }
 }

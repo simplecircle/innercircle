@@ -5,28 +5,28 @@
   %meta{property:"og:image", content:"http://fbb10cc56329cb5ea057-4ca1418a7613371d048778718c3acae9.r81.cf1.rackcdn.com/inner_circle_logo.png"}
   %meta{property:"og:title", content:"inner circle"}
   %meta{property:"og:description", content:"Don’t miss out on your dream job"}
-%section.digest-h1-section
+%section.newsletter-h1-section
   .container
     .row-fluid
       .span12.mobile-padding.text-center
-        .mtxl.hidden-phone
-        %h1 We've got our ears to the ground for the coolest companies in NYC.
-        %h1.mtl Each week we'll send you the top 3.
-%section.digest-signup-section
+        .mtxl
+        %h1 We've got the most exciting companies in NYC.
+        %h1.mtl Each week we'll send you a few.
+%section.newsletter-signup-section
   .container
     = form_for @user, remote:true, html:{class:"mobile-padding"} do |f|
-      .row-fluid
-        .span7.offset1
-          =hidden_field_tag :digest_subscription, "true"
-          .inline_error#email-error{style:"display:none;"}
+      .row-fluid.newsletter-signup-wrapper
+        .span8
+          =hidden_field_tag :newsletter_subscription, "true"
           = f.email_field :email, placeholder:"Email", class:"span12 mbn"
+          .inline_error#email-error{style:"display:none;"}
           .tiny.gray-light.hidden-phone
-            Your subscription is private and we'll never spam you.
+            Your subscription is private. You can unsubscribe with one click and we'll never spam you.
           .mts.visible-phone
-        .span3
-          = f.submit("Subscribe", class:"btn btn-primary btn-large span12", onclick:"_gaq.push(['_trackEvent', 'Digest', 'Signup']);")
+        .span4
+          = f.submit("Subscribe", class:"btn btn-primary btn-large span12", onclick:"_gaq.push(['_trackEvent', 'Newsletter', 'Signup']);")
           .tiny.gray-light.visible-phone
-            Your subscription is private. We'll never spam you.
+            Your subscription is private. You can unsubscribe with one click and we'll never spam you.
       .row-fluid
         .span10.offset1
           .well.controls.other-job-category-section.inactive{style:"display:none;"}
@@ -42,13 +42,13 @@
                   - if dept.name == "other"
                     %br.visible-phone
                     = text_field("other_job_category", nil, value: @other_job_category, class:"mlm #{'field_with_errors' if @user.errors[:other_job_category].first}", placeholder:"* Job category")
-%section.digest-preview-section
+%section.newsletter-preview-section
   .container
     .row-fluid
-      .span12#digest-preview
-        .digest-preview-wrapper
-          .preview-badge
-            .preview-badge-text Sample newsletter!
+      .span12#newsletter-preview
+        .newsletter-preview-wrapper
+          =image_tag("sample_newsletter.png", class:"preview-badge")
+          
           :plain
           <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateContainer" style="border: 1px solid #ededed;background-color: #ededed;">
                           <tbody><tr>
@@ -135,7 +135,7 @@
                                             <!-- Begin CTA Button -->
                                             <tr class="companyCTA">
                                               <td style="padding-top:0;">
-                                                <table cellspacing="0" cellpadding="0" border="0" class="CTAButton1" style="border-radius: 2px;border-width: 1px;border-style: solid;padding: 8px 15px 8px 15px;background-color: #FFFFFF;background: #0088cc !important;border-color: #0088cc !important;">
+                                                <table cellspacing="0" cellpadding="0" border="0" class="CTAButton1" style="border-radius: 2px;border-width: 1px;border-style: solid;padding: 8px 15px 8px 15px;background-color: #FFFFFF;background: #0096ff !important;border-color: #0096ff !important;">
                                                  <tbody><tr>
                                                   <td style="color: #ffffff; text-align: center;"><a href="http://hugeinc.getinnercircle.com" style="text-decoration: none; color: #ffffff;font-weight:bold;" target="_blank">See more Huge → </a> </td>
                                                  </tr>
@@ -212,7 +212,7 @@
                                             <!-- Begin CTA Button -->
                                             <tr class="companyCTA">
                                               <td style="padding-top:0;">
-                                                <table cellspacing="0" cellpadding="0" border="0" class="CTAButton1" style="border-radius: 2px;border-width: 1px;border-style: solid;padding: 8px 15px 8px 15px;background-color: #FFFFFF;background: #0088cc !important;border-color: #0088cc !important;">
+                                                <table cellspacing="0" cellpadding="0" border="0" class="CTAButton1" style="border-radius: 2px;border-width: 1px;border-style: solid;padding: 8px 15px 8px 15px;background-color: #FFFFFF;background: #0096ff !important;border-color: #0096ff !important;">
                                                  <tbody><tr>
                                                   <td style="color: #ffffff; text-align: center;"><a href="http://squarespace.getinnercircle.com" style="text-decoration: none; color: #ffffff;font-weight:bold;" target="_blank">See more Squarespace → </a> </td>
                                                  </tr>
@@ -256,7 +256,7 @@
                                               <td style="padding:7px 15px 7px 5px;">
                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
                                                   <tbody><tr>
-                                                    <td><a class="jobLink" href="http://www.squarespace.com/career-openings" style="text-decoration: none !important;font-weight: bold !important;color: #0088cc !important;line-height: 1 !important;" target="_blank">Platform Software Engineer</a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Squarespace (NY) </span> </td>
+                                                    <td><a class="jobLink" href="http://www.squarespace.com/career-openings" style="text-decoration: none !important;font-weight: bold !important;color: #0096ff !important;line-height: 1 !important;" target="_blank">Platform Software Engineer</a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Squarespace (NY) </span> </td>
                                                   </tr>
                                                   <tr>
                                                     <td>Squarespace is pushing the envelope in user-interface design &amp; experience, web-services, distributed caching and grid computing. You'll be working with other engineers with years of startup experience developing and integrating large-scale backend systems powering highly interactive web applications.</td>
@@ -270,7 +270,7 @@
                                               <td style="padding:7px 15px 7px 5px;">
                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
                                                   <tbody><tr>
-                                                    <td><a class="jobLink" href="/" style="text-decoration: none !important;font-weight: bold !important;color: #0088cc !important;line-height: 1 !important;" target="_blank">Experience Director </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Huge Inc (NY) </span> </td>
+                                                    <td><a class="jobLink" href="/" style="text-decoration: none !important;font-weight: bold !important;color: #0096ff !important;line-height: 1 !important;" target="_blank">Experience Director </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Huge Inc (NY) </span> </td>
                                                   </tr>
                                                   <tr>
                                                     <td>Our Experience Directors lead our most complex and innovative projects, creating products used by millions of people every day. Directors often own multiple projects at the same time or oversee and drive a multi-track account with a UX team supporting.<br>
@@ -319,7 +319,7 @@
                                               <td style="padding:7px 15px 7px 5px;">
                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
                                                   <tbody><tr>
-                                                    <td><a class="jobLink" href="/" style="text-decoration: none !important;font-weight: bold !important;color: #0088cc !important;line-height: 1 !important;" target="_blank">Data Visualization Software Engineer </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Squarespace (NY) </span> </td>
+                                                    <td><a class="jobLink" href="/" style="text-decoration: none !important;font-weight: bold !important;color: #0096ff !important;line-height: 1 !important;" target="_blank">Data Visualization Software Engineer </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Squarespace (NY) </span> </td>
                                                   </tr>
                                                   <tr>
                                                     <td>Build amazing data visualization dashboards and applications using advanced HTML, CSS, and JavaScript, using open-source tools (d3, nvd3, etc.)</td>
@@ -333,7 +333,7 @@
                                               <td style="padding:7px 15px 7px 5px;">
                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
                                                   <tbody><tr>
-                                                    <td><a class="jobLink" href="http://www.squarespace.com/career-openings" style="text-decoration: none !important;font-weight: bold !important;color: #0088cc !important;line-height: 1 !important;" target="_blank">Data Team Engineer </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Squarespace (NY) </span> </td>
+                                                    <td><a class="jobLink" href="http://www.squarespace.com/career-openings" style="text-decoration: none !important;font-weight: bold !important;color: #0096ff !important;line-height: 1 !important;" target="_blank">Data Team Engineer </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Squarespace (NY) </span> </td>
                                                   </tr>
                                                   <tr>
                                                     <td>You will be working with software engineers with years of startup experience developing and integrating complex systems. You'll design and implement processes to extract, transform, and load (ETL) data from a wide variety of sources (relational, NoSQL, web services, flat files).</td>
@@ -347,7 +347,7 @@
                                               <td style="padding:7px 15px 7px 5px;">
                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
                                                   <tbody><tr>
-                                                    <td><a class="jobLink" href="http://www.hugeinc.com/careers/job-335-oCUdVfwo" style="text-decoration: none !important;font-weight: bold !important;color: #0088cc !important;line-height: 1 !important;" target="_blank">Web Developer </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Huge Inc (NY) </span> </td>
+                                                    <td><a class="jobLink" href="http://www.hugeinc.com/careers/job-335-oCUdVfwo" style="text-decoration: none !important;font-weight: bold !important;color: #0096ff !important;line-height: 1 !important;" target="_blank">Web Developer </a> <span class="detail" style="color: #707070;font-family: Arial;font-size: 12px;"> - Huge Inc (NY) </span> </td>
                                                   </tr>
                                                   <tr>
                                                     <td>Huge Web Developers work with account team, interaction designers, and graphic designers to create interactive solutions for clients as well as internal HUGE projects.</td>
