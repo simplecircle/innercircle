@@ -5,47 +5,33 @@
   %meta{property:"og:image", content:"http://fbb10cc56329cb5ea057-4ca1418a7613371d048778718c3acae9.r81.cf1.rackcdn.com/inner_circle_logo.png"}
   %meta{property:"og:title", content:"inner circle"}
   %meta{property:"og:description", content:"Don’t miss out on your dream job"}
-.homepage-top-hero-image
 %section.homepage-top
   .container
     .row-fluid
-      .span12.mobile-padding.homepage-top-text
+      .span12
         %h1
-          %span.white-text-background
-            Use <span class="accent-blue">inner circle</span> to market your way to top talent
-        .mtxl
-        %h2.white-text-background
-          Our team serves as an extra hand for your company, helping you brand and market your company to potential hires
+          Market your way to top talent with <span class="accent-blue">inner circle</span>
+        %h2
+          We help you hire in two ways:
 %section.homepage-how-we-do.container
   .row-fluid
-    .span12.mobile-padding
-      %h2 inner circle helps you hire in two ways:
-      %h3 Build a <b>talent community</b> for your company
+    .span6.homepage-how-we-do-left
+      =image_tag("home_arrow1.png", class:"home_arrow1")
+      %h3 Build a talent community for your company
       %ul
-        %li We harness your company's fans and current and past employees to build a high-quality talent community
-        %li We <b>seed your community</b> with relevant talent
-      %h3 Market your company culture, opportunities, and content to your community
+        %li We harness your company's followers and current and past employees to build a high-quality talent community
+        %li We seed your community with relevant talent
+    .span6.homepage-how-we-do-right
+      =image_tag("home_arrow2.png", class:"home_arrow2 hidden-phone")
+      =image_tag("home_arrow3.png", class:"home_arrow3 visible-phone")
+      %h3 Market your culture, company updates, and jobs
       %ul
-        %li We create <b>custom content</b> to continuously engage your talent community
-        %li We help <b>identify great candidates</b> in your community and convert them into leads
-%section.homepage-contact-block.container-fluid
+        %li We create custom content to keep your talent community engaged
+        %li We help identify great candidates in your community and convert them into leads
+%section.homepage-team-block.container-fluid
   .row-fluid
-    .span12.mobile-padding
-      %h3 Email or call us to learn how we can help you market your way to top talent
-      .mtm
-        =link_to "hello@getinnercircle.com", "mailto:hello@getinnercircle.com"
-        %span.hidden-phone 
-          |
-        %span.hidden-phone 917.880.2147
-        =link_to "917-880-2147", "tel:1-917-880-2147", :class=>"visible-phone"
-        %span.hidden-phone
-          |
-        902 Broadway 4th Fl, New York, NY
-.down-arrow
-%section.homepage-team-block.container
-  .row-fluid
-    .span12.mobile-padding
-      %h2 Meet the team
+    .span9.column-center
+      %h2 Meet the <span class="accent-blue">inner circle</span> team
       .row-fluid.headshots-container
         .span3.headshot
           =image_tag "patti.jpg", class:"headshot-image"
@@ -59,4 +45,16 @@
         .span3.headshot
           =image_tag "jon.jpg", class:"headshot-image"
           .headshot-name Jon
-      =image_tag("inner_circle_logo.png", class:"mtxl")
+%section.homepage-contact-block.container-fluid
+  .row-fluid
+    .span12
+      %h2 Email or call us for a free consultation
+      .mtm
+        =link_to "hello@getinnercircle.com", "mailto:hello@getinnercircle.com"
+        %span.hidden-phone 
+          |
+        %span.hidden-phone 917.880.2147
+        =link_to "917-880-2147", "tel:1-917-880-2147", :class=>"visible-phone"
+        %span.hidden-phone
+          |
+        902 Broadway 4th Fl, New York, NY
