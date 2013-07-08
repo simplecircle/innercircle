@@ -9,7 +9,8 @@ class UserMailer < ActionMailer::Base
   def welcome(user, company_name)
     @user = user
     @company_name = company_name
-    mail(to:user.email, subject:"Welcome to #{company_name}'s talent community")
+    subject = company_name == 'Talent' ? 'Welcome to the inner circle Newsletter!' : "Welcome to #{company_name}'s talent community"
+    mail(to:user.email, subject:subject)
   end
 
   def password_reset(user)

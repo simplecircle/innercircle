@@ -11,21 +11,29 @@
           %table{width:"600px",  align:"center"}
             %tr
               %td{align:"center"}
-                = image_tag(url_for_cdn_image(@user, @user.companies.first.logo.url(:medium)), style:"max-width:100px;")
+                - if @company_name == 'Talent'
+                  = image_tag("http://fbb10cc56329cb5ea057-4ca1418a7613371d048778718c3acae9.r81.cf1.rackcdn.com/inner_circle_logo.png")
+
+                - else
+                  = image_tag(url_for_cdn_image(@user, @user.companies.first.logo.url(:medium)), style:"max-width:100px;")
+          %br
           %br
           %table{width:"600px", bgcolor:"white", align:"center", style:"padding:15px 15px 20px 15px; border-bottom:1px solid #ccc;"}
             %tr{width:"580px"}
               %td
                 %p{style:"margin:0 0 15px 0;"}
-                  Thanks for joining our talent community.
-                  %br
-                  %br
-                  We’ll send you a short email twice a month with job offers, a lil' news and a visual look into life at #{@company_name}.
-                  %br
-                  %br
-                  Take a sec to create a password, so that you can edit your email preferences.
-                  = edit_password_reset_url(@user.password_reset_token)
-
+                  - if @company_name == 'Talent'
+                    Thanks for joining the inner circle newsletter!
+                    %br
+                    %br
+                    We’ll send you a short email each week with the most exciting companies and jobs in New York, so keep your eyes peeled.
+                    %br
+                  - else 
+                    Thanks for joining our talent community!
+                    %br
+                    %br
+                    We’ll send you a short email every so often with the most exciting job offers, news, and a pictures so you get a look into life at #{@company_name}.
+                    %br
           %br
           %br
           %br
