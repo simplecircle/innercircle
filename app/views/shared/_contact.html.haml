@@ -34,4 +34,4 @@
               %li= link_to "Edit Your Profile", :controller => "users", :action=> "edit", :id => current_user.id
               %li= link_to "Logout", logout_url(subdomain:false)
         - else
-          %li= link_to "Login", login_url, class:"pull-right"
+          %li= link_to "Client login", login_url, class:"pull-right"

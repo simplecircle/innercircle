@@ -50,8 +50,6 @@
     text-align: center;
   }
   .homepage-how-we-do {
-    padding-top: 20px;
-    padding-bottom: 45px;
     ul {
       margin-left: 18px;
     }
@@ -68,20 +66,32 @@
       font-family: 'gibsonsemibold';
     }
   }
+  .homepage-how-we-do-right-container {
+    border-left: 1px solid #dedede;
+  }
   .homepage-how-we-do-left {
-    margin-top:-85px;
+    margin-top:-65px;
   }
   .homepage-how-we-do-right {
-    margin-top:100px;
+    margin-top:145px;
+    padding-left: 40px;
+    padding-bottom: 60px;
   }
   .home_arrow1 {
     margin-left: 25%;
   }
+  .home_arrow2 {
+    margin-left: -20px;
+  }
   .home_arrow3 {
     margin-left: 40%;
   }
+  @media (max-width: 768px) {
+    .homepage-how-we-do-left {
+      margin-top: -45px;
+    }
+  }
   @media (max-width: 570px) {
-
     .homepage-top {
       h1 {
         font-size: 30px;
@@ -93,11 +103,12 @@
         margin-top: 30px;
       }
     }
-    .homepage-how-we-do-left {
-      margin-top: -60px;
+    .homepage-how-we-do-right-container {
+      border:none;
     }
     .homepage-how-we-do-right {
       margin-top: 0;
+      padding-left: 0;
     }
     .homepage-how-we-do {
       h3 {

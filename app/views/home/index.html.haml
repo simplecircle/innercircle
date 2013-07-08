@@ -10,24 +10,28 @@
     .row-fluid
       .span12
         %h1
-          Market your way to top talent with <span class="accent-blue">inner circle</span>
+          Market your way to top talent<br />with <span class="accent-blue">inner circle</span>
         %h2
           We help you hire in two ways:
 %section.homepage-how-we-do.container
   .row-fluid
-    .span6.homepage-how-we-do-left
-      =image_tag("home_arrow1.png", class:"home_arrow1")
-      %h3 Build a talent community for your company
-      %ul
-        %li We harness your company's followers and current and past employees to build a high-quality talent community
-        %li We seed your community with relevant talent
-    .span6.homepage-how-we-do-right
-      =image_tag("home_arrow2.png", class:"home_arrow2 hidden-phone")
-      =image_tag("home_arrow3.png", class:"home_arrow3 visible-phone")
-      %h3 Market your culture, company updates, and jobs
-      %ul
-        %li We create custom content to keep your talent community engaged
-        %li We help identify great candidates in your community and convert them into leads
+    .span6.homepage-how-we-do-left-container
+      .row-fluid
+        .span12.homepage-how-we-do-left
+          =image_tag("home_arrow1.png", class:"home_arrow1")
+          %h3 Build a talent community for your company
+          %ul
+            %li We harness your followers and current and past employees to build a high-quality talent community
+            %li We seed your community with relevant talent
+    .span6.homepage-how-we-do-right-container
+      .row-fluid
+        .span12.homepage-how-we-do-right
+          =image_tag("home_arrow2.png", class:"home_arrow2 hidden-phone")
+          =image_tag("home_arrow3.png", class:"home_arrow3 visible-phone")
+          %h3 Market your culture, jobs, and <br/ >company updates
+          %ul
+            %li We create custom content to keep your talent community engaged
+            %li We help identify great candidates in your community and convert them into leads
 %section.homepage-team-block.container-fluid
   .row-fluid
     .span9.column-center
