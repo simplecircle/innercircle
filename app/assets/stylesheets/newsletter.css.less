@@ -275,8 +275,22 @@
 }
 
 #newsletter {
+
   input[disabled] {
     background-color: #3fa5fc;
+    color: #3fa5fc !important;
+    &+.subscribe-button-loading-animation {
+      display: block;
+    }
+  }
+  .subscribe-button-wrapper {
+    position: relative;
+  }
+  .subscribe-button-loading-animation {
+    display: none;
+    position: absolute;
+    top:16px;
+    left:48%;
   }
   .newsletter-signup-wrapper {
     width: 600px;

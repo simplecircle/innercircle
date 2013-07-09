@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $('#user_email').keyup (e) ->
-  if $('.other-job-category-section').hasClass 'inactive'
+  if e.target.checkValidity() && $('.other-job-category-section').hasClass 'inactive'
     $('.other-job-category-section').toggleClass 'inactive active'
     $('.other-job-category-section').slideDown()
     # Scroll to top of category form

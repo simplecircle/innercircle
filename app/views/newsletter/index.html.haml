@@ -10,7 +10,7 @@
     .row-fluid
       .span12.mobile-padding.text-center
         .mtxl
-        %h1 We've got the most exciting companies in NYC.
+        %h1 We find the most exciting companies in NYC.
         %h1.mtl Each week we'll send you a few.
 %section.newsletter-signup-section
   .container
@@ -23,17 +23,17 @@
           .tiny.gray-light.hidden-phone
             Your subscription is private. You can unsubscribe with one click and we'll never spam you.
           .mts.visible-phone
-        .span4
+        .span4.subscribe-button-wrapper
           = f.submit("Subscribe", class:"btn btn-primary btn-large span12", onclick:"_gaq.push(['_trackEvent', 'Newsletter', 'Signup']);")
+          = image_tag("http://06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com/loader.gif", class:"subscribe-button-loading-animation")
           .tiny.gray-light.visible-phone
             Your subscription is private. You can unsubscribe with one click and we'll never spam you.
       .row-fluid.newsletter-signup-wrapper
-        .span12
+        .span8
           .well.controls.other-job-category-section.inactive{style:"display:none;"}
             .inline_error#categories-error{style:"display:none;"}
             .inline_error#other_job_category-error{style:"display:none;"}
-            .help-block.mbs
-              %b Which category fits you best?
+            .help-block.mbs * Which category fits you best?
             %p.checkbox-group.mobile-checkbox-group
               - CompanyDept.all.each do |dept|
                 = radio_button_tag("category", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"#{dept.name}-radio-tag pull-left")
