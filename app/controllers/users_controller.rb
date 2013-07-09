@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
       #Add user to company's talent community
       UsersCompany.create(user_id: current_user.id, company_id: @company.id)
+      UserMailer.welcome(current_user, capitalize_phrase(@company.name)).deliver
 
       if !current_user.has_filled_out_profile
         redirect_to edit_user_url(current_user.auth_token), notice: "You've joined #{@company.name}'s talent community!"
@@ -86,7 +87,6 @@ class UsersController < ApplicationController
           #log in user if there's no current user
           cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} unless current_user
           @user.set_password_reset_token
-          UserMailer.welcome(@user, capitalize_phrase(@company.name)).deliver
           if request.xhr?
             respond_to do |format|
               format.json { render :json => {:success=>edit_user_url(@user.auth_token) }}
@@ -95,6 +95,7 @@ class UsersController < ApplicationController
             redirect_to(edit_user_url(@user.auth_token))
           end
         end
+        UserMailer.welcome(@user, capitalize_phrase(@company.name)).deliver
       else
         if request.xhr?
           respond_to do |format|
@@ -123,8 +124,9 @@ class UsersController < ApplicationController
       @incoming_tags = @user.profile.skills.map(&:name).join(',')
 
       @alert = 'Sorry, LinkedIn authorization failed' if params[:strategy] == 'linkedin' && params[:message] == 'invalid_credentials'
-
-      if auth = request.env["omniauth.auth"]
+      
+      auth = request.env["omniauth.auth"]
+      if auth
         info = auth["info"]
 
         @profile.update_attributes!(
@@ -177,16 +179,17 @@ class UsersController < ApplicationController
       @other_job_category = params[:other_job_category].first
     end
 
-    #
     if validate_depts? && @depts.nil?
       @user.errors.add(:categories, "You have to choose at least one category.")
       throw_err = true
     end
+
     #Check if user selected "other" but didn't specify
     if validate_depts? && !@depts.nil? && CompanyDept.find(@depts.first.to_i).name == "other" && @other_job_category.blank?
       @user.errors.add(:other_job_category, "Please tell us which category fits you best") if 
       throw_err = true
     end
+
     if throw_err  
       render "edit"
     else
