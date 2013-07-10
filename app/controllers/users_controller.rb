@@ -236,8 +236,6 @@ class UsersController < ApplicationController
   def save_referral_source(user, cookie_string)
     if cookie_string.length > 0
       ga = GoogleAnalyticsParser.new
-      logger.info "***"
-      logger.info ga.parse(cookie_string)
       user.update_attribute(:referral_source, ga.parse(cookie_string))
     end
   end
