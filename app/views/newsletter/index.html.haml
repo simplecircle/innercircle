@@ -17,7 +17,6 @@
     = form_for @user, remote:true, html:{class:"mobile-padding"} do |f|
       .row-fluid.newsletter-signup-wrapper
         .span8
-          =hidden_field_tag :newsletter_subscription, "true"
           = f.email_field :email, placeholder:"Email", class:"span12 mbn"
           .inline_error#email-error{style:"display:none;"}
           .tiny.gray-light.hidden-phone
