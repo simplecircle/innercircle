@@ -21,6 +21,7 @@ class Profile < ActiveRecord::Base
   end
 
   def job_category
+    return "" if profiles_company_depts.empty?
     category_name = profiles_company_depts.first.company_dept.name
     category_name = profiles_company_depts.first.other_job_category if category_name == "other"
     category_name
