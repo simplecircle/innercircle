@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130621190339) do
+ActiveRecord::Schema.define(:version => 20130710133428) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20130621190339) do
     t.string   "admin_invite_token"
     t.datetime "admin_invite_sent_at"
     t.boolean  "pending",                :default => false
+    t.text     "referral_source"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
