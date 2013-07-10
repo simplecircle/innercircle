@@ -9,7 +9,7 @@
         .well
           = form_tag login_url do
             %p
-              = text_field_tag :email, params[:email], class:"input-block-level", placeholder:"Email"
+              = email_field_tag :email, params[:email], class:"input-block-level", placeholder:"Email"
             %p
               = password_field_tag :password, nil, class:"input-block-level", placeholder:"Password"
             = submit_tag("Login", class:"btn btn-primary span12 mbl")

@@ -29,7 +29,7 @@
               = p.text_field :last_name, class:"span6", placeholder: "* Last Name"
         .controls
           .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
-          = f.text_field :email, class:"span12", placeholder:"* Email"
+          = f.email_field :email, class:"span12", placeholder:"* Email"
         .controls.mtm.mbl
           - if @user.errors[:other_job_category].first
             .inline_error= @user.errors[:other_job_category].first 

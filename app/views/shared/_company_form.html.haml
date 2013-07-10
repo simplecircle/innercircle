@@ -16,7 +16,7 @@
       .control-group
         %label.control-label{:for=>:email} * Email
         .controls
-          = user.text_field :email, :class=>'span12'
+          = user.email_field :email, :class=>'span12'
           .inline_error= @company.users.first.errors[:email].first
           %span.help-block.small Receipts and account notices will be sent here
       .control-group

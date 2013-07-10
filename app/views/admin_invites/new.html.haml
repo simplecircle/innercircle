@@ -10,5 +10,5 @@
           .well
             = form_tag admin_invites_path, :method => :post do
               %p
-                = text_field_tag(:email, params[:email], class:"input-block-level", placeholder:"Email")
+                = email_field_tag(:email, params[:email], class:"input-block-level", placeholder:"Email")
               = submit_tag "Submit", class:"btn span12"
