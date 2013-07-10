@@ -202,6 +202,12 @@ class UsersController < ApplicationController
     else
       if @user.save
         save_departments(@depts, @user.profile, @other_job_category) if validate_depts?
+        
+        # Add / update mailchimp lists
+        if current_user.talent?
+          mc = Mailchimp.new
+          mc.list_subscribe(@user)
+        end
 
         if @is_new_user
           redirect_to confirmation_url

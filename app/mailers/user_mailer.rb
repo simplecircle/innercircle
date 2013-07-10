@@ -9,13 +9,13 @@ class UserMailer < ActionMailer::Base
     @user = user
     @company_name = company_name
     @is_newsletter = company_name == 'Talent'
+
     subject = @is_newsletter ? 'Welcome to the inner circle Newsletter!' : "Welcome to #{company_name}'s talent community"
     mail(to:user.email, subject:subject)
     
-    #TODO: add users to company's specific mailing list. Need to add MailChimp list id attr to companies
-    if @is_newsletter #&& Rails.env == "production"
+    if Rails.env == "production" || true == true
       mc = Mailchimp.new
-      mc.list_subscribe('12cc45a9d8', user.email)
+      mc.list_subscribe(user)
     end
   end
 

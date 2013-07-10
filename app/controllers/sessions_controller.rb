@@ -28,7 +28,12 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    is_talent = !current_user || current_user && current_user.talent?
     cookies.delete(:auth_token, domain: :all)
-    redirect_to root_url(subdomain: false, src:"logout"), notice: "Logged out."
+    if is_talent
+      redirect_to newsletter_url(subdomain: false), notice: "Logged out"
+    else
+      redirect_to root_url(subdomain: false, src:"logout"), notice: "Logged out"
+    end
   end
 end
