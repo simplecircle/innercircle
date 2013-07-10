@@ -87,6 +87,7 @@ class UsersController < ApplicationController
         @company.users << @user
         save_departments(@depts, @user.profile, @other_job_category)
         save_star_rating(@star_rating, @user.id, @company.id)
+        save_referral_source(@user, params[:referral_source] || "__utmz=#{cookies[:__utmz]}")
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
         if @is_admin_adding
           params[:commit] == "Save & add another" ? redirect_to('/add-talent', :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
@@ -230,6 +231,15 @@ class UsersController < ApplicationController
 
   def save_star_rating(rating, user_id, company_id)
     UsersCompany.find_by_user_id_and_company_id(user_id, company_id).update_attributes(:star_rating => rating)
+  end
+
+  def save_referral_source(user, cookie_string)
+    if cookie_string.length > 0
+      ga = GoogleAnalyticsParser.new
+      logger.info "***"
+      logger.info ga.parse(cookie_string)
+      user.update_attribute(:referral_source, ga.parse(cookie_string))
+    end
   end
 
   def save_departments(departments, profile, other_job_category)
