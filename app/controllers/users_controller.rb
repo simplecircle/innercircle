@@ -34,7 +34,14 @@ class UsersController < ApplicationController
   def create
     existing_user = User.find_by_email(params[:user][:email])
     if existing_user
-      return redirect_to login_url(email: params[:user][:email], redirect_back: existing_user.talent? ? join_url : root_url(subdomain:false)), notice: "There's already an account with this email address.<p></p>Please log in or set your password below:"
+      if request.xhr?
+        respond_to do |format|
+          format.json { render :json => {:email => ["You're already signed up with us, thanks!"]} }
+        end
+        return
+      else
+        return redirect_to login_url(email: params[:user][:email], redirect_back: existing_user.talent? ? join_url : root_url(subdomain:false)), notice: "There's already an account with this email address.<p></p>Please log in or set your password below:"
+      end
     end
     @user = @company.users.build(params[:user])
     @user.role = 'talent'
