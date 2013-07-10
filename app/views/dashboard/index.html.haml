@@ -109,11 +109,11 @@
             .span12
               %ul.unstyled
                 - unless @company.jobs_page.blank?
-                  %li.bb-1.ptl
+                  %li.bb-1.ptm
                     Jobs page:
-                    =link_to(@company.jobs_page, "http://instagram.com/#{@company.jobs_page}", target:"_blank")
+                    =link_to(@company.jobs_page, @company.jobs_page, target:"_blank")
                 - unless @company.instagram_username.blank?
-                  %li.bb-1.ptl
+                  %li.bb-1.ptm
                     Instagram:
                     =link_to(@company.instagram_username, "http://instagram.com/#{@company.instagram_username}", target:"_blank")
                 - unless @company.instagram_location_id.blank?

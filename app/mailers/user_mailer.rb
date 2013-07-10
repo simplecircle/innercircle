@@ -15,7 +15,7 @@ class UserMailer < ActionMailer::Base
     #TODO: add users to company's specific mailing list. Need to add MailChimp list id attr to companies
     if @is_newsletter #&& Rails.env == "production"
       mc = Mailchimp.new
-      mc.list_subscribe('12cc45a9d8', user.email) 
+      mc.list_subscribe('12cc45a9d8', user.email)
     end
   end
 

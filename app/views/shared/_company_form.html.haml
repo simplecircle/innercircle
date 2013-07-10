@@ -138,5 +138,9 @@
       %label.span1.radio-label{:for=>"company_foursquare_auto_publish_false"}
         Off
         = co.radio_button :foursquare_auto_publish, false, :checked=> !@company.foursquare_auto_publish
+  .control-group
+    %label.control-label{:for=>:jobs_page} Jobs page
+    .controls.controls-row
+      = co.text_field :jobs_page, {:class=>'span10', :placeholder=>'Jobs page'}
   = co.submit @submit_button_text || "Create account", class:"btn btn-large span12 mtl"
 

@@ -119,13 +119,22 @@ class Company < ActiveRecord::Base
   end
 
   def add_url_protocol
-   if self.website_url.blank?
-     self.website_url = nil
-   else
-     uri = URI.parse(self.website_url)
-     unless %w( http https ).include?(uri.scheme)
-       self.website_url = 'http://' + self.website_url
-     end
-   end
+    if self.website_url.blank?
+      self.website_url = nil
+    else
+      uri = URI.parse(self.website_url)
+      unless %w( http https ).include?(uri.scheme)
+        self.website_url = 'http://' + self.website_url
+      end
+    end
+
+    if self.jobs_page.blank?
+      self.jobs_page = nil
+    else
+      uri = URI.parse(self.jobs_page)
+      unless %w( http https ).include?(uri.scheme)
+        self.jobs_page = 'http://' + self.jobs_page
+      end
+    end
   end
 end
