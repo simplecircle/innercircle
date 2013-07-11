@@ -1,7 +1,7 @@
 namespace :emails do
   desc "Export emails"
   task :export => :environment do
-    require 'CSV'
+    require 'csv'
     CSV.open("#{Rails.root}/email_export.csv", "wb") do |csv|
     	csv << ['email', 'fname', 'lname', 'category', 'companies', 'created_at']
     	User.find_each do |user|
