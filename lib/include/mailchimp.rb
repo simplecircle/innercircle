@@ -20,8 +20,9 @@ class Mailchimp
       fname ||= ""
       lname = user.profile.last_name
       lname ||= ""
+      created_date = user.created_at.in_time_zone("Eastern Time (US & Canada)").to_s
 
-      url = "#{@@api_base}?method=listSubscribe&apikey=#{@@api_key}&id=#{@@list_id}&merge_vars[OPTIN_IP]=remote_ip&merge_vars[CATEGORY]=#{CGI.escape(category)}&merge_vars[COMPANIES]=#{CGI.escape(companies)}&merge_vars[FNAME]=#{CGI.escape(fname)}&merge_vars[LNAME]=#{CGI.escape(lname)}&email_address=#{user.email}&update_existing=true&double_optin=false&output=json"
+      url = "#{@@api_base}?method=listSubscribe&apikey=#{@@api_key}&id=#{@@list_id}&merge_vars[OPTIN_IP]=remote_ip&merge_vars[CATEGORY]=#{CGI.escape(category)}&merge_vars[COMPANIES]=#{CGI.escape(companies)}&merge_vars[FNAME]=#{CGI.escape(fname)}&merge_vars[LNAME]=#{CGI.escape(lname)}&merge_vars[JOINDATE]=#{CGI.escape(created_date)}&email_address=#{user.email}&update_existing=true&double_optin=false&output=json"
       res = open(url)
 
     rescue
