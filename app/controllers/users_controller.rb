@@ -265,7 +265,7 @@ class UsersController < ApplicationController
   end
 
   def find_resource
-    @newsletter_subscription = !request.env["HTTP_REFERER"].match(/newsletter/i).nil?
+    @newsletter_subscription = request.env["HTTP_REFERER"] && !request.env["HTTP_REFERER"].match(/newsletter/i).nil?
     if @newsletter_subscription
       @company = Company.find_by_subdomain('talent')
     else
