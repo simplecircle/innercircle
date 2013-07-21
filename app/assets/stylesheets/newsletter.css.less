@@ -515,18 +515,21 @@
     .checkbox-group {
       margin-bottom: 0;
     }
-    #other_job_category_ {
-      height: 30px;
-      margin: 0 10px;
-    }
+  }
+  #other_job_category_ {
+    height: 30px;
+    margin: 0 10px;
+    border: 1px solid @linkColor;
   }
   .other-radio-tag {
     &+label input {
-      display: none;
+      display: inline-block;
+      opacity: 0;
+      .transition(opacity 0.5s)
     }
     &:checked {
       &+label input {
-        display: inline-block;
+        opacity: 1;
       }
     }
   }
@@ -538,8 +541,21 @@
     }
   }
   @media (max-width: 570px) {
+    .other-job-category-section {
+      padding: 20px 15px;
+    }
     .newsletter-signup-wrapper {
       width: 100%;
+    }
+    .newsletter-signup-section {
+      padding-bottom: 60px;
+    }
+    .subscribe-button-wrapper .tiny {
+      text-align: center;
+      padding-left: 0;
+    }
+    #other_job_category_ {
+      width: 150px;
     }
   }
 }

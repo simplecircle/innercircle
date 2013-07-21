@@ -28,7 +28,7 @@
           .tiny.gray-light.visible-phone
             Your subscription is private. You can unsubscribe with one click and we'll never spam you.
       .row-fluid.newsletter-signup-wrapper
-        .span8
+        .span8.other-job-category-section-wrapper
           .well.controls.other-job-category-section.inactive{style:"display:none;"}
             .inline_error#categories-error{style:"display:none;"}
             .inline_error#other_job_category-error{style:"display:none;"}
@@ -36,10 +36,9 @@
             %p.checkbox-group.mobile-checkbox-group
               - CompanyDept.all.each do |dept|
                 = radio_button_tag("category", dept.id, (@depts.include?(dept.id.to_s) if @depts), name:'company_depts[]', class:"#{dept.name}-radio-tag pull-left")
-                = label_tag "category_#{dept.id.to_s}" do
+                = label_tag "category_#{dept.id.to_s}", id:"#{'other-job-category-label' if dept.name == 'other'}" do
                   = capitalize_phrase(dept.name)
                   - if dept.name == "other"
-                    %br.visible-phone
                     = text_field("other_job_category", nil, value: @other_job_category, class:"mlm #{'field_with_errors' if @user.errors[:other_job_category].first}", placeholder:"* Job category")
 %section.newsletter-preview-section
   .container

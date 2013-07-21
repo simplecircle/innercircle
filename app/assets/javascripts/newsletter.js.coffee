@@ -10,9 +10,13 @@ $('#user_email').keyup (e) ->
   if validateEmail($(e.target).val().trim()) && $('.other-job-category-section').hasClass 'inactive'
     $('.other-job-category-section').toggleClass 'inactive active'
     $('.other-job-category-section').slideDown()
-    # Scroll to top of category form
+    
     if $(window).width() < 570
-      $('body').animate({scrollTop: $('#new_user').position().top - 60}, 400)
+      # Move submit button
+      $('.subscribe-button-wrapper').insertAfter('.other-job-category-section-wrapper')
+
+      # Scroll to top of category form
+      $('body').animate({scrollTop: $('#user_email').position().top - 60}, 400)
 
 $('#new_user').submit () ->
   $('#new_user input[type="submit"]').attr 'disabled', true
