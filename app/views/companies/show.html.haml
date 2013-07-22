@@ -6,9 +6,9 @@
   %meta{property:"og:title", content:"#{@company.name} on inner circle"}
   %meta{property:"og:description", content:"Get updates on job opportunities and work life at #{capitalize_phrase(@company.name)}"}
 = render 'shared/social_tag_script'
-#company-info{:class=>"#{@referrer}"}
-  %section.mobile-padding
-    #logo{:class=>"#{@referrer}"}= link_to(image_tag(@company.logo_url(:large)), @company.website_url, target:"blank")
+#company-info
+  %section.logo-and-short-description.mobile-padding
+    #logo= link_to(image_tag(@company.logo_url(:large)), @company.website_url, target:"blank")
     = @company.short_description
     .tiny.gray-light= "#{@company.hq_city}, #{@company.hq_state} - #{@company.employee_count.gsub(/_/, "-")} employees"
   %hr

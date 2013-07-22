@@ -98,6 +98,12 @@
 }
 #companies{
   padding-top:0;
+  &.external {
+    .navbar-fixed-top {
+      top: -65px;
+      position: fixed;
+    }
+  }
   .content-no-nav {
     margin-top:0;
   }
@@ -222,24 +228,14 @@
       display: inline-block;
     }
   }
-  //between mobile and iPad
+  //between mobile and iPad Landscape
   @media (min-width: 571px) and (max-width: 768px) {
     section {
       padding:0 15px;
     }
-    .has-company-logo {
-      .navbar-company-logo-wrapper {
-        display: none;
-      }
-    }
-    #company-info {
-      &.external {
-        margin-top:10px;
-      }
-      &.internal {
-        margin-top:0;
-      }
-    }
+    // #company-info {
+    //   margin-top:0;
+    // }
     .masonry-wrapper {
       background: white;
       padding:5px;
@@ -259,21 +255,65 @@
       max-width: 680px;
     }
   }
-  //Mobile
-  @media (max-width: 570px) {
-    #company-info {
-      &.external {
-        margin-top:0;
+  // Below iPad landscape
+  @media (max-width: 768px) {
+    #logo {
+      margin: 0 auto;
+    }
+    .logo-and-short-description {
+      text-align: center;
+    }
+    .subscribe-button-header {
+      width: 140px;
+      height: 40px;
+      display: none;
+      vertical-align: middle;
+      margin-left: 20px;
+      margin-top: 0;
+      line-height: 23px;
+    }
+    .powered-by {
+      text-align: center;
+    }
+    .navbar-company-logo-wrapper {
+      display: none;
+    }
+    .navbar-fixed-top {
+      
+    }
+    .navbar-fixed-top.hidden-nav {
+      position: fixed;
+      top: -65px;
+    }
+    .navbar-fixed-top.scrolling-nav {
+      .transition(top 1s);
+      position: fixed;
+      top: 0;
+      .navbar-company-logo-wrapper {
+        display: block;
       }
-      &.internal {
-        margin-top:74px;
+      .nav-collapse-border-div, .btn-navbar, .nav-collapse, .brand {
+        display: none;
+      }
+      .subscribe-button-header {
+        display: inline-block;
       }
     }
-    #logo.internal {
-      display: none;
+  }
+
+  //Mobile
+  @media (max-width: 570px) {
+    .navbar-fixed-top {
+      position: static;
+    }
+    .brand {
+      margin-top: 8px;
     }
     hr {
       margin: 10px 0;
+    }
+    .content-with-nav {
+      margin-top: 0; 
     }
     #masonry.masonry-published {
       border: none;
@@ -292,6 +332,7 @@
         padding:0 20px;
       }
       position: fixed;
+      top: 20px;
       float: left;
       width:290px;
       z-index: 2;

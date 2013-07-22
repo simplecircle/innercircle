@@ -50,11 +50,6 @@ $(document).ready ->
   # Infinite scroll
   if $('#infinite .pagination').length
     $(window).scroll ->
-      if window.scrollY >= 70 && window.innerWidth > 768 #ipad Portrait
-        $("#company-info").css({ position: 'fixed', top:20 })
-      else
-        $("#company-info").css({ position: 'relative'})
-
       url = $('.pagination .next_page').attr('href')
       # The offset needs to be at least over 190px for it to work on the iphone!
       if url && window.scrollY >= $(document).height() - window.innerHeight - 500
