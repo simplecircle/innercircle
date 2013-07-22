@@ -1,23 +1,29 @@
-threshold = $('.masonry-wrapper').offset().top
-navbar = $('.navbar-fixed-top')
+masonryWrapper = $('.masonry-wrapper')
 
-scrollHandler = () ->
-  if window.scrollY >= 70 && window.innerWidth > 768 #ipad Portrait
-    $("#company-info").css({ position: 'fixed', top:20 })
-  else
-    $("#company-info").css({ position: 'relative'})
+if masonryWrapper.length > 0
+  threshold = $('.masonry-wrapper').offset().top
+  navbar = $('.navbar-fixed-top')
+  contentWithNav = $('.content-with-nav')
+  referrer = if $('body').hasClass 'internal' then 'internal' else 'external'
+  companyInfo = $("#company-info")
 
-  if $(window).width() < 769
-    if $(window).scrollTop() > 65
-      navbar.addClass 'hidden-nav'
-      $('.content-with-nav').css 'margin-top', '40px' if $('body').hasClass 'internal'
-    if $(window).scrollTop() - threshold > 0
-      navbar.addClass 'scrolling-nav'
-      $('.content-with-nav').css 'margin-top', '40px' if $('body').hasClass 'internal'
+  scrollHandler = () ->
+    if window.scrollY >= 70 && window.innerWidth > 768 #ipad Portrait
+      companyInfo.css({ position: 'fixed', top:20 })
     else
-      navbar.removeClass 'scrolling-nav hidden-nav'
-      $('.content-with-nav').css 'margin-top', '0' if $('body').hasClass 'internal'
+      companyInfo.css({ position: 'relative'})
+
+    if $(window).width() < 769
+      if $(window).scrollTop() > 65
+        navbar.addClass 'hidden-nav'
+        contentWithNav.css 'margin-top', '40px' if referrer == 'internal'
+      if $(window).scrollTop() - threshold > 0
+        navbar.addClass 'scrolling-nav'
+        contentWithNav.css 'margin-top', '40px' if referrer == 'internal'
+      else
+        navbar.removeClass 'scrolling-nav hidden-nav'
+        contentWithNav.css 'margin-top', '0' if referrer == 'internal'
 
 
-$(window).scroll scrollHandler
-scrollHandler()
+  $(window).scroll scrollHandler
+  scrollHandler()
