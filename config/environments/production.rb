@@ -22,7 +22,7 @@ Innercircle::Application.configure do
   config.serve_static_assets = true
   config.assets.debug = true
   # Compress JavaScripts and CSS
-  config.assets.compress = false
+  config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
