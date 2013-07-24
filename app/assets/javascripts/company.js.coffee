@@ -14,15 +14,10 @@ if masonryWrapper.length > 0
       companyInfo.css({ position: 'relative'})
 
     if $(window).width() < 769
-      if $(window).scrollTop() > 65
-        navbar.addClass 'hidden-nav'
-        contentWithNav.css 'margin-top', '40px' if referrer == 'internal'
       if $(window).scrollTop() - threshold > 0
-        navbar.addClass 'scrolling-nav'
-        contentWithNav.css 'margin-top', '40px' if referrer == 'internal'
+        navbar.addClass 'nav-scrolling'
       else
-        navbar.removeClass 'scrolling-nav hidden-nav'
-        contentWithNav.css 'margin-top', '0' if referrer == 'internal'
+        navbar.removeClass 'nav-scrolling'
 
 
   $(window).scroll scrollHandler

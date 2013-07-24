@@ -120,7 +120,7 @@
       border-top:1px solid darken(@grayLighter, 7%);
       border-bottom:none;
     }
-    #logo{
+    .company-logo {
       padding:10px 0 10px 0;
       width:240px;
     }
@@ -189,7 +189,7 @@
     padding:0 25px 0 25px;
     line-height:25px;
     position: absolute;
-    transition: opacity 0.6s ease-in ;
+    .transition(opacity 0.6s ease-in);
     opacity: 0;
     top:35%;
     text-align: center;
@@ -202,7 +202,7 @@
     left:0;
     top:0;
     width: 100%;
-    transition: background-color 0.4s ease-in;
+    .transition(background-color 0.4s ease-in);
     // padding-left: 1px; //to solve quirk where there was a right-hand margin of 1px where the overlay wasn't covering the photo
     &:hover{
       .photo-overlay-text { opacity: 1; }
@@ -210,10 +210,6 @@
     }
   }
   .has-company-logo {
-    .navbar-company-logo-wrapper {
-      float: left;
-      height: 60px;
-    }
     .btn-navbar {
       height: 60px;
       padding: 19px 0px 19px 9px;
@@ -221,10 +217,19 @@
     .nav-collapse-border-div {
       height: 60px;
     }
-    .navbar-company-logo {
-      max-height: 40px;
-      max-width: 225px;
+    .navbar-vertical-align-helper {
       vertical-align: middle;
+      height: 100%;
+      display: inline-block;
+    }
+    .navbar-company-logo-wrapper {
+      float: left;
+      height: 60px;
+    }
+    .navbar-company-logo {
+      vertical-align: middle;
+      max-height: 40px;
+      max-width: 150px;
       display: inline-block;
     }
   }
@@ -233,9 +238,6 @@
     section {
       padding:0 15px;
     }
-    // #company-info {
-    //   margin-top:0;
-    // }
     .masonry-wrapper {
       background: white;
       padding:5px;
@@ -248,6 +250,9 @@
         width: 49.5%;
       }
     }
+    .subscribe-button-header {
+      right:15px;
+    }
   }
   //iPad portrait to iPad landscape
   @media (min-width: 769px) and (max-width: 1024px) {
@@ -257,63 +262,62 @@
   }
   // Below iPad landscape
   @media (max-width: 768px) {
-    #logo {
-      margin: 0 auto;
+    .company-logo  {
+      display: none;
     }
-    .logo-and-short-description {
-      text-align: center;
+    .content-with-nav {
+      margin-top: 75px;
+    }
+    .navbar-inner {
+      min-height: 60px;
     }
     .subscribe-button-header {
-      width: 140px;
+      padding: 0 10px;
       height: 40px;
-      display: none;
-      vertical-align: middle;
-      margin-left: 20px;
-      margin-top: 0;
-      line-height: 23px;
+      line-height: 40px;
+      .transition(top 0.3s);
+      position: absolute;
+      margin: 0;
+      top: -100px;
     }
     .powered-by {
       text-align: center;
     }
-    .navbar-company-logo-wrapper {
-      display: none;
-    }
     .navbar-fixed-top {
-      
-    }
-    .navbar-fixed-top.hidden-nav {
-      position: fixed;
-      top: -65px;
-    }
-    .navbar-fixed-top.scrolling-nav {
-      .transition(top 1s);
-      position: fixed;
-      top: 0;
-      .navbar-company-logo-wrapper {
-        display: block;
+      &.has-company-logo {
+        position: fixed;
+        top: 0;
+        .brand {
+          display: none;
+        }
+        .navbar-inner {
+          border-bottom: 1px solid #cecece;
+        }
+        .dropdown-toggle {
+          padding: 20px 10px;
+        }
       }
-      .nav-collapse-border-div, .btn-navbar, .nav-collapse, .brand {
-        display: none;
-      }
-      .subscribe-button-header {
-        display: inline-block;
+      &.nav-scrolling {
+        .nav-collapse-border-div {
+          .transition(none);
+        }
+        .nav-collapse-border-div, .btn-navbar, .nav-collapse {
+          display: none;
+        }
+        .subscribe-button-header {
+          top:10px;
+        }
       }
     }
   }
 
   //Mobile
   @media (max-width: 570px) {
-    .navbar-fixed-top {
-      position: static;
-    }
-    .brand {
-      margin-top: 8px;
-    }
     hr {
       margin: 10px 0;
     }
-    .content-with-nav {
-      margin-top: 0; 
+    .subscribe-button-header {
+      right: 5px;
     }
     #masonry.masonry-published {
       border: none;
@@ -336,6 +340,9 @@
       float: left;
       width:290px;
       z-index: 2;
+    }
+    .subscribe-button-header {
+      display: none;
     }
     .navbar{
       z-index: 3;

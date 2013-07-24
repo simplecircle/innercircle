@@ -8,7 +8,7 @@
 = render 'shared/social_tag_script'
 #company-info
   %section.logo-and-short-description.mobile-padding
-    #logo= link_to(image_tag(@company.logo_url(:large)), @company.website_url, target:"blank")
+    .company-logo= link_to(image_tag(@company.logo_url(:large)), @company.website_url, target:"_blank")
     = @company.short_description
     .tiny.gray-light= "#{@company.hq_city}, #{@company.hq_state} - #{@company.employee_count.gsub(/_/, "-")} employees"
   %hr
