@@ -7,6 +7,13 @@ class UsersController < ApplicationController
   before_filter :get_user, only:[:edit, :update]
 
   def new
+    # Check for email query string
+    existing_user = User.find_by_email(params[:email])
+    if existing_user
+      @company.users << existing_user
+      return redirect_to confirmation_url
+    end
+    
     #User is already a member
     if current_user && current_user.talent?
       return redirect_to root_url if current_user.member_of?(@company.id)

@@ -7,7 +7,7 @@
       - if @has_current_user_already_joined
         .btn.btn-block.disabled.subscribe-button-header{style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};"} ✓&nbsp;&nbsp;Subscribed
       - else
-        = link_to("Subscribe", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm subscribe-button-header", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};", onclick:"_gaq.push(['_trackEvent', 'Companies', 'Go To Signup Form', '#{@company.subdomain}']);")
+        = link_to("Subscribe", join_url(subdomain: @company.subdomain, email: params[:email]), class:"btn btn-block mtm subscribe-button-header", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};", onclick:"_gaq.push(['_trackEvent', 'Companies', 'Go To Signup Form', '#{@company.subdomain}']);")
     %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
       %span.icon-bar
       %span.icon-bar
