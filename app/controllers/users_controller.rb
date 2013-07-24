@@ -40,7 +40,9 @@ class UsersController < ApplicationController
         end
         return
       else
-        return redirect_to login_url(email: params[:user][:email], redirect_back: existing_user.talent? ? join_url : root_url(subdomain:false)), notice: "There's already an account with this email address.<p></p>Please log in or set your password below:"
+        @company.users << existing_user
+        return redirect_to confirmation_url
+        # return redirect_to login_url(email: params[:user][:email], redirect_back: existing_user.talent? ? join_url : root_url(subdomain:false)), notice: "There's already an account with this email address.<p></p>Please log in or set your password below:"
       end
     end
     @user = @company.users.build(params[:user])
