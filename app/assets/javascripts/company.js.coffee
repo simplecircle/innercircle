@@ -1,17 +1,15 @@
-masonryWrapper = $('.masonry-wrapper')
+subscribeButtonBody = $('.subscribe-button-body')
 
-if masonryWrapper.length > 0
-  threshold = $('.masonry-wrapper').offset().top
+if subscribeButtonBody.length > 0
+  threshold = subscribeButtonBody.offset().top
   navbar = $('.navbar-fixed-top')
-  contentWithNav = $('.content-with-nav')
-  referrer = if $('body').hasClass 'internal' then 'internal' else 'external'
   companyInfo = $("#company-info")
 
   scrollHandler = () ->
     if window.scrollY >= 70 && window.innerWidth > 768 #ipad Portrait
       companyInfo.css({ position: 'fixed', top:20 })
     else
-      companyInfo.css({ position: 'relative'})
+      companyInfo.css({ position: 'relative', top:0})
 
     if $(window).width() < 769
       if $(window).scrollTop() - threshold > 0
@@ -19,6 +17,6 @@ if masonryWrapper.length > 0
       else
         navbar.removeClass 'nav-scrolling'
 
-
   $(window).scroll scrollHandler
+  $(window).resize scrollHandler
   scrollHandler()

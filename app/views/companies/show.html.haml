@@ -15,9 +15,9 @@
   %section.mobile-padding
     = render "shared/flash", :flash=>flash unless flash.blank?
     - if @has_current_user_already_joined
-      .btn.btn-block.disabled.mtm{style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};"} ✓&nbsp;&nbsp;Subscribed
+      .btn.btn-block.disabled.mtm.subscribe-button-body{style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};"} ✓&nbsp;&nbsp;Subscribed
     - else
-      = link_to("Subscribe", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};", onclick:"_gaq.push(['_trackEvent', 'Companies', 'Go To Signup Form', '#{@company.subdomain}']);")
+      = link_to("Subscribe", join_url(subdomain: @company.subdomain), class:"btn btn-block mtm subscribe-button-body", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};", onclick:"_gaq.push(['_trackEvent', 'Companies', 'Go To Signup Form', '#{@company.subdomain}']);")
     .mts.gray-light.tac Get updates on job opportunities and work life at #{capitalize_phrase(@company.name)}
     - if @referrer == "external"
       .powered-by.visible-phone.mtm.tac
