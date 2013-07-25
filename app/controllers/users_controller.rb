@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       @company.users << existing_user
       return redirect_to confirmation_url
     end
-    
+
     #User is already a member
     if current_user && current_user.talent?
       return redirect_to root_url if current_user.member_of?(@company.id)
@@ -102,11 +102,11 @@ class UsersController < ApplicationController
           params[:commit] == "Save & add another" ? redirect_to('/add-talent', :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
         else
           #log in user if there's no current user
-          cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} unless current_user
+          cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} unless current_user || params[:is_kiosk] == "true"
           @user.set_password_reset_token
           if request.xhr?
             respond_to do |format|
-              format.json { render :json => {:success=>edit_user_url(@user.auth_token) }}
+              format.json { render :json => {:success=>edit_user_url(@user.auth_token, is_kiosk:params[:is_kiosk]) }}
             end
           else
             redirect_to(edit_user_url(@user.auth_token))
@@ -214,13 +214,13 @@ class UsersController < ApplicationController
         save_departments(@depts, @user.profile, @other_job_category) if validate_depts?
         
         # Add / update mailchimp lists
-        if current_user.talent?
+        if @user.talent?
           mc = Mailchimp.new
           mc.list_subscribe(@user)
         end
 
         if @is_new_user
-          redirect_to confirmation_url
+          redirect_to confirmation_url(is_kiosk: params[:is_kiosk])
         elsif current_user.god_or_admin?
           redirect_to dashboard_url, notice: "Account Updated"
         else
@@ -274,7 +274,7 @@ class UsersController < ApplicationController
   end
 
   def find_resource
-    @newsletter_subscription = request.env["HTTP_REFERER"] && !request.env["HTTP_REFERER"].match(/newsletter/i).nil?
+    @newsletter_subscription = request.env["HTTP_REFERER"] && !request.env["HTTP_REFERER"].match(/newsletter/i).nil? || params[:is_kiosk] == "true"
     if @newsletter_subscription
       @company = Company.find_by_subdomain('talent')
     else

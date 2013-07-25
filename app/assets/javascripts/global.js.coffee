@@ -109,3 +109,22 @@ $(document).ready ->
 
   #Nav collapse fix
   $('[data-target=".nav-collapse"]').click () -> $('.navbar-inner').toggleClass('expanded collapsed')
+
+
+  # Timer for kiosk mode
+  t = null
+  setKioskTimer = (seconds = 60) ->
+    t = setTimeout (()->window.location = 'http://innercircle.local/newsletter?is_kiosk=true'), seconds * 1000 #set timer to one minute
+  resetTimer = () ->
+    clearTimeout t #clear timer
+    setKioskTimer() #reset timer
+
+  if location.search.search("is_kiosk=true") > -1 || $('#is_kiosk').val() == "true"
+    if location.pathname.search("newsletter") > -1 # On newsletter signup page
+      $(window).on 'scroll', resetTimer
+
+    if location.pathname.search("users") > -1 # On users#edit page
+      setKioskTimer() # set timer right away
+      $("#users form").on 'keyup', resetTimer
+    if location.pathname.search("confirmation") > -1 # On confirmation page
+      setKioskTimer(5)

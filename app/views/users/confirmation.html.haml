@@ -6,7 +6,10 @@
         .maxl
       %h1 You’re all set!
       %h4.mbl We'll be in touch with relevant updates & opportunities.
-      =link_to "Check out other inspiring companies", companies_url(subdomain:false), :class=>"btn btn-large mtl" unless @is_admin_adding
+      - if params[:is_kiosk] == "true"
+        =link_to "Back", newsletter_url(subdomain:false, is_kiosk: "true"), :class=>"btn btn-large mtl"
+      - else
+        =link_to "Check out other inspiring companies", companies_url(subdomain:false), :class=>"btn btn-large mtl" unless @is_admin_adding
       - if @is_admin_adding
         =link_to "New signup", join_url, class:"btn btn-small mvl"
         %br
