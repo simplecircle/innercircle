@@ -114,7 +114,7 @@ $(document).ready ->
   # Timer for kiosk mode
   t = null
   setKioskTimer = (seconds = 60) ->
-    t = setTimeout (()->window.location = 'http://innercircle.local/newsletter?is_kiosk=true'), seconds * 1000 #set timer to one minute
+    t = setTimeout (()->window.location = 'http://devstream.me/newsletter?is_kiosk=true'), seconds * 1000 #set timer to one minute
   resetTimer = () ->
     clearTimeout t #clear timer
     setKioskTimer() #reset timer
