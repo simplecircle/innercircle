@@ -136,10 +136,13 @@ class CompaniesController < ApplicationController
 
   def find_resource
     @company = current_company
+    @is_remote = params[:remote] == "true"
   end
 
   def choose_layout
-    if ['create'].include?(action_name) && !(current_user && current_user.god_or_admin?)
+    if @is_remote
+      'remote'
+    elsif ['create'].include?(action_name) && !(current_user && current_user.god_or_admin?)
       'onboarding'
     else
       'application'

@@ -98,7 +98,7 @@
 }
 #companies{
   padding-top:0;
-
+  
   .content-no-nav {
     margin-top:0;
   }
@@ -128,12 +128,21 @@
       }
     }
   }
+  &.remote {
+    #masonry {
+      width: 100%;
+      &.masonry-published {
+        left: 0;
+        border: none;
+      }
+    }
+  }
   #masonry{
     background:white;
     width:70%;
     height:800px;
     &.masonry-published{
-      border:10px solid white;
+      border: 10px solid white;
       left:290px;
       .photo {
         position: relative;
@@ -240,6 +249,9 @@
     .navbar-fixed-top.has-company-logo .nav > li > a {
       padding: 20px 10px;
     }
+    .remote #masonry.masonry-published li {
+      width: 33%;
+    }
     #masonry.masonry-published {
       width: 100%;
       border:none;
@@ -257,6 +269,9 @@
   @media (min-width: 769px) and (max-width: 1024px) {
     #masonry.masonry-published {
       max-width: 680px;
+    }
+    &.remote #masonry.masonry-published {
+      max-width: none;
     }
   }
   // Below iPad landscape
@@ -349,6 +364,9 @@
     }
     .navbar-company-logo-wrapper {
       display: none;
+    }
+    &.remote #masonry.masonry-published li {
+      width: 33%;
     }
     #masonry.masonry-published {
       li {

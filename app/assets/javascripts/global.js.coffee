@@ -31,7 +31,10 @@ $(document).ready ->
     if window.innerWidth <= 570 then items.css('width', '44%')
     items.fadeIn("fast")
   else
-    columnCount = if window.innerWidth > 570 then 2 else 1
+    if location.search.search("remote=true") > -1
+      columnCount = if window.innerWidth > 570 then 3 else 1
+    else
+      columnCount = if window.innerWidth > 570 then 2 else 1
     items = $(container).find("li")
     initPublished = ->
       setHeight(columnCount, container.width(), items)
