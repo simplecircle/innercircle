@@ -214,7 +214,7 @@ class UsersController < ApplicationController
         save_departments(@depts, @user.profile, @other_job_category) if validate_depts?
         
         # Add / update mailchimp lists
-        if @user.talent?
+        if @user.talent? && Rails.env == "production"
           mc = Mailchimp.new
           mc.list_subscribe(@user)
         end

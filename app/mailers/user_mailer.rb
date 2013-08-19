@@ -13,7 +13,7 @@ class UserMailer < ActionMailer::Base
     subject = @is_newsletter ? 'Welcome to the inner circle Newsletter!' : "Welcome to #{company_name}'s talent community"
     mail(to:user.email, subject:subject)
     
-    if Rails.env == "production" || true == true
+    if Rails.env == "production"
       mc = Mailchimp.new
       mc.list_subscribe(user)
     end
