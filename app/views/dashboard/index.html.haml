@@ -5,18 +5,18 @@
   .row-fluid
     .span12.mobile-padding.white-background
       .row-fluid.dashboard-header.bb-1
-        .span7
+        .span9
           .gears.mtl.mrm.pull-left
           %h2.mbn.ptl= capitalize_phrase(@company.name)
-        .span5.dashboard-header-links
-          = link_to("#{@company.subdomain}.circ.co", root_url(subdomain:@company.subdomain), class:"hidden-phone hidden-tablet company-profile-link mrl")
-          = link_to("Edit company profile", :controller => "companies", :action=>"edit", :id=>@company.id)
-  -if @company.posts_to_review_count > 0
-    .row-fluid
-      .span12.mobile-padding.white-background
-        %section#awaiting-approval-box.highlight.tac
+        .span3.dashboard-header-links
+          = link_to("Company settings", :controller => "companies", :action=>"edit", :id=>@company.id)
+  .row-fluid
+    .span12.mobile-padding.white-background
+      %section#awaiting-approval-box.highlight.tac
+        -if @company.posts_to_review_count > 0
           %h4#awaiting-approval-message.mrl= "#{@company.posts_to_review_count} posts awaiting approval"
-          =link_to("Review now", posts_url, :class=>"btn btn-warning btn-large")
+          =link_to("Review Posts", posts_url, :class=>"btn btn-warning btn-large")
+        =link_to "Show Profile", root_url, class:"btn btn-large"
 
   .row-fluid
     .span12.mobile-padding.ptxl.white-background
