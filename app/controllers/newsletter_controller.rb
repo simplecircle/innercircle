@@ -5,4 +5,6 @@ class NewsletterController < ApplicationController
     @user.build_profile
     @is_kiosk = params[:is_kiosk] == "true"
   end
+  def for_companies
+  end
 end

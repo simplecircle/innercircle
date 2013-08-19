@@ -30,6 +30,6 @@ Innercircle::Application.routes.draw do
   post "login"=>"sessions#create"
   get "logout"=>"sessions#destroy"
   get "confirmation"=>"users#confirmation"
-  get "for_companies"=>"static#for_companies"
+  get "for_companies"=>"newsletter#for_companies"
   get '/robots.txt' => 'static#robots'
 end
