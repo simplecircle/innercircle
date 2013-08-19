@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   include ActionView::Helpers::SanitizeHelper
   add_template_helper(ApplicationHelper)
 
-  default from: "hello@getinnercircle.com"
+  default from: "\"Inner Circle\" <hello@getinnercircle.com>"
   Rails.env == "production" ? default_url_options[:host] = "getinnercircle.com" : default_url_options[:host] = "lvh.me"
 
   def welcome(user, company_name)
