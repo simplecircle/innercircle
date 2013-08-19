@@ -4,6 +4,7 @@
     .row-fluid
       .span8.column-center.mobile-padding
         %h2.mbxl All Companies
+        %h3= link_to "+ Add Company", signup_url(subdomain:false)
         - @companies.each do |company|
           %h3= link_to(capitalize_phrase(company.name), dashboard_url(subdomain:company.subdomain))
 -else
