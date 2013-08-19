@@ -42,6 +42,9 @@ class CompaniesController < ApplicationController
   end
 
   def show
+    # Check to see if user has an email param from a newsletter
+    session[:email] = params[:email] if params[:email]
+    
     @has_company_logo = true
     @posts = @company.posts.where(published:true).order("provider_publication_date DESC").paginate(:page => params[:page], per_page:8)
     @referrer = referrer

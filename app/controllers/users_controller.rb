@@ -7,16 +7,9 @@ class UsersController < ApplicationController
   before_filter :get_user, only:[:edit, :update]
 
   def new
-    # Check for email query string
-    existing_user = User.find_by_email(params[:email])
-    if existing_user
-      @company.users << existing_user
-      return redirect_to confirmation_url
-    end
-
     #User is already a member
     if current_user && current_user.talent?
-      return redirect_to root_url if current_user.member_of?(@company.id)
+      return redirect_to @company if current_user.member_of?(@company.id)
 
       #Add user to company's talent community
       UsersCompany.create(user_id: current_user.id, company_id: @company.id)
@@ -30,11 +23,18 @@ class UsersController < ApplicationController
     elsif current_user && current_user.admin? && @company != current_user.companies.first
       redirect_to :back, alert: "You're currently logged in as an admin. Please log out to join another company's talent community"
     else
-      @user = User.new :role=>'talent'
-      @user.build_profile
-      @is_admin_adding = request.fullpath == '/add-talent' && current_user && current_user.god_or_admin?
-      @star_rating = 1 if !@is_admin_adding
-      @depts = CompanyDept.all
+      # Check for email stored in session
+      if User.find_by_email(session[:email])
+        @user = User.find_by_email(session[:email])
+        @depts = @user.profile.company_depts.map(&:id)
+        @other_job_category = @user.profile.profiles_company_depts.empty? ? nil : @user.profile.profiles_company_depts.first.other_job_category
+      else
+        @user = User.new :role=>'talent'
+        @user.build_profile
+        @is_admin_adding = request.fullpath == '/add-talent' && current_user && current_user.god_or_admin?
+        @star_rating = 1 if !@is_admin_adding
+        @depts = CompanyDept.all
+      end
     end
   end
 
@@ -49,7 +49,6 @@ class UsersController < ApplicationController
       else
         @company.users << existing_user
         return redirect_to confirmation_url
-        # return redirect_to login_url(email: params[:user][:email], redirect_back: existing_user.talent? ? join_url : root_url(subdomain:false)), notice: "There's already an account with this email address.<p></p>Please log in or set your password below:"
       end
     end
     @user = @company.users.build(params[:user])
@@ -102,7 +101,7 @@ class UsersController < ApplicationController
           params[:commit] == "Save & add another" ? redirect_to('/add-talent', :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
         else
           #log in user if there's no current user
-          cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} unless current_user || params[:is_kiosk] == "true"
+          log_in_new_user(@user)
           @user.set_password_reset_token
           if request.xhr?
             respond_to do |format|
@@ -220,6 +219,8 @@ class UsersController < ApplicationController
         end
 
         if @is_new_user
+          log_in_new_user @user
+          @company.users << @user
           redirect_to confirmation_url(is_kiosk: params[:is_kiosk])
         elsif current_user.god_or_admin?
           redirect_to dashboard_url, notice: "Account Updated"
@@ -237,6 +238,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def log_in_new_user(user)
+    cookies.permanent[:auth_token] = {value: user.auth_token, domain: :all} unless current_user || params[:is_kiosk] == "true"
+  end
 
   def save_star_rating(rating, user_id, company_id)
     UsersCompany.find_by_user_id_and_company_id(user_id, company_id).update_attributes(:star_rating => rating)
@@ -271,6 +276,9 @@ class UsersController < ApplicationController
     else
       @user = current_user
     end
+
+    @user = User.find_by_email(session[:email]) if !@user #try to get user by email address stored in session, in the case that they're coming from a newsletter link
+      
   end
 
   def find_resource
