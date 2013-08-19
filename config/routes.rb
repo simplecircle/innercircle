@@ -31,4 +31,5 @@ Innercircle::Application.routes.draw do
   get "logout"=>"sessions#destroy"
   get "confirmation"=>"users#confirmation"
   get "for_companies"=>"static#for_companies"
+  get '/robots.txt' => 'static#robots'
 end
