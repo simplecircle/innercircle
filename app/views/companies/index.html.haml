@@ -13,7 +13,7 @@
       inner circle - Don’t miss out on your dream job
     - content_for :og_tags do
       %meta{property:"og:url", content:root_url(subdomain:false)}
-      %meta{property:"og:image", content:"http://fbb10cc56329cb5ea057-4ca1418a7613371d048778718c3acae9.r81.cf1.rackcdn.com/inner_circle_logo.png"}
+      %meta{property:"og:image", content:URI.join(root_url, image_path('inner_circle_square.jpg'))}
       %meta{property:"og:title", content:"inner circle"}
       %meta{property:"og:description", content:"Don’t miss out on your dream job"}
     = render 'shared/social_tag_script'
