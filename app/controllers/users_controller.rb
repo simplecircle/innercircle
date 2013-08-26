@@ -203,7 +203,7 @@ class UsersController < ApplicationController
     #Check if user selected "other" but didn't specify
     if validate_depts? && !@depts.nil? && CompanyDept.find(@depts.first.to_i).name == "other" && @other_job_category.blank?
       @user.errors.add(:other_job_category, "Please tell us which category fits you best") if 
-      throw_err = true
+      throw_err == true
     end
 
     if throw_err  

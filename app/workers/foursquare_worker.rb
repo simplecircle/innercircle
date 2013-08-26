@@ -6,6 +6,8 @@ class FoursquareWorker
   PROVIDER = "foursquare"
 
   def perform(company_id, first_run=false)
+    company = Company.find(company_id)
+    logger.info "#{company.subdomain}: Start"
     if first_run
       @first_run = first_run
       @limit = 200
@@ -13,7 +15,7 @@ class FoursquareWorker
       @limit = 10
     end
     @offset = 0
-    import(Company.find(company_id))
+    import(company)
   end
 
   def get_media(foursquare_v2_id, offset, limit)
@@ -27,8 +29,9 @@ class FoursquareWorker
     media = self.get_media(company.foursquare_v2_id, @offset, @limit)
 
     photo_count = media["response"]["photos"]["count"].to_i
-    unless media["response"]["photos"]["groups"][1].nil?
-      media["response"]["photos"]["groups"][1]["items"].each do |post|
+    photos = media["response"]["photos"]["groups"][0]["count"] > 0 ? media["response"]["photos"]["groups"][0] : media["response"]["photos"]["groups"][1]
+    unless photos.nil?
+      photos["items"].each do |post|
         logger.info "#{company.subdomain} -- existing post?"
         unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
           post = company.posts.create({
