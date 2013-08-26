@@ -6,6 +6,8 @@ class TumblrWorker
   PROVIDER = "tumblr"
 
   def perform(company_id, first_run=false)
+    company = Company.find(company_id)
+    logger.info "#{company.subdomain}: Start"
     if first_run
       @first_run = first_run
       # 50 is the max limit Tumblr allows
@@ -14,14 +16,13 @@ class TumblrWorker
       @limit = 10
     end
     @offset = 0
-    import(Company.find(company_id))
+    import(company)
   end
 
   def get_media(blog, offset, limit)
     # Tumblr's access token is not supposed to expire.
     # NOTE: There is a required Tumblr application (Like facebook) for this api key that must exist.
-    HTTParty.get("https://api.tumblr.com/v2/blog/#{blog}/posts/photo",
-      :query=>{api_key:Settings.tokens.tumblr, offset:offset, limit:limit})
+    HTTParty.get("https://api.tumblr.com/v2/blog/#{blog}/posts/photo",:query=>{api_key:Settings.tokens.tumblr, offset:offset, limit:limit})
   end
 
   def import(company)
