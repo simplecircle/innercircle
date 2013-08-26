@@ -6,6 +6,8 @@ class FoursquareWorker
   PROVIDER = "foursquare"
 
   def perform(company_id, first_run=false)
+    company = Company.find(company_id)
+    logger.info "#{company.subdomain}: Start"
     if first_run
       @first_run = first_run
       @limit = 200
@@ -13,7 +15,7 @@ class FoursquareWorker
       @limit = 10
     end
     @offset = 0
-    import(Company.find(company_id))
+    import(company)
   end
 
   def get_media(foursquare_v2_id, offset, limit)

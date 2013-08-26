@@ -6,13 +6,15 @@ class InstagramLocationWorker
   PROVIDER = "instagram"
 
   def perform(company_id, first_run=false)
+    company = Company.find(company_id)
+    logger.info "#{company.subdomain}: Start"
     if first_run
       @first_run = first_run
       @count = 200
     else
       @count = 10
     end
-    import(Company.find(company_id))
+    import(company)
   end
 
   def get_media(location_id, next_max_id=nil)

@@ -7,6 +7,8 @@ class FacebookWorker
   PROVIDER = "facebook"
 
   def perform(company_id, first_run=false)
+    company = Company.find(company_id)
+    logger.info "#{company.subdomain}: Start"
     if first_run
       @first_run = first_run
       @limit = 200
