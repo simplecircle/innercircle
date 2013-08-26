@@ -29,8 +29,9 @@ class FoursquareWorker
     media = self.get_media(company.foursquare_v2_id, @offset, @limit)
 
     photo_count = media["response"]["photos"]["count"].to_i
-    unless media["response"]["photos"]["groups"][1].nil?
-      media["response"]["photos"]["groups"][1]["items"].each do |post|
+    photos = media["response"]["photos"]["groups"][0]["count"] > 0 ? media["response"]["photos"]["groups"][0] : media["response"]["photos"]["groups"][1]
+    unless photos.nil?
+      photos["items"].each do |post|
         logger.info "#{company.subdomain} -- existing post?"
         unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
           post = company.posts.create({
