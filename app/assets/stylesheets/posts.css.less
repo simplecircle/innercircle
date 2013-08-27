@@ -20,9 +20,23 @@
         .info{
           color:@grayLight;
           font-size:11px;
+          position: relative;
           padding:6px 0 4px 5px;
+          z-index: 5;
           .date{
-            padding-left:25px;
+            padding-left:10px;
+          }
+          &:hover {
+            .photo__caption--unpublished {
+              white-space: normal;
+              background-color: white;
+              padding: 10px;
+              line-height: 1.4;
+              position: absolute;
+              bottom:0;
+              right:0;
+              width: 100%;
+            }
           }
         }
         .photo{
@@ -33,6 +47,16 @@
         }
       }
     }
+  }
+  .photo__caption--unpublished {
+    .box-sizing(border-box);
+    padding-left: 15px;
+    color: #333;
+    padding-right: 10px;
+    padding-bottom:4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .new-post-ribbon-wrapper {
     width: 63px;

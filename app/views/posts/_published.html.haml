@@ -12,7 +12,7 @@
         - when "foursquare"
           .foursquare_logo_gray.pull-left
         .date= render('shared/pretty_publication_date', post:post)
-      -if !post.caption.blank?
+      -unless post.caption.blank?
         .photo-overlay
           %h4.photo-overlay-text= strip_tags(CGI::unescapeHTML(post.caption))
       = image_tag post.photo_url(:large)
