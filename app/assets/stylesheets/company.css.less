@@ -153,7 +153,6 @@
         .box-sizing(border-box);
         img{
           min-width:100%;
-          border:1px solid @grayLighter;
           .border-radius(4px);
           .box-sizing(border-box);
         }
@@ -179,38 +178,40 @@
     font-size:12px;
     padding:0 0 7px 10px;
     position: absolute;
-    width:100%;
+    z-index: 6;
     .box-sizing(border-box);
     .date{
       color:#D1D1D1;
       display:inline-block;
       padding-left:8px;
+      padding-bottom: 2px;
     }
   }
   .photo-overlay-text {
     .box-sizing(border-box);
-    color: white;
-    padding:0 25px 0 25px;
-    line-height:25px;
-    position: absolute;
-    .transition(opacity 0.6s ease-in);
-    opacity: 0;
-    top:35%;
-    text-align: center;
+    color: #D1D1D1;
+    padding:0 25px 0 100px;
+    text-align: left;
     width: 100%;
+    font-weight: normal;
+    bottom:0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .photo-overlay {
-    height: 100%;
-    .border-radius(4px);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
     position: absolute;
     left:0;
-    top:0;
+    bottom:0;
     width: 100%;
-    .transition(background-color 0.4s ease-in);
-    // padding-left: 1px; //to solve quirk where there was a right-hand margin of 1px where the overlay wasn't covering the photo
+    background-color: rgba(0,0,0,0.6);
+    overflow: hidden;
     &:hover{
-      .photo-overlay-text { opacity: 1; }
-      background-color: rgba(0,0,0,0.6);
+      .photo-overlay-text { 
+        white-space: normal;
+      }
     }
   }
   .has-company-logo {
