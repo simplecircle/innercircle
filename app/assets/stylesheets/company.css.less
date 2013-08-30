@@ -208,7 +208,7 @@
     width: 100%;
     background-color: rgba(0,0,0,0.6);
     overflow: hidden;
-    &:hover{
+    &.active{
       .photo-overlay-text { 
         white-space: normal;
       }
@@ -341,6 +341,13 @@
       left: 0;
       li {
         width: 100%;
+      }
+    }
+  }
+  @media (min-width: 571px) {
+    .photo-overlay:hover {
+      .photo-overlay-text { 
+        white-space: normal;
       }
     }
   }
