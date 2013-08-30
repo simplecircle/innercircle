@@ -112,6 +112,7 @@ $(document).ready ->
       error: callback
   bindPhotoOverlayExpandOnMobile = ->
     if $(window).width() < 571
+      $('.photo-overlay').off 'click'
       $('.photo-overlay').on 'click', (e) ->
         $(e.target).closest('.photo-overlay').toggleClass 'active'
   bindPhotoOverlayExpandOnMobile()
