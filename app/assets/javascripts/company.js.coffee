@@ -20,7 +20,3 @@ if subscribeButtonBody.length > 0
   $(window).scroll scrollHandler
   $(window).resize scrollHandler
   scrollHandler()
-
-if $(window).width() < 571
-  $('.photo-overlay').on 'click', (e) ->
-    $(e.target).closest('.photo-overlay').toggleClass 'active'

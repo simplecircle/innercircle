@@ -83,6 +83,7 @@ $(document).ready ->
             setHeight(columnCount, containerWidth, newItems)
             container.masonry( 'appended', newItems );
           newItems.fadeIn("fast")
+          bindPhotoOverlayExpandOnMobile()
 
         $.ajax
           url: url
@@ -109,7 +110,11 @@ $(document).ready ->
         'entry.1170793925': email
       success: callback
       error: callback
-
+  bindPhotoOverlayExpandOnMobile = ->
+    if $(window).width() < 571
+      $('.photo-overlay').on 'click', (e) ->
+        $(e.target).closest('.photo-overlay').toggleClass 'active'
+  bindPhotoOverlayExpandOnMobile()
 
   #Nav collapse fix
   $('[data-target=".nav-collapse"]').click () -> $('.navbar-inner').toggleClass('expanded collapsed')
