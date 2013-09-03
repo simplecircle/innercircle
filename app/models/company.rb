@@ -48,6 +48,15 @@ class Company < ActiveRecord::Base
     Post.import_from_provider(self, changed_providers) unless changed_providers.length == 0
   end
 
+  def create_default_admin_user
+    default_admin_user_email = "#{self.subdomain}@getinnercircle.com"
+    if User.find_by_email(default_admin_user_email).nil?
+      default_admin_user = self.users.build(role:"admin", email:default_admin_user_email, password:"#{self.subdomain}#{self.id}")
+      default_admin_user.build_profile
+      self.users << default_admin_user
+    end
+  end
+
   def last_published_time
     return "" if last_published_posts_at.nil?
 

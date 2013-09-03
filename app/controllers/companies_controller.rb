@@ -34,7 +34,9 @@ class CompaniesController < ApplicationController
     if @company.save
       save_verticals(@verticals, @company) if @verticals
       cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} if @user.admin?
-      # Content is imported from provider via a Company commit callback
+
+      @company.create_default_admin_user
+
       redirect_to posts_url(subdomain: @company.subdomain)
     else
       render "new"
