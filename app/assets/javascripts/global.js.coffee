@@ -4,6 +4,11 @@ $(document).ready ->
   unpublishedContainer = $("#masonry.masonry-unpublished")
   unpublishedContainerWidth = unpublishedContainer.width()
   mode = "unpublished" if unpublishedContainer.length == 1
+  if $('#company-info').length > 0
+    companySubdomain = $('#company-info').data().companySubdomain
+  else
+    companySubdomain = undefined
+
 
   validateEmail = (email) -> 
     re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -47,8 +52,6 @@ $(document).ready ->
     $(window).resize ->
       initPublished()
 
-
-
   # Infinite scroll
   if $('#infinite .pagination').length
     $(window).scroll ->
@@ -82,6 +85,7 @@ $(document).ready ->
           else
             setHeight(columnCount, containerWidth, newItems)
             container.masonry( 'appended', newItems );
+            _gaq.push(['_trackEvent', 'Companies', 'Infinite Scroll', companySubdomain, items.length]);
           newItems.fadeIn("fast")
           bindPhotoOverlayExpandOnMobile()
 

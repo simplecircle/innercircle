@@ -7,7 +7,7 @@
   %meta{property:"og:description", content:"Get updates on job opportunities and work life at #{capitalize_phrase(@company.name)}"}
 = render 'shared/social_tag_script'
 - if !@is_remote
-  #company-info
+  #company-info{'data-company-subdomain'=>@company.subdomain}
     %section.logo-and-short-description.mobile-padding
       .company-logo= link_to(image_tag(@company.logo_url(:large)), @company.website_url, target:"_blank")
       = @company.short_description
@@ -18,7 +18,7 @@
       - if @has_current_user_already_joined
         .btn.btn-block.disabled.mtm.subscribe-button-body{style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};"} ✓&nbsp;&nbsp;Subscribed
       - else
-        = link_to("Subscribe", join_url(subdomain: @company.subdomain, email: params[:email]), class:"btn btn-block mtm subscribe-button-body", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};", onclick:"_gaq.push(['_trackEvent', 'Companies', 'Go To Signup Form', '#{@company.subdomain}']);")
+        = link_to("Subscribe", join_url(subdomain: @company.subdomain, email: params[:email]), class:"btn btn-block mtm subscribe-button-body js-btn-subscribe", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
       .mts.gray-light.tac Get updates on job opportunities and work life at #{capitalize_phrase(@company.name)}
       - if @referrer == "external"
         .powered-by.visible-phone.mtm.tac
@@ -27,7 +27,7 @@
     - if @company.jobs_page
       %hr
       %section.mobile-padding
-        = link_to("See current job openings", @company.jobs_page, class:"btn btn-block mtm", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};", onclick:"_gaq.push(['_trackEvent', 'Companies', 'See Jobs', '#{@company.subdomain}']);", target:"_blank")
+        = link_to("See current job openings", @company.jobs_page, class:"btn btn-block mtm js-btn-see-company-jobs", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};", target:"_blank")
     %hr
     - if @referrer == "external"
       %section.mobile-padding.hidden-phone

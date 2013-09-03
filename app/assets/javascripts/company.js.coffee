@@ -1,4 +1,8 @@
 subscribeButtonBody = $('.subscribe-button-body')
+if $('#company-info').length > 0
+  companySubdomain = $('#company-info').data().companySubdomain
+else
+  companySubdomain = undefined
 
 if subscribeButtonBody.length > 0
   threshold = subscribeButtonBody.offset().top
@@ -20,3 +24,9 @@ if subscribeButtonBody.length > 0
   $(window).scroll scrollHandler
   $(window).resize scrollHandler
   scrollHandler()
+
+$('.js-btn-subscribe').on 'click', (e)->
+  _gaq.push(['_trackEvent', 'Companies', 'Go To Signup Form', companySubdomain])
+
+$('.js-btn-see-company-jobs').on 'click', (e)->
+  _gaq.push(['_trackEvent', 'Companies', 'See Jobs', companySubdomain]);
