@@ -87,7 +87,7 @@ $(document).ready ->
             container.masonry( 'appended', newItems );
             _gaq.push(['_trackEvent', 'Companies', 'Infinite Scroll', companySubdomain, items.length]);
           newItems.fadeIn("fast")
-          bindPhotoOverlayExpandOnMobile()
+          bindPostCaptionClickOnMobile()
 
         $.ajax
           url: url
@@ -114,12 +114,12 @@ $(document).ready ->
         'entry.1170793925': email
       success: callback
       error: callback
-  bindPhotoOverlayExpandOnMobile = ->
+  bindPostCaptionClickOnMobile = ->
     if $(window).width() < 571
-      $('.photo-overlay').off 'click'
-      $('.photo-overlay').on 'click', (e) ->
-        $(e.target).closest('.photo-overlay').toggleClass 'active'
-  bindPhotoOverlayExpandOnMobile()
+      $('.js-photo').off 'click'
+      $('.js-photo').on 'click', (e) ->
+        $(e.target).closest('.js-photo').find('.js-post-info-bar').toggleClass 'active'
+  bindPostCaptionClickOnMobile()
 
   #Nav collapse fix
   $('[data-target=".nav-collapse"]').click () -> $('.navbar-inner').toggleClass('expanded collapsed')

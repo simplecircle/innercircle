@@ -172,44 +172,37 @@
     margin-top: 5px;
     margin-bottom: 5px;
   }
-  .post-info-bar{
-    color: white;
-    bottom:0;
-    font-size:12px;
-    padding:0 0 7px 10px;
-    position: absolute;
-    z-index: 6;
-    .box-sizing(border-box);
-    .date{
-      color:#D1D1D1;
-      display:inline-block;
-      padding-left:8px;
-      padding-bottom: 2px;
-    }
+  .post-info-bar__icon {
+    float: left;
   }
-  .photo-overlay-text {
-    .box-sizing(border-box);
-    color: #D1D1D1;
-    padding:0 25px 0 110px;
-    text-align: left;
-    width: 100%;
-    font-weight: normal;
-    bottom:0;
+  .post-info-bar__date{
+    float: left;
+    padding-left:8px;
+    padding-bottom: 2px;
+  }
+  .post-info-bar__icon-and-date {
+    float: left;
+  }
+  .post-info-bar__caption {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-  .photo-overlay {
+  .post-info-bar {
+    .box-sizing(border-box);
+    padding: 7px 10px;
+    font-size:14px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     position: absolute;
     left:0;
+    color: #D1D1D1;
     bottom:0;
     width: 100%;
     background-color: rgba(0,0,0,0.6);
     overflow: hidden;
     &.active{
-      .photo-overlay-text { 
+      .post-info-bar__caption { 
         white-space: normal;
       }
     }
@@ -334,6 +327,26 @@
     .subscribe-button-header {
       padding: 0 10px;
     }
+    .post-info-bar {
+      &.post-info-bar--has-caption {
+        padding: 5px 10px 15px 10px;
+        &:hover, &.active {
+          padding: 7px 10px;
+        }
+      }
+      &:hover, &.active {
+        .post-info-bar__click-for-more-prompt {
+          display: none;
+        }
+      }
+    }
+    .post-info-bar__click-for-more-prompt {
+      font-size: 10px;
+      color: #aaa;
+      position: absolute;
+      right: 5px;
+      bottom:0px
+    }
     #masonry.masonry-published {
       border: none;
       width: 100%;
@@ -345,10 +358,13 @@
     }
   }
   @media (min-width: 571px) {
-    .photo-overlay:hover {
-      .photo-overlay-text { 
+    .post-info-bar:hover {
+      .post-info-bar__caption { 
         white-space: normal;
       }
+    }
+    .post-info-bar__click-for-more-prompt {
+      display: none;
     }
   }
   //Above iPad
