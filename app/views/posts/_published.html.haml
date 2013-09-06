@@ -17,6 +17,6 @@
             &nbsp;|&nbsp; 
         -unless post.caption.blank?
           .post-info-bar__caption= strip_tags(CGI::unescapeHTML(post.caption))
-          .post-info-bar__click-for-more-prompt click to see full caption
+          / .post-info-bar__click-for-more-prompt click to see full caption
         .clearfix
       = image_tag post.photo_url(:large)
