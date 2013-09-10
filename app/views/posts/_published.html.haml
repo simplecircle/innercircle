@@ -1,19 +1,22 @@
 - posts.each do |post|
   %li{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}"}}
-    .photo
-      .post-info-bar
-        - case post.provider
-        - when "facebook"
-          .facebook_logo_gray.pull-left
-        - when "instagram"
-          .instagram_logo_gray.pull-left
-        - when "tumblr"
-          .tumblr_logo_gray.pull-left
-        - when "foursquare"
-          .foursquare_logo_gray.pull-left
-        .date= render('shared/pretty_publication_date', post:post)
-      -if !post.caption.blank?
-        .photo-overlay
-          %h4.photo-overlay-text= strip_tags(CGI::unescapeHTML(post.caption))
+    .photo.js-photo
+      .post-info-bar.js-post-info-bar{class:"#{'post-info-bar--has-caption' unless post.caption.blank?}"}
+        .post-info-bar__icon-and-date
+          - case post.provider
+          - when "facebook"
+            .post-info-bar__icon.facebook_logo_gray
+          - when "instagram"
+            .post-info-bar__icon.instagram_logo_gray
+          - when "tumblr"
+            .post-info-bar__icon.tumblr_logo_gray
+          - when "foursquare"
+            .post-info-bar__icon.foursquare_logo_gray
+          .post-info-bar__date= render('shared/pretty_publication_date', post:post)
+          -unless post.caption.blank?
+            &nbsp;|&nbsp; 
+        -unless post.caption.blank?
+          .post-info-bar__caption= strip_tags(CGI::unescapeHTML(post.caption))
+          / .post-info-bar__click-for-more-prompt click to see full caption
+        .clearfix
       = image_tag post.photo_url(:large)
-
