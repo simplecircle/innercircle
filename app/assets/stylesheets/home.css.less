@@ -56,6 +56,50 @@
   .homepage-screenshots__feed-captions{
     padding-left: 20px;
   }
+  #email_email {
+    margin-bottom: 0;
+    width: 300px;
+  }
+  .homepage-signup-form {
+    margin-bottom: 30px;
+    padding-bottom: 22px;
+    position: relative;
+  }
+  .homepage-contact-info__logo, .homepage-contact-info__address {
+    display: inline;
+    margin-right: 5px;
+    img {
+      margin-bottom: 5px;
+    }
+  }
+  .homepage-contact-info__address {
+    color: @grayLight;
+  }
+  .homepage-signup-form__submit-button {
+    height: 39px;
+    width: 120px;
+  }
+  .homepage-signup-form__message {
+    position: absolute;
+    bottom:-1px;
+    width: 100%;
+  }
+  .homepage-signup {
+    background-color: @accentYellow;
+    border: 5px solid white;
+    border-top-width: 0;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+    .text-error {
+      color:red;
+    }
+    h3 {
+      font-weight: normal;
+      line-height: 1.3;
+      margin-bottom: 25px;
+    }
+  }
   .homepage-screenshots__feed-image{
     padding-right: 20px;
   }
@@ -74,6 +118,11 @@
     margin-bottom: 30px;
   }
   .homepage-how-we-do, .homepage-screenshots {
+    .homepage-how-we-do--bottom-center {
+      h3 {
+        font-size: 44px;
+      }
+    }
     h3 {
       font-size: 34px;
       line-height: 1;
@@ -100,15 +149,24 @@
   @media (max-width: 768px) {
 
   }
+  @media (min-width: 769px) {
+    .homepage-top {
+      h2 {
+        padding: 0 200px;
+      }
+    }
+  }
   @media (max-width: 570px) {
     .homepage-top {
+      margin-top: 40px;
+      padding-top: 20px;
+      padding-bottom: 30px;
       h1 {
         font-size: 30px;
-        margin-top: 40px;
         line-height: 1.1;
       }
       h2 {
-        font-size: 20px;
+        font-size: 18px;
         margin-top: 30px;
       }
     }

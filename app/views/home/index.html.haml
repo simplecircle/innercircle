@@ -9,14 +9,14 @@
   .row-fluid
     .span12
       %h1
-        Capture top talent, whether or not<br>they’re looking for a job
+        Capture top talent, whether or not they’re looking for a job
       %h2
-        <b>inner circle</b> helps you get high-quality hires<br> by convincing passive talent to apply for your jobs
+        <b>inner circle</b> helps you get high-quality hires by converting passive talent to apply for your jobs
 %section.homepage-how-we-do.container
   .row-fluid
     .span6.text-right.homepage-how-we-do--top-left
       %h3 Capture passive talent
-      %p Capture the emails of talent who are interested<br> in your company but not ready to apply for a job
+      %p Capture the emails of talent who are interested<br> in your company, whether or not they're ready<br> to apply for a job
       =image_tag "homepage_how_we_do_arrows.png", class:"homepage-how-we-do__arrows"
     .span6.text-left.homepage-how-we-do--top-right
       %h3 Get leads from us
@@ -27,7 +27,7 @@
         to the NYC tech and creative talent community.
   .row-fluid
     .span12.text-center.homepage-how-we-do--bottom-center
-      %h3 Convert 'em
+      %h3 Convert 'em to hires
       %p Stay on their radar with weekly jobs & culture emails.<br> So when they’re ready to switch jobs,<br> you’re there to hire them
 %section.container.homepage-screenshots
   .row-fluid
@@ -52,3 +52,20 @@
         %h3 Convert them to hires with jobs & culture emails
         %p Keep passive talent engaged with regular email updates - think of it as automated marketing.<br> We do the heavy lifting: gathering the photos, jobs, and updates that make up your emails.
         =image_tag "homepage_screenshots_devices.png", class:"homepage_screenshots__devices"
+%section.container.homepage-signup.text-center
+  .row-fluid
+    .span12
+      %h3 Learn more about how we can help.<br> Drop us your email and we'll be in touch!
+      =form_tag("", class:"homepage-signup-form") do
+        =text_field "email", "email", placeholder:"Email address"
+        %button.js-homepage-signup-form__submit-button.homepage-signup-form__submit-button.btn{type:"submit"}Submit
+        .clearfix
+        .homepage-signup-form__message
+      .homepage-contact-info
+        .homepage-contact-info__logo=image_tag("inner_circle_logo_dark.png", width:"80", height:"13")
+        .homepage-contact-info__address
+          902 Broadway, 4th Floor, New York, NY 10010
+          %span &nbsp;|&nbsp;
+          =link_to "hello@getinnercircle.com", "mailto:hello@getinnercircle.com"
+          %span &nbsp;|&nbsp;
+          917.880.2147
