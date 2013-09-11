@@ -1,15 +1,9 @@
-.navbar.navbar-fixed-top.marketing-nav
+.navbar.navbar-fixed-top.navbar--marketing
   .navbar-inner.collapsed
-    .marketing-contact-info-wrapper
-      .marketing-contact-info.visible-phone
-        =link_to "Email", "mailto:hello@getinnercircle.com"
-        or
-        =link_to "call", "tel:1-917-880-2147"
-        us to learn more
-      .marketing-contact-info.hidden-phone
-        Contact us for a FREE consultation.
-        =link_to "hello@getinnercircle.com", "mailto:hello@getinnercircle.com"
-        &nbsp;|&nbsp;917.880.2147
+    = link_to(image_tag("inner_circle_logo_dark.png", :width=>"500"), root_url(subdomain:false, src:"nav"), :class=>"brand")
+    .navbar-newsletter-link-wrapper
+      =link_to("Looking for our newsletter?", newsletter_path, class:"navbar-newsletter-link hidden-phone hidden-tablet")
+      =link_to("Newsletter", newsletter_path, class:"navbar-newsletter-link visible-phone")
     %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
       %span.icon-bar
       %span.icon-bar
@@ -17,6 +11,8 @@
     .nav-collapse-border-div
     .nav-collapse.collapse
       %ul.nav.pull-right
+        %li=link_to("Newsletter", newsletter_path, class:"navbar-newsletter-link visible-tablet hidden-phone")
+        %li.marketing-contact-info.hidden-phone=link_to "hello@getinnercircle.com", "mailto:hello@getinnercircle.com"
         - if current_user
           - if current_user.god?
             %li= link_to("Companies", companies_url(subdomain:false))

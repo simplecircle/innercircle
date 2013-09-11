@@ -53,7 +53,7 @@
 
 body {
   background:@bodyBackground;
-  font-family:Lucida Grande, Lucida Sans Unicode;
+  font-family:@sansFontFamily;
   font-size:13px;
 }
 
@@ -82,7 +82,7 @@ body {
 @navbarCollapseWidth:             570px;
 
 @font-face {
-  font-family: 'gibsonregular';
+  font-family: 'Gibson';
   src: asset-url('gibson-regular-webfont.eot');
   src: asset-url('gibson-regular-webfont.eot?#iefix') format('embedded-opentype'),
        asset-url('gibson-regular-webfont.woff') format('woff'),
@@ -92,25 +92,23 @@ body {
   font-style: normal;
 }
 @font-face {
-  font-family: 'gibsonsemibold';
+  font-family: 'Gibson';
   src: asset-url('gibson-semibold-webfont.eot');
   src: asset-url('gibson-semibold-webfont.eot?#iefix') format('embedded-opentype'),
        asset-url('gibson-semibold-webfont.woff') format('woff'),
        asset-url('gibson-semibold-webfont.ttf') format('truetype'),
        asset-url('gibson-semibold-webfont.svg#gibsonsemibold') format('svg');
-  font-weight: normal;
+  font-weight: bold;
   font-style: normal;
 }
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5 {
+  font-family: @headings-font-family;
   .btn {
     font-weight: normal;
   }
 }
 h1, h2{
- font-family: 'gibsonsemibold';
-}
-h3, h4, h5{
- font-family: 'gibsonregular';
+ font-weight: bold;
 }
 hr{
   border-top:1px solid darken(@bodyBackground, 6%);
@@ -126,7 +124,7 @@ input[type="password"]{
   /*.box-shadow(0px 1px 1px #EDEDED);*/
   .box-sizing(border-box);
   font-size:16px;
-  font-family: 'gibsonregular';
+  font-family: @headings-font-family;
   height:40px;
   &:focus {
     border-color: @linkColor;
@@ -153,7 +151,7 @@ input[type="file"]{
   color:white !important;
   cursor: pointer;
   display: inline-block;
-  font-family: 'gibsonregular';
+  font-family: @headings-font-family;
   font-size:16px;
   line-height: @baseLineHeight;
   margin-bottom: 0; // For input.btn
@@ -227,8 +225,8 @@ input[type="file"]{
   border-top:2px solid @accentColor;
   .brand {
     margin-left:0;
-    padding:10px 0 5px 4px;
-    width:85px;
+    padding:8px 0 5px 4px;
+    width:100px;
   }
   .divider-vertical{
     border-left:1px solid #ccc;
