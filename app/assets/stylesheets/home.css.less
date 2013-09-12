@@ -9,141 +9,277 @@
     padding-right: 10px;
   }
   .homepage-top {
+    margin-top: 30px;
     text-align: center;
-    background: @accentYellow;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    border-bottom: 4px solid #d6f4fe;
+    background-image: image-url('homepage_texture.jpg');
+    background-repeat: repeat;
     h1 {
-      font-size: 58px;
+      font-size: 52px;
       line-height: 1;
-      margin-top:100px; 
     }
     h2 {
-      font-size: 30px;
-      margin-top: 50px;
-      margin-bottom: 60px;
-    }
-  }
-  .homepage-contact-block {
-    text-align: center;
-    padding-top: 70px;
-    padding-bottom: 100px;
-    h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
-  }
-  .homepage-team-block {
-    text-align: center;
-    background: white;
-    padding-top: 70px;
-    padding-bottom: 90px;
-    h2 {
-      margin-bottom: 40px;
-    }
-  }
-  .headshot-image {
-    width: 100%;
-    .border-radius(4px);
-  }
-  .headshot-name {
-    font-size: 16px;
-    margin-top: 15px;
-    text-align: center;
-  }
-  .homepage-how-we-do {
-    ul {
-      margin-left: 18px;
-    }
-    li {
-      margin-bottom: 15px;
-      font-size: 16px;
+      font-size: 20px;
       line-height: 1.3;
+      font-family: @headings-font-family;
+      color: #d93705;
+      font-weight: normal;
+      margin-top: 30px;
+    }
+  }
+  .homepage-how-we-do--bottom-center {
+    padding-top: 95px;
+  }
+  .homepage-how-we-do--top-left {
+    text-align: right;
+    padding-right: 70px;
+    position: relative;
+  }
+  .homepage-how-we-do--top-right {
+    padding-left: 70px;
+    text-align: left;
+  }
+  .homepage-screenshots__arrow1 {
+    position: absolute;
+  }
+  .homepage-screenshots__arrow2 {
+    position: absolute;
+  }
+  .homepage-screenshots__feed-captions{
+    padding-left: 20px;
+    text-align: left;
+  }
+  #email_email {
+    margin-bottom: 0;
+    width: 300px;
+  }
+  .homepage-signup-form {
+    margin-bottom: 30px;
+    padding-bottom: 22px;
+    position: relative;
+  }
+  .homepage-contact-info__logo, .homepage-contact-info__address {
+    display: inline;
+    margin-right: 5px;
+    img {
+      margin-bottom: 5px;
+    }
+  }
+  .homepage-contact-info__address {
+    color: @grayLight;
+  }
+  .homepage-signup-form__submit-button {
+    height: 39px;
+    width: 120px;
+  }
+  .homepage-signup-form__message {
+    position: absolute;
+    bottom:-1px;
+    width: 100%;
+  }
+  .homepage-signup {
+    background-image: image-url('homepage_texture.jpg');
+    background-repeat: repeat;
+    border: 5px solid white;
+    border-top-width: 0;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+    .text-error {
+      color:red;
     }
     h3 {
-      margin-top:35px;
-      margin-bottom: 20px;
-      font-size: 20px;
-      line-height: 1;
-      font-family: 'gibsonsemibold';
+      font-weight: normal;
+      line-height: 1.3;
+      margin-bottom: 25px;
     }
   }
-  .homepage-how-we-do-right-container {
-    border-left: 1px solid #dedede;
+  .homepage-screenshots__feed-image{
+    position: relative;
+    padding-right: 20px;
+    text-align: right;
   }
-  .homepage-how-we-do-left {
-    margin-top:-65px;
+  .homepage-screenshots--first {
+    position: relative;
+    margin-bottom: 180px;
   }
-  .homepage-how-we-do-right {
-    margin-top:145px;
-    padding-left: 40px;
-    padding-bottom: 60px;
+  .homepage_screenshots__devices {
+    margin-top: 30px;
   }
-  .home_arrow1 {
-    margin-left: 25%;
+  .homepage-screenshots--second {
+    position: relative;
   }
-  .home_arrow2 {
-    margin-left: -20px;
+  .homepage-screenshots--third {
+    margin-top: 100px;
+    margin-bottom: 30px;
   }
-  .home_arrow3 {
-    margin-left: 40%;
+  .homepage-how-we-do, .homepage-screenshots {
+    h3 {
+      font-size: 30px;
+      line-height: 1;
+      font-weight: normal;
+      font-family: @headings-font-family;
+    }
+    .homepage-how-we-do--bottom-center {
+      h3 {
+        font-size: 44px;
+      }
+    }
+  }
+  .homepage-how-we-do {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: white;
+  }
+  .homepage-screenshots {
+    padding-top: 45px;
+    background-color: @grayLighter;
+    border: 5px solid white;
+    h2 {
+      font-weight: normal;
+      font-size: 44px;
+      line-height: 1.1;
+      margin-bottom: 75px;
+    }
+  }
+  @media (min-width: 571px) {
+    .homepage-how-we-do__arrows {
+      position: absolute;
+      top: 50px;
+      right: -75px;
+    }
+    .homepage-screenshots__arrow1 {
+      bottom: -95px;
+      left: -45px;
+    }
+    .homepage-screenshots__arrow2 {
+      bottom: -20px;
+      right: -27px;
+    }
   }
   @media (max-width: 768px) {
-    .homepage-how-we-do-left {
-      margin-top: -45px;
+    .navbar-inner {
+      background-image: image-url('homepage_texture.jpg');
+      background-repeat: repeat;
+      background-attachment: fixed;
+      background-position: 0% 100%;
+    }
+    .homepage-top {
+      margin-top: 0;
+    }
+  }
+  @media (min-width: 769px) {
+    .homepage-top {
+      h2 {
+        padding: 0 200px;
+      }
     }
   }
   @media (max-width: 570px) {
+    #email_email {
+      width: 100%;
+    }
+    .homepage-screenshots__feed-image {
+      text-align: center;
+      img {
+        width: 100%;
+      }
+    }
+    .homepage-signup {
+      margin-bottom: 0;
+    }
+    .homepage-signup-form__submit-button {
+      width: 100%;
+      margin-top: 5px;
+    }
+    .homepage-how-we-do__arrows {
+      margin: 0 auto;
+    }
+    .homepage-screenshots--first {
+      text-align: left;
+      margin-bottom: 25px;
+    }
+    .homepage-screenshots--second {
+      text-align: left;
+    }
+    .homepage-screenshots--third {
+      margin-top: 50px;
+      text-align: left;
+    }
+    .homepage_screenshots_devices {
+      margin-top: 15px;
+      margin-bottom: 30px;
+    }
+    .homepage-screenshots__feed-image {
+      margin-bottom: 80px;
+      padding-right: 0;
+    }
+    .homepage-how-we-do, .homepage-screenshots {
+      h3 {
+        font-size: 24px;
+      }
+    }
+    .homepage-screenshots__feed-captions{
+      padding-left: 0;
+    }
+    .homepage-how-we-do--top-left, .homepage-how-we-do--top-right {
+      text-align: center;
+    }
+    .homepage-how-we-do--top-left {
+      margin-top: 40px;
+      padding-right: 0;
+    }
+    .homepage-how-we-do--top-right {
+      padding-left: 0;
+      margin-top: 30px;
+    }
+    .homepage-how-we-do--bottom-center {
+      padding-top: 0;
+      h3 {
+        font-size: 28px;
+      }
+    }
+    .homepage-screenshots__arrow1 {
+      .rotate(120deg);
+      top: -117px;
+      left: 25px;
+    }
+    .homepage-screenshots {
+      h2 {
+        font-size: 28px;
+        margin-top: 0;
+        margin-bottom: 40px;
+      }
+    }
+    .navbar-newsletter-link {
+      color: @grayLight;
+    }
+    .nav-collapse {
+      background: @accentYellow;
+    }
     .homepage-top {
+      margin-top: 40px;
+      padding-top: 20px;
+      padding-bottom: 30px;
       h1 {
         font-size: 30px;
-        margin-top: 40px;
         line-height: 1.1;
       }
       h2 {
-        font-size: 20px;
+        font-size: 18px;
         margin-top: 30px;
       }
     }
-    .homepage-how-we-do-right-container {
-      border:none;
+    .navbar-newsletter-link-wrapper {
+      right: 55px;
+      width: auto;
+      margin-left: 0;
+      margin-right: 20px;
     }
-    .homepage-how-we-do-right {
-      margin-top: 0;
-      padding-left: 0;
-    }
-    .homepage-how-we-do {
-      h3 {
-        margin-top: 30px;
-      }
-    }
-    .homepage-team-block {
-      padding-top: 20px;
-      padding-bottom: 0;
-      h2 {
-        margin-bottom: 30px;
-      }
-    }
-    .homepage-contact-block {
-      padding-top: 30px;
-      padding-bottom: 60px;
-      h2 {
-        font-size: 30px;
-        line-height: 1.2;
-      }
-    }
-    .headshot {
-      margin-bottom: 40px;
-    }
-    .marketing-contact-info-wrapper {
-      width: 70%;
-    }
-    .marketing-contact-info {
+    .navbar-newsletter-link {
       width: 100%;
-    }
-    .headshot-image {
-      width: 70%;
-    }
-    .headshot-name {
-      margin-top: 10px;
     }
   }
 }

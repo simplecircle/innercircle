@@ -1,4 +1,4 @@
-%title= content_for?(:title) ? yield(:title) : 'inner circle - Market your way to top job talent'
+%title= content_for?(:title) ? yield(:title) : 'inner circle - Capture top talent, whether or not they’re looking for a job'
 = stylesheet_link_tag  "application", :media => "all"
 = csrf_meta_tags
 /[if IE]
@@ -13,6 +13,6 @@
   %meta{property:"og:url", content:root_url(subdomain:false)}
   %meta{property:"og:image", content:URI.join(root_url, image_path('inner_circle_square.jpg'))}
   %meta{property:"og:title", content:"inner circle"}
-  %meta{property:"og:description", content:"Market your way to top job talent"}
+  %meta{property:"og:description", content:"Capture top talent, whether or not they’re looking for a job"}
 :javascript
   var _gaq = _gaq || [];var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';_gaq.push(['_require', 'inpage_linkid', pluginUrl]);_gaq.push(['_setAccount', 'UA-41758671-1']);_gaq.push(['_setDomainName', 'getinnercircle.com']);_gaq.push(['_trackPageview']);(function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();

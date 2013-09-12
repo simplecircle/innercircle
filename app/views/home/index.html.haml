@@ -1,62 +1,75 @@
 - content_for :title do
-  inner circle - Market Your Way to Top Talent
+  inner circle - Capture top talent, whether or not they’re looking for a job
 - content_for :og_tags do
   %meta{property:"og:url", content:root_url(subdomain:false)}
   %meta{property:"og:image", content:URI.join(root_url, image_path('inner_circle_square.jpg'))}
   %meta{property:"og:title", content:"inner circle"}
-  %meta{property:"og:description", content:"Market Your Way to Top Talent"}
-%section.homepage-top
-  .container
-    .row-fluid
-      .span12
-        %h1
-          Market your way to top talent<br />with <span class="accent-blue">inner circle</span>
-        %h2
-          We help you hire in two ways:
-%section.homepage-how-we-do.container
-  .row-fluid
-    .span6.homepage-how-we-do-left-container
-      .row-fluid
-        .span12.homepage-how-we-do-left
-          =image_tag("home_arrow1.png", class:"home_arrow1")
-          %h3 Build a talent community for your company
-          %ul
-            %li We capture passive talent who love your company but aren't looking for a job now
-            %li We harness your followers and current and past employees to build a high-quality talent community
-            %li We seed your community with relevant talent
-    .span6.homepage-how-we-do-right-container
-      .row-fluid
-        .span12.homepage-how-we-do-right
-          =image_tag("home_arrow2.png", class:"home_arrow2 hidden-phone")
-          =image_tag("home_arrow3.png", class:"home_arrow3 visible-phone")
-          %h3 Market your culture, jobs, and <br/ >company updates
-          %ul
-            %li We create custom content to keep your talent community engaged
-            %li We help identify great candidates in your community and convert them into leads
-%section.homepage-team-block.container-fluid
-  .row-fluid
-    .span8.column-center
-      %h2 Meet the <span class="accent-blue">inner circle</span> team
-      .row-fluid.headshots-container
-        .span4.headshot
-          =image_tag "elliott.jpg", class:"headshot-image"
-          .headshot-name Elliott
-        .span4.headshot
-          =image_tag "kenny.jpg", class:"headshot-image"
-          .headshot-name Kenny
-        .span4.headshot
-          =image_tag "patti.jpg", class:"headshot-image"
-          .headshot-name Patti
-%section.homepage-contact-block.container-fluid
+  %meta{property:"og:description", content:"Capture top talent, whether or not they’re looking for a job"}
+%section.homepage-top.container
   .row-fluid
     .span12
-      %h2 Email or call us to learn how we can help
-      .mtm
-        =link_to "hello@getinnercircle.com", "mailto:hello@getinnercircle.com"
-        %span.hidden-phone 
-          |
-        %span.hidden-phone 917.880.2147
-        =link_to "917-880-2147", "tel:1-917-880-2147", :class=>"visible-phone"
-        %span.hidden-phone
-          |
-        902 Broadway 4th Fl, New York, NY
+      %h1
+        Capture top talent, whether or not they’re looking for a job
+      %h2
+        Inner Circle helps you get high-quality hires by converting passive talent to apply for your jobs
+%section.homepage-how-we-do.container
+  .row-fluid
+    .span6.homepage-how-we-do--top-left
+      %h3 Capture passive talent
+      %p Capture the emails of talent who are interested in your company, whether or not they're ready to apply for a job
+      =image_tag "homepage_how_we_do_arrows.png", class:"homepage-how-we-do__arrows hidden-phone"
+    .span6.homepage-how-we-do--top-right
+      %h3 Get leads from us
+      %p 
+        Get featured in our
+        =link_to("independent newsletter", newsletter_path)
+        to the NYC tech and creative talent community.
+  .row-fluid
+    .span12.text-center.homepage-how-we-do--bottom-center
+      =image_tag "homepage_how_we_do_arrows.png", class:"homepage-how-we-do__arrows visible-phone"
+      %h3 Convert 'em to hires
+      %p Stay on their radar with weekly jobs & culture emails. So when they’re ready to switch jobs, you’re there to hire them
+%section.container.homepage-screenshots
+  .row-fluid
+    .span12
+      %h2.text-center The best hires are rarely searching for work, don’t let them slip away
+  .row-fluid
+    .span6.homepage-screenshots__feed-image
+      .js-destination{"data-source-element"=>"js-homepage-screenshots--first"}
+      =image_tag "homepage_screenshots_feed.png"
+      =image_tag "homepage_screenshots_arrow2.png", class:"homepage-screenshots__arrow2 hidden-phone"
+    .span6.homepage-screenshots__feed-captions
+      .homepage-screenshots--first.js-homepage-screenshots--first
+        %h3 Nab their attention with your company's culture
+        %p Embed an eye-catching company culture feed into your careers page. Give passive talent a reason to look around.
+        =image_tag "homepage_screenshots_arrow1.png", class:"homepage-screenshots__arrow1 hidden-phone"
+      .homepage-screenshots--second
+        %h3 Sign up the talent who usually leave without applying
+        %p Capture those who are interested in your company but might not be looking for a job now.
+        %p Think of all the people who don’t actively apply and you never hear from again!
+        =image_tag "homepage_screenshots_arrow1.png", class:"homepage-screenshots__arrow1 visible-phone"
+  .row-fluid
+    .span12
+      .homepage-screenshots--third.text-center
+        %h3 Convert them to hires with jobs & culture emails
+        %p Keep passive talent engaged with regular email updates - think of it as automated marketing.
+        %p We do the heavy lifting: gathering the photos, jobs, and updates that make up your emails.
+        =image_tag "homepage_screenshots_devices.png", class:"homepage_screenshots__devices"
+%section.container.homepage-signup.text-center
+  .row-fluid
+    .span12
+      %h3 Learn more about how we can help. Drop us your email and we'll be in touch!
+      =form_tag("", class:"homepage-signup-form") do
+        =text_field "email", "email", placeholder:"Email address"
+        %button.js-homepage-signup-form__submit-button.homepage-signup-form__submit-button.btn{type:"submit"}Submit
+        .clearfix
+        .homepage-signup-form__message
+      .homepage-contact-info
+        .homepage-contact-info__address
+          <b>Inner Circle</b>
+          %span &nbsp;|&nbsp;
+          902 Broadway, 4th Floor, New York, NY 10010
+          %span &nbsp;|&nbsp;
+          =link_to "hello@getinnercircle.com", "mailto:hello@getinnercircle.com"
+          %span &nbsp;|&nbsp;
+          917.880.2147

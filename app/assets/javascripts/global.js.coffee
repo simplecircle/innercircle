@@ -96,24 +96,22 @@ $(document).ready ->
           async: true
 
   #company beta signup form
-  $('.company-signup-wrapper input').keyup (e) ->
-    if (e.which && e.which == 13) then submitSignupForm()
-
-  $('.company-signup-wrapper .btn').click () -> submitSignupForm()
-
-  submitSignupForm = () ->
-    email = $('#email').val().trim()
+  $('.homepage-signup-form').submit (e) ->
+    e.preventDefault();
+    email = $('#email_email').val().trim()
     if !validateEmail(email)
-      return alert "That is not a valid email address, please correct it and try again"
+      return $('.homepage-signup-form__message').html("Are you sure this is a valid email?").addClass('text-error').removeClass('text-success')
 
-    callback = () -> $('.company-signup-wrapper').html('<h4>Thanks, we\'ll be in touch!</h4><br><a href="/">Back to home page</a>')
+    callback = () -> 
+      $('#email_email').val('')
+      $('.homepage-signup-form__message').html('Thanks, we\'ll be in touch!').addClass('text-success').removeClass('text-error')
     $.ajax
       type:"POST"
       url: "https://docs.google.com/forms/d/1kPGuifUaBA6ihrZ8RUklZ-Zrsdfk_1vb34MgIWDY1qI/formResponse"
       data: 
         'entry.1170793925': email
-      success: callback
-      error: callback
+      complete: callback
+
   bindPostCaptionClickOnMobile = ->
     if $(window).width() < 571
       $('.js-photo').off 'click'
@@ -132,6 +130,18 @@ $(document).ready ->
   resetTimer = () ->
     clearTimeout t #clear timer
     setKioskTimer() #reset timer
+
+  
+
+  bindMobileContentMover = ->
+    if $(window).width() < 571
+      moveToDestination = (element) ->
+        $el = $(element)
+        $el.after $('.' + $el.data().sourceElement)
+
+      moveToDestination element for element in $('.js-destination')
+
+  bindMobileContentMover()
 
   if location.search.search("is_kiosk=true") > -1 || $('#is_kiosk').val() == "true"
     if location.pathname.search("newsletter") > -1 # On newsletter signup page
