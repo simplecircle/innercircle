@@ -11,59 +11,63 @@
       %h1
         Capture top talent, whether or not they’re looking for a job
       %h2
-        <b>inner circle</b> helps you get high-quality hires by converting passive talent to apply for your jobs
+        Inner Circle helps you get high-quality hires by converting passive talent to apply for your jobs
 %section.homepage-how-we-do.container
   .row-fluid
-    .span6.text-right.homepage-how-we-do--top-left
+    .span6.homepage-how-we-do--top-left
       %h3 Capture passive talent
-      %p Capture the emails of talent who are interested<br> in your company, whether or not they're ready<br> to apply for a job
-      =image_tag "homepage_how_we_do_arrows.png", class:"homepage-how-we-do__arrows"
-    .span6.text-left.homepage-how-we-do--top-right
+      %p Capture the emails of talent who are interested in your company, whether or not they're ready to apply for a job
+      =image_tag "homepage_how_we_do_arrows.png", class:"homepage-how-we-do__arrows hidden-phone"
+    .span6.homepage-how-we-do--top-right
       %h3 Get leads from us
       %p 
         Get featured in our
         =link_to("independent newsletter", newsletter_path)
-        %br
         to the NYC tech and creative talent community.
   .row-fluid
     .span12.text-center.homepage-how-we-do--bottom-center
+      =image_tag "homepage_how_we_do_arrows.png", class:"homepage-how-we-do__arrows visible-phone"
       %h3 Convert 'em to hires
-      %p Stay on their radar with weekly jobs & culture emails.<br> So when they’re ready to switch jobs,<br> you’re there to hire them
+      %p Stay on their radar with weekly jobs & culture emails. So when they’re ready to switch jobs, you’re there to hire them
 %section.container.homepage-screenshots
   .row-fluid
     .span12
-      %h2.text-center The best hires are rarely searching for work,<br> don’t let them slip away
+      %h2.text-center The best hires are rarely searching for work, don’t let them slip away
   .row-fluid
-    .span6.text-right.homepage-screenshots__feed-image
+    .span6.homepage-screenshots__feed-image
+      .js-destination{"data-source-element"=>"js-homepage-screenshots--first"}
       =image_tag "homepage_screenshots_feed.png"
-    .span6.text-left.homepage-screenshots__feed-captions
-      .homepage-screenshots--first
+      =image_tag "homepage_screenshots_arrow2.png", class:"homepage-screenshots__arrow2 hidden-phone"
+    .span6.homepage-screenshots__feed-captions
+      .homepage-screenshots--first.js-homepage-screenshots--first
         %h3 Nab their attention with your company's culture
         %p Embed an eye-catching company culture feed into your careers page. Give passive talent a reason to look around.
-        =image_tag "homepage_screenshots_arrow1.png", class:"homepage-screenshots__arrow1"
+        =image_tag "homepage_screenshots_arrow1.png", class:"homepage-screenshots__arrow1 hidden-phone"
       .homepage-screenshots--second
-        %h3 Sign up the talent who usually leave wihtout applying
-        %p Capture those who are interested in your company but might not be looking for a job now
+        %h3 Sign up the talent who usually leave without applying
+        %p Capture those who are interested in your company but might not be looking for a job now.
         %p Think of all the people who don’t actively apply and you never hear from again!
-        =image_tag "homepage_screenshots_arrow2.png", class:"homepage-screenshots__arrow2"
+        =image_tag "homepage_screenshots_arrow1.png", class:"homepage-screenshots__arrow1 visible-phone"
   .row-fluid
     .span12
       .homepage-screenshots--third.text-center
         %h3 Convert them to hires with jobs & culture emails
-        %p Keep passive talent engaged with regular email updates - think of it as automated marketing.<br> We do the heavy lifting: gathering the photos, jobs, and updates that make up your emails.
+        %p Keep passive talent engaged with regular email updates - think of it as automated marketing.
+        %p We do the heavy lifting: gathering the photos, jobs, and updates that make up your emails.
         =image_tag "homepage_screenshots_devices.png", class:"homepage_screenshots__devices"
 %section.container.homepage-signup.text-center
   .row-fluid
     .span12
-      %h3 Learn more about how we can help.<br> Drop us your email and we'll be in touch!
+      %h3 Learn more about how we can help. Drop us your email and we'll be in touch!
       =form_tag("", class:"homepage-signup-form") do
         =text_field "email", "email", placeholder:"Email address"
         %button.js-homepage-signup-form__submit-button.homepage-signup-form__submit-button.btn{type:"submit"}Submit
         .clearfix
         .homepage-signup-form__message
       .homepage-contact-info
-        .homepage-contact-info__logo=image_tag("inner_circle_logo_dark.png", width:"80", height:"13")
         .homepage-contact-info__address
+          <b>Inner Circle</b>
+          %span &nbsp;|&nbsp;
           902 Broadway, 4th Floor, New York, NY 10010
           %span &nbsp;|&nbsp;
           =link_to "hello@getinnercircle.com", "mailto:hello@getinnercircle.com"

@@ -131,6 +131,18 @@ $(document).ready ->
     clearTimeout t #clear timer
     setKioskTimer() #reset timer
 
+  
+
+  bindMobileContentMover = ->
+    if $(window).width() < 571
+      moveToDestination = (element) ->
+        $el = $(element)
+        $el.after $('.' + $el.data().sourceElement)
+
+      moveToDestination element for element in $('.js-destination')
+
+  bindMobileContentMover()
+
   if location.search.search("is_kiosk=true") > -1 || $('#is_kiosk').val() == "true"
     if location.pathname.search("newsletter") > -1 # On newsletter signup page
       $(window).on 'scroll', resetTimer
