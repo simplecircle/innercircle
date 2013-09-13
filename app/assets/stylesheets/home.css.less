@@ -6,7 +6,7 @@
   p {
     font-size: 16px;
     color: #666;
-    line-height: 1.4;
+    line-height: 1.5;
   }
   section {
     .box-sizing(border-box);
@@ -14,11 +14,11 @@
     padding-right: 10px;
   }
   .homepage-top {
-    margin-top: 30px;
+    margin-top: 60px;
     text-align: center;
     padding-top: 80px;
     padding-bottom: 80px;
-    border-bottom: 4px solid #d6f4fe;
+    border-bottom: 4px solid #9ad6fd;
     background-image: image-url('homepage_texture.jpg');
     background-repeat: repeat;
     h1 {
@@ -29,7 +29,7 @@
       font-size: 20px;
       line-height: 1.3;
       font-family: @headings-font-family;
-      color: #d93705;
+      color: #EC430F;
       font-weight: normal;
       margin-top: 30px;
     }
@@ -78,7 +78,7 @@
     }
   }
   .homepage-contact-info__address {
-    color: @grayLight;
+    color: #A77F00;
   }
   .homepage-signup-form__submit-button {
     height: 39px;
@@ -141,12 +141,15 @@
   }
   .homepage-screenshots__captions--third {
     margin-top: 100px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
+    p {
+      margin-bottom: 0;
+    }
   }
   .homepage-how-we-do, .homepage-screenshots {
     h3 {
       font-size: 30px;
-      line-height: 1;
+      line-height: 1.2;
       font-weight: normal;
       font-family: @headings-font-family;
     }
@@ -186,8 +189,13 @@
       left: -45px;
     }
     .homepage-screenshots__arrow2 {
-      bottom: -40px;
+      bottom: -75px;
       left: -175px;
+    }
+    .homepage-how-we-do--bottom-center {
+      p {
+        padding: 0 150px;
+      }
     }
   }
   @media (max-width: 768px) {
@@ -211,13 +219,6 @@
     .homepage-how-we-do, .homepage-screenshots {
       h3 {
         font-size: 28px;
-      }
-    }
-  }
-  @media (min-width: 769px) {
-    .homepage-top {
-      h2 {
-        padding: 0 200px;
       }
     }
   }
@@ -321,7 +322,7 @@
       padding-top: 20px;
       padding-bottom: 30px;
       h1 {
-        font-size: 27px;
+        font-size: 28px;
         line-height: 1.1;
       }
       h2 {
