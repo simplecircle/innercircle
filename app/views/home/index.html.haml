@@ -36,20 +36,21 @@
   .row-fluid
     .span6.homepage-screenshots__feed
       .js-destination{"data-source-element"=>"js-homepage-screenshots__captions--first"}
-      .homepage-screenshots__feed__frame
-        .homepage-screenshots__feed__scrollable-div.js-nice-scroll-target
+      .homepage-screenshots__feed__frame.js-homepage-screenshots__feed__frame
+        .homepage-screenshots__feed__scrollable-div.js-homepage-screenshots__feed__scrollable-div.js-nice-scroll-target
           =image_tag "screenshot_feed.jpg", class:"homepage-screenshots__feed__image"
-      =image_tag "homepage_screenshots_arrow2.png", class:"homepage-screenshots__arrow2 hidden-phone"
     .span6.homepage-screenshots__captions
       .homepage-screenshots__captions--first.js-homepage-screenshots__captions--first
         %h3 Nab their attention with your company's culture
-        %p Embed an eye-catching company culture feed into your careers page. Give passive talent a reason to look around.
+        %p Embed an eye-catching company culture feed into your careers page.
+        %p Give people a reason to look around.
         =image_tag "homepage_screenshots_arrow1.png", class:"homepage-screenshots__arrow1 hidden-phone"
       .homepage-screenshots__captions--second
         %h3 Sign 'em up, even if they're not ready to apply
         %p Hopefully they'll apply for a job. But if not, make sure you keep in touch.
         %p Think of all the people who don’t actively apply and you never hear from again!
         =image_tag "homepage_screenshots_arrow1.png", class:"homepage-screenshots__arrow1 visible-phone"
+        =image_tag "homepage_screenshots_arrow2.png", class:"homepage-screenshots__arrow2 hidden-phone"
   .row-fluid
     .span12
       .homepage-screenshots__captions--third.text-center

@@ -117,7 +117,7 @@
     width: 90%;
     float: right;
     padding: 12% 1% 138% 1%;
-    background-image: image-url('homepage_screenshots_feed_frame.png');
+    background-image: image-url('homepage_screenshots_feed_frame.jpg');
     background-size: contain;
   }
   .homepage-screenshots__feed__scrollable-div {
@@ -178,13 +178,16 @@
       top: 50px;
       right: -75px;
     }
+    .homepage-screenshots__feed__frame {
+      margin-bottom: -110%;
+    }
     .homepage-screenshots__arrow1 {
       bottom: -95px;
       left: -45px;
     }
     .homepage-screenshots__arrow2 {
-      bottom: -20px;
-      right: -27px;
+      bottom: -40px;
+      left: -175px;
     }
   }
   @media (max-width: 768px) {
@@ -196,6 +199,19 @@
     }
     .homepage-top {
       margin-top: 0;
+    }
+  }
+  @media (min-width: 571px) and (max-width: 768px) {
+    .homepage-screenshots__arrow2 {
+      bottom: -5px;
+    }
+    .homepage-screenshots__captions--first {
+      margin-bottom: 90px;
+    }
+    .homepage-how-we-do, .homepage-screenshots {
+      h3 {
+        font-size: 28px;
+      }
     }
   }
   @media (min-width: 769px) {
@@ -214,9 +230,12 @@
     }
     .homepage-screenshots__feed {
       text-align: center;
+      margin-bottom: 50px;
+      padding-right: 0;
     }
     .homepage-screenshots__feed__frame {
       width: 100%;
+      float: none;
     }
     .homepage-signup {
       margin-bottom: 0;
@@ -245,10 +264,6 @@
     .homepage_screenshots_devices {
       margin-top: 15px;
       margin-bottom: 30px;
-    }
-    .homepage-screenshots__feed {
-      margin-bottom: 90px;
-      padding-right: 0;
     }
     .homepage-how-we-do, .homepage-screenshots {
       h3 {
@@ -285,8 +300,8 @@
     }
     .homepage-screenshots__arrow1 {
       .rotate(120deg);
-      top: -117px;
-      left: 0;
+      top: -110px;
+      left: -5px;
     }
     .homepage-screenshots {
       h2 {
