@@ -1,5 +1,5 @@
 $(document).ready ->
-  $('.homepage-screenshots__feed__scrollable-div').niceScroll()
+  $('.js-nice-scroll-target').niceScroll()
   container = $("#masonry")
   containerWidth = container.width()
   unpublishedContainer = $("#masonry.masonry-unpublished")
