@@ -78,7 +78,7 @@
     }
   }
   .homepage-contact-info__address {
-    color: #A77F00;
+    color: @yellowDark;
   }
   .homepage-signup-form__submit-button {
     height: 39px;
@@ -204,6 +204,19 @@
       background-repeat: repeat;
       background-attachment: fixed;
       background-position: 0% 100%;
+      border-bottom-color: #F8E01E;
+    }
+    .navbar .nav > li > a {
+      color: @yellowDark;
+      &:hover {
+        color: darken(@yellowDark, 20%);
+      }
+    }
+    .navbar--marketing {
+      border-bottom-color: #F8E01E;
+    }
+    .nav-collapse-border-div {
+      border-left-color: #F8E01E;
     }
     .homepage-top {
       margin-top: 0;
@@ -223,6 +236,9 @@
     }
   }
   @media (max-width: 570px) {
+    .navbar--marketing {
+      border-bottom: none;
+    }
     .homepage-screenshots__feed__scrollable-div {
       display:none;
     }
@@ -312,7 +328,7 @@
       }
     }
     .navbar-newsletter-link {
-      color: @grayLight;
+      color: @yellowDark;
     }
     .nav-collapse {
       background: @accentYellow;
