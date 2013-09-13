@@ -34,23 +34,25 @@
     .span12
       %h2.text-center The best hires are rarely searching for work, so don’t let them slip away
   .row-fluid
-    .span6.homepage-screenshots__feed-image
-      .js-destination{"data-source-element"=>"js-homepage-screenshots--first"}
-      =image_tag "homepage_screenshots_feed.png"
+    .span6.homepage-screenshots__feed
+      .js-destination{"data-source-element"=>"js-homepage-screenshots__captions--first"}
+      .homepage-screenshots__feed__frame
+        .homepage-screenshots__feed__scrollable-div
+          =image_tag "screenshot_feed.jpg", class:"homepage-screenshots__feed__image"
       =image_tag "homepage_screenshots_arrow2.png", class:"homepage-screenshots__arrow2 hidden-phone"
-    .span6.homepage-screenshots__feed-captions
-      .homepage-screenshots--first.js-homepage-screenshots--first
+    .span6.homepage-screenshots__captions
+      .homepage-screenshots__captions--first.js-homepage-screenshots__captions--first
         %h3 Nab their attention with your company's culture
         %p Embed an eye-catching company culture feed into your careers page. Give passive talent a reason to look around.
         =image_tag "homepage_screenshots_arrow1.png", class:"homepage-screenshots__arrow1 hidden-phone"
-      .homepage-screenshots--second
+      .homepage-screenshots__captions--second
         %h3 Sign 'em up, even if they're not ready to apply
         %p Hopefully they'll apply for a job. But if not, make sure you keep in touch.
         %p Think of all the people who don’t actively apply and you never hear from again!
         =image_tag "homepage_screenshots_arrow1.png", class:"homepage-screenshots__arrow1 visible-phone"
   .row-fluid
     .span12
-      .homepage-screenshots--third.text-center
+      .homepage-screenshots__captions--third.text-center
         %h3 Convert them to hires with jobs & culture emails
         %p Keep talent engaged with regular email updates to stay on their radar — think of it as automatic jobs marketing.
         %p We do the heavy lifting: gathering photos, jobs, and content for your emails.
@@ -66,7 +68,7 @@
         .homepage-signup-form__message
       .homepage-contact-info
         .homepage-contact-info__address
-          <b>Inner Circle</b>
+          <b>inner circle</b>
           %span &nbsp;|&nbsp;
           902 Broadway, 4th Floor, New York, NY 10010
           %span &nbsp;|&nbsp;

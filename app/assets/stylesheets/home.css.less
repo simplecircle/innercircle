@@ -3,6 +3,11 @@
 @import "variables.css.less";
 
 #home {
+  p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.4;
+  }
   section {
     .box-sizing(border-box);
     padding-left: 10px;
@@ -31,14 +36,18 @@
   }
   .homepage-how-we-do--bottom-center {
     padding-top: 95px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
   .homepage-how-we-do--top-left {
     text-align: right;
+    padding-left: 20px;
     padding-right: 70px;
     position: relative;
   }
   .homepage-how-we-do--top-right {
     padding-left: 70px;
+    padding-right: 20px;
     text-align: left;
   }
   .homepage-screenshots__arrow1 {
@@ -47,9 +56,10 @@
   .homepage-screenshots__arrow2 {
     position: absolute;
   }
-  .homepage-screenshots__feed-captions{
+  .homepage-screenshots__captions{
     padding-left: 20px;
     text-align: left;
+    padding-right: 20px;
   }
   #email_email {
     margin-bottom: 0;
@@ -96,22 +106,40 @@
       margin-bottom: 25px;
     }
   }
-  .homepage-screenshots__feed-image{
+  .homepage-screenshots__feed{
     position: relative;
     padding-right: 20px;
     text-align: right;
   }
-  .homepage-screenshots--first {
+  .homepage-screenshots__feed__frame {
+    .box-sizing(border-box);
+    background-repeat: no-repeat;
+    width: 375px;
+    float: right;
+    padding: 12% 1.5% 33% 1.5%;
+    background-image: image-url('homepage_screenshots_feed_frame.png');
+    background-size: contain;
+  }
+  .homepage-screenshots__feed__scrollable-div {
+    width: 100%;
+    height: 345px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .homepage-screenshots__feed__image {
+    width: 100%;
+  }
+  .homepage-screenshots__captions--first {
     position: relative;
     margin-bottom: 180px;
   }
   .homepage_screenshots__devices {
     margin-top: 30px;
   }
-  .homepage-screenshots--second {
+  .homepage-screenshots__captions--second {
     position: relative;
   }
-  .homepage-screenshots--third {
+  .homepage-screenshots__captions--third {
     margin-top: 100px;
     margin-bottom: 30px;
   }
@@ -169,6 +197,9 @@
     .homepage-top {
       margin-top: 0;
     }
+    .homepage-screenshots__feed__frame {
+      width: 100%;
+    }
   }
   @media (min-width: 769px) {
     .homepage-top {
@@ -181,11 +212,11 @@
     #email_email {
       width: 100%;
     }
-    .homepage-screenshots__feed-image {
+    .homepage-screenshots__feed {
       text-align: center;
-      img {
-        width: 100%;
-      }
+    }
+    .homepage-screenshots__feed__frame {
+      width: 100%;
     }
     .homepage-signup {
       margin-bottom: 0;
@@ -200,14 +231,14 @@
     .homepage-how-we-do__arrows {
       margin: 0 auto;
     }
-    .homepage-screenshots--first {
+    .homepage-screenshots__captions--first {
       text-align: left;
       margin-bottom: 25px;
     }
-    .homepage-screenshots--second {
+    .homepage-screenshots__captions--second {
       text-align: left;
     }
-    .homepage-screenshots--third {
+    .homepage-screenshots__captions--third {
       margin-top: 50px;
       text-align: left;
     }
@@ -215,7 +246,7 @@
       margin-top: 15px;
       margin-bottom: 30px;
     }
-    .homepage-screenshots__feed-image {
+    .homepage-screenshots__feed {
       margin-bottom: 90px;
       padding-right: 0;
     }
@@ -226,12 +257,14 @@
     }
     .homepage-how-we-do {
       .homepage-how-we-do--bottom-center {
+        padding-left: 0;
+        padding-right: 0;
         h3 {
           font-size: 32px;
         }
       }
     }
-    .homepage-screenshots__feed-captions{
+    .homepage-screenshots__captions{
       padding-left: 0;
     }
     .homepage-how-we-do--top-left, .homepage-how-we-do--top-right {
@@ -240,9 +273,11 @@
     .homepage-how-we-do--top-left {
       margin-top: 40px;
       padding-right: 0;
+      padding-left: 0;
     }
     .homepage-how-we-do--top-right {
       padding-left: 0;
+      padding-right: 0;
       margin-top: 30px;
     }
     .homepage-how-we-do--bottom-center {
