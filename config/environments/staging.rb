@@ -53,7 +53,7 @@ Innercircle::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  config.action_controller.asset_host = "https://14181e843e40be7a1141-163a236048d7f4151c9934409d024168.ssl.cf1.rackcdn.com"
+  config.action_controller.asset_host = "http://33431f06af2ba6f81d2d-163a236048d7f4151c9934409d024168.r88.cf1.rackcdn.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
