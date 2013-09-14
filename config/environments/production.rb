@@ -57,7 +57,8 @@ Innercircle::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  config.action_controller.asset_host = "http://fbb10cc56329cb5ea057-4ca1418a7613371d048778718c3acae9.r81.cf1.rackcdn.com"
+  # config.action_controller.asset_host = "http://fbb10cc56329cb5ea057-4ca1418a7613371d048778718c3acae9.r81.cf1.rackcdn.com"
+  config.action_controller.asset_host = "http://33431f06af2ba6f81d2d-163a236048d7f4151c9934409d024168.r88.cf1.rackcdn.com"
 
 
   # Disable delivery errors, bad email addresses will be ignored
