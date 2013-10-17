@@ -5,72 +5,25 @@
   %meta{property:"og:image", content:URI.join(root_url, image_path('inner_circle_square.jpg'))}
   %meta{property:"og:title", content:"inner circle"}
   %meta{property:"og:description", content:"Capture top talent, whether or not they’re looking for a job"}
-%section.homepage-top.container
-  .row-fluid
-    .span12
-      %h1
-        Capture top talent, whether or not theyʼre looking for a job
-      %h2
-        Inner Circle is a software and services team. We help you hire quality talent.
-%section.homepage-how-we-do.container
-  .row-fluid
-    .span6.homepage-how-we-do--top-left
-      %h3 Harness your fans
-      %p We help capture emails of people who love your company—your jobs page visitors, followers and network.
-      =image_tag "homepage_how_we_do_arrows.png", class:"homepage-how-we-do__arrows hidden-phone"
-    .span6.homepage-how-we-do--top-right
-      %h3 Get leads from us
-      %p 
-        Get featured in our
-        =link_to("newsletter", newsletter_path)
-        to the NY tech & creative talent community.
-  .row-fluid
-    .span12.text-center.homepage-how-we-do--bottom-center
-      =image_tag "homepage_how_we_do_arrows.png", class:"homepage-how-we-do__arrows visible-phone"
-      %h3 Convert ʼem to hires
-      %p Stay on their radar with jobs & culture emails. So when they’re ready to switch jobs, you’re there to hire them.
-%section.container.homepage-screenshots
-  .row-fluid
-    .span12
-      %h2.text-center The best hires are rarely searching for work. Don’t let them slip away.
-  .row-fluid
-    .span6.homepage-screenshots__feed
-      .js-destination{"data-source-element"=>"js-homepage-screenshots__captions--first"}
-      .homepage-screenshots__feed__frame.js-homepage-screenshots__feed__frame
-        .homepage-screenshots__feed__scrollable-div.js-homepage-screenshots__feed__scrollable-div.js-nice-scroll-target
-          =image_tag "screenshot_feed.jpg", class:"homepage-screenshots__feed__image"
-    .span6.homepage-screenshots__captions
-      .homepage-screenshots__captions--first.js-homepage-screenshots__captions--first
-        %h3 Nab their attention with your companyʼs culture
-        %p Embed an eye-catching “culture feed” in your careers page.
-        %p Give people a reason to stick around and get to know you.
-        =image_tag "homepage_screenshots_arrow1.png", class:"homepage-screenshots__arrow1 hidden-phone"
-      .homepage-screenshots__captions--second
-        %h3 Stay in touch, whether or not theyʼre ready to apply
-        %p Hopefully theyʼll apply for a job. If not, weʼll make sure they donʼt forget about you.
-        =image_tag "homepage_screenshots_arrow1.png", class:"homepage-screenshots__arrow1 visible-phone"
-        =image_tag "homepage_screenshots_arrow2.png", class:"homepage-screenshots__arrow2 hidden-phone"
-  .row-fluid
-    .span12
-      .homepage-screenshots__captions--third.text-center
-        %h3 Convert them to hires with jobs & culture emails
-        %p Keep talent engaged with regular email updates—think of it as automatic jobs marketing. We do the heavy lifting: gathering photos, jobs, and content for your emails.
-        =image_tag "homepage_screenshots_devices.jpg", class:"homepage_screenshots__devices"
-%section.container.homepage-signup.text-center
-  .row-fluid
-    .span12
-      %h3 Learn how we can help. Drop us your email and weʼll be in touch!
-      =form_tag("", class:"homepage-signup-form") do
-        =text_field "email", "email", placeholder:"Email address"
-        %button.js-homepage-signup-form__submit-button.homepage-signup-form__submit-button.btn{type:"submit"}Submit
-        .clearfix
-        .homepage-signup-form__message
-      .homepage-contact-info
-        .homepage-contact-info__address
-          <b>inner circle</b>
-          %span &nbsp;|&nbsp;
-          902 Broadway, 4th Floor, New York, NY 10010
-          %span &nbsp;|&nbsp;
-          =link_to "hello@getinnercircle.com", "mailto:hello@getinnercircle.com"
-          %span &nbsp;|&nbsp;
-          917.880.2147
+.container
+  #company-index
+    %section
+      .span8.offset2
+        %h1
+          DISCOVER AND FOLLOW EXCITING COMPANIES IN CREATIVE & TECH
+        %h2
+          BOOM BOOM BOOM
+    %section#company-index-bottom.span8.offset2.mtxl
+      - @companies.each do |company|
+        = link_to(root_url(subdomain:company.subdomain), {:class=>'company-wrapper mbxl'}) do
+          .filmstrip.mbs{:style=>"border-bottom-color:#{company.hex_code};"}
+            - company.latest_posts_by_provider_date(3).each do |post|
+              .filmstrip-image{:class=>post.wrapper_class}
+                = image_tag post.photo_url(:medium)
+            .clearfix
+          .company-info.mbl
+            .pull-right.company-last-updated-time= company.last_published_time
+            .pull-left.company-name.mbn.mts= company.name.upcase
+            .pull-left.company-hq.mlm.mts= company.hq_city
+            .clearfix
+            .company-description= company.short_description
