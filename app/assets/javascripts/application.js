@@ -12,12 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require placeholder.min
-//= require_tree .
-
-
 //= require bootstrap/transition
 //= require bootstrap/dropdown
 //= require bootstrap/tooltip
 //= require bootstrap/button
 //= require bootstrap/collapse
+//= require placeholder.min
+//= require_tree .
+
+
+
