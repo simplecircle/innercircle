@@ -3,20 +3,14 @@
 @import "variables.css.less";
 
 
-/*#company-index {*/
-  .company-index {
-    background-color: white;
-    
-    padding:15px 15px 30px 15px;
-  }
-  .company-index__filmstrip {
+  .company-filmstrip {
     display: block;
     width:100%;
     &:hover {
       text-decoration: none;
     }
   }
-   .company-index__filmstrip-image {
+   .company-filmstrip__image {
     background:@bodyBackground;
     height: 0;
     padding-bottom: 32.3%;
@@ -39,25 +33,25 @@
       position: absolute;
     }
   }
-  .company-description{
+  .company-filmstrip__description{
     font-size:13px;
     color: lighten(black, 30%);
   }
-  .company-name {
+  .company-filmstrip__name {
     font-size: 20px;
     font-family: @headings-font-family;
   }
-  .company-hq{
+  .company-filmstrip__hq{
     color: @gray-light;
     font-size:11px;
     margin-top:8px;
   }
-  .company-last-updated-time {
+  .company-filmstrip__last-updated-time {
     color: @gray-light;
     font-size:11px;
     margin-top:7px;
   }
-  .company-info {
+  .company-filmstrip__info {
     color: @bodyColor;
     margin: 0.5%;
   }
