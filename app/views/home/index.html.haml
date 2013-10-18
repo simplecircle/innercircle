@@ -6,19 +6,19 @@
   %meta{property:"og:title", content:"inner circle"}
   %meta{property:"og:description", content:"Capture top talent, whether or not they’re looking for a job"}
 .container
-  #company-index
-    %section
-      .span8.offset2
-        %h1
-          DISCOVER AND FOLLOW EXCITING COMPANIES IN CREATIVE & TECH
-        %h2
-          BOOM BOOM BOOM
-    %section#company-index-bottom.span8.offset2.mtxl
+  .row
+    %section.col-md-8.col-offset-2
+      %h1
+        DISCOVER AND FOLLOW EXCITING COMPANIES IN CREATIVE & TECH
+      %h2
+        BOOM BOOM BOOM
+  .row
+    %section.company-index.col-offset-2.mtxl
       - @companies.each do |company|
-        = link_to(root_url(subdomain:company.subdomain), {:class=>'company-wrapper mbxl'}) do
-          .filmstrip.mbs{:style=>"border-bottom-color:#{company.hex_code};"}
+        = link_to(root_url(subdomain:company.subdomain), {:class=>'company-index__filmstrip mbxl'}) do
+          .mbs{:style=>"border-bottom-color:#{company.hex_code};"}
             - company.latest_posts_by_provider_date(3).each do |post|
-              .filmstrip-image{:class=>post.wrapper_class}
+              .company-index__filmstrip-image{:class=>post.wrapper_class}
                 = image_tag post.photo_url(:medium)
             .clearfix
           .company-info.mbl

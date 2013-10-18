@@ -1,5 +1,5 @@
-@import "twitter/bootstrap/variables.less";
-@import "twitter/bootstrap/mixins.less";
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
 @import "variables.css.less";
 
 @yellow: #FFF8C2;
@@ -15,7 +15,7 @@ form{
 }
 section {
   &.gray{
-    background:@grayLighter;
+    background:@gray-lighter;
     form{
       margin-bottom:0;
     }
@@ -26,7 +26,7 @@ section {
   &.highlight{
     background:@yellow;
     padding:10px 10px 20px 10px;
-   .border-radius(@borderRadiusLarge);
+   /*.border-radius(@borderRadiusLarge);*/
    p{
     color:@gray;
    }
@@ -52,7 +52,7 @@ section {
   height:200px;
   .pagination{
     display:none;
-    border-top:1px solid @grayLighter;
+    border-top:1px solid @gray-lighter;
     padding:80px 0 0 60%;
    }
  }
@@ -72,7 +72,7 @@ section {
 }
 .checkbox-group{
   label{
-    color:@grayLight;
+    color:@gray-light;
     font-size:16px;
     padding-left:20px;
   }
@@ -90,10 +90,10 @@ section {
   color:@gray;
 }
 .gray-lighter {
-  color:@grayLighter;
+  color:@gray-lighter;
 }
 .gray-light {
-  color:@grayLight;
+  color:@gray-light;
 }
 .help-block{
   &.small{
@@ -103,9 +103,9 @@ section {
   }
 }
 .navbar--marketing {
-  .box-sizing(border-box);
+  
   border-top: none;
-  border-bottom: 1px solid darken(@grayLighter, 10%);
+  border-bottom: 1px solid darken(@gray-lighter, 10%);
   .nav-collapse {
     text-align: center;
   }

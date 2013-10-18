@@ -1,57 +1,22 @@
-@import "twitter/bootstrap/variables";
-@import "twitter/bootstrap/mixins.less";
+@import "bootstrap/variables";
+@import "bootstrap/mixins.less";
 @import "variables.css.less";
 
 
-#company-index {
-  #company-index-bottom {
+/*#company-index {*/
+  .company-index {
     background-color: white;
-    .box-sizing(border-box);
+    
     padding:15px 15px 30px 15px;
   }
-  #company-index-top {
-    text-align: center;
-    h2{
-      color:darken(@grayLight, 10%);
-      font-family:@sansFontFamily;
-      font-size:16px;
-      font-weight:normal;
-      line-height:23px;
-    }
-  }
-  .company-wrapper {
+  .company-index__filmstrip {
     display: block;
     width:100%;
     &:hover {
       text-decoration: none;
     }
   }
-  .company-description{
-    font-size:13px;
-    color: lighten(black, 30%);
-  }
-  .company-name {
-    font-size: 20px;
-    font-family: @headings-font-family;
-  }
-  .company-hq{
-    color: @grayLight;
-    font-size:11px;
-    margin-top:8px;
-  }
-  .company-last-updated-time {
-    color: @grayLight;
-    font-size:11px;
-    margin-top:7px;
-  }
-  .company-info {
-    color: @bodyColor;
-    margin: 0.5%;
-  }
-  .fb-like {
-    min-height: 25px;
-  }
-  .filmstrip-image {
+   .company-index__filmstrip-image {
     background:@bodyBackground;
     height: 0;
     padding-bottom: 32.3%;
@@ -59,7 +24,7 @@
     position: relative;
     border-bottom: 3px solid;
     border-bottom-color: inherit;
-    .border-radius(3px);
+    /*.border-radius(3px);*/
     margin: 0.5%;
     width: 32.3%;
     float: left;
@@ -74,6 +39,32 @@
       position: absolute;
     }
   }
+  .company-description{
+    font-size:13px;
+    color: lighten(black, 30%);
+  }
+  .company-name {
+    font-size: 20px;
+    font-family: @headings-font-family;
+  }
+  .company-hq{
+    color: @gray-light;
+    font-size:11px;
+    margin-top:8px;
+  }
+  .company-last-updated-time {
+    color: @gray-light;
+    font-size:11px;
+    margin-top:7px;
+  }
+  .company-info {
+    color: @bodyColor;
+    margin: 0.5%;
+  }
+  .fb-like {
+    min-height: 25px;
+  }
+ 
   .social-links {
     text-align: center;
     height: 20px;
@@ -96,7 +87,7 @@
       white-space: nowrap;
     }
   }
-}
+/*}*/
 #companies{
   padding-top:0;
   
@@ -107,13 +98,13 @@
     width: 100%;
     height: 20px;
     overflow: hidden;
-    .box-sizing(border-box);
+    
   }
   #company-info{
     margin-top:20px;
-    .box-sizing(border-box);
+    
     hr{
-      border-top:1px solid darken(@grayLighter, 7%);
+      border-top:1px solid darken(@gray-lighter, 7%);
       border-bottom:none;
     }
     .company-logo {
@@ -121,7 +112,7 @@
       width:240px;
     }
     .powered-by {
-      color:lighten(@grayLight, 10%);
+      color:lighten(@gray-light, 10%);
       font-size:11px;
       img{
         margin-top:-3px;
@@ -151,11 +142,11 @@
       li{
         color:white;
         padding:5px;
-        .box-sizing(border-box);
+        
         img{
           min-width:100%;
-          .border-radius(4px);
-          .box-sizing(border-box);
+          /*.border-radius(4px);*/
+          
         }
       }
     }
@@ -190,7 +181,7 @@
     text-overflow: ellipsis;
   }
   .post-info-bar {
-    .box-sizing(border-box);
+    
     padding: 7px 10px;
     font-size:14px;
     border-bottom-left-radius: 4px;

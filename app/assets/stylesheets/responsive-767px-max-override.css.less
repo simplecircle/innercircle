@@ -1,5 +1,5 @@
-@import "twitter/bootstrap/variables";
-@import "twitter/bootstrap/mixins";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
 @import "variables.css.less";
 
 /*This is a complete copy of bootstrap/less/responsive-767px-max.less file
@@ -73,12 +73,12 @@ except for the edited first query max-width of 480 and the navbar margins being 
     display: block;
     width: 100%;
     margin-left: 0;
-    .box-sizing(border-box);
+    
   }
   .span12,
   .row-fluid .span12 {
     width: 100%;
-    .box-sizing(border-box);
+    
   }
   .row-fluid [class*="offset"]:first-child {
     margin-left: 0;
@@ -93,9 +93,6 @@ except for the edited first query max-width of 480 and the navbar margins being 
   input[class*="span"],
   select[class*="span"],
   textarea[class*="span"],
-  .uneditable-input {
-    .input-block-level();
-  }
   // But don't let it screw up prepend/append inputs
   .input-prepend input,
   .input-append input,

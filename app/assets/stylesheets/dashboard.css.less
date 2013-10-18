@@ -1,11 +1,11 @@
-@import "twitter/bootstrap/variables";
-@import "twitter/bootstrap/mixins.less";
+@import "bootstrap/variables";
+@import "bootstrap/mixins.less";
 @import "variables.css.less";
 
 #dashboard{
   section.highlight {
     padding: 20px;
-    .border-radius(0px);
+    /*.border-radius(0px);*/
   }
   .dashboard-header {
     position: relative;
@@ -28,7 +28,7 @@
     float: right;
   }
   .detail-text {
-    color: @grayLight;
+    color: @gray-light;
   }
   #awaiting-approval-box {
     padding: 10px 0;
@@ -58,11 +58,11 @@
         padding:7px 0;
       }
       li:hover{
-        background:lighten(@grayLighter, 4%);
+        background:lighten(@gray-lighter, 4%);
       }
     }
     .counter{
-      color:@grayLight;
+      color:@gray-light;
       font-size:14px;
     }
   }

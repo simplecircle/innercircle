@@ -12,10 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap/bootstrap-transition
-//= require twitter/bootstrap/bootstrap-dropdown
-//= require twitter/bootstrap/bootstrap-tooltip
-//= require twitter/bootstrap/bootstrap-button
-//= require twitter/bootstrap/bootstrap-collapse
 //= require placeholder.min
 //= require_tree .
+
+
+//= require bootstrap/transition
+//= require bootstrap/dropdown
+//= require bootstrap/tooltip
+//= require bootstrap/button
+//= require bootstrap/collapse

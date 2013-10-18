@@ -1,55 +1,56 @@
 /// CSS Reset
-@import "twitter/bootstrap/reset.less";
+//@import "bootstrap/reset.less";
 
 // Core variables and mixins
-@import "twitter/bootstrap/variables.less"; // Modify this for custom colors, font-sizes, etc
-@import "twitter/bootstrap/mixins.less";
+@import "bootstrap/variables"; // Modify this for custom colors, font-sizes, etc
+@import "bootstrap/bootstrap";
+@import "bootstrap/mixins";
 
 // Grid system and page structure
-@import "twitter/bootstrap/scaffolding.less";
-@import "twitter/bootstrap/grid.less";
-@import "twitter/bootstrap/layouts.less";
+@import "bootstrap/scaffolding.less";
+@import "bootstrap/grid.less";
+/*@import "bootstrap/layouts.less";*/
 
 // Base CSS
-@import "twitter/bootstrap/type.less";
-@import "twitter/bootstrap/code.less";
-@import "twitter/bootstrap/forms.less";
-/*@import "twitter/bootstrap/tables.less";*/
+@import "bootstrap/type.less";
+@import "bootstrap/code.less";
+@import "bootstrap/forms.less";
+/*@import "bootstrap/tables.less";*/
 
 // Components: common
-/*@import "twitter/bootstrap/sprites.less";*/
-@import "twitter/bootstrap/dropdowns.less";
-@import "twitter/bootstrap/wells.less";
-@import "twitter/bootstrap/component-animations.less";
-/*@import "twitter/bootstrap/close.less";*/
+/*@import "bootstrap/sprites.less";*/
+@import "bootstrap/dropdowns.less";
+@import "bootstrap/wells.less";
+@import "bootstrap/component-animations.less";
+/*@import "bootstrap/close.less";*/
 
 // Components: Buttons & Alerts
-/*@import "twitter/bootstrap/buttons.less";*/
-@import "twitter/bootstrap/button-groups.less";
-@import "twitter/bootstrap/alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
+/*@import "bootstrap/buttons.less";*/
+@import "bootstrap/button-groups.less";
+@import "bootstrap/alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
 
 // Components: Nav
-@import "twitter/bootstrap/navs.less";
-@import "twitter/bootstrap/navbar.less";
-/*@import "twitter/bootstrap/breadcrumbs.less";*/
-/*@import "twitter/bootstrap/pagination.less";*/
-/*@import "twitter/bootstrap/pager.less";*/
+@import "bootstrap/navs.less";
+@import "bootstrap/navbar.less";
+/*@import "bootstrap/breadcrumbs.less";*/
+/*@import "bootstrap/pagination.less";*/
+/*@import "bootstrap/pager.less";*/
 
 // Components: Popovers
-/*@import "twitter/bootstrap/modals.less";*/
-/*@import "twitter/bootstrap/tooltip.less";*/
-/*@import "twitter/bootstrap/popovers.less";*/
+/*@import "bootstrap/modals.less";*/
+/*@import "bootstrap/tooltip.less";*/
+/*@import "bootstrap/popovers.less";*/
 
 // Components: Misc
-/*@import "twitter/bootstrap/thumbnails.less";*/
-/*@import "twitter/bootstrap/labels.less";*/
-/*@import "twitter/bootstrap/progress-bars.less";*/
-/*@import "twitter/bootstrap/accordion.less";*/
-/*@import "twitter/bootstrap/carousel.less";*/
-/*@import "twitter/bootstrap/hero-unit.less";*/
+/*@import "bootstrap/thumbnails.less";*/
+/*@import "bootstrap/labels.less";*/
+/*@import "bootstrap/progress-bars.less";*/
+/*@import "bootstrap/accordion.less";*/
+/*@import "bootstrap/carousel.less";*/
+/*@import "bootstrap/hero-unit.less";*/
 
 // Utility classes
-@import "twitter/bootstrap/utilities.less"; // Has to be last to override when necessary
+@import "bootstrap/utilities.less"; // Has to be last to override when necessary
 
 body {
   background:@bodyBackground;
@@ -57,15 +58,15 @@ body {
   font-size:13px;
 }
 
-/*@import "twitter/bootstrap/responsive";*/
+/*@import "bootstrap/responsive";*/
 /*NOTE: twitter/bootstrap/responsive-767px-min.less has be manually included so that an aspect of it could be overridden*/
-/*@import "twitter/bootstrap/responsive";*/
+/*@import "bootstrap/responsive";*/
 /*responsive-utilities has been copied and overridden so that will work with REAL phone dimensions*/
-/*@import "twitter/bootstrap/responsive-utilities.less";*/
-/*@import "twitter/bootstrap/responsive-1200px-min.less";*/
-/*@import "twitter/bootstrap/responsive-768px-979px.less";*/
-/*@import "twitter/bootstrap/responsive-767px-max.less";*/
-@import "twitter/bootstrap/responsive-navbar.less";
+/*@import "bootstrap/responsive-utilities.less";*/
+/*@import "bootstrap/responsive-1200px-min.less";*/
+/*@import "bootstrap/responsive-768px-979px.less";*/
+/*@import "bootstrap/responsive-767px-max.less";*/
+/*@import "bootstrap/responsive-navbar.less";*/
 
 @import "variables.css.less";
 
@@ -75,7 +76,7 @@ body {
 @linkColor:#26BFE5;
 @navbarBackground:@bodyBackground;
 @navbarBackgroundHighlight:@bodyBackground;
-@navbarLinkColor:@grayLight;
+@navbarLinkColor:@gray-lighter;
 
 // Navbar
 // -------------------------
@@ -101,7 +102,11 @@ body {
   font-weight: bold;
   font-style: normal;
 }
-h1, h2, h3, h4, h5 {
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+-moz-border-radius: @radius;
+border-radius: @radius;
+}h1, h2, h3, h4, h5 {
   font-family: @headings-font-family;
   .btn {
     font-weight: normal;
@@ -120,9 +125,9 @@ input[type="text"],
 input[type="email"],
 input[type="password"]{
   border: 1px solid #cecece;
-  color:@black;
+  color:black;
   /*.box-shadow(0px 1px 1px #EDEDED);*/
-  .box-sizing(border-box);
+  
   font-size:16px;
   font-family: @headings-font-family;
   height:40px;
@@ -146,8 +151,7 @@ input[type="file"]{
 .btn {
   background:@linkColor;
   border: 1px solid @linkColor;
-  .border-radius(@baseBorderRadius);
-  .box-sizing(border-box);
+  
   color:white !important;
   cursor: pointer;
   display: inline-block;
@@ -189,7 +193,6 @@ input[type="file"]{
 }
 
 .btn-large {
-  padding: @paddingLarge;
   font-size:18px;
   .border-radius(@borderRadiusLarge);
 }
