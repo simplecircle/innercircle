@@ -1,27 +1,22 @@
 %nav.navbar.navbar-default.navbar-fixed-top{role: "navigation"}
-  / Brand and toggle get grouped for better mobile display
   .navbar-header
     %button.navbar-toggle{"data-target" => ".navbar-ex1-collapse", "data-toggle" => "collapse", type: "button"}
       %span.sr-only Toggle navigation
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    = link_to(image_tag("inner_circle_logo.png"), root_url(subdomain:false), class:"navbar-brand")
+    = link_to(image_tag("jobcrush_logo.png"), root_url(subdomain:false), class:"navbar-brand")
   .collapse.navbar-collapse.navbar-ex1-collapse
     %ul.nav.navbar-nav
-      %li.active
-        %li
-          = link_to("FOLLOWING", "http://google.com")
-        %li
-          = link_to("COMPANIES", companies_url())
-        %li
-          = link_to("JOBS", "http://google.com")
+      %li= link_to("COMPANIES", companies_url(), class:"gibson-semibold")
+      %li= link_to("JOBS", "http://google.com", class:"gibson-semibold")
+      %li= link_to("FOLLOWING", "http://google.com", class:"gibson-semibold")
     %ul.nav.navbar-nav.navbar-right
       - if current_user
         - if current_user.god?
           %li= link_to("#{capitalize_phrase(current_company.name)}’s Dashboard", dashboard_url) if current_company
         - if current_user.admin?
-          %li= link_to("Dashboard", dashboard_url)
+          %li= link_to("Dashboard", dashboard_url, class:"gibson-semibold")
         %li.dropdown
           %a.display-strong.white.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             = current_user.email
@@ -31,5 +26,5 @@
             %li= link_to "Logout", logout_url(subdomain:false)
       - else
         %li= link_to("See who you know at JobCrush companies", companies_url(subdomain:false), class:"pull-right")
-        %li= link_to("Login", login_url, class:"pull-right")
+        %li= link_to("LOGIN", login_url, class:"pull-right, gibson-semibold")
 

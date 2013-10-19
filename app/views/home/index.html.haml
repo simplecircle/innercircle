@@ -6,11 +6,11 @@
   %meta{property:"og:title", content:"JobCrush"}
   %meta{property:"og:description", content:"Discover and Follow Exciting Companies in Creative & Tech"}
 .container
-  %section.col-md-8.centered
+  %section.hero.col-md-8.centered
     %h1
-      DISCOVER AND FOLLOW EXCITING COMPANIES IN CREATIVE & TECH
+      DISCOVER AND FOLLOW EXCITING COMPANIES IN <span class="hero__highlight">CREATIVE & TECH</span>
     %h2
-      BOOM BOOM BOOM
+      Find work with a company that fits your style or stay “in the know” by following today’s most inspiring companies.
   %section.white-panel.col-md-7.centered.mtxl
     - @companies.each do |company|
       = link_to(root_url(subdomain:company.subdomain), {:class=>'company-filmstrip mbxl'}) do

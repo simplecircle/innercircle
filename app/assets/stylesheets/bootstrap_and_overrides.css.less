@@ -56,6 +56,7 @@ body {
   background:@bodyBackground;
   font-family:@sansFontFamily;
   font-size:13px;
+  padding-top: 100px;
 }
 
 /*@import "bootstrap/responsive";*/
@@ -93,21 +94,26 @@ body {
   font-style: normal;
 }
 @font-face {
-  font-family: 'Gibson';
+  font-family: 'gibson-semibold';
   src: asset-url('gibson-semibold-webfont.eot');
   src: asset-url('gibson-semibold-webfont.eot?#iefix') format('embedded-opentype'),
        asset-url('gibson-semibold-webfont.woff') format('woff'),
        asset-url('gibson-semibold-webfont.ttf') format('truetype'),
        asset-url('gibson-semibold-webfont.svg#gibsonsemibold') format('svg');
-  font-weight: bold;
   font-style: normal;
 }
 .border-radius(@radius) {
   -webkit-border-radius: @radius;
--moz-border-radius: @radius;
-border-radius: @radius;
-}h1, h2, h3, h4, h5 {
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+.gibson-semibold{
   font-family: @headings-font-family;
+  font-weight: normal;
+}
+h1, h2, h3, h4, h5 {
+  font-family: @headings-font-family;
+  font-weight: normal;
   .btn {
     font-weight: normal;
   }
@@ -225,16 +231,20 @@ input[type="file"]{
   }
 }
 .navbar{
-  border-top:2px solid @accentColor;
-  .brand {
-    margin-left:0;
-    padding:8px 0 5px 4px;
+  border-top:3px solid @accentColor;
+  background:@bodyBackground;
+  /*border-bottom:1px solid #ccc;*/
+}
+.navbar-default .navbar-nav > li > a{
+    margin-top: 4px;
+    font-size:13px;
+    color:#999999;
+}
+.navbar-brand {
+  padding:15px 10px 5px 15px;
+  img{
     width:100px;
   }
- 
-}
-.nav > li > a {
-  font-size:14px;
 }
 .company-cta{
   background:#FFF0B0;
