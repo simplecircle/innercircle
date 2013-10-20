@@ -1,74 +1,19 @@
 .container
-  = render "shared/flash", :flash=>flash unless flash.blank?
-  .row-fluid
-    - if @is_admin_adding
-      .mtxl
-    - else
-      .span12.form-row-narrow.column-center
-        #logo.column-center.mtm.mbm= image_tag(@company.logo_url(:large))
-        %h4.mobile-padding.mvl.lh-24.hidden-phone
-          Get a twice-monthly email with:
-          %ul.email-description
-            %li New job openings
-            %li Photos and company updates
-        .mobile-padding.mtl.lh-24.visible-phone.ptm
-          %b.mts Get a twice-monthly email with:
-          %ul.email-description
-            %li New job openings
-            %li Photos and company updates
-      %hr.mtm
-  .row-fluid
-    .span12.form-row-narrow.column-center.mobile-padding
-      = form_for @user do |f|
-        = hidden_field_tag :is_admin_adding, @is_admin_adding
-        - if @is_admin_adding
-          = f.fields_for :profile do |p|
-            .controls.controls-row
-              .inline_error= @user.errors[:name].first
-              = p.text_field :first_name, class:"span6", placeholder: "* First Name"
-              = p.text_field :last_name, class:"span6", placeholder: "* Last Name"
-        .controls
-          .inline_error= "This email #{@user.errors[:email].first}" if @user.errors[:email].first
-          = f.email_field :email, class:"span12", placeholder:"* Email"
-        .controls.mtm.mbl
-          - if @user.errors[:other_job_category].first
-            .inline_error= @user.errors[:other_job_category].first 
-          .inline_error= @user.errors[:categories].first
-          .help-block.mbs
-            %b= @is_admin_adding ? "* Categories" : "* Which category fits you best?"
-          %p.checkbox-group.mobile-checkbox-group
-            - CompanyDept.all.each do |dept|
-              = radio_button_tag("category", dept.id, (@depts.include?(dept.id) if @depts), name:'company_depts[]', class:"pull-left #{dept.name}-radio-tag")
-              = label_tag "category_#{dept.id.to_s}" do
-                = capitalize_phrase(dept.name)
-                = text_field("other_job_category", nil, value: @other_job_category, class:"mlm #{'field_with_errors' if @user.errors[:other_job_category].first}", placeholder:"* Job category") if dept.name == "other"
-
-        - if @is_admin_adding
-          .controls.mbl
-            .inline_error= @user.errors[:star_rating].first
-            %b.help-block.pull-left.mrm * Star Rating:
-            %span.rating
-              - [4, 3, 2, 1].each do |rating|
-                =radio_button_tag(:star_rating, rating, @star_rating && rating==@star_rating, :class=>"rating-input")
-                %label.rating-star{:for=>"star_rating_#{rating}"}
-            .clearfix
-          = f.fields_for :profile do |p|
-            .controls
-              = p.text_field :job_title, class:"span12", placeholder:"Ideal job title"
-            .controls
-              = p.text_field :url, class:"span12", placeholder:"Site, blog or Linkedin profile"
-              .inline_error= @user.profile.errors[:url].first
-            .controls.skills-control-block.mts
-              = text_field_tag nil, nil, {id:"skills", class:"span12"}
-              %span.help-block.small List a few (e.g., Excel, baking, Ruby, Agile, responsive design)
-              %span#incoming-tags{style:"display:none;"}= @incoming_tags
-              %span#existing-tags{style:"display:none;"}= @tags
-          %p
-          .controls
-            = f.submit "Save", class:"btn btn-large mtl span4"
-            = f.submit "Save & add another", class:"btn btn-large mtl span8"
-
-        - else
-          = f.submit("Subscribe", class:"btn btn-large btn-primary btn-block mvm span12", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};", onclick:"_gaq.push(['_trackEvent', 'Companies', 'Signup', '#{@company.subdomain}']);")
-          .tiny.text-center
-            Your subscription is private and we'll never spam you.
+  .col-md-5.centered.text-center.pbxl
+    %h3 Stay “in the know” with great companies or find the perfect job
+  %section.signup.col-md-4.white.centered
+    = form_for @user do |f|
+      .form-group
+        = f.label :email, "EMAIL"
+        = f.email_field(:email, class:"form-control")
+      .form-group
+        = f.label :password, "PASSWORD"
+        = f.password_field(:password, class:"form-control")
+      .help-block.ptl WHAT FIELDS DO YOU WORK OR ASPIRE TO WORK IN?
+      - CompanyDept.all.each do |dept|
+        %div
+          = check_box_tag dept.name, dept.id, @user.company_depts.include?(dept), :name => 'user[company_dept_ids][]'
+          = label_tag dept.name, dept.name.upcase
+      = f.submit "SIGN UP", class:"btn btn-primary btn-block mtxl mbm"
+      .tiny.text-center
+        Your subscription is private and we'll never spam you.

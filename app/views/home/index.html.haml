@@ -8,12 +8,12 @@
 .container
   %section.hero.col-md-8.centered
     %h1
-      DISCOVER AND FOLLOW EXCITING COMPANIES IN <span class="hero__highlight">CREATIVE & TECH</span>
+      DISCOVER AND FOLLOW EXCITING COMPANIES IN CREATIVE & TECH
     %h2.pbxl
       Find work with a company that fits your style or stay “in the know” by following today’s most inspiring companies.
-    %h3.mtxl EXPLORE
+    %h3.mtxl <span class="hero__highlight">EXPLORE</span>
     .arrow_down.centered
-  %section.white-panel.col-md-7.centered.mtl
+  %section.white.col-md-7.centered.mtl
     - @companies.each do |company|
       = link_to(root_url(subdomain:company.subdomain), {:class=>'company-filmstrip mbxl'}) do
         .mbs{:style=>"border-bottom-color:#{company.hex_code};"}

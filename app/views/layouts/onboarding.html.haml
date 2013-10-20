@@ -2,8 +2,5 @@
 %html
   %head
     = render 'shared/head'
-
-  %body{:id => controller_name, :class => referrer }
-    .content-no-nav
-      = yield
-    = javascript_include_tag "application"
+  %body
+    = yield

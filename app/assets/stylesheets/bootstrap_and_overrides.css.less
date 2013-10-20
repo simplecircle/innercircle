@@ -1,5 +1,5 @@
 /// CSS Reset
-//@import "bootstrap/reset.less";
+//@import "bootstrap/reset";
 
 // Core variables and mixins
 @import "bootstrap/variables"; // Modify this for custom colors, font-sizes, etc
@@ -7,31 +7,31 @@
 @import "bootstrap/mixins";
 
 // Grid system and page structure
-@import "bootstrap/scaffolding.less";
-@import "bootstrap/grid.less";
+@import "bootstrap/scaffolding";
+@import "bootstrap/grid";
 /*@import "bootstrap/layouts.less";*/
 
 // Base CSS
-@import "bootstrap/type.less";
-@import "bootstrap/code.less";
-@import "bootstrap/forms.less";
+@import "bootstrap/type";
+@import "bootstrap/code";
+@import "bootstrap/forms";
 /*@import "bootstrap/tables.less";*/
 
 // Components: common
 /*@import "bootstrap/sprites.less";*/
-@import "bootstrap/dropdowns.less";
-@import "bootstrap/wells.less";
-@import "bootstrap/component-animations.less";
+@import "bootstrap/dropdowns";
+@import "bootstrap/wells";
+@import "bootstrap/component-animations";
 /*@import "bootstrap/close.less";*/
 
 // Components: Buttons & Alerts
-/*@import "bootstrap/buttons.less";*/
-@import "bootstrap/button-groups.less";
-@import "bootstrap/alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
+@import "bootstrap/buttons";
+@import "bootstrap/button-groups";
+@import "bootstrap/alerts"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
 
 // Components: Nav
-@import "bootstrap/navs.less";
-@import "bootstrap/navbar.less";
+@import "bootstrap/navs";
+@import "bootstrap/navbar";
 /*@import "bootstrap/breadcrumbs.less";*/
 /*@import "bootstrap/pagination.less";*/
 /*@import "bootstrap/pager.less";*/
@@ -130,12 +130,8 @@ select,
 input[type="text"],
 input[type="email"],
 input[type="password"]{
-  border: 1px solid #cecece;
-  color:black;
-  /*.box-shadow(0px 1px 1px #EDEDED);*/
-  
+  color:#444;
   font-size:16px;
-  font-family: @headings-font-family;
   height:40px;
   &:focus {
     border-color: @linkColor;
@@ -145,7 +141,7 @@ input[type="password"]{
   }
 }
 input[type="checkbox"]{
-  margin-top: 9px !important;
+  /*margin-top: 9px !important;*/
 }
 input[type="radio"]{
   margin-top: 8px;
@@ -158,10 +154,10 @@ input[type="file"]{
   background:@linkColor;
   border: 1px solid @linkColor;
   
-  color:white !important;
-  cursor: pointer;
-  display: inline-block;
   font-family: @headings-font-family;
+  /*color:white !important;*/
+/*  cursor: pointer;
+  display: inline-block;
   font-size:16px;
   line-height: @baseLineHeight;
   margin-bottom: 0; // For input.btn
@@ -169,8 +165,9 @@ input[type="file"]{
   text-shadow:none !important;
   text-align: center;
   vertical-align: middle;
-  &:hover{
+*/  &:hover{
     background: darken(@linkColor, 4%);
+  border: 1px solid @linkColor;
     text-decoration:none;
   }
   &.disabled {
@@ -197,7 +194,7 @@ input[type="file"]{
     }
   }
 }
-
+/*
 .btn-large {
   font-size:18px;
   .border-radius(@borderRadiusLarge);
@@ -214,7 +211,7 @@ input[type="file"]{
 }
 .btn-block {
   display:block;
-}
+}*/
 .checkbox-group{
   padding-top:5px;
   label{

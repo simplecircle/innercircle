@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130710133428) do
+ActiveRecord::Schema.define(:version => 20131020154022) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -104,17 +104,6 @@ ActiveRecord::Schema.define(:version => 20130710133428) do
   add_index "profiles", ["last_name"], :name => "index_profiles_on_last_name"
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
 
-  create_table "profiles_company_depts", :force => true do |t|
-    t.integer  "profile_id"
-    t.integer  "company_dept_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.string   "other_job_category"
-  end
-
-  add_index "profiles_company_depts", ["company_dept_id"], :name => "index_profiles_company_depts_on_company_dept_id"
-  add_index "profiles_company_depts", ["profile_id"], :name => "index_profiles_company_depts_on_profile_id"
-
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -159,6 +148,16 @@ ActiveRecord::Schema.define(:version => 20130710133428) do
 
   add_index "users_companies", ["company_id"], :name => "index_users_companies_on_company_id"
   add_index "users_companies", ["user_id"], :name => "index_users_companies_on_user_id"
+
+  create_table "users_company_depts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "company_dept_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "users_company_depts", ["company_dept_id"], :name => "index_profiles_company_depts_on_company_dept_id"
+  add_index "users_company_depts", ["user_id"], :name => "index_profiles_company_depts_on_profile_id"
 
   create_table "verticals", :force => true do |t|
     t.string   "name"

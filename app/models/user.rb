@@ -1,11 +1,13 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :email, :first_name, :last_name, :password_newsletter, :password, :password_confirmation, :role, :profile_attributes, :pending
+  attr_accessible :email, :password, :role, :company_dept_ids
 
   strip_attributes :only => [:email, :first_name, :last_name]
 
   has_many :users_companies, :dependent => :destroy
   has_many :companies, through: :users_companies
+  has_many :users_company_depts, :dependent => :destroy
+  has_many :company_depts, through: :users_company_depts
   has_one :profile, :dependent => :destroy
   
   accepts_nested_attributes_for :profile, :users_companies

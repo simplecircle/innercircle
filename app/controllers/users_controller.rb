@@ -1,127 +1,61 @@
 class UsersController < ApplicationController
 
   layout :choose_layout
-  before_filter :find_resource
+  # before_filter :find_resource
   # auth handled through get_user
   before_filter :authorize_user, only:[:show]
   before_filter :get_user, only:[:edit, :update]
 
   def new
-    #User is already a member
-    if current_user && current_user.talent?
-      return redirect_to @company if current_user.member_of?(@company.id)
-
+    @user = User.new
+    @depts = CompanyDept.all
       #Add user to company's talent community
-      UsersCompany.create(user_id: current_user.id, company_id: @company.id)
-      UserMailer.welcome(current_user, capitalize_phrase(@company.name)).deliver
+      # UsersCompany.create(user_id: current_user.id, company_id: @company.id)
+      # UserMailer.welcome(current_user, capitalize_phrase(@company.name)).deliver
 
-      if !current_user.has_filled_out_profile
-        redirect_to edit_user_url(current_user.auth_token), notice: "You've joined #{@company.name}'s talent community!"
-      else
-        redirect_to confirmation_url
-      end
-    elsif current_user && current_user.admin? && @company != current_user.companies.first
-      redirect_to :back, alert: "You're currently logged in as an admin. Please log out to join another company's talent community"
-    else
-      # Check for email stored in session
-      if User.find_by_email(session[:email])
-        @user = User.find_by_email(session[:email])
-        @depts = @user.profile.company_depts.map(&:id)
-        @other_job_category = @user.profile.profiles_company_depts.empty? ? nil : @user.profile.profiles_company_depts.first.other_job_category
-      else
-        @user = User.new :role=>'talent'
-        @user.build_profile
-        @is_admin_adding = request.fullpath == '/add-talent' && current_user && current_user.god_or_admin?
-        @star_rating = 1 if !@is_admin_adding
-        @depts = CompanyDept.all
-      end
-    end
   end
 
   def create
-    existing_user = User.find_by_email(params[:user][:email])
-    if existing_user
-      if request.xhr?
-        respond_to do |format|
-          format.json { render :json => {:email => ["You're already signed up with us, thanks!"]} }
-        end
-        return
-      else
-        @company.users << existing_user
-        return redirect_to confirmation_url
-      end
-    end
-    @user = @company.users.build(params[:user])
+    @user = User.new(params[:user])
     @user.role = 'talent'
-    form_errors = {}
-    @is_admin_adding = (params[:is_admin_adding]=="true") && current_user && current_user.god_or_admin?
-    @depts = params[:company_depts]
-    @other_job_category = params[:other_job_category].first
-    @star_rating = @is_admin_adding ? params[:star_rating].to_i : 1 #Default to one star for new user signing up
+    # form_errors = {}
+    # @depts = params[:company_depts]
 
-    if @is_admin_adding
-      @profile = @user.profile
 
-      #Save skill list
-      if !params[:as_values_true].blank?
-        @incoming_tags = params[:as_values_true].split(",").reject(&:empty?).join(",")
-        @user.profile.skill_list = @incoming_tags #Need to define it this way so that tags populate on form reload (i.e. if validation fails)
-      end
-    else
-      @user.build_profile
-    end
 
-    @user.password = SecureRandom.urlsafe_base64
 
-    form_errors[:name] = "Please enter first and last name" if @is_admin_adding && (@user.profile.first_name.empty? || @user.profile.last_name.empty?)
-    form_errors[:categories] = "You have to choose at least one category." if @depts.nil?
-    form_errors[:other_job_category] = "Please tell us which category fits you best" if !@depts.nil? && CompanyDept.find(@depts.first.to_i).name == "other" && @other_job_category.blank?
-    form_errors[:star_rating] = "Please rate the person you are adding" if @star_rating == 0
+    # form_errors[:name] = "Please enter first and last name" if @is_admin_adding && (@user.profile.first_name.empty? || @user.profile.last_name.empty?)
+    # form_errors[:categories] = "You have to choose at least one category." if @depts.nil?
 
-    if !form_errors.empty?
-      @user.valid?
-      form_errors.each do |field, msg|
-        @user.errors.add(field, msg)
-      end
-      if request.xhr?
-        respond_to do |format|
-          format.json { render :json => @user.errors.to_json }
-        end
-      else
-        render "new"
-      end
-    else
-      if @user.save
-        @company.users << @user
-        save_departments(@depts, @user.profile, @other_job_category)
-        save_star_rating(@star_rating, @user.id, @company.id)
-        save_referral_source(@user, params[:referral_source] || "__utmz=#{cookies[:__utmz]}")
+    # if !form_errors.empty?
+    #   @user.valid?
+    #   form_errors.each do |field, msg|
+    #     @user.errors.add(field, msg)
+    #   end
+    #   if request.xhr?
+    #     respond_to do |format|
+    #       format.json { render :json => @user.errors.to_json }
+    #     end
+    #   else
+    #     render "new"
+    #   end
+    # else
+      @user.save
+        # save_departments(@depts, @user.profile, @other_job_category)
+        # save_referral_source(@user, params[:referral_source] || "__utmz=#{cookies[:__utmz]}")
         # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
-        if @is_admin_adding
-          params[:commit] == "Save & add another" ? redirect_to('/add-talent', :notice => "#{@user.profile.full_name} successfully added!") : redirect_to(dashboard_url, :notice => "#{@user.profile.full_name} successfully added!")
-        else
           #log in user if there's no current user
-          log_in_new_user(@user)
-          @user.set_password_reset_token
-          if request.xhr?
-            respond_to do |format|
-              format.json { render :json => {:success=>edit_user_url(@user.auth_token, is_kiosk:params[:is_kiosk]) }}
-            end
-          else
-            redirect_to(edit_user_url(@user.auth_token))
-          end
-        end
-        UserMailer.welcome(@user, capitalize_phrase(@company.name)).deliver
-      else
-        if request.xhr?
-          respond_to do |format|
-            format.json { render :json => @user.errors.to_json }
-          end
-        else
-          render "new"
-        end
-      end
-    end
+          # log_in_new_user(@user)
+        #   @user.set_password_reset_token
+        #   if request.xhr?
+        #     respond_to do |format|
+        #       format.json { render :json => {:success=>edit_user_url(@user.auth_token, is_kiosk:params[:is_kiosk]) }}
+        #     end
+        #   else
+        #     redirect_to(edit_user_url(@user.auth_token))
+        #   end
+        # end
+        # UserMailer.welcome(@user, capitalize_phrase(@company.name)).deliver
   end
 
   def show
