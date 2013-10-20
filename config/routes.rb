@@ -26,7 +26,7 @@ Innercircle::Application.routes.draw do
   get "/auth/linkedin/callback"=>"users#edit"
   get "auth/failure"=>"users#edit"
   get "signup"=>"users#new"
-  # get "signup"=>"companies#new"
+  get "signup/linkedin"=>"users#linkedin"
   get "login"=>"sessions#new"
   post "login"=>"sessions#create"
   get "logout"=>"sessions#destroy"

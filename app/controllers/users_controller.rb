@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
   layout :choose_layout
-  # before_filter :find_resource
   # auth handled through get_user
   before_filter :authorize_user, only:[:show]
   before_filter :get_user, only:[:edit, :update]
@@ -9,53 +8,18 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @depts = CompanyDept.all
-      #Add user to company's talent community
-      # UsersCompany.create(user_id: current_user.id, company_id: @company.id)
-      # UserMailer.welcome(current_user, capitalize_phrase(@company.name)).deliver
-
   end
 
   def create
     @user = User.new(params[:user])
     @user.role = 'talent'
-    # form_errors = {}
-    # @depts = params[:company_depts]
-
-
-
-
-    # form_errors[:name] = "Please enter first and last name" if @is_admin_adding && (@user.profile.first_name.empty? || @user.profile.last_name.empty?)
-    # form_errors[:categories] = "You have to choose at least one category." if @depts.nil?
-
-    # if !form_errors.empty?
-    #   @user.valid?
-    #   form_errors.each do |field, msg|
-    #     @user.errors.add(field, msg)
-    #   end
-    #   if request.xhr?
-    #     respond_to do |format|
-    #       format.json { render :json => @user.errors.to_json }
-    #     end
-    #   else
-    #     render "new"
-    #   end
-    # else
-      @user.save
-        # save_departments(@depts, @user.profile, @other_job_category)
-        # save_referral_source(@user, params[:referral_source] || "__utmz=#{cookies[:__utmz]}")
-        # Scope through auth_token so that an exposed ID for an Edit form won't be in the public domain.
-          #log in user if there's no current user
-          # log_in_new_user(@user)
-        #   @user.set_password_reset_token
-        #   if request.xhr?
-        #     respond_to do |format|
-        #       format.json { render :json => {:success=>edit_user_url(@user.auth_token, is_kiosk:params[:is_kiosk]) }}
-        #     end
-        #   else
-        #     redirect_to(edit_user_url(@user.auth_token))
-        #   end
-        # end
-        # UserMailer.welcome(@user, capitalize_phrase(@company.name)).deliver
+    if @user.save
+      cookies.permanent[:auth_token] = {value:@user.auth_token, domain: :all}
+      redirect_to(signup_linkedin_url)
+    else
+      # UserMailer.welcome(@user, capitalize_phrase(@company.name)).deliver
+      render "new"
+    end
   end
 
   def show
@@ -167,70 +131,14 @@ class UsersController < ApplicationController
     end
   end
 
-  def confirmation
-    @is_admin_adding = current_user && current_user.god_or_admin?
+  def linkedin
   end
+
 
   private
 
-  def log_in_new_user(user)
-    cookies.permanent[:auth_token] = {value: user.auth_token, domain: :all} unless current_user || params[:is_kiosk] == "true"
-  end
-
-  def save_star_rating(rating, user_id, company_id)
-    UsersCompany.find_by_user_id_and_company_id(user_id, company_id).update_attributes(:star_rating => rating)
-  end
-
-  def save_referral_source(user, cookie_string)
-    if cookie_string.length > 0
-      ga = GoogleAnalyticsParser.new
-      user.update_attribute(:referral_source, ga.parse(cookie_string))
-    end
-  end
-
-  def save_departments(departments, profile, other_job_category)
-    #Destroy category association if the user unchecked it in form
-    profile.company_depts.each do |dept|
-      if !departments.include? dept.id.to_s
-        ProfilesCompanyDept.where(:profile_id => profile.id, :company_dept_id=> dept.id).destroy_all
-      end
-    end
-    departments.each do |dept|
-      pcd = ProfilesCompanyDept.find_or_create_by_profile_id_and_company_dept_id(profile.id, dept)
-      pcd.update_attribute(:other_job_category, other_job_category) if pcd.company_dept.name == "other"
-    end
-  end
-
-  def get_user
-    @is_new_user = !cookies[:auth_token] || !User.find_by_auth_token(params[:id]).nil? #first case is if they're not logged in, second case is if they are logged in but editing a user based on auth token (which happens if they're at the /join link)
-
-    if @is_new_user
-      @auth_token = params[:id] || session[:callback_token] #callback_token will be populated if we're coming back from a linkedin callback
-      @user = User.find_by_auth_token(@auth_token)
-    else
-      @user = current_user
-    end
-
-    @user = User.find_by_email(session[:email]) if !@user #try to get user by email address stored in session, in the case that they're coming from a newsletter link
-      
-  end
-
-  def find_resource
-    @newsletter_subscription = request.env["HTTP_REFERER"] && !request.env["HTTP_REFERER"].match(/newsletter/i).nil? || params[:is_kiosk] == "true"
-    if @newsletter_subscription
-      @company = Company.find_by_subdomain('talent')
-    else
-      @company = request.subdomain.empty? ? current_user.companies.first : current_company
-    end
-    @tags = ActsAsTaggableOn::Tag.all.to_json(only: :name)
-  end
-
   def choose_layout
-    if !cookies[:auth_token] || action_name == "confirmation" #always onboarding if not logged in or are on the confirmation page
-      'onboarding'
-    elsif ['update', 'edit'].include?(action_name) && @is_new_user
-      'onboarding'
-    elsif ['new', 'create'].include?(action_name) && !@is_admin_adding
+    if ['new', 'create', 'linkedin'].include?(action_name)
       'onboarding'
     else
       'application'

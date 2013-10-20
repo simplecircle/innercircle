@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :role, :company_dept_ids
 
-  strip_attributes :only => [:email, :first_name, :last_name]
+  strip_attributes :only => [:email]
 
   has_many :users_companies, :dependent => :destroy
   has_many :companies, through: :users_companies
@@ -19,12 +19,13 @@ class User < ActiveRecord::Base
   attr_reader :password
   include ActiveModel::SecurePassword::InstanceMethodsOnActivation
 
-  validates :email, presence:true
-  validates :email, uniqueness:true
-  validates_format_of :email, with:/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i, message:"Email isn't valid. Please make sure there are no spaces"
+  validates :email, presence:{message:"PLEASE ENTER YOUR EMAIL"}
+  validates :email, uniqueness:{message:"THIS EMAIL IS ALREADY TAKEN"}
+  validates_format_of :email, with:/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i, message:"THIS EMAIL ISN'T VALID"
   # These password validations are here for password reset functionality.
-  validates_presence_of :password, if: :password
+  validates_presence_of :password, message:"PLEASE SET YOUR PASSWORD"
   validates_confirmation_of :password, if: :password, message:"Passwords do not match"
+  validates_presence_of :company_depts, message:"CHOOSE AT LEAST ONE FIELD"
 
   def self.by_category(subdomain, category)
     joins(:companies, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order('email')

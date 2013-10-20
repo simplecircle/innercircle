@@ -3,7 +3,7 @@
   %head
     = render 'shared/head'
 
-  %body{:id => controller_name, :class => referrer }
+  %body.application
     = render 'shared/navbar'
     .content-with-nav
       = yield
