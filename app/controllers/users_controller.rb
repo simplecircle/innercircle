@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   layout :choose_layout
   # auth handled through get_user
   before_filter :authorize_user, only:[:show]
-  before_filter :get_user, only:[:edit, :update]
+  # before_filter :get_user, only:[:edit, :update]
 
   def new
     @user = User.new
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user.role = 'talent'
     if @user.save
       cookies.permanent[:auth_token] = {value:@user.auth_token, domain: :all}
-      redirect_to(signup_linkedin_url)
+      redirect_to(new_linkedin_url)
     else
       # UserMailer.welcome(@user, capitalize_phrase(@company.name)).deliver
       render "new"
@@ -24,42 +24,41 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @star_rating = @user.star_rating(@company.id) if current_user.god_or_admin?
   end
 
   def edit
-    if params[:autofill] == 'linkedin' #The link for the 'autofill with linkedin' button looks like users/token/edit?autofill=linkedin, so this catches that url and redirects to the linkedin auth page
-      session[:callback_token] = @user.auth_token
-      redirect_to "/auth/linkedin"
-    else
-      @profile = @user.profile
-      @depts = @profile.company_depts.map(&:id)
-      @other_job_category = @profile.profiles_company_depts.empty? ? nil : @profile.profiles_company_depts.first.other_job_category
-      @incoming_tags = @user.profile.skills.map(&:name).join(',')
+    # if params[:autofill] == 'linkedin' #The link for the 'autofill with linkedin' button looks like users/token/edit?autofill=linkedin, so this catches that url and redirects to the linkedin auth page
+    #   session[:callback_token] = @user.auth_token
+    #   redirect_to "/auth/linkedin"
+    # else
+    #   @profile = @user.profile
+    #   @depts = @profile.company_depts.map(&:id)
+    #   @other_job_category = @profile.profiles_company_depts.empty? ? nil : @profile.profiles_company_depts.first.other_job_category
+    #   @incoming_tags = @user.profile.skills.map(&:name).join(',')
 
-      @alert = 'Sorry, LinkedIn authorization failed' if params[:strategy] == 'linkedin' && params[:message] == 'invalid_credentials'
+    #   @alert = 'Sorry, LinkedIn authorization failed' if params[:strategy] == 'linkedin' && params[:message] == 'invalid_credentials'
       
-      auth = request.env["omniauth.auth"]
-      if auth
-        info = auth["info"]
+    #   auth = request.env["omniauth.auth"]
+    #   if auth
+    #     info = auth["info"]
 
-        @profile.update_attributes!(
-          :linkedin_data => JSON.parse(auth.to_json), 
-          :linkedin_profile => info["urls"]["public_profile"]
-        )
+    #     @profile.update_attributes!(
+    #       :linkedin_data => JSON.parse(auth.to_json), 
+    #       :linkedin_profile => info["urls"]["public_profile"]
+    #     )
 
-        @profile.first_name = info["first_name"]
-        @profile.last_name = info["last_name"]
-        @profile.job_title = info["headline"]
-        @profile.url = info["urls"]["public_profile"]
-        @incoming_tags = @incoming_tags + ',' + auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",") unless auth["extra"]["raw_info"]["skills"].nil?
+    #     @profile.first_name = info["first_name"]
+    #     @profile.last_name = info["last_name"]
+    #     @profile.job_title = info["headline"]
+    #     @profile.url = info["urls"]["public_profile"]
+    #     @incoming_tags = @incoming_tags + ',' + auth["extra"]["raw_info"]["skills"].values[1].map{|s| s.skill.name}.join(",") unless auth["extra"]["raw_info"]["skills"].nil?
 
-        session[:callback_token] = nil
-        if @is_new_user
-          @profile.save
-        end
-      end
-    end
+    #     session[:callback_token] = nil
+    #     if @is_new_user
+    #       @profile.save
+    #     end
+    #   end
+    # end
   end
 
   def update

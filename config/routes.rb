@@ -7,6 +7,7 @@ Innercircle::Application.routes.draw do
   resources :companies
   resources :password_resets
   resources :admin_invites
+  resources :linkedin, only:[:new, :create, :destroy]
 
   constraints(Subdomain) do
     match '/' => 'companies#show'
@@ -23,7 +24,7 @@ Innercircle::Application.routes.draw do
   get "newsletter" => "newsletter#index"
   get "send_password_reset" => "password_resets#create"
   get "dashboard" => "dashboard#index"
-  get "/auth/linkedin/callback"=>"users#edit"
+  get "/auth/linkedin/callback"=>"linkedin#create"
   get "auth/failure"=>"users#edit"
   get "signup"=>"users#new"
   get "signup/linkedin"=>"users#linkedin"

@@ -1,0 +1,10 @@
+.container
+  .col-md-5.centered.text-center.ptl
+    = link_to(image_tag("jobcrush_logo.png", class:"jobcrush_logo"), root_url(subdomain:false))
+    %h3.ptxl.pbl Welcome aboard! Now, find who you know at any JobCrush company.
+  %section.signup.col-md-4.white.centered
+    %p
+      Most hires are through referals... Privately connect with LinkedIn, and when you see the [in] logo by a company or job, you’ll know you who your connections are.
+    = link_to("Connect with LinkedIn", "/auth/linkedin", class:"btn btn-block btn-linkedin")
+    .tiny.text-center
+      We’ll never post your activity to LinkedIn.
