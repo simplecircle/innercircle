@@ -1,7 +1,7 @@
 .container
-  .col-md-5.centered.text-center.ptl
+  .col-md-6.centered.text-center.ptl
     = link_to(image_tag("jobcrush_logo.png", class:"jobcrush_logo"), root_url(subdomain:false))
-    %h3.ptxl.pbl Sign Up to find the perfect job or just stay “in the know” with great companies
+    %h3.ptxl.pbl Stay “in the know” with great companies or find the perfect job. Sign up now.
   %section.signup.col-md-4.white.centered
     = form_for @user do |f|
       .form-group
@@ -12,7 +12,7 @@
         .pull-left= f.label :password, "* PASSWORD"
         .inline_error.pull-left= @user.errors[:password].first
         = f.password_field(:password, class:"form-control")
-      .help-block.ptl * HELP US CUSTOMIZE YOUR JOBCRUSH EXPERIENCE. WHAT FIELDS ARE YOU INTO?
+      .help-block.ptl * WHAT FIELDS DO YOU WORK IN OR ASPIRE TO?
       .inline_error= @user.errors[:company_depts].first
       - CompanyDept.all.each do |dept|
         %div

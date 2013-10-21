@@ -16,7 +16,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'babosa'
 gem 'acts-as-taggable-on'
 gem 'omniauth'
-gem 'omniauth-linkedin'
+gem 'omniauth-linkedin-oauth2'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
