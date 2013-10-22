@@ -43,9 +43,9 @@ class ApplicationController < ActionController::Base
     (referrer.nil? || referrer.match(/(simplestream\.)|(jobcrush\.)|(innercircle\.)|(\.circ\.)/i).nil?) ? "external" : "internal"
   end
 
-  def sort_by_star_rating(array, company_id)
-    array.sort {|a, b| b.star_rating(company_id) <=> a.star_rating(company_id)}
-  end
+  # def sort_by_star_rating(array, company_id)
+  #   array.sort {|a, b| b.star_rating(company_id) <=> a.star_rating(company_id)}
+  # end
 
   def capitalize_phrase(phrase)
     phrase.nil? ? nil : phrase.split.each{|x|x.capitalize!}.join(" ")

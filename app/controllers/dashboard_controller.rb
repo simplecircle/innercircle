@@ -6,11 +6,6 @@ class DashboardController < ApplicationController
   before_filter :authorize
 
   def index
-    @creative = sort_by_star_rating(User.by_category(@company.subdomain, "creative"), @company.id)
-    @operations = sort_by_star_rating(User.by_category(@company.subdomain, "operations"), @company.id)
-    @sales_marketing = sort_by_star_rating(User.by_category(@company.subdomain, "sales & marketing"), @company.id)
-    @technology = sort_by_star_rating(User.by_category(@company.subdomain, "technology"), @company.id)
-    @other = sort_by_star_rating(User.by_category(@company.subdomain, "other"), @company.id)
     @admins = @company.users.where(role:"admin")
   end
 

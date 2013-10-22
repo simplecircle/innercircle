@@ -16,6 +16,7 @@ class CompaniesController < ApplicationController
   end
 
   def create
+    params[:company][:linkedin_identifiers] = params[:company][:linkedin_identifiers].gsub(" ", "").split(",")
     @company = Company.new(params[:company])
     @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
     @verticals = (params[:verticals] || []).map{|v| v.to_i}
@@ -96,6 +97,7 @@ class CompaniesController < ApplicationController
     end
 
     @notice = nil
+    params[:company][:linkedin_identifiers] = params[:company][:linkedin_identifiers].gsub(" ", "").split(",")
     @company.assign_attributes params[:company]
     @verticals = params[:verticals] || []
     @verticals = @verticals.map{|x| x.to_i }

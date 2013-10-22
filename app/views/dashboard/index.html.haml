@@ -1,10 +1,10 @@
 .container
   = render "shared/flash", :flash=>flash unless flash.blank?
-  .row-fluid
+  .row
     .span12.mtl.placeholder.hidden-phone
-  .row-fluid
+  .row
     .span12.mobile-padding.white-background
-      .row-fluid.dashboard-header.bb-1
+      .row.dashboard-header.bb-1
         .span9
           .gears.mtl.mrm.pull-left
           %h2.mbn.ptl= capitalize_phrase(@company.name)
@@ -35,68 +35,6 @@
                   Share this link with talent you want to invite: 
                   = link_to("#{@company.subdomain}.circ.co/join", join_url(subdomain:@company.subdomain))
                 .mbm.detail-text Invite people you've met at meetups, panels, hackathons, online - anyone you'd like to keep on your watchlist.
-          .row-fluid
-            .span12#dashboard_index.mtxl
-              %h4.bb-1
-                Creative
-                %span.counter.pull-right (#{@creative.count})
-              %ul.unstyled
-                - @creative.each do |talent|
-                  = link_to user_url(talent) do
-                    %li.bb-1
-                      = talent.email.downcase
-                      %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
-                      %span.rating
-                        - talent.star_rating(@company.id).times do |rating|
-                          %span.rating-star-fixed
-              %h4.bb-1
-                Operations
-                %span.counter.pull-right (#{@operations.count})
-              %ul.unstyled
-                - @operations.each do |talent|
-                  = link_to user_url(talent) do
-                    %li.bb-1
-                      = talent.email.downcase
-                      %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
-                      %span.rating
-                        - talent.star_rating(@company.id).times do |rating|
-                          %span.rating-star-fixed
-              %h4.bb-1
-                Sales / Marketing
-                %span.counter.pull-right (#{@sales_marketing.count})
-              %ul.unstyled
-                - @sales_marketing.each do |talent|
-                  = link_to user_url(talent) do
-                    %li.bb-1
-                      = talent.email.downcase
-                      %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
-                      %span.rating
-                        - talent.star_rating(@company.id).times do |rating|
-                          %span.rating-star-fixed
-              %h4.bb-1
-                Technology
-                %span.counter.pull-right (#{@technology.count})
-              %ul.unstyled
-                - @technology.each do |talent|
-                  = link_to user_url(talent) do
-                    %li.bb-1
-                      = talent.email.downcase
-                      %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
-                      %span.rating
-                        - talent.star_rating(@company.id).times do |rating|
-                          %span.rating-star-fixed
-              %h4.bb-1
-                Other
-                %span.counter.pull-right (#{@other.count})
-              %ul.unstyled
-                - @other.each do |talent|
-                  = link_to user_url(talent) do
-                    %li.bb-1
-                      = talent.email.downcase
-                      %span.gray-light= " - #{capitalize_phrase(talent.profile.full_name)}" if !talent.profile.full_name.empty?
-                      %span.rating
-                        - talent.star_rating(@company.id).times do |rating|
-                          %span.rating-star-fixed
 
         .span5#dashboard-right-column
           .row-fluid.dashboard-header.bb-1

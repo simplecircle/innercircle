@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       cookies.permanent[:auth_token] = {value: user.auth_token, domain: :all}
-      subdomain = user.companies.first.subdomain
+      # subdomain = user.companies.first.subdomain
 
       if params[:redirect_back]
         redirect_to params[:redirect_back]
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
       elsif user.god?
         redirect_to companies_url(subdomain:false)
       else
-        redirect_to dashboard_url(subdomain: subdomain)
+        # redirect_to dashboard_url(subdomain: subdomain)
       end
     else
       flash.now.alert = "Invalid email or password"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131021213853) do
+ActiveRecord::Schema.define(:version => 20131022180526) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20131021213853) do
     t.datetime "last_reviewed_posts_at"
     t.datetime "last_published_posts_at",                       :default => '1970-01-01 00:00:00'
     t.boolean  "show_in_index",                                 :default => true
+    t.text     "linkedin_identifiers"
   end
 
   add_index "companies", ["subdomain"], :name => "index_companies_on_subdomain", :unique => true

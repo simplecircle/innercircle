@@ -40,6 +40,12 @@
       .inline_error= @company.errors[:website_url].first
 
   .control-group
+    %label.control-label{:for=>:website_url} * LinkedIn identifiers
+    .controls
+      = co.text_field :linkedin_identifiers, value:@company.linkedin_identifiers.join(","), class:'span12'
+      .inline_error= @company.errors[:linkedin_identifiers].first
+
+  .control-group
     %label.control-label{:for=>:short_description} 
       * Short Description
     .controls
