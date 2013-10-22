@@ -6,6 +6,28 @@ class Post < ActiveRecord::Base
   mount_uploader :photo, PhotoUploader
   before_save :check_auto_published
 
+  def self.following_stream(user, limit)
+    query = "SELECT p.* FROM posts p
+            INNER JOIN relationships r ON r.followed_id = p.company_id
+            WHERE (r.follower_id = #{user.id})
+            AND (p.published IS TRUE)
+            ORDER BY p.created_at DESC
+            LIMIT #{limit}"
+
+    Post.find_by_sql(query)
+  end
+  # def self.following_stream(user, limit)
+  #   query = "SELECT p.* FROM posts p
+  #           INNER JOIN relationships r ON r.followed_id = p.company_id
+  #           WHERE (r.follower_id = #{user.id})
+  #           AND (date(r.created_at) - integer '7' <= p.created_at)
+  #           AND (p.published IS TRUE)
+  #           ORDER BY p.created_at DESC
+  #           LIMIT #{limit}"
+
+  #   Post.find_by_sql(query)
+  # end
+
   def check_auto_published
     auto_published = false if published == false
     return true

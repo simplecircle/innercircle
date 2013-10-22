@@ -10,7 +10,7 @@
     %ul.nav.navbar-nav
       %li= link_to("COMPANIES", companies_url(), class:"gibson-semibold")
       %li= link_to("JOBS", "http://google.com", class:"gibson-semibold")
-      %li= link_to("FOLLOWING", "http://google.com", class:"gibson-semibold")
+      %li= link_to("FOLLOWING", root_url(), class:"gibson-semibold")
     %ul.nav.navbar-nav.navbar-right
       - if current_user
         - if current_user.company_connections.empty?

@@ -1,0 +1,12 @@
+- content_for :title do
+  Following | JobCrush
+
+.container
+  .col-md-8
+    = @posts.size
+    .masonry-wrapper
+      %ul#masonry.masonry-published
+        = render("posts/published", posts:@posts)
+    /#infinite= will_paginate @posts
+  .col-md-4
+    %h4 Suggested companies to follow

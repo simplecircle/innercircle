@@ -42,7 +42,7 @@ class LinkedinController < ApplicationController
   		logger.info company_connections
   		user.assign_attributes(linkedin_access_token:access_token, company_connections:company_connections)
         if user.save(validate: false)
-  		  # redirect_to(user_path(current_user))
+  		   redirect_to(root_url())
   	    end
   	end
   end
