@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @depts = CompanyDept.all
+    @company_connections = true if params[:company_connections]
   end
 
   def create
