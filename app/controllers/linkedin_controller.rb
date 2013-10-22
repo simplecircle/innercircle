@@ -7,10 +7,11 @@ class LinkedinController < ApplicationController
   end
 
   def create
+  	user = User.find(current_user)
   	if auth = request.env["omniauth.auth"]
   		# raise auth.to_yaml
   		company_connections = {}
-  		company_blacklist = ["freelance"]
+  		company_blacklist = ["freelance", "freelancing"]
   		access_token = auth["credentials"].token
         response = HTTParty.get("https://api.linkedin.com/v1/people/~/connections:(id,first-name,last-name,public-profile-url,picture-url,positions:(title,is_current,company:(id,name)))", :query=>{oauth2_access_token:access_token, format:"json"})
   		response = JSON.parse(response.body)
@@ -39,7 +40,10 @@ class LinkedinController < ApplicationController
   		  end
   		end
   		logger.info company_connections
-  		# redirect_to(user_path(current_user))
+  		user.assign_attributes(linkedin_access_token:access_token, company_connections:company_connections)
+        if user.save(validate: false)
+  		  # redirect_to(user_path(current_user))
+  	    end
   	end
   end
 

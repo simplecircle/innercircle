@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131020154022) do
+ActiveRecord::Schema.define(:version => 20131021213853) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -134,6 +134,8 @@ ActiveRecord::Schema.define(:version => 20131020154022) do
     t.datetime "admin_invite_sent_at"
     t.boolean  "pending",                :default => false
     t.text     "referral_source"
+    t.string   "linkedin_access_token"
+    t.text     "company_connections"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
