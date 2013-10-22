@@ -1,0 +1,11 @@
+class Relationship < ActiveRecord::Base
+  # attr_accessible :followed_id, :follower_id
+  attr_accessible :followed_id
+
+  belongs_to :follower, class_name:"User"
+  belongs_to :followed, class_name:"Company"
+
+  validates :follower_id, :presence => true
+  validates :followed_id, :presence => true
+  # after_create :log_activity
+end

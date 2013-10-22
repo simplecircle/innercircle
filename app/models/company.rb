@@ -9,6 +9,10 @@ class Company < ActiveRecord::Base
   has_many :users, through: :users_companies
   has_many :companies_verticals, :dependent => :destroy
   has_many :verticals, through: :companies_verticals
+  has_many :reverse_relationships, :foreign_key => "followed_id",
+                                   :class_name => "Relationship",
+                                   :dependent => :destroy
+  has_many :followers, :through => :reverse_relationships, :source => :follower
 
   before_create :set_last_reviewed_posts_at
   accepts_nested_attributes_for :users, :users_companies

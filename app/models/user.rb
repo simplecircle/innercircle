@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :users_company_depts, :dependent => :destroy
   has_many :company_depts, through: :users_company_depts
   has_one :profile, :dependent => :destroy
+  has_many :relationships, :foreign_key=>"follower_id", :dependent=>:destroy
+  has_many :following, :through=>:relationships, :source=>:followed
   
   accepts_nested_attributes_for :profile, :users_companies
   before_create { generate_token(:auth_token) }
@@ -23,6 +25,18 @@ class User < ActiveRecord::Base
   validates :password, presence:{message:"PLEASE SET YOUR PASSWORD"}
   # password conf is here for password reset functionality.
   # validates_confirmation_of :password, if: :password, message:"Passwords do not match"
+
+  def following?(company)
+    relationships.find_by_followed_id(company)
+  end
+
+  def follow!(company)
+    relationships.create!(followed_id:company.id)
+  end
+
+  def unfollow!(company)
+    relationships.find_by_followed_id(company).destroy
+  end
 
   def self.by_category(subdomain, category)
     joins(:companies, :profile => :company_depts).where(role: :talent).where(:companies=>{subdomain: subdomain}).where(:company_depts =>{name: category}).order('email')
