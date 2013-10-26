@@ -19,7 +19,7 @@
         .mbs{:style=>"border-bottom-color:#{company.hex_code};"}
           - company.latest_posts_by_provider_date(3).each do |post|
             .company-filmstrip__image{class:post.wrapper_class}
-              = image_tag post.photo_url(:medium)
+              = image_tag(url_for_cdn_image(post, post.photo_url(:medium)))
           .clearfix
         .company-filmstrip__info.mbl
           .pull-right.company-filmstrip__last-updated-time= company.last_published_time

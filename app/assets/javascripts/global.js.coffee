@@ -1,23 +1,14 @@
 $(document).ready ->
-  $('.js-nice-scroll-target').niceScroll()
   container = $("#masonry")
   containerWidth = container.width()
   unpublishedContainer = $("#masonry.masonry-unpublished")
   unpublishedContainerWidth = unpublishedContainer.width()
   mode = "unpublished" if unpublishedContainer.length == 1
-  if $('#company-info').length > 0
-    companySubdomain = $('#company-info').data().companySubdomain
-  else
-    companySubdomain = undefined
-
-
-  validateEmail = (email) -> 
-    re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    re.test(email)
 
   setHeight = (columnCount, containerWidth, items) ->
     $.each items, ->
-      width = (containerWidth/columnCount)
+      # 29 makes up for the faux gutter
+      width = (containerWidth/columnCount)-29 
       if mode == "unpublished"
         # Both image and parent li need their height set to work in FF
         $(this).find('.photo img').height(Math.round(width * $(this).data("aspect-ratio")))
@@ -25,7 +16,7 @@ $(document).ready ->
       else
         # Both image and parent li need their height set to work in FF
         $(this).find('.photo img').height(Math.round(width * $(this).data("aspect-ratio")))
-        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+15)
+        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+30)
 
   if mode == "unpublished"
     items = $(unpublishedContainer).find("li")
@@ -37,10 +28,7 @@ $(document).ready ->
     if window.innerWidth <= 570 then items.css('width', '44%')
     items.fadeIn("fast")
   else
-    if location.search.search("remote=true") > -1
-      columnCount = if window.innerWidth > 570 then 3 else 1
-    else
-      columnCount = if window.innerWidth > 570 then 2 else 1
+    columnCount = 2 
     items = $(container).find("li")
     initPublished = ->
       setHeight(columnCount, container.width(), items)
@@ -48,7 +36,7 @@ $(document).ready ->
         columnWidth: ->
          container.width()/columnCount
     initPublished()
-    items.fadeIn("fast")
+    items.show()
 
     $(window).resize ->
       initPublished()
@@ -86,7 +74,6 @@ $(document).ready ->
           else
             setHeight(columnCount, containerWidth, newItems)
             container.masonry( 'appended', newItems );
-            _gaq.push(['_trackEvent', 'Companies', 'Infinite Scroll', companySubdomain, items.length]);
           newItems.fadeIn("fast")
           bindPostCaptionClickOnMobile()
 

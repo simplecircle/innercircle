@@ -23,5 +23,6 @@
  *= require static
  *= require media_query_overrides
  *= require responsive-utilities
+ *= require masonry
 */
 

@@ -1,0 +1,27 @@
+
+@import "bootstrap/variables";
+@import "bootstrap/mixins.less";
+@import "variables.css.less";
+
+#masonry{
+  /*background:red;*/
+  width:100%;
+  padding:0;
+  li{
+    width:48%;
+    border:1px solid #D6D6D6;
+    overflow:hidden;
+    margin-bottom: 15px;
+    .photo {
+      position: relative;
+      .post-info-bar{
+        background:white;
+   	    color:@gray-light;
+  	    padding:5px;
+  	    .date{
+  	  	  padding-left: 30px;
+  	    }
+      }
+    }
+  }
+}
