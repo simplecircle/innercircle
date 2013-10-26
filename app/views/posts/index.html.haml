@@ -7,9 +7,7 @@
           = link_to "Show Profile", root_url, class:"btn pull-right"
         %h4 Publish great photos that show what it’s like to work at #{capitalize_phrase(@company.name)}
         %hr
-  .container
-    .row
-      .col-md-12.mobile-padding
-        %ul#masonry.masonry-unpublished
-          = render("unpublished", posts:@posts)
-        #infinite= will_paginate @posts
+  .mobile-padding
+    %ul#masonry.masonry-unpublished
+      = render("unpublished", posts:@posts)
+    #infinite= will_paginate @posts

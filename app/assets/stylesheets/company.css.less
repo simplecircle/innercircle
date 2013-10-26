@@ -82,7 +82,7 @@
     white-space: nowrap;
   }
 }
-/*}*/
+
 
 #companies{
 padding-top:0;
@@ -116,15 +116,6 @@ padding-top:0;
     }
   }
 }
-&.remote {
-  #masonry {
-    width: 100%;
-    &.masonry-published {
-      left: 0;
-      border: none;
-    }
-  }
-}
 
 #sidebar{
   z-index: 1;
@@ -155,7 +146,7 @@ padding-top:0;
   white-space: nowrap;
   text-overflow: ellipsis;
 }*/
-.post-info-bar {
+/*.post-info-bar {
   
   padding: 7px 10px;
   font-size:14px;
@@ -173,7 +164,7 @@ padding-top:0;
       white-space: normal;
     }
   }
-}
+}*/
 .has-company-logo {
   .btn-navbar {
     height: 60px;
@@ -203,14 +194,14 @@ padding-top:0;
   section {
     padding:0 15px;
   }
-  .masonry-wrapper {
+ /* .masonry-wrapper {
     background: white;
     padding:5px;
-  }
+  }*/
   .navbar-fixed-top.has-company-logo .nav > li > a {
     padding: 20px 10px;
   }
-  .remote #masonry.masonry-published li {
+/*  .remote #masonry.masonry-published li {
     width: 33%;
   }
   #masonry.masonry-published {
@@ -220,7 +211,7 @@ padding-top:0;
     li {
       width: 49.5%;
     }
-  }
+  }*/
   .subscribe-button-header {
     right:15px;
     padding: 0 20px;
@@ -228,12 +219,12 @@ padding-top:0;
 }
 //iPad portrait to iPad landscape
 @media (min-width: 769px) and (max-width: 1024px) {
-  #masonry.masonry-published {
+ /* #masonry.masonry-published {
     max-width: 680px;
   }
   &.remote #masonry.masonry-published {
     max-width: none;
-  }
+  }*/
 }
 // Below iPad landscape
 @media (max-width: 768px) {
@@ -294,7 +285,7 @@ padding-top:0;
   .subscribe-button-header {
     padding: 0 10px;
   }
-  // .post-info-bar {
+/*  // .post-info-bar {
   //   &.post-info-bar--has-caption {
   //     padding: 5px 10px 15px 10px;
   //     &:hover, &.active {
@@ -322,7 +313,7 @@ padding-top:0;
     li {
       width: 100%;
     }
-  }
+  }*/
 }
 @media (min-width: 571px) {
   .post-info-bar:hover {
@@ -358,11 +349,6 @@ padding-top:0;
   }
   &.remote #masonry.masonry-published li {
     width: 33%;
-  }
-  #masonry.masonry-published {
-    li {
-      width:49.5%;
-    }
   }
 }
 }

@@ -1,5 +1,5 @@
 - posts.each do |post|
-  %li{id:post.id, class:"photo-wrapper#{post.published ? ' published' : ' unpublished'}", data:{"aspect-ratio"=>"#{post.aspect_ratio}"}}
+  %li{id:post.id, class:"photo-wrapper", data:{"aspect-ratio"=>"#{post.aspect_ratio}"}}
     - if !post.published && post.created_at > @last_reviewed_time
       .new-post-ribbon-wrapper
         .new-post-ribbon NEW
