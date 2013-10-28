@@ -13,6 +13,8 @@ class Company < ActiveRecord::Base
                                    :class_name => "Relationship",
                                    :dependent => :destroy
   has_many :followers, :through => :reverse_relationships, :source => :follower
+  has_many :company_connections
+  has_many :connected_users, :through => :company_connections, :source=>:user
 
   before_create :set_last_reviewed_posts_at
   accepts_nested_attributes_for :users, :users_companies
