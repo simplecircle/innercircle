@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   serialize :company_connections, Hash
-  attr_accessible :email, :password, :role, :company_dept_ids, :company_connections, :linkedin_access_token
+  # attr_accessible :email, :password, :role, :company_dept_ids, :company_connections, :linkedin_access_token
 
   has_secure_password
   strip_attributes :only => [:email]
@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   validates :email, presence:{message:"PLEASE ENTER YOUR EMAIL"}
   validates :email, uniqueness:{message:"THIS EMAIL IS ALREADY TAKEN"}
-  validates_format_of :email, with:/^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i, message:"THIS EMAIL ISN'T VALID"
+  validates_format_of :email, with:/\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, message:"THIS EMAIL ISN'T VALID"
   validates :company_depts, presence:{message:"CHOOSE AT LEAST ONE FIELD"}
   validates :password, presence:{message:"PLEASE SET YOUR PASSWORD"}
   # password conf is here for password reset functionality.

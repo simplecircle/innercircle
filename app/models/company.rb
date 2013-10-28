@@ -1,7 +1,7 @@
 class Company < ActiveRecord::Base
 
   serialize :linkedin_identifiers, Array
-  attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at, :last_published_posts_at, :instagram_location_id, :show_in_index, :linkedin_identifiers
+  # attr_accessible :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at, :last_published_posts_at, :instagram_location_id, :show_in_index, :linkedin_identifiers
   strip_attributes :only => [:name, :website_url, :short_description, :hq_city, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :foursquare_v2_id, :instagram_uid, :hex_code, :instagram_location_id]
 
   has_many :users_companies, :dependent => :destroy
@@ -28,8 +28,8 @@ class Company < ActiveRecord::Base
   validates :website_url, presence:true
   validates :short_description, presence:true
   validates :hq_city, presence:true
-  validates_format_of :employee_count, with:/^[\d]+_[\d]+$/, message:"please select a range"
-  validates_format_of :hq_state, with:/^[A-Z]{2}$/, message:"please select a state"
+  validates_format_of :employee_count, with:/\A[\d]+_[\d]+\z/, message:"please select a range"
+  validates_format_of :hq_state, with:/\A[A-Z]{2}\z/, message:"please select a state"
   validates_format_of :website_url, with:/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}?/, message:"URL isn't valid"
   validates :logo, presence:true
 

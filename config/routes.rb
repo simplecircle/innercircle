@@ -10,14 +10,14 @@ Innercircle::Application.routes.draw do
   resources :linkedin, only:[:new, :create, :destroy]
 
   constraints(Subdomain) do
-    match '/' => 'companies#show'
-    match 'join' => 'users#new'
-    match 'add-talent' => 'users#new'
+    get '/' => 'companies#show'
+    get 'join' => 'users#new'
+    get 'add-talent' => 'users#new'
     resources :posts, only:[:index, :update, :destroy]
   end
 
   constraints(NoSubdomain) do
-    match 'join' => 'home#index'
+    get 'join' => 'home#index'
   end
 
   root :to => 'home#index'

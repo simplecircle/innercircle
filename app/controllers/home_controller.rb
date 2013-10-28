@@ -13,4 +13,9 @@ class HomeController < ApplicationController
       @companies = Company.where(:show_in_index=>true).order('last_published_posts_at DESC')
     end
   end
+
+  # private
+  # def home_params
+  #   params.require(:post).permit(:provider, :provider_strategy, :provider_uid, :provider_publication_date, :provider_raw_data, :media_url, :media_url_small, :like_count, :published, :caption, :width, :height, :remote_photo_url, :auto_published)
+  # end
 end
