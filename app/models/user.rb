@@ -3,12 +3,12 @@ class User < ActiveRecord::Base
   serialize :linkedin_connections, Hash
   # attr_accessible :email, :password, :role, :company_dept_ids, :company_connections, :linkedin_access_token
 
-  has_secure_password
+  has_secure_password validations: false
   strip_attributes :only => [:email]
 
-  has_many :users_companies, :dependent => :destroy
+  has_many :users_companies#, :dependent => :destroy
   has_many :companies, through: :users_companies
-  has_many :users_company_depts, :dependent => :destroy
+  has_many :users_company_depts #, :dependent => :destroy
   has_many :company_depts, through: :users_company_depts
   has_one :profile, :dependent => :destroy
   has_many :relationships, :foreign_key=>"follower_id", :dependent=>:destroy

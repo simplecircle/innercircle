@@ -13,7 +13,7 @@ class LinkedinController < ApplicationController
   		company_connections = {}
   		company_blacklist = ["freelance", "freelancing"]
   		access_token = auth["credentials"].token
-        response = HTTParty.get("https://api.linkedin.com/v1/people/~/connections:(id,first-name,last-name,public-profile-url,picture-url,positions:(title,is_current,company:(id,name)))", :query=>{oauth2_access_token:access_token, format:"json"})
+      response = HTTParty.get("https://api.linkedin.com/v1/people/~/connections:(id,first-name,last-name,public-profile-url,picture-url,positions:(title,is_current,company:(id,name)))", :query=>{oauth2_access_token:access_token, format:"json"})
   		response = JSON.parse(response.body)
   		 # logger.info response
 
@@ -32,7 +32,7 @@ class LinkedinController < ApplicationController
   		  	 	  (company_connections[position['company']['id'].to_s.downcase] ||= []) << built_connection
   		  	 	else 
   		  	 	  unless company_blacklist.include?(position['company']['name'].to_s.downcase)
-    		  	 	(company_connections[position['company']['name'].to_s.downcase] ||= []) << built_connection
+    		  	 	(company_connections[position['company']['name'].to_s.downcase.gsub(" ","")] ||= []) << built_connection
     		  	  end
   		  	    end
   		  	  end
@@ -40,7 +40,7 @@ class LinkedinController < ApplicationController
   		  end
   		end
   		# logger.info company_connections
-  		user.assign_attributes(linkedin_access_token:access_token, company_connections:company_connections)
+  		user.assign_attributes(linkedin_access_token:access_token, linkedin_connections:company_connections)
         if user.save(validate: false)
   		   redirect_to(root_url())
   	    end

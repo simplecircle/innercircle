@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(params_user)
     @user.role = 'talent'
     if @user.save
       cookies.permanent[:auth_token] = {value:@user.auth_token, domain: :all}
@@ -143,5 +143,9 @@ class UsersController < ApplicationController
     else
       'application'
     end
+  end
+
+  def params_user
+    params.require(:user).permit(:email, :password, :role, :linkedin_connections, :linkedin_access_token, company_dept_ids:[])
   end
 end
