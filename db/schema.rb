@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131028214220) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20131028221104) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -46,7 +43,6 @@ ActiveRecord::Schema.define(version: 20131028214220) do
     t.datetime "last_reviewed_posts_at"
     t.datetime "last_published_posts_at",                    default: '1970-01-01 00:00:00'
     t.boolean  "show_in_index",                              default: true
-    t.text     "linkedin_identifiers"
   end
 
   add_index "companies", ["subdomain"], name: "index_companies_on_subdomain", unique: true, using: :btree
@@ -117,6 +113,13 @@ ActiveRecord::Schema.define(version: 20131028214220) do
   add_index "profiles", ["first_name"], name: "index_profiles_on_first_name", using: :btree
   add_index "profiles", ["last_name"], name: "index_profiles_on_last_name", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
+  create_table "provider_identifiers", force: true do |t|
+    t.integer "company_id"
+    t.string  "linkedin"
+  end
+
+  add_index "provider_identifiers", ["linkedin"], name: "index_provider_identifiers_on_linkedin", using: :btree
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"

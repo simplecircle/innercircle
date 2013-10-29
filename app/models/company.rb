@@ -15,9 +15,10 @@ class Company < ActiveRecord::Base
   has_many :followers, :through => :reverse_relationships, :source => :follower
   has_many :company_connections
   has_many :connected_users, :through => :company_connections, :source=>:user
+  has_many :provider_identifiers
 
   before_create :set_last_reviewed_posts_at
-  accepts_nested_attributes_for :users, :users_companies
+  accepts_nested_attributes_for :users, :users_companies, :provider_identifiers
   after_validation :add_url_protocol
   after_update :update_provider_content
   after_commit :create_provider_content, on: :create

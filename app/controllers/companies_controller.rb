@@ -16,27 +16,30 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    params[:company][:linkedin_identifiers] = params[:company][:linkedin_identifiers].gsub(" ", "").split(",")
-    @company = Company.new(params[:company])
+    @company = Company.new(company_params)
     @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
     @verticals = (params[:verticals] || []).map{|v| v.to_i}
+    @provider_identifiers_string = params[:company][:provider_identifier][:linkedin].gsub(" ", "")
 
-    if current_user && current_user.god?
-      @company.users << current_user
-      @user = current_user
-    else
-      @user = @company.users.first
-      @user.role = 'admin' if @user.role == nil
-      @profile = @user.profile
-    end
+    # if current_user && current_user.god?
+    #   @company.users << current_user
+    #   @user = current_user
+    # else
+    #   @user = @company.users.first
+    #   @user.role = 'admin' if @user.role == nil
+    #   @profile = @user.profile
+    # end
 
     @company.instagram_location_id = get_instagram_location_id(@company.instagram_location_id) if @company.instagram_location_id.length > 12
 
-    if @company.save
+    if @company.save!
+      @provider_identifiers_string.split(",").each do |pi|
+         ProviderIdentifier.create({company_id:@company.id, linkedin:pi}) 
+      end
       save_verticals(@verticals, @company) if @verticals
-      cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} if @user.admin?
+      # cookies.permanent[:auth_token] = {value: @user.auth_token, domain: :all} if @user.admin?
 
-      @company.create_default_admin_user
+      # @company.create_default_admin_user
 
       redirect_to posts_url(subdomain: @company.subdomain)
     else
@@ -88,6 +91,7 @@ class CompaniesController < ApplicationController
     @mode = 'update'
     @verticals = @company.verticals.map(&:id)
     @submit_button_text = "Save"
+    @stringified_provider_identifiers = @company.provider_identifiers.pluck(:linkedin).join(",")
   end
 
   def update
@@ -97,14 +101,20 @@ class CompaniesController < ApplicationController
     end
 
     @notice = nil
-    params[:company][:linkedin_identifiers] = params[:company][:linkedin_identifiers].gsub(" ", "").split(",")
-    @company.assign_attributes params[:company]
+    # params[:company][:linkedin_identifiers] = params[:company][:linkedin_identifiers].gsub(" ", "").split(",")
+    @company.assign_attributes company_params
     @verticals = params[:verticals] || []
     @verticals = @verticals.map{|x| x.to_i }
 
+
     @company.instagram_location_id = get_instagram_location_id(@company.instagram_location_id) if @company.instagram_location_id.length > 12
 
-    if @company.save
+    if @company.save!
+      @provider_identifiers_string = params[:company][:provider_identifier][:linkedin].gsub(" ", "")
+      ProviderIdentifier.where(company_id:@company.id).delete_all
+      @provider_identifiers_string.split(",").each do |pi|
+        ProviderIdentifier.create({company_id:@company.id, linkedin:pi}) 
+      end
       save_verticals(@verticals, @company)
       @notice = "Profile Updated"
       redirect_to dashboard_url, notice: @notice
@@ -154,5 +164,9 @@ class CompaniesController < ApplicationController
     else
       'application'
     end
+  end
+
+  def company_params
+    params.require(:company).permit(:name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at, :last_published_posts_at, :instagram_location_id, :show_in_index, :provider_identifier)
   end
 end

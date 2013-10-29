@@ -42,8 +42,9 @@
   .control-group
     %label.control-label{:for=>:website_url} * LinkedIn identifiers
     .controls
-      = co.text_field :linkedin_identifiers, value:@company.linkedin_identifiers.join(","), class:'span12'
-      .inline_error= @company.errors[:linkedin_identifiers].first
+      = co.fields_for @company.provider_identifiers.new do |pi|
+        = pi.text_field :linkedin, value:@stringified_provider_identifiers, class:'col-md-12'
+        //.inline_error= @company.errors[:linkedin_identifiers].first
 
   .control-group
     %label.control-label{:for=>:short_description} 

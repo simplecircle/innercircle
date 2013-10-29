@@ -1,6 +1,6 @@
 class Vertical < ActiveRecord::Base
 
-  attr_accessible :name
+  # attr_accessible :name
 
   strip_attributes :only => [:name]
 
