@@ -11,7 +11,7 @@ class LinkedinController < ApplicationController
   	if auth = request.env["omniauth.auth"]
   		# raise auth.to_yaml
   		company_connections = {}
-  		company_blacklist = ["freelance", "freelancing"]
+  		company_blacklist = ["freelance", "freelancing", "selfemployed", "independent"]
   		access_token = auth["credentials"].token
       response = HTTParty.get("https://api.linkedin.com/v1/people/~/connections:(id,first-name,last-name,public-profile-url,picture-url,positions:(title,is_current,company:(id,name)))", :query=>{oauth2_access_token:access_token, format:"json"})
   		response = JSON.parse(response.body)
@@ -31,7 +31,7 @@ class LinkedinController < ApplicationController
   		  	 	if position['company']['id']
   		  	 	  (company_connections[position['company']['id'].to_s.downcase] ||= []) << built_connection
   		  	 	else 
-  		  	 	  unless company_blacklist.include?(position['company']['name'].to_s.downcase)
+  		  	 	  unless company_blacklist.include?(position['company']['name'].to_s.downcase.gsub(" ",""))
     		  	 	(company_connections[position['company']['name'].to_s.downcase.gsub(" ","")] ||= []) << built_connection
     		  	  end
   		  	    end
@@ -39,11 +39,19 @@ class LinkedinController < ApplicationController
   		    end
   		  end
   		end
-  		# logger.info company_connections
+
   		user.assign_attributes(linkedin_access_token:access_token, linkedin_connections:company_connections)
-        if user.save(validate: false)
-  		   redirect_to(root_url())
-  	    end
+      if user.save(validate: false)
+        company_ids = []
+        ProviderIdentifier.where(:linkedin => user.linkedin_connections.keys).each{|pi| company_ids << pi.company_id}
+        company_ids.uniq!
+        company_ids.each{|ci| CompanyConnection.create({user_id:current_user.id, company_id:ci})}
+        user.connected_companies.each do |co|
+          user.follow!(co) 
+        end
+
+  		  redirect_to(root_url())
+  	  end
   	end
   end
 
