@@ -43,7 +43,7 @@
     %label.control-label{:for=>:website_url} * LinkedIn identifiers
     .controls
       = co.fields_for @company.provider_identifiers.new do |pi|
-        = pi.text_field :linkedin, value:@stringified_provider_identifiers, class:'col-md-12'
+        = pi.text_field :linkedin, value:@normalized_pi, class:'col-md-12'
         //.inline_error= @company.errors[:linkedin_identifiers].first
 
   .control-group

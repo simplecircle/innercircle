@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+  include ApplicationHelper
 
   layout :choose_layout
   before_filter :find_resource, only: [:show, :edit, :update, :destroy]
@@ -19,7 +20,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
     @company.subdomain = params[:company][:name].to_slug.normalize(:separator=>"").to_s
     @verticals = (params[:verticals] || []).map{|v| v.to_i}
-    @provider_identifiers_string = params[:company][:provider_identifier][:linkedin].gsub(" ", "")
+    @normalized_pi = normalize_provider_identifiers(params[:company][:provider_identifier][:linkedin])
 
     # if current_user && current_user.god?
     #   @company.users << current_user
@@ -32,8 +33,8 @@ class CompaniesController < ApplicationController
 
     @company.instagram_location_id = get_instagram_location_id(@company.instagram_location_id) if @company.instagram_location_id.length > 12
 
-    if @company.save!
-      @provider_identifiers_string.split(",").each do |pi|
+    if @company.save
+      @normalized_pi.split(",").each do |pi|
          ProviderIdentifier.create({company_id:@company.id, linkedin:pi}) 
       end
       save_verticals(@verticals, @company) if @verticals
@@ -91,28 +92,26 @@ class CompaniesController < ApplicationController
     @mode = 'update'
     @verticals = @company.verticals.map(&:id)
     @submit_button_text = "Save"
-    @stringified_provider_identifiers = @company.provider_identifiers.pluck(:linkedin).join(",")
+    @normalized_pi = @company.provider_identifiers.pluck(:linkedin).join(",")
   end
 
   def update
-    if params[:commit] == "update_show_in_index"
-      current_company.update_attribute(:show_in_index, params[:company][:show_in_index]) if current_user.god?
-      return render :nothing => true
-    end
+    # if params[:commit] == "update_show_in_index"
+    #   current_company.update_attribute(:show_in_index, params[:company][:show_in_index]) if current_user.god?
+    #   return render :nothing => true
+    # end
 
     @notice = nil
     # params[:company][:linkedin_identifiers] = params[:company][:linkedin_identifiers].gsub(" ", "").split(",")
     @company.assign_attributes company_params
     @verticals = params[:verticals] || []
     @verticals = @verticals.map{|x| x.to_i }
-
-
+    @normalized_pi = normalize_provider_identifiers(params[:company][:provider_identifier][:linkedin])
     @company.instagram_location_id = get_instagram_location_id(@company.instagram_location_id) if @company.instagram_location_id.length > 12
 
-    if @company.save!
-      @provider_identifiers_string = params[:company][:provider_identifier][:linkedin].gsub(" ", "")
+    if @company.save
       ProviderIdentifier.where(company_id:@company.id).delete_all
-      @provider_identifiers_string.split(",").each do |pi|
+      @normalized_pi.split(",").each do |pi|
         ProviderIdentifier.create({company_id:@company.id, linkedin:pi}) 
       end
       save_verticals(@verticals, @company)

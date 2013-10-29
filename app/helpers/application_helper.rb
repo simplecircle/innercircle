@@ -22,5 +22,10 @@ module ApplicationHelper
       "http://06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com/#{attachment_name}/#{model.id}/#{File.basename(image_url)}"
     end
   end
+  
+  def normalize_provider_identifiers(provider_identifiers)
+    # must be a string
+    provider_identifiers.split(",").map{|pi| pi.downcase.gsub(" ", "")}.uniq.join(",")
+  end
 
 end

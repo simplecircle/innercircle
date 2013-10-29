@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131028221104) do
+ActiveRecord::Schema.define(version: 20131029190225) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(version: 20131028221104) do
     t.boolean  "pending",                default: false
     t.text     "referral_source"
     t.string   "linkedin_access_token"
-    t.text     "company_connections"
+    t.text     "linkedin_connections"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

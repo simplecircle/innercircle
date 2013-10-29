@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  serialize :company_connections, Hash
+  serialize :linkedin_connections, Hash
   # attr_accessible :email, :password, :role, :company_dept_ids, :company_connections, :linkedin_access_token
 
   has_secure_password
