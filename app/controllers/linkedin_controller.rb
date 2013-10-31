@@ -18,8 +18,10 @@ class LinkedinController < ApplicationController
         ProviderIdentifier.where(linkedin:user.linkedin_connections.keys).each{|pi| company_ids << pi.company_id}
         company_ids.uniq!
         company_ids.each{|ci| CompanyConnection.create({user_id:current_user.id, company_id:ci})}
-        user.connected_companies.each do |co|
-          user.follow!(co) 
+
+        # (featured companies) buzzfeed, meetup, warby parker, general assembly, squarespace, songza, huge inc, newscred, kickstarter, razorfush ny
+        user.connected_companies.pluck(:id).concat([73, 72, 64, 49, 48, 43, 40, 39, 18, 47]).uniq.each do |co_id|
+          Relationship.create!(follower_id:user.id, followed_id:co_id)
         end
   		  redirect_to(root_url())
   	  end
