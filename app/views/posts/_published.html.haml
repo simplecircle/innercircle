@@ -1,8 +1,6 @@
 - posts.each do |post|
   %li{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}"}}
     .photo
-
-      = post.photo_url(:large)
       = image_tag(url_for_cdn_image(post, post.photo_url(:large)))
       .post-info-bar
         - case post.provider

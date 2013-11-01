@@ -41,10 +41,9 @@ $(document).ready ->
     $(window).resize ->
       initPublished()
 
+
+
   # Infinite scroll
-
-
-
   loading = false
   queryOffsetQuantity = 15
   queryOffset = queryOffsetQuantity 
@@ -56,7 +55,7 @@ $(document).ready ->
       
       onComplete = ->
         loading = false
-        $('.spinner').hide()
+        $('.loader').hide()
 
       success = ->
         items = $("#masonry li")
@@ -87,8 +86,8 @@ $(document).ready ->
         url = window.location.pathname 
         url += '?offset=' + queryOffset 
         queryOffset += queryOffsetQuantity
-        $('.spinner').html('<img src="http://06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com/loader.gif" width="16px" height="11px" />')
-        $('.spinner').show()
+        $('.loader').html('LOADING...')
+        $('.loader').show()
 
         $.ajax
           url: url
