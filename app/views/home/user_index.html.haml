@@ -5,6 +5,6 @@
   .col-md-8
     %ul#masonry
       = render("posts/published", posts:@posts)
-    #infinite= will_paginate @posts
+    .spinner
   .col-md-4
     %h4 Suggested companies to follow

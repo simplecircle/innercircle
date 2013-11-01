@@ -42,46 +42,63 @@ $(document).ready ->
       initPublished()
 
   # Infinite scroll
-  if $('#infinite .pagination').length
-    $(window).scroll ->
-      url = $('.pagination .next_page').attr('href')
-      scrollY = if window.pageYOffset != undefined then window.pageYOffset else (document.documentElement || document.body.parentNode || document.body).scrollTop
-      # The offset needs to be at least over 190px for it to work on the iphone!
-      if url && scrollY >= $(document).height() - window.innerHeight - 400
-        $('.pagination').html('<img src="http://06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com/loader.gif" width="16px" height="11px" />')
-        $('.pagination').show()
-        existingItems = $("#masonry li")
 
-        success = ->
-          items = $("#masonry li")
-          offset = existingItems.length - items.length
-          if offset  != -8
-            newItems = items.slice(offset)
-          else
-            newItems = items.slice(-8)
 
-          if mode == "unpublished"
-            if window.innerWidth < 600
-              # Two columns for phones please
-              unpublishedContainer.masonry
-                columnWidth: (unpublishedContainerWidth ) ->
-                  unpublishedContainerWidth / 2
-              $(unpublishedContainer).find("li").css('width', '44%')
-              setHeight(columnCount, unpublishedContainerWidth, newItems)
-            else
-              setHeight(columnCount, unpublishedContainerWidth, newItems)
-            unpublishedContainer.masonry( 'appended', newItems);
+
+  loading = false
+  queryOffsetQuantity = 15
+  queryOffset = queryOffsetQuantity 
+  $(window).scroll ->
+    scrollY = if window.pageYOffset != undefined then window.pageYOffset else (document.documentElement || document.body.parentNode || document.body).scrollTop
+    # The offset needs to be at least over 190px for it to work on the iphone!
+    if scrollY >= $(document).height() - window.innerHeight - 400
+      existingItems = $("#masonry li")
+      
+      onComplete = ->
+        loading = false
+        $('.spinner').hide()
+
+      success = ->
+        items = $("#masonry li")
+        offset = existingItems.length - items.length
+        if offset  != -8
+          newItems = items.slice(offset)
+        else
+          newItems = items.slice(-8)
+
+        if mode == "unpublished"
+          if window.innerWidth < 600
+            # Two columns for phones please
+            unpublishedContainer.masonry
+              columnWidth: (unpublishedContainerWidth ) ->
+                unpublishedContainerWidth / 2
+            $(unpublishedContainer).find("li").css('width', '44%')
+            setHeight(columnCount, unpublishedContainerWidth, newItems)
           else
-            setHeight(columnCount, containerWidth, newItems)
-            container.masonry( 'appended', newItems );
-          newItems.fadeIn("fast")
-          bindPostCaptionClickOnMobile()
+            setHeight(columnCount, unpublishedContainerWidth, newItems)
+          unpublishedContainer.masonry( 'appended', newItems);
+        else
+          setHeight(columnCount, containerWidth, newItems)
+          container.masonry( 'appended', newItems );
+        newItems.fadeIn("fast")
+
+      if loading == false
+        loading = true
+        url = window.location.pathname 
+        url += '?offset=' + queryOffset 
+        queryOffset += queryOffsetQuantity
+        $('.spinner').html('<img src="http://06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com/loader.gif" width="16px" height="11px" />')
+        $('.spinner').show()
 
         $.ajax
           url: url
           dataType: "script"
           success: success
           async: true
+          complete: onComplete
+
+
+
 
   #company beta signup form
   $('.homepage-signup-form').submit (e) ->

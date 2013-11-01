@@ -31,6 +31,7 @@ gem 'uglifier'#, '>= 1.0.3'
 gem "less-rails"
 gem 'bootstrap-on-rails'
 gem 'sprite-factory'
+gem 'hirb'
 
 group :test, :development do
   gem 'haml-rails'
