@@ -8,7 +8,7 @@ $(document).ready ->
   setHeight = (columnCount, containerWidth, items) ->
     $.each items, ->
       # 29 makes up for the faux gutter
-      width = (containerWidth/columnCount)-29 
+      width = (containerWidth/columnCount)-15
       if mode == "unpublished"
         # Both image and parent li need their height set to work in FF
         $(this).find('.photo-img').height(Math.round(width * $(this).data("aspect-ratio")))

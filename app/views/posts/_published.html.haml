@@ -3,5 +3,10 @@
     .photo
       = image_tag(url_for_cdn_image(post, post.photo_url(:large)), class:"photo-img")
       .post-info-bar.clearfix
-        .pull-left= link_to(image_tag(post.company.logo_url(:medium), class:"company-logo-small"), post.company.website_url, target:"_blank")
+        - if current_user
+          - post.company.provider_identifiers.each do|pi|
+            - if current_user.linkedin_connections.has_key?(pi.linkedin)
+              .pull-left= link_to("in",root_url(subdomain:post.company.subdomain), class:"connection_flag")
+              - break
+        .pull-left= link_to(image_tag(post.company.logo_url(:medium), class:"company-logo-small"), root_url(subdomain:post.company.subdomain))
         .date.pull-right= render('shared/pretty_publication_date', post:post)

@@ -1,5 +1,4 @@
 class Post < ActiveRecord::Base
-  serialize :provider_raw_data, Hash
   # attr_accessible :provider, :provider_strategy, :provider_uid, :provider_publication_date, :provider_raw_data, :media_url, :media_url_small, :like_count, :published, :caption, :width, :height, :remote_photo_url, :auto_published
 
   belongs_to :company
@@ -8,7 +7,7 @@ class Post < ActiveRecord::Base
 
   def self.following_stream(user, limit, offset=0)
     followed_user_ids = "SELECT followed_id FROM relationships WHERE follower_id = #{user.id}"
-    Post.where("company_id IN (#{followed_user_ids})").where(published:true).includes(:company).order(provider_publication_date: :desc).limit(15).offset(offset)
+    Post.where("company_id IN (#{followed_user_ids})").where(published:true).includes(company: :provider_identifiers).order(provider_publication_date: :desc).limit(15).offset(offset)
   end
 
 
