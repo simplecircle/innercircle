@@ -8,7 +8,11 @@
         .modal-content
           .modal-body
           .modal-footer
-            .logo.pull-left
+            .media
+              = link_to(image_tag("#", class:"modal-logo"), root_url(subdomain:"google"), class:"pull-left")
+              .media-body
+                .media-heading.modal-date
+                .modal-caption
     %ul#masonry
       = render("posts/published", posts:@posts)
     .loader

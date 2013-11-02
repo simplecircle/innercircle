@@ -1,5 +1,5 @@
 - posts.each do |post|
-  %li{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}"}}
+  %li{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}", "caption"=>"#{strip_tags(post.caption)}", "subdomain"=>"#{post.company.subdomain}"}}
     .photo
       = image_tag(url_for_cdn_image(post, post.photo_url(:large)), class:"photo-img")
       .post-info-bar.clearfix

@@ -231,6 +231,39 @@ input[type="file"]{
     display: inline-block;
   }
 }
+.modal-backdrop{
+  background-color: black;
+    filter: alpha(opacity=80) !important;
+    -khtml-opacity: 0.8 !important;
+    -moz-opacity: 0.8 !important;
+    opacity: 0.8 !important;
+ }
+.modal-content{
+  overflow:hidden;
+}
+.modal-body{
+  padding:0;
+  img{
+    width:100%;
+  }
+}
+.modal-footer{
+  margin:0;
+  text-align: left;
+}
+.modal-logo{
+  max-width:200px;
+  max-height:50px;
+  margin-top:3px;
+}
+.media-body{
+  border-left: 1px solid #ccc;
+  padding-left:10px;
+  min-height:55px;
+}
+.media-heading{
+  color:#999;
+}
 .navbar{
   border-top:3px solid @accentColor;
   background:@bodyBackground;
