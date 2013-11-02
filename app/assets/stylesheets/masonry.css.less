@@ -3,22 +3,35 @@
 @import "bootstrap/mixins.less";
 @import "variables.css.less";
 
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
 #masonry{
   width:100%;
   padding:0;
   li{
-    width:48%;
+    .border-radius(6px);
+    background:white;
     border:1px solid #D6D6D6;
-    overflow:hidden;
     margin-bottom: 15px;
+    overflow:hidden;
+    width:48%;
     .photo {
-      position: relative;
       .post-info-bar{
-        background:white;
    	    color:@gray-light;
-  	    padding:5px;
+  	    padding:8px 0 0 7px;
+        .company-logo-small{
+          max-width:100px;
+          max-height:25px;
+        }
   	    .date{
-  	  	  padding-left: 30px;
+          display:inline-block;
+          font-size:11px;
+          color:#ccc;
+          padding-top:3px;
+          margin-right:7px;
   	    }
       }
     }

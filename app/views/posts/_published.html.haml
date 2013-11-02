@@ -1,17 +1,7 @@
 - posts.each do |post|
   %li{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}"}}
     .photo
-      = image_tag(url_for_cdn_image(post, post.photo_url(:large)))
-      .post-info-bar
-        - case post.provider
-        - when "facebook"
-          .facebook_logo_gray.pull-left
-        - when "instagram"
-          .instagram_logo_gray.pull-left
-        - when "tumblr"
-          .tumblr_logo_gray.pull-left
-        - when "foursquare"
-          .foursquare_logo_gray.pull-left
-        .date
-          = post.company.name
-          = render('shared/pretty_publication_date', post:post)
+      = image_tag(url_for_cdn_image(post, post.photo_url(:large)), class:"photo-img")
+      .post-info-bar.clearfix
+        .pull-left= link_to(image_tag(post.company.logo_url(:medium), class:"company-logo-small"), post.company.website_url, target:"_blank")
+        .date.pull-right= render('shared/pretty_publication_date', post:post)

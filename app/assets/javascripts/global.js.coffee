@@ -11,12 +11,12 @@ $(document).ready ->
       width = (containerWidth/columnCount)-29 
       if mode == "unpublished"
         # Both image and parent li need their height set to work in FF
-        $(this).find('.photo img').height(Math.round(width * $(this).data("aspect-ratio")))
+        $(this).find('.photo-img').height(Math.round(width * $(this).data("aspect-ratio")))
         $(this).height(Math.round(width * $(this).data("aspect-ratio"))+30)
       else
         # Both image and parent li need their height set to work in FF
-        $(this).find('.photo img').height(Math.round(width * $(this).data("aspect-ratio")))
-        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+30)
+        $(this).find('.photo-img').height(Math.round(width * $(this).data("aspect-ratio")))
+        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+40)
 
   if mode == "unpublished"
     items = $(unpublishedContainer).find("li")
