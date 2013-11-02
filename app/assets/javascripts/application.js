@@ -17,6 +17,7 @@
 //= require bootstrap/tooltip
 //= require bootstrap/button
 //= require bootstrap/collapse
+//= require bootstrap/modal
 //= require placeholder.min
 //= require_tree .
 
