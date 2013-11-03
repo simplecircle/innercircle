@@ -3,6 +3,8 @@ class HomeController < ApplicationController
   def index
   	if current_user
   	  @posts = Post.following_stream(current_user, 15, home_params[:offset].to_i)
+      @suggested_companies = Company.suggest(5, current_user)
+
   	  respond_to do |format|
         format.html {render("user_index")}
         format.js {render("posts/published.js.erb")}

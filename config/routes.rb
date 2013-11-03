@@ -34,4 +34,6 @@ Innercircle::Application.routes.draw do
   get "confirmation"=>"users#confirmation"
   get "for_companies"=>"newsletter#for_companies"
   get '/robots.txt' => 'static#robots'
+  post 'relationships/:company_id'=>'relationships#create', as:'relationships'
+  delete 'relationships/:company_id'=>'relationships#destroy', as:'relationship'
 end

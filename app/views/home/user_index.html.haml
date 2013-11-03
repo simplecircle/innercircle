@@ -18,3 +18,10 @@
     .loader
   .col-md-4
     %h4 Suggested companies to follow
+    %ul.suggested_companies
+      - @suggested_companies.each do |company|
+        %li
+          .pull-left= company.name
+          .pull-right{class:company.id}= render("relationships/follow_btn", company:company)
+
+

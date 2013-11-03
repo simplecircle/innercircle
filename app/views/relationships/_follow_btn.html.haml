@@ -1,0 +1,8 @@
+%div{"id"=>company.id}
+  - if current_user
+    - if current_user.following?(company.id)
+      = link_to 'Unfollow', relationship_url(company), method:"delete", remote:true, id:"following", class:"btn following_btn gray_text"
+    - else
+      = link_to 'Follow', relationships_url(company), method:"post", remote:true, id:"follow", class:"btn follow_btn"
+  - else
+    = link_to 'Follow', relationships_url(company), method:"post", remote:true, id:"follow", class:"btn follow_btn"
