@@ -1,1 +1,1 @@
-$('.suggested_companies .<%= @company.id %>').html('<%= escape_javascript(render("relationships/follow_btn", company:@company, size:@size))%>');
+$('#follow-btn-id-<%= @company.id %>').replaceWith('<%= escape_javascript(render("relationships/follow_btn", company:@company, size:@size))%>');

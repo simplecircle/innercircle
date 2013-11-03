@@ -1,8 +1,7 @@
-%div{"id"=>company.id}
-  - if current_user
-    - if current_user.following?(company.id)
-      = link_to "#{size == 'mini' ? '✓':'Unfollow'}", relationship_url(company, size:size), method:"delete", remote:true, class:"btn following_btn"
-    - else
-      = link_to "#{size == 'mini' ? '+':'+ Follow'}", relationships_url(company, size:size), method:"post", remote:true, class:"btn follow_btn"
+- if current_user
+  - if current_user.following?(company.id)
+    = link_to "#{size == 'mini' ? '✓':'Unfollow'}", relationship_url(company, size:size), method:"delete", remote:true, id:"follow-btn-id-#{company.id}", class:"btn following_btn"
   - else
-    = link_to "#{size == 'mini' ? '+':'+ Follow'}", relationships_url(company, size:size), method:"post", remote:true, class:"btn follow_btn"
+    = link_to("#{size == 'mini' ? '+':'+ Follow'}", relationships_url(company, size:size), method:"post", remote:true, id:"follow-btn-id-#{company.id}", class:"btn follow_btn")
+- else
+  = link_to "#{size == 'mini' ? '+':'+ Follow'}", relationships_url(company, size:size), method:"post", remote:true, id:"follow-btn-id-#{company.id}", class:"btn follow_btn"

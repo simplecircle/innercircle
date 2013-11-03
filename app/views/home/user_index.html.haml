@@ -22,6 +22,6 @@
       - @suggested_companies.each do |company|
         %li
           .pull-left= company.name
-          .pull-right{class:company.id}= render("relationships/follow_btn", company:company, size:"mini")
+          .pull-right= render("relationships/follow_btn", company:company, size:"mini")
 
 
