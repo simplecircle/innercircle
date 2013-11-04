@@ -17,11 +17,18 @@
       = render("posts/published", posts:@posts)
     .loader
   .col-md-4
-    %h4 Suggested companies to follow
-    %ul.suggested_companies
+    %h4 MORE COMPANIES TO FOLLOW
+    %ul.list-unstyled
       - @suggested_companies.each do |company|
-        %li
-          .pull-left= company.name
-          .pull-right= render("relationships/follow_btn", company:company, size:"mini")
+        - post = company.posts.where(published:true).first
+        %li.suggested-company.clearfix
+          .media
+            .suggested-company__image-wrapper.media-object.pull-left 
+              = link_to("", root_url(subdomain:company.subdomain), class:"suggested-company__image", style:"background-image: url(#{url_for_cdn_image(post, post.photo_url(:large))});")
+            .media-body
+              .media-heading= link_to(company.name.upcase, root_url(subdomain:company.subdomain))
+              = truncate(company.short_description, length:75)
+              %br
+              = render("relationships/follow_btn", company:company, size:"mini")
 
 

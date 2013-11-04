@@ -6,7 +6,6 @@ class RelationshipsController < ApplicationController
     if current_user
      if current_user.follow!(@company)
       @size = relationship_params[:size]
-      # @follower_count = @company.followers.count
      end
     else
       render "shared/login_overlay"
@@ -17,7 +16,6 @@ class RelationshipsController < ApplicationController
     if current_user and current_user.following?(@company)
       current_user.unfollow!(@company)
       @size = relationship_params[:size]
-      # @follower_count = @company.followers.count
     else
       head 403
     end

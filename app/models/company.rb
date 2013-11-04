@@ -156,6 +156,6 @@ class Company < ActiveRecord::Base
 
   def self.suggest(quantity, current_user)
     co_ids = ids.reject{|id| current_user.following_ids.include?(id)}
-    select(:name, :id).find(co_ids.sample(quantity))
+    select(:name, :id, :subdomain, :short_description).includes(:posts).find(co_ids.sample(quantity))
   end
 end

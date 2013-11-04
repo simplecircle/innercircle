@@ -13,6 +13,61 @@ form{
   outline-color: transparent;
   outline-style: none;
 }
+.suggested-company{
+    border-top: 1px solid #ccc;
+    padding:10px 0 10px 5px;
+    .media-heading{
+      font-family: @headings-font-family;
+      color: #333;
+      margin:0;
+      & a{
+        color:black;
+      }
+    }
+    .media-body{
+      border-left:none;
+      font-size: 12px;
+      color:#999;
+      padding:0;
+      .btn-follow{
+        margin-top: 4px;
+      }
+    }
+}
+.suggested-company__image-wrapper{
+  height:95px;
+  width:95px;
+  
+}
+.suggested-company__image{
+  /*Note the background image is set dynamically via an inline style*/
+  .border-radius(3px);
+  border:1px solid #ccc;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height:95px;
+  width:95px;
+  display:block;
+}
+.btn-follow{
+  border:1px solid #ccc;
+  .border-radius(3px);
+  color:#666;
+  display: inline-block;
+  font-family: 'gibson-semibold';
+  font-size: 12px;
+  line-height: 16px;
+  min-width: 35px;
+  padding:2px 10px 2px 10px;
+  text-align: center;
+}
+.btn-follow:hover{
+  border:1px solid #999;
+  color:black;
+  text-decoration: none;
+}
 .centered{
   float: none;
   margin: 0 auto;
