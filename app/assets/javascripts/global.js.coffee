@@ -50,7 +50,7 @@ $(document).ready ->
   $(window).scroll ->
     scrollY = if window.pageYOffset != undefined then window.pageYOffset else (document.documentElement || document.body.parentNode || document.body).scrollTop
     # The offset needs to be at least over 190px for it to work on the iphone!
-    if scrollY >= $(document).height() - window.innerHeight - 400
+    if scrollY >= $(document).height() - window.innerHeight - 800
       existingItems = $("#masonry li")
       
       onComplete = ->
