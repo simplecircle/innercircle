@@ -1,26 +1,29 @@
 .container
-  .col-md-6.centered.text-center.ptl
+  .text-center.ptl
     = link_to(image_tag("jobcrush_logo.png", class:"jobcrush_logo"), root_url(subdomain:false))
+  .col-md-5.centered
     - if @company_connections
-      %h3.ptxl.pbl.plxl.prxl Sign up to see who you know at any JobCrush company
+      %h3.ptxl.pbxl Sign up to see who you know at any JobCrush company.
     - else
-      %h3.ptxl.pbl.plxl.prxl Stay “in the know” with great companies or find the perfect job. Sign up now.
-  %section.signup.col-md-4.white.centered
+      %h3.ptxl.pbxl Sign up to stay “in the know” with great companies or find the perfect job.
+  %section.signup.col-md-5.centered
     = form_for @user do |f|
       .form-group
-        .pull-left= f.label :email, "* EMAIL"
         .inline_error.pull-left= @user.errors[:email].first
-        = f.email_field(:email, class:"form-control")
+        = f.email_field(:email, class:"form-control public", placeholder:"* EMAIL")
       .form-group
-        .pull-left= f.label :password, "* PASSWORD"
         .inline_error.pull-left= @user.errors[:password].first
-        = f.password_field(:password, class:"form-control")
+        = f.password_field(:password, class:"form-control public", placeholder:"* PASSWORD")
       .help-block.ptl * WHAT FIELDS DO YOU WORK IN OR ASPIRE TO?
       .inline_error= @user.errors[:company_depts].first
       - CompanyDept.all.each do |dept|
         %div
           = check_box_tag dept.name, dept.id, @user.company_depts.include?(dept), :name => 'user[company_dept_ids][]'
           = label_tag dept.name, dept.name.upcase
-      = f.submit "SIGN UP", class:"btn btn-primary btn-block mtxl mbm"
-      .tiny.text-center
-        Your subscription is private and we'll never spam you.
+      = f.submit "SIGN UP", class:"btn btn-lg btn-onboarding btn-block mtm mbxl"
+      .tiny.mtm
+        Your privacy is very important to us. By using JobCrush you’re agreeing to our 
+        = link_to("terms & conditions.", "http://google.com")
+        Already have an account?
+        = link_to("Login here.", login_url())
+

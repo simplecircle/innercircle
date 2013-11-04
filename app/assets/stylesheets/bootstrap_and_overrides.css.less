@@ -79,7 +79,7 @@ body {
 
 // Custom colors
 // -------------------------
-/*@linkColor:#00bce4;*/
+@linkColor:#00bce4;
 @navbarBackground:@bodyBackground;
 @navbarBackgroundHighlight:@bodyBackground;
 @navbarLinkColor:@gray-lighter;
@@ -112,6 +112,13 @@ body {
   font-family: @headings-font-family;
   font-weight: normal;
 }
+a{
+  color:#00bce4;
+}
+a:hover{
+  color: darken(#00bce4, 10%);
+  text-decoration: none;
+}
 h1, h2, h3, h4, h5 {
   font-family: @headings-font-family;
   font-weight: normal;
@@ -129,6 +136,7 @@ hr{
   border-top:1px solid darken(@bodyBackground, 6%);
   border-bottom:1px solid @bodyBackground;
 }
+
 textarea,
 select,
 input[type="text"],
@@ -136,7 +144,12 @@ input[type="email"],
 input[type="password"]{
   color:#444;
   font-size:16px;
-  height:40px;
+  &.public{
+    height:50px;
+    font-family:@headings-font-family;
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
   &:focus {
     border-color: @linkColor;
     outline: 0;
@@ -157,21 +170,10 @@ input[type="file"]{
 .btn {
   background:@linkColor;
   border: 1px solid @linkColor;
-  
   font-family: @headings-font-family;
-  /*color:white !important;*/
-/*  cursor: pointer;
-  display: inline-block;
-  font-size:16px;
-  line-height: @baseLineHeight;
-  margin-bottom: 0; // For input.btn
-  padding: 7px 16px;
-  text-shadow:none !important;
-  text-align: center;
-  vertical-align: middle;
-*/  &:hover{
+  &:hover{
     background: darken(@linkColor, 4%);
-  border: 1px solid @linkColor;
+    border: 1px solid @linkColor;
     text-decoration:none;
   }
   &.disabled {
@@ -187,39 +189,14 @@ input[type="file"]{
       background: darken(@accentRed, 4%);
     }
   }
-  &.btn-linkedin {
-    background:#005f95;
-    border-color:#005f95;
-    background-image: image-url('sprite_master.png');
-    background-position:4px 4px;
-    background-repeat:no-repeat;
+  &.btn-onboarding {
+    background:yellow;
+    border-color: darken(yellow, 4%);
+    color:#333;
     &:hover {
-      background-color: darken(#005f95, 4%);
+      background-color: lighten(yellow, 20%);
+      border-color: lighten(yellow, 20%);
     }
-  }
-}
-/*
-.btn-large {
-  font-size:18px;
-  .border-radius(@borderRadiusLarge);
-}
-.btn-small {
-  padding: @paddingSmall;
-  font-size: @fontSizeSmall;
-  .border-radius(@borderRadiusSmall);
-}
-.btn-mini {
-  padding: @paddingMini;
-  font-size: @fontSizeMini;
-  .border-radius(@borderRadiusSmall);
-}
-.btn-block {
-  display:block;
-}*/
-.checkbox-group{
-  padding-top:5px;
-  label{
-  color:@gray !important;
   }
 }
 .form-horizontal {
