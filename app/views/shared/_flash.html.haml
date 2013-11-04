@@ -1,9 +1,11 @@
 - unless flash[:notice].blank?
-  .alert.alert-success.mtm
-    %h4
-      = raw flash[:notice]
+  .alert.alert-success
+    .container
+      .col-md-8
+        = raw flash[:notice]
 
 - unless flash[:alert].blank?
-  .alert.alert-error.mtm
-    %h4
-      = raw flash[:alert]
+  .alert.alert-error
+    .container
+      .col-md-8
+        = raw flash[:alert]

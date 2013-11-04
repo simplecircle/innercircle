@@ -23,7 +23,7 @@ class LinkedinController < ApplicationController
         user.connected_companies.pluck(:id).concat([73, 72, 64, 49, 48, 43, 40, 39, 18, 47]).uniq.each do |co_id|
           Relationship.create!(follower_id:user.id, followed_id:co_id)
         end
-  		  redirect_to(root_url())
+  		  redirect_to(root_url(), notice:"<h3>OK, YOU’RE READY TO GO!</h3><p>This is your news feed. Recent content from companies you follow shows up here. To get the ball rolling, we followed the <b>#{current_user.company_connections.count}</b> companies you have <span class='connection_flag'>in</span> connections at, plus some we recommend. <b>Go ahead and explore...</b></p>")
   	  end
   	end
   end
