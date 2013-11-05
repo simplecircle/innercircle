@@ -15,6 +15,10 @@ class UsersController < ApplicationController
     @user = User.new(params_user)
     @user.role = 'talent'
     if @user.save
+      # (featured companies) buzzfeed, meetup, warby parker, general assembly, squarespace, songza, huge inc, newscred, kickstarter, razorfush ny
+      [73, 72, 64, 49, 48, 43, 40, 39, 18, 47].uniq.each do |co_id|
+        Relationship.create!(follower_id:@user.id, followed_id:co_id)
+      end
       cookies.permanent[:auth_token] = {value:@user.auth_token, domain: :all}
       redirect_to(new_linkedin_url)
     else

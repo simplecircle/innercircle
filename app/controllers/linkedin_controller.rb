@@ -1,29 +1,42 @@
 class LinkedinController < ApplicationController
 
+include ActionView::Helpers::TextHelper
   layout "onboarding"
-  # before_filter :authorize_user, only:[:show]
 
   def new
+    session[:company_connections_only] = true if linkedin_params[:company_connections]
   end
 
   def create
   	user = User.find(current_user)
+
   	if auth = request.env["omniauth.auth"]
   		# raise auth.to_yaml
       access_token = auth["credentials"].token
   		user.assign_attributes(linkedin_access_token:access_token, linkedin_connections:build_linkedin_connections(access_token))
       if user.save(validate: false)
         company_ids = []
-        # note the IN clause here...
+        # Note the IN clause here...
         ProviderIdentifier.where(linkedin:user.linkedin_connections.keys).each{|pi| company_ids << pi.company_id}
         company_ids.uniq!
         company_ids.each{|ci| CompanyConnection.create({user_id:current_user.id, company_id:ci})}
-
-        # (featured companies) buzzfeed, meetup, warby parker, general assembly, squarespace, songza, huge inc, newscred, kickstarter, razorfush ny
-        user.connected_companies.pluck(:id).concat([73, 72, 64, 49, 48, 43, 40, 39, 18, 47]).uniq.each do |co_id|
+        
+        # Ensure companies that were followed in user#create are not attempted to be followed again.
+        user.connected_company_ids.reject!{|con_co_id| user.relationships.pluck(:followed_id).include?(con_co_id)}.each do |co_id|
           Relationship.create!(follower_id:user.id, followed_id:co_id)
         end
-  		  redirect_to(root_url(), notice:"<h3>OK, YOU’RE READY TO GO!</h3><p>This is your news feed. Recent content from companies you follow shows up here. To get the ball rolling, we followed the <b>#{current_user.company_connections.count}</b> companies you have <span class='connection_flag'>in</span> connections at, plus some we recommend. <b>Go ahead and explore...</b></p>")
+        
+        if session[:company_connections_only] and user.company_connections.blank?
+          session.delete(:company_connections_only)
+          redirect_to(root_url(), notice:"<h4>YOU MAY NOT HAVE COMPANY CONNECTIONS AT THIS TIME</h4><p>Some of your colleague’s may have their LinkedIn privacy settings locked down. As new companies join or your network changes, connections may form...</p>")
+        elsif session[:company_connections_only] and !user.company_connections.blank?
+          session.delete(:company_connections_only) 
+          redirect_to(root_url(), notice:"<h4>YOU KNOW SOMEONE AT #{pluralize(current_user.company_connections.count, 'company').upcase}!</h4><p>We’ve added these companies to your feed: <b>#{Company.where(id:current_user.company_connections.pluck(:company_id)).pluck(:name).join(", ")}</b>")
+        elsif user.company_connections.blank?
+    		  redirect_to(root_url(), notice:"<h4>WELCOME TO YOUR NEWS FEED!</h4><p>Looks like you don’t have any LinkedIn connections here just yet. As new companies join or your network changes, connections may form.<br/><br/>In other news, this screen contains the latest content from companies you follow. We started you off by adding a few humdingers. <b>Go ahead, look around...</b></p>")
+        else
+          redirect_to(root_url(), notice:"<h4>WELCOME TO YOUR NEWS FEED!</h4><p>It contains the latest content from companies you follow. We started you off by adding the <b>#{pluralize(current_user.company_connections.count, 'company')}</b> you have connections at, plus some we recommend. <b>Go ahead, look around...</b></p>")
+        end
   	  end
   	end
   end
@@ -71,5 +84,9 @@ class LinkedinController < ApplicationController
       build_linkedin_connections(access_token, offset)
     end
     @company_connections
+  end
+
+  def linkedin_params
+    params.permit!
   end
 end

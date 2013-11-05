@@ -2,11 +2,14 @@
   .text-center.ptl
     = link_to(image_tag("jobcrush_logo.png", class:"jobcrush_logo"), root_url(subdomain:false))
   .col-md-5.centered.ptl
-    %h3.ptxl Welcome aboard! Now, find out who you know at JobCrush companies.
+    - if session[:company_connections_only]
+      %h3.ptxl See who you know at the JobCrush companies!
+    - else
+      %h3.ptxl Great! Now, find out who you know at JobCrush companies.
   %section.signup.col-md-5.centered
     %p.mbxl
       Privately connect with <b><i>LinkedIn</i></b>, and when you see the <span class="connection_flag">in</span> logo by a company or job, you’ll be able to see who your connections are.
       <i>We’ll never post your JobCrush activity to LinkedIn.</i>
     = link_to("FIND CONNECTIONS", "/auth/linkedin", class:"btn btn-lg btn-block btn-onboarding mtxl mbm")
     .text-center
-      = link_to("Skip this incredibly useful step", root_url, class:"tiny")
+      = link_to("Skip this incredibly useful step", root_url(company_connections_skipped:"true"), class:"tiny")
