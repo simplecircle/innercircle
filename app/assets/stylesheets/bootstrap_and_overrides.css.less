@@ -168,7 +168,7 @@ input[type="file"]{
   line-height:0px;
 }
 .alert-success{
-  background-color: yellow;
+  background-color: @accentYellow;
   border:none;
   color:@gray-dark;
   padding:25px 0 25px 0;
@@ -197,12 +197,12 @@ input[type="file"]{
     }
   }
   &.btn-onboarding {
-    background:yellow;
-    border-color: darken(yellow, 4%);
+    background-color: darken(@accentYellow, 10%);
+    border-color: darken(@accentYellow, 25%);
     color:#333;
     &:hover {
-      background-color: lighten(yellow, 20%);
-      border-color: lighten(yellow, 20%);
+      background:@accentYellow;
+      border-color: darken(@accentYellow, 20%);
     }
   }
 }
