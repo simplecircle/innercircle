@@ -1,12 +1,15 @@
 - posts.each do |post|
   %li{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}", "caption"=>"#{strip_tags(post.caption)}", "subdomain"=>"#{post.company.subdomain}"}}
+    - if current_user
+      - post.company.provider_identifiers.each do|pi|
+        - if current_user.linkedin_connections.has_key?(pi.linkedin)
+          = link_to(root_url(subdomain:post.company.subdomain)) do 
+            .connection-flag__triangle-wrapper    
+              .connection-flag__triangle
+              .connection-flag in
+          - break
     .photo
       = image_tag(url_for_cdn_image(post, post.photo_url(:large)), class:"photo-img")
       .post-info-bar.clearfix
-        - if current_user
-          - post.company.provider_identifiers.each do|pi|
-            - if current_user.linkedin_connections.has_key?(pi.linkedin)
-              .pull-left= link_to("in",root_url(subdomain:post.company.subdomain), class:"connection_flag")
-              - break
         .pull-left= link_to(image_tag(post.company.logo_url(:medium), class:"company-logo-small"), root_url(subdomain:post.company.subdomain))
         .date.pull-right= render('shared/pretty_publication_date', post:post)
