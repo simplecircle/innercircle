@@ -1,6 +1,6 @@
 - if current_user
   - if current_user.following?(company.id)
-    = link_to "#{size == 'mini' ? '✓':'UNFOLLOW'}", relationship_url(company, size:size), method:"delete", remote:true, id:"follow-btn-id-#{company.id}", class:"btn-follow"
+    = link_to "#{size == 'mini' ? '✓':'UNFOLLOW'}", relationship_url(company, size:size), method:"delete", remote:true, id:"follow-btn-id-#{company.id}", class:"btn-follow btn-unfollow"
   - else
     = link_to("#{size == 'mini' ? '+':'+ FOLLOW'}", relationships_url(company, size:size), method:"post", remote:true, id:"follow-btn-id-#{company.id}", class:"btn-follow")
 - else

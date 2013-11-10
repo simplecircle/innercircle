@@ -1,0 +1,14 @@
+- post = company.posts.where(published:true).first
+.col-md-6
+  .company-card
+    .company-card__cover-wrapper
+      .company-card__cover-opacity-overlay
+      = link_to(root_url(subdomain:company.subdomain)) do
+        .connection-flag__triangle-wrapper    
+          .connection-flag__triangle
+          .connection-flag HIRING
+        .company-card__name= company.name.upcase
+        = image_tag(url_for_cdn_image(post, post.photo_url(:medium)), class:"company-card__cover")
+    .company-card__info
+      .pull-left= link_to(truncate(company.short_description, length:50, separator:' '), root_url(subdomain:company.subdomain), class:"inverse-link company-card__description")
+      .pull-right= render("relationships/follow_btn", company:company, size:"default")

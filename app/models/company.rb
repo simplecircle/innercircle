@@ -35,6 +35,8 @@ class Company < ActiveRecord::Base
   validates_format_of :website_url, with:/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}?/, message:"URL isn't valid"
   validates :logo, presence:true
 
+  scope :published, where(show_in_index:true)
+
   def admins
     users.where(:role=>"admin")
   end
