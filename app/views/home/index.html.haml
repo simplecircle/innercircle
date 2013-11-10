@@ -6,24 +6,26 @@
   %meta{property:"og:title", content:"JobCrush"}
   %meta{property:"og:description", content:"Discover and Follow Exciting Companies in Creative & Tech"}
 .container
-  %section.hero.col-md-8.centered
+  .hero.col-md-12
     %h1
-      DISCOVER AND FOLLOW EXCITING COMPANIES IN CREATIVE & TECH
+      FOLLOW DAILY LIFE AT EXCITING COMPANIES
     %h2.pbxl
-      Find work with a company that fits your style or stay “in the know” by following today’s most inspiring companies.
-    %h3.mtxl <span class="hero__highlight">EXPLORE</span>
+      JobCrush provides a unique look into a company’s culture. Use it to find work with a company that fits your style or just stay “in the know”.
+    %h3.red EXPLORE      
     .arrow_down.centered
-  %section.white.col-md-7.centered.mtl
+  .row.mtxl
     - @companies.each do |company|
-      = link_to(root_url(subdomain:company.subdomain), {:class=>'company-filmstrip mbxl'}) do
-        .mbs{:style=>"border-bottom-color:#{company.hex_code};"}
-          - company.latest_posts_by_provider_date(3).each do |post|
-            .company-filmstrip__image{class:post.wrapper_class}
-              = image_tag(url_for_cdn_image(post, post.photo_url(:medium)))
-          .clearfix
-        .company-filmstrip__info.mbl
-          .pull-right.company-filmstrip__last-updated-time= company.last_published_time
-          .pull-left.company-filmstrip__name.mbn.mts= company.name.upcase
-          .pull-left.company-filmstrip__hq.mlm.mts= company.hq_city
-          .clearfix
-          .company-filmstrip__description= company.short_description
+      - post = company.posts.where(published:true).first
+      .col-md-6
+        .company-card
+          .company-card__cover-wrapper
+            .company-card__cover-opacity-overlay
+            = link_to(root_url(subdomain:company.subdomain)) do
+              .connection-flag__triangle-wrapper    
+                .connection-flag__triangle
+                .connection-flag HIRING
+              .company-card__name= company.name.upcase
+              = image_tag(url_for_cdn_image(post, post.photo_url(:medium)), class:"company-card__cover")
+          .company-card__info
+            .pull-left= link_to(truncate(company.short_description, length:53, separator:' '), root_url(subdomain:company.subdomain), class:"inverse-link")
+            .pull-right= render("relationships/follow_btn", company:company, size:"default")
