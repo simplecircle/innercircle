@@ -8,6 +8,7 @@ class Company < ActiveRecord::Base
   has_many :users, through: :users_companies
   has_many :companies_verticals, :dependent => :destroy
   has_many :verticals, through: :companies_verticals
+  # has_many :relationships, :foreign_key => "follower_id"
   has_many :reverse_relationships, :foreign_key => "followed_id",
                                    :class_name => "Relationship",
                                    :dependent => :destroy
@@ -35,7 +36,7 @@ class Company < ActiveRecord::Base
   validates_format_of :website_url, with:/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}?/, message:"URL isn't valid"
   validates :logo, presence:true
 
-  scope :published, where(show_in_index:true)
+  scope :published, -> {where(show_in_index:true)}
 
   def admins
     users.where(:role=>"admin")

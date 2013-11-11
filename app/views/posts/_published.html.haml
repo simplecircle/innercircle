@@ -4,9 +4,7 @@
       - post.company.provider_identifiers.each do|pi|
         - if current_user.linkedin_connections.has_key?(pi.linkedin)
           = link_to(root_url(subdomain:post.company.subdomain)) do 
-            .connection-flag__triangle-wrapper    
-              .connection-flag__triangle
-              .connection-flag in
+            .connection-flag in
           - break
     .photo
       = image_tag(url_for_cdn_image(post, post.photo_url(:large)), class:"photo-img")

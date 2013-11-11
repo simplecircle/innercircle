@@ -26,7 +26,6 @@
   zoom: 1;
   z-index:2;
 }
-
 .company-card__cover{
   min-width: 100%;
   position: relative
@@ -51,7 +50,35 @@
   padding-top: 4px;
   display: block;
 }
-
+.corner-triangle-wrapper{
+  position:absolute;
+  z-index: 5;
+}
+.corner-triangle{
+  background-color: white;
+  height:100px;
+  left:-50px;
+  position:absolute;
+  top:-50px;
+  width:100px;
+  -webkit-transform:rotate(45deg);
+  -moz-transform:rotate(45deg);
+  -o-transform:rotate(45deg);
+  -ms-transform:rotate(45deg);
+}
+.corner-triangle__message{
+  color:#333;
+  font-family: @headings-font-family;
+  font-size: 11px;
+  margin:15px 0 0 3px;
+  padding:1px 6px 1px 5px;
+  position:absolute;
+  top:0;
+  -webkit-transform:rotate(-45deg);
+  -moz-transform:rotate(-45deg);
+  -o-transform:rotate(-45deg);
+  -ms-transform:rotate(-45deg);
+}
 
 
 .fb-like {

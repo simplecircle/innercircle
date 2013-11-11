@@ -4,9 +4,9 @@
     .company-card__cover-wrapper
       .company-card__cover-opacity-overlay
       = link_to(root_url(subdomain:company.subdomain)) do
-        .connection-flag__triangle-wrapper    
-          .connection-flag__triangle
-          .connection-flag HIRING
+        .corner-triangle-wrapper 
+          .corner-triangle
+          .corner-triangle__message HIRING
         .company-card__name= company.name.upcase
         = image_tag(url_for_cdn_image(post, post.photo_url(:medium)), class:"company-card__cover")
     .company-card__info
