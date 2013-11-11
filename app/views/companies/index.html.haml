@@ -16,11 +16,11 @@
           %input.search-query{:type => 'search', :name => 'query'}
       %li
         %a{"data-toggle"=>"dropdown", href: "#"}
-          ALL
+          = @vertical.nil? ? "ALL":@vertical.upcase
           %b.caret
         %ul.dropdown-menu
-          - Vertical.all.pluck(:name).each do |name|
+          - @verticals.each do |name|
             %li
-              %a{href: "http://twitter.com/fat", role: "menuitem", tabindex: "-1"}= name
+              = link_to(name, companies_url(vertical:name))
     .row.mtxl
       = render(partial:"companies/card", collection:@companies, as: :company)
