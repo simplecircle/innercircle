@@ -1,6 +1,7 @@
 - post = company.posts.where(published:true).first
 .col-md-6
   .company-card
+    = render("relationships/connection_flag", company:company)
     .company-card__cover-wrapper
       .company-card__cover-opacity-overlay
       = link_to(root_url(subdomain:company.subdomain)) do

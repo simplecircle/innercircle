@@ -1,11 +1,6 @@
 - posts.each do |post|
   %li{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}", "caption"=>"#{strip_tags(post.caption)}", "subdomain"=>"#{post.company.subdomain}"}}
-    - if current_user
-      - post.company.provider_identifiers.each do|pi|
-        - if current_user.linkedin_connections.has_key?(pi.linkedin)
-          = link_to(root_url(subdomain:post.company.subdomain)) do 
-            .connection-flag in
-          - break
+    = render("relationships/connection_flag", company:post.company)
     .photo
       = image_tag(url_for_cdn_image(post, post.photo_url(:large)), class:"photo-img")
       .post-info-bar.clearfix

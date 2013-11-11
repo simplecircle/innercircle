@@ -63,7 +63,7 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @companies = Company.published.order('last_published_posts_at DESC')
+    @companies = Company.published.includes(:provider_identifiers).order('last_published_posts_at DESC')
   end
 
   def edit
