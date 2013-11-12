@@ -79,7 +79,7 @@ body {
 
 // Custom colors
 // -------------------------
-@linkColor:#fe3c38;
+
 @navbarBackground:@bodyBackground;
 @navbarBackgroundHighlight:@bodyBackground;
 @navbarLinkColor:@gray-lighter;
@@ -205,6 +205,29 @@ input[type="file"]{
       border-color: darken(@accentYellow, 20%);
     }
   }
+}
+.nav .caret-large{
+  margin-top: 7px;
+  border-top: 7px solid @gray;
+  border-right: 7px solid rgba(0, 0, 0, 0);
+  border-left: 7px solid rgba(0, 0, 0, 0);
+}
+.nav a:hover .caret, .nav a:hover .caret:focus{
+  border-top-color: black; 
+  border-bottom-color: black; 
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+  border-color:#333;
+  color:black;
+}
+.dropdown-menu{
+  .border-radius(0);
+  width:100%;
+  margin:0;
+}
+.dropdown-menu > li > a:hover{
+  color:black;
+  background:#ededed;
 }
 .form-horizontal {
   label {

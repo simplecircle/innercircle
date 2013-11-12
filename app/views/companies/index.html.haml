@@ -10,19 +10,17 @@
 -else
   .container
     .row
-      .centered.col-md-8
-        %ul.nav
-          %li.col-md-6
-            =form_tag companies_path, :method => 'get' do |f|
-              /.search-icon= image_sprite(:magnify_glass)
-              %input{:type => 'search', :name => 'q', :class => 'company-search', placeholder:"company name or location"}
-          %li.col-md-6
-            %a{"data-toggle"=>"dropdown", href: "#", class:"verticals-dropdown"}
-              = @vertical.nil? ? "ALL":@vertical.upcase
-              /%b.caret
-            %ul.dropdown-menu
-              - @verticals.each do |name|
-                %li
-                  = link_to(name, companies_url(vertical:name))
+      %ul.nav
+        %li.col-md-4
+          =form_tag companies_path, :method => 'get' do |f|
+            %input{type:'search', name:'q', class:'company-search', value:"#{@q}", placeholder:"company name or location"}
+        %li.col-md-4
+          = link_to("#", "data-toggle"=>"dropdown", class:"verticals-dropdown") do 
+            = @vertical.nil? ? "ALL CATEGORIES":@vertical.upcase
+            %b.caret.caret-large.pull-right
+          %ul.dropdown-menu
+            - @verticals.each do |name|
+              %li
+                = link_to(name, companies_url(vertical:name))
     .row.mtxl
       = render(partial:"companies/card", collection:@companies, as: :company)

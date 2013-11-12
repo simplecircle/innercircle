@@ -64,12 +64,13 @@ class CompaniesController < ApplicationController
 
   def index
     @verticals = Vertical.all.pluck(:name)
-    if @q = company_params[:q]
+    if !company_params[:q].blank?
+     @q = company_params[:q]
      @companies = Company.where('name ILIKE ? OR hq_city ILIKE ? OR hq_city ILIKE ?', "#{@q}%","#{@q}%","#{@q}%") 
     elsif @vertical = company_params[:vertical]
       @verticals.reject!{|v| v == @vertical.downcase}
-      @verticals.unshift("all")
-      @companies = Company.published.joins(:verticals).where("verticals.name"=>company_params[:vertical].downcase).order('last_published_posts_at DESC')
+      @verticals.unshift("All categories").sort_by!{ |v| v.downcase }
+      @companies = Company.published.joins(:verticals).where("lower(verticals.name) = ?", company_params[:vertical].downcase).order('last_published_posts_at DESC')
     else
       @companies = Company.published.includes(:provider_identifiers).order('last_published_posts_at DESC')
     end
