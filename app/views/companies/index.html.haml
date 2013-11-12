@@ -12,9 +12,6 @@
     .row
       %ul.nav
         %li.col-md-4
-          =form_tag companies_path, :method => 'get' do |f|
-            %input{type:'search', name:'q', class:'company-search', value:"#{@q}", placeholder:"company name or location"}
-        %li.col-md-4
           = link_to("#", "data-toggle"=>"dropdown", class:"verticals-dropdown") do 
             = @vertical.nil? ? "ALL CATEGORIES":@vertical.upcase
             %b.caret.caret-large.pull-right
@@ -22,5 +19,8 @@
             - @verticals.each do |name|
               %li
                 = link_to(name, companies_url(vertical:name))
+        %li.col-md-4
+          = form_tag companies_path, method:'get' do
+            %input{type:'search', name:'q', class:'company-search', value:"#{@q}", placeholder:"company name or location"}
     .row.mtxl
       = render(partial:"companies/card", collection:@companies, as: :company)
