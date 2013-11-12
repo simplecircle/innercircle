@@ -64,7 +64,9 @@ class CompaniesController < ApplicationController
 
   def index
     @verticals = Vertical.all.pluck(:name)
-    if @vertical = company_params[:vertical]
+    if @q = company_params[:q]
+     @companies = Company.where('name ILIKE ? OR hq_city ILIKE ? OR hq_city ILIKE ?', "#{@q}%","#{@q}%","#{@q}%") 
+    elsif @vertical = company_params[:vertical]
       @verticals.reject!{|v| v == @vertical.downcase}
       @verticals.unshift("all")
       @companies = Company.published.joins(:verticals).where("verticals.name"=>company_params[:vertical].downcase).order('last_published_posts_at DESC')
@@ -152,6 +154,6 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.permit(:vertical, :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at, :last_published_posts_at, :instagram_location_id, :show_in_index, :provider_identifier)
+    params.permit(:q, :vertical, :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at, :last_published_posts_at, :instagram_location_id, :show_in_index, :provider_identifier)
   end
 end

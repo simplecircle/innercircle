@@ -9,18 +9,20 @@
           %h3= link_to(capitalize_phrase(company.name), dashboard_url(subdomain:company.subdomain))
 -else
   .container
-    %ul.nav
-      %li
-        =form_tag "http://google.com", :class => 'navbar-search', :method => 'get' do |f|
-          /.search-icon= image_sprite(:magnify_glass)
-          %input.search-query{:type => 'search', :name => 'query'}
-      %li
-        %a{"data-toggle"=>"dropdown", href: "#"}
-          = @vertical.nil? ? "ALL":@vertical.upcase
-          %b.caret
-        %ul.dropdown-menu
-          - @verticals.each do |name|
-            %li
-              = link_to(name, companies_url(vertical:name))
+    .row
+      .centered.col-md-8
+        %ul.nav
+          %li.col-md-6
+            =form_tag companies_path, :method => 'get' do |f|
+              /.search-icon= image_sprite(:magnify_glass)
+              %input{:type => 'search', :name => 'q', :class => 'company-search', placeholder:"company name or location"}
+          %li.col-md-6
+            %a{"data-toggle"=>"dropdown", href: "#", class:"verticals-dropdown"}
+              = @vertical.nil? ? "ALL":@vertical.upcase
+              /%b.caret
+            %ul.dropdown-menu
+              - @verticals.each do |name|
+                %li
+                  = link_to(name, companies_url(vertical:name))
     .row.mtxl
       = render(partial:"companies/card", collection:@companies, as: :company)
