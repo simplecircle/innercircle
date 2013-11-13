@@ -45,12 +45,13 @@ $(document).ready ->
 
   # Infinite scroll
   loading = false
-  queryOffsetQuantity = 15
+  queryOffsetQuantity = 14
   queryOffset = queryOffsetQuantity 
   $(window).scroll ->
     scrollY = if window.pageYOffset != undefined then window.pageYOffset else (document.documentElement || document.body.parentNode || document.body).scrollTop
     # The offset needs to be at least over 190px for it to work on the iphone!
-    if scrollY >= $(document).height() - window.innerHeight - 800
+    # Dont page if .loader is not present
+    if (scrollY >= $(document).height() - window.innerHeight - 800) and $('.loader').length
       existingItems = $("#masonry li")
       
       onComplete = ->
@@ -58,28 +59,30 @@ $(document).ready ->
         $('.loader').hide()
 
       success = ->
+        # This block only gets ran if its for a Masonry page
         items = $("#masonry li")
-        offset = existingItems.length - items.length
-        if offset  != -8
-          newItems = items.slice(offset)
-        else
-          newItems = items.slice(-8)
-
-        if mode == "unpublished"
-          if window.innerWidth < 600
-            # Two columns for phones please
-            unpublishedContainer.masonry
-              columnWidth: (unpublishedContainerWidth ) ->
-                unpublishedContainerWidth / 2
-            $(unpublishedContainer).find("li").css('width', '44%')
-            setHeight(columnCount, unpublishedContainerWidth, newItems)
+        if items.length
+          offset = existingItems.length - items.length
+          if offset  != -8
+            newItems = items.slice(offset)
           else
-            setHeight(columnCount, unpublishedContainerWidth, newItems)
-          unpublishedContainer.masonry( 'appended', newItems);
-        else
-          setHeight(columnCount, containerWidth, newItems)
-          container.masonry( 'appended', newItems );
-        newItems.fadeIn("fast")
+            newItems = items.slice(-8)
+
+          if mode == "unpublished"
+            if window.innerWidth < 600
+              # Two columns for phones please
+              unpublishedContainer.masonry
+                columnWidth: (unpublishedContainerWidth ) ->
+                  unpublishedContainerWidth / 2
+              $(unpublishedContainer).find("li").css('width', '44%')
+              setHeight(columnCount, unpublishedContainerWidth, newItems)
+            else
+              setHeight(columnCount, unpublishedContainerWidth, newItems)
+            unpublishedContainer.masonry( 'appended', newItems);
+          else
+            setHeight(columnCount, containerWidth, newItems)
+            container.masonry( 'appended', newItems );
+          newItems.fadeIn("fast")
 
       if loading == false
         loading = true

@@ -1,0 +1,6 @@
+// Note @companies is returning one more than needed so the loader can be removed or not. The loader's
+// presence tells the pager when its at the end of a collection
+$('.company_cards').append('<%= j render(partial:"companies/card", collection:@companies[0...Company::PAGINATION_LIMIT], as: :company) %>');
+<% if @companies.length <  Company::PAGINATION_LIMIT%> 
+  $('.loader').remove();
+<% end %>

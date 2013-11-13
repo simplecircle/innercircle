@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   def index
   	if current_user
-  	  @posts = Post.following_stream(current_user, 15, home_params[:offset].to_i)
+  	  @posts = Post.following_stream(current_user, Company::PAGINATION_LIMIT, home_params[:offset].to_i)
       @suggested_companies = Company.suggest(3, current_user)
       if home_params[:company_connections_skipped]
         flash[:notice] = "<h4>WELCOME TO YOUR NEWS FEED!</h4><p>It contains the latest content from companies you follow. We started you off by adding a few humdingers. <b>Go ahead, look around...</b></p>"

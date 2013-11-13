@@ -37,6 +37,7 @@ class Company < ActiveRecord::Base
   validates :logo, presence:true
 
   scope :published, -> {where(show_in_index:true)}
+  PAGINATION_LIMIT = 14
 
   def admins
     users.where(:role=>"admin")

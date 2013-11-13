@@ -22,5 +22,6 @@
         %li.col-md-4
           = form_tag companies_path, method:'get' do
             %input{type:'search', name:'q', class:'company-search', value:"#{@q}", placeholder:"company name or location"}
-    .row.mtxl
-      = render(partial:"companies/card", collection:@companies, as: :company)
+    .row.company_cards.mtxl
+      = render(partial:"companies/card", collection:@companies[0...Company::PAGINATION_LIMIT], as: :company)
+      .loader

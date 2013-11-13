@@ -72,7 +72,12 @@ class CompaniesController < ApplicationController
       @verticals.unshift("All categories").sort_by!{ |v| v.downcase }
       @companies = Company.published.joins(:verticals).where("lower(verticals.name) = ?", company_params[:vertical].downcase).order('last_published_posts_at DESC')
     else
-      @companies = Company.published.includes(:provider_identifiers).order('last_published_posts_at DESC')
+      # Company::PAGINATION_LIMIT + 1 is being returned here to paging will ACURATELY know when it's at the end of a collection.
+      @companies = Company.published.includes(:provider_identifiers).order('last_published_posts_at DESC').limit(Company::PAGINATION_LIMIT+1).offset(company_params[:offset])
+      respond_to do |format|
+        format.html {render("index")}
+        format.js {render("index.js.erb")}
+      end
     end
 
   end
@@ -155,6 +160,6 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.permit(:q, :vertical, :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at, :last_published_posts_at, :instagram_location_id, :show_in_index, :provider_identifier)
+    params.permit(:offset, :q, :vertical, :name, :website_url, :users_attributes, :logo, :logo_cache, :short_description, :hq_city, :hq_state, :employee_count, :verticals, :instagram_username, :facebook, :tumblr, :twitter, :jobs_page, :instagram_username_auto_publish, :instagram_location_auto_publish, :facebook_auto_publish, :tumblr_auto_publish, :twitter_auto_publish, :foursquare_auto_publish, :foursquare_v2_id, :instagram_uid, :hex_code, :last_reviewed_posts_at, :last_published_posts_at, :instagram_location_id, :show_in_index, :provider_identifier)
   end
 end

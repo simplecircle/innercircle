@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
 
   def self.following_stream(user, limit, offset=0)
     followed_user_ids = "SELECT followed_id FROM relationships WHERE follower_id = #{user.id}"
-    Post.where("company_id IN (#{followed_user_ids})").where(published:true).includes(company: :provider_identifiers).order(provider_publication_date: :desc).limit(15).offset(offset)
+    Post.where("company_id IN (#{followed_user_ids})").where(published:true).includes(company: :provider_identifiers).order(provider_publication_date: :desc).limit(limit).offset(offset)
   end
 
 
