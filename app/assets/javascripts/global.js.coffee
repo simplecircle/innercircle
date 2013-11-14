@@ -100,6 +100,10 @@ $(document).ready ->
           complete: onComplete
 
 
+$(document).on 'click', '.inline-cta__hide', (e)->
+  e.preventDefault()
+  $(this).parent().parent().fadeOut()
+
 
 
   #company beta signup form

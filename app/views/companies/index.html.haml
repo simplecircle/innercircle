@@ -26,5 +26,9 @@
           = form_tag companies_path, method:'get' do
             %input{type:'search', name:'q', class:'company-search', value:"#{@q}", placeholder:"company name or location"}
     .row.company_cards.mtxl
-      = render(partial:"companies/card", collection:@companies[0...Company::PAGINATION_LIMIT], as: :company)
+      /= render(partial:"companies/card", collection:@companies[0...Company::PAGINATION_LIMIT], as: :company)
+      - @companies[0...Company::PAGINATION_LIMIT].each_with_index do |company, index| 
+        = render("companies/card", company:company)
+        - if index == 3
+          = render("shared/inline_cta_share")
       .loader
