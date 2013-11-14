@@ -8,8 +8,8 @@
     = link_to(image_tag("jobcrush_logo.png"), root_url(subdomain:false), class:"navbar-brand")
   .collapse.navbar-collapse.navbar-ex1-collapse
     %ul.nav.navbar-nav
-      %li= link_to("COMPANIES", companies_url(), class:"gibson-semibold")
-      %li= link_to("JOBS", "http://google.com", class:"gibson-semibold")
+      %li= nav_link("COMPANIES", companies_url())
+      %li= nav_link("JOBS", "http://google.com")
     %ul.nav.navbar-nav.navbar-right
       - if current_user
         - if current_user.company_connections.empty?

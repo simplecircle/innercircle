@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include ActionView::Helpers::UrlHelper
 
   def url_for_cdn_image(model, image_url)
     case model.class.name.downcase
@@ -26,6 +27,11 @@ module ApplicationHelper
   def normalize_provider_identifiers(provider_identifiers)
     # must be a string
     provider_identifiers.split(",").map{|pi| pi.downcase.gsub(" ", "")}.uniq.join(",")
+  end
+
+  def nav_link(link_text, link_path)
+    class_name = current_page?(link_path) ? 'current' : nil
+    link_to(link_text, link_path, class:"#{class_name}")
   end
 
 end

@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
     @current_company ||= Company.find_by_subdomain(request.subdomain)
   end
 
+  
   def authorize
     if current_user
       #God users included in has_privileges_to logic
