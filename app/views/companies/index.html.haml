@@ -18,7 +18,10 @@
           %ul.dropdown-menu
             - @verticals.each do |name|
               %li
-                = link_to(name, companies_url(vertical:name))
+                - if name.downcase == "all categories"
+                  = link_to(name, companies_url(vertical:nil))
+                - else
+                  = link_to(name, companies_url(vertical:name))
         %li.col-md-4
           = form_tag companies_path, method:'get' do
             %input{type:'search', name:'q', class:'company-search', value:"#{@q}", placeholder:"company name or location"}
