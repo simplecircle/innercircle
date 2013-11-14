@@ -2,24 +2,65 @@
 @import "bootstrap/mixins.less";
 @import "variables.css.less";
 
+body.home { 
+  background: image-url('home_bkgrnd.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 .hero{
-  text-align: center;
   h1{
+    color:white;
     line-height: 42px;
   }
   h2{
-    color:@gray-light;
+    color:#F0F0F0;
     font-family: @sansFontFamily;
     font-weight:normal;
+    font-size:18px;
+    line-height: 26px;
+    margin: 0 0 0px 0;
+  }
+  ul{
+    color:#E0E0E0;
+    font-size:18px;
+    margin:10px 0 60px 0;
+    padding-left:20px;
+    li{
+      padding-top: 6px;
+    }
+  }
+  .btn-lg{
+    color:#FAE1E1;
+    color:white;
+    padding: 15px 39px 15px 40px;
     font-size:16px;
-    line-height: 24px;
-    padding: 0 50px 0 50px;
+    background: transparent;
+    border:1px solid #ccc;
+  }
+  .btn-lg:hover{
+    color:#FAE1E1;
+  }
+  .signup_cta{
+    color:#E0E0E0;
+    padding: 15px 0 0 20px;
+    a{
+      font-family: @headings-font-family;
+      font-size: 16px;
+      padding-left: 10px;
+    }
+
   }
 }
-.hero__highlight{
-  background:yellow;
-  padding:0 5px 0 5px;
-}
-.hero__arrow-down{
-  text-align: center;
-}
+.photo_credit{
+   color:@gray-light;
+   font-size: 11px;
+   margin-bottom: 30px;
+   a{
+     color:@gray-light;
+   }
+   a:hover{
+     color:@accentColor;
+   }
+ }

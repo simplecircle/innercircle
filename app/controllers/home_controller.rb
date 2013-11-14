@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+  layout 'home'
+
   def index
   	if current_user
   	  @posts = Post.following_stream(current_user, Company::PAGINATION_LIMIT, home_params[:offset].to_i)

@@ -56,7 +56,7 @@ body {
   background:@bodyBackground;
   font-family:@sansFontFamily;
   font-size:13px;
-  &.application{
+  &.application, &.home{
    padding-top: 100px;
   }
   &.onboarding{
@@ -277,10 +277,14 @@ input[type="file"]{
 .media-heading{
   color:#999;
 }
-.navbar{
+.home > .navbar{
   border-top:3px solid @accentColor;
-  background:@bodyBackground;
+  background:transparent;
+  border:none;
   /*border-bottom:1px solid #ccc;*/
+}
+.navbar{
+  background-color:@bodyBackground;
 }
 .navbar-default .navbar-nav > li > a{
     margin-top: 4px;

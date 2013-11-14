@@ -6,12 +6,27 @@
   %meta{property:"og:title", content:"JobCrush"}
   %meta{property:"og:description", content:"Discover and Follow Exciting Companies in Creative & Tech"}
 .container
-  .hero.col-md-12
-    %h1
-      FOLLOW DAILY LIFE AT EXCITING COMPANIES
-    %h2.pbxl
-      JobCrush provides a unique look into a company’s culture. Use it to find work with a company that fits your style or just stay “in the know”.
-    %h3.red EXPLORE      
-    .arrow_down.centered
-  .row.mtxl
-    = render(partial:"companies/card", collection:@companies, as: :company)
+  .hero
+    .col-md-12
+      %h1
+        FOLLOW DAILY LIFE AT EXCITING COMPANIES
+    .col-md-8
+      %h2
+        JobCrush provides a unique look into a company’s culture.
+      %ul
+        %li Find work with a company that fits your style
+        %li See where you have connections
+        %li Stay “in the know” with companies of interest
+
+      %nav.clearfix
+        = link_to("EXPLORE COMPANIES", companies_url(subdomain:false), class:"btn btn-lg inverse-link pull-left")
+        .signup_cta.pull-left
+          or
+          = link_to("SIGN UP FIRST", signup_url())
+  .nav.navbar-fixed-bottom
+    .container
+      .col-md-12
+        .photo_credit
+          Photo:
+          = link_to("General Assembly", root_url(subdomain:"generalassembly"))
+

@@ -26,6 +26,5 @@
             %li= link_to "Your Account", :controller => "users", :action=> "edit", :id => current_user.id
             %li= link_to "Logout", logout_url(subdomain:false)
       - else
-        %li= link_to("See who you know at JobCrush companies", signup_url(subdomain:false, company_connections:true), class:"pull-right")
         %li= link_to("LOGIN", login_url, class:"pull-right, gibson-semibold")
 
