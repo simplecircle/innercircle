@@ -13,7 +13,9 @@
     %ul.nav.navbar-nav.navbar-right
       - if current_user
         - if current_user.company_connections.empty?
-          %li= link_to("See who you know at JobCrush companies", new_linkedin_url(subdomain:false, company_connections:true), class:"pull-right")
+          %li
+            = link_to("Sign Up", new_linkedin_url(subdomain:false, company_connections:true), class:"pull-right")
+            to follow companies & find connections
         - if current_user.god?
           %li= link_to("#{capitalize_phrase(current_company.name)}’s Dashboard", dashboard_url) if current_company
         - if current_user.admin?
@@ -26,5 +28,8 @@
             %li= link_to "Your Account", :controller => "users", :action=> "edit", :id => current_user.id
             %li= link_to "Logout", logout_url(subdomain:false)
       - else
+        .signup_cta.pull-left
+          = link_to("Sign Up", signup_url(subdomain:false, company_connections:true), class:"underlined")
+          to follow companies & find connections
         %li= link_to("LOGIN", login_url, class:"pull-right, gibson-semibold")
 

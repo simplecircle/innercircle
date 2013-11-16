@@ -1,3 +1,4 @@
+
 /// CSS Reset
 //@import "bootstrap/reset";
 
@@ -51,6 +52,7 @@
 
 // Utility classes
 @import "bootstrap/utilities.less"; // Has to be last to override when necessary
+
 
 body {
   background:@bodyBackground;
@@ -113,10 +115,14 @@ body {
   font-weight: normal;
 }
 a{
-  color:@accentColor;
+  color:#333;
+}
+a.underlined{
+  color:#333;
+  text-decoration: underline;
 }
 a:hover{
-  color: darken(#00bce4, 10%);
+  color: black;
   text-decoration: none;
 }
 h1, h2, h3, h4, h5 {
