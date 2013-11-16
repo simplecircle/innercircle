@@ -9,7 +9,7 @@
           %h3= link_to(capitalize_phrase(company.name), dashboard_url(subdomain:company.subdomain))
 -else
   .container
-    .row
+    .row.mtl
       %ul.nav
         %li.col-md-4
           = link_to("#", "data-toggle"=>"dropdown", class:"verticals-dropdown") do 
@@ -25,6 +25,8 @@
         %li.col-md-4
           = form_tag companies_path, method:'get' do
             %input{type:'search', name:'q', class:'company-search', value:"#{@q}", placeholder:"company name or location"}
+        %li.col-md-4
+          = link_to("Show companies where I know someone",signup_url(subdomain:false, company_connections:true), class:"underlined pull-right") 
     .row.company_cards.mtxl
       /= render(partial:"companies/card", collection:@companies[0...Company::PAGINATION_LIMIT], as: :company)
       - @companies[0...Company::PAGINATION_LIMIT].each_with_index do |company, index| 

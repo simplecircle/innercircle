@@ -187,19 +187,14 @@ input[type="file"]{
   margin: -42px 0 30px 0;
 }
 .btn {
-  background:@linkColor;
-  border: 1px solid @linkColor;
+  background: transparent;
+  border: 1px solid #999;
+  color: @gray;
   font-family: @headings-font-family;
   &:hover{
-    background: darken(@linkColor, 4%);
-    border: 1px solid @linkColor;
+    border: 1px solid #333;
+    color: black;
     text-decoration:none;
-  }
-  &.disabled {
-    cursor: default;
-  }
-  &[disabled] {
-    background-color: #3fa5fc;
   }
   &.btn-warning {
     background: @accentRed;

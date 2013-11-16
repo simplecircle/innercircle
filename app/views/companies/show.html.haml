@@ -3,40 +3,26 @@
 - content_for :og_tags do
   %meta{property:"og:url", content:root_url}
   %meta{property:"og:image", content:@company.logo.url}
-  %meta{property:"og:title", content:"#{@company.name} on inner circle"}
-  %meta{property:"og:description", content:"Get updates on job opportunities and work life at #{capitalize_phrase(@company.name)}"}
+  %meta{property:"og:title", content:"#{@company.name} on JobCrush"}
+  %meta{property:"og:description", content:"Follow daily life at #{capitalize_phrase(@company.name)}"}
 = render 'shared/social_tag_script'
-- if !@is_remote
-  #company-info{'data-company-subdomain'=>@company.subdomain}
-    %section.logo-and-short-description.mobile-padding
-      .company-logo= link_to(image_tag(@company.logo_url(:large)), @company.website_url, target:"_blank")
-      = @company.short_description
-      .tiny.gray-light= "#{@company.hq_city}, #{@company.hq_state} - #{@company.employee_count.gsub(/_/, "-")} employees"
-    %hr
-    %section.mobile-padding
-      = render "shared/flash", :flash=>flash unless flash.blank?
-      - if @has_current_user_already_joined
-        .btn.btn-block.disabled.mtm.subscribe-button-body{style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};"} ✓&nbsp;&nbsp;Subscribed
-      - else
-        = link_to("Subscribe", join_url(subdomain: @company.subdomain, email: params[:email]), class:"btn btn-block mtm subscribe-button-body js-btn-subscribe", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};")
-      .mts.gray-light.tac Get updates on job opportunities and work life at #{capitalize_phrase(@company.name)}
-      - if @referrer == "external"
-        .powered-by.visible-phone.mtm.tac
-          Powered by
-          =link_to(image_tag("inner_circle_logo.png"), root_url(subdomain: false))
-    - if @company.jobs_page
-      %hr
-      %section.mobile-padding
-        = link_to("See current job openings", @company.jobs_page, class:"btn btn-block mtm js-btn-see-company-jobs", style:"background-color:#{@company.hex_code};border-color:#{@company.hex_code};", target:"_blank")
-    %hr
-    - if @referrer == "external"
-      %section.mobile-padding.hidden-phone
-        .powered-by
-          Powered by
-          =link_to(image_tag("inner_circle_logo.png"), root_url(subdomain: false))
-    %section.social-links.tac.mvl.hidden-phone
-      = render 'shared/social_tags', url:root_url
-.masonry-wrapper
-  %ul#masonry.masonry-published
-    = render("posts/published", posts:@posts)
-  #infinite= will_paginate @posts
+= render "shared/flash", :flash=>flash unless flash.blank?
+
+.container
+  .row
+    .col-md-8
+      .masonry-wrapper
+        %ul#masonry.masonry-published
+          = render("posts/published", posts:@posts)
+    .col-md-4
+      #company-info{'data-company-subdomain'=>@company.subdomain}
+        %section.logo-and-short-description.mobile-padding
+          %h2= link_to(@company.name.upcase, @company.website_url, target:"_blank")
+          %hr
+          = @company.short_description
+          .tiny.gray-light= "#{@company.hq_city}, #{@company.hq_state} - #{@company.employee_count.gsub(/_/, "-")} employees"
+        %section.mobile-padding
+          = render("relationships/follow_btn", company:@company, size:"default")
+          = link_to("JOBS", @company.jobs_page, class:"btn")
+        %hr
+    /= render 'shared/social_tags', url:root_url

@@ -1,4 +1,4 @@
-%nav.navbar.navbar-default.navbar-fixed-top{role: "navigation"}
+%nav.navbar.navbar-default.navbar-fixed-top{role: "navigation", style:"border-top:3px solid #{@company.hex_code if @company};"}
   .navbar-header
     %button.navbar-toggle{"data-target" => ".navbar-ex1-collapse", "data-toggle" => "collapse", type: "button"}
       %span.sr-only Toggle navigation
@@ -21,7 +21,7 @@
         - if current_user.admin?
           %li= link_to("Dashboard", dashboard_url, class:"gibson-semibold")
         %li.dropdown
-          %a.display-strong.white.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          %a.white.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             = current_user.email
             %b.caret.caret-black
           %ul.dropdown-menu
