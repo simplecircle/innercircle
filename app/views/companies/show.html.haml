@@ -22,7 +22,7 @@
           = @company.short_description
           .tiny.gray-light= "#{@company.hq_city}, #{@company.hq_state} - #{@company.employee_count.gsub(/_/, "-")} employees"
         %section.mobile-padding
-          = render("relationships/follow_btn", company:@company, size:"default")
+          = render("relationships/follow_btn", company:@company, size:"large")
           = link_to("JOBS", @company.jobs_page, class:"btn")
         %hr
     /= render 'shared/social_tags', url:root_url

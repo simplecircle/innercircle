@@ -1,7 +1,7 @@
 - if current_user
   - if current_user.following?(company.id)
-    = link_to "#{size == 'mini' ? '✓':'UNFOLLOW'}", relationship_url(company, size:size), method:"delete", remote:true, id:"follow-btn-id-#{company.id}", class:"btn-follow btn-unfollow"
+    = link_to "#{size == 'small' ? '✓':'UNFOLLOW'}", relationship_url(company, size:size), method:"delete", remote:true, id:"follow-btn-id-#{company.id}", class:"btn btn-follow btn-unfollow #{'btn-follow-large' if size == 'large'} #{'btn-follow-medium' if size == 'medium'} #{'btn-follow-small' if size == 'small'}"
   - else
-    = link_to("#{size == 'mini' ? '+':'+ FOLLOW'}", relationships_url(company, size:size), method:"post", remote:true, id:"follow-btn-id-#{company.id}", class:"btn-follow")
+    = link_to("#{size == 'small' ? '+':'+ FOLLOW'}", relationships_url(company, size:size), method:"post", remote:true, id:"follow-btn-id-#{company.id}", class:"btn btn-follow #{'btn-follow-large' if size == 'large'} #{'btn-follow-medium' if size == 'medium'} #{'btn-follow-small' if size == 'small'}")
 - else
-  = link_to "#{size == 'mini' ? '+':'+ FOLLOW'}", relationships_url(company, size:size), method:"post", remote:true, id:"follow-btn-id-#{company.id}", class:"btn-follow"
+  = link_to "#{size == 'small' ? '+':'+ FOLLOW'}", relationships_url(company, size:size), method:"post", remote:true, id:"follow-btn-id-#{company.id}", class:"btn btn-follow #{'btn-follow-large' if size == 'large'} #{'btn-follow-medium' if size == 'medium'} #{'btn-follow-small' if size == 'small'}"

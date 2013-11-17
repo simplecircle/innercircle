@@ -12,4 +12,4 @@
         = image_tag(url_for_cdn_image(post, post.photo_url(:medium)), class:"company-card__cover")
     .company-card__info
       .pull-left= link_to(truncate(company.short_description, length:50, separator:' '), root_url(subdomain:company.subdomain), class:"inverse-link company-card__description")
-      .pull-right= render("relationships/follow_btn", company:company, size:"default")
+      .pull-right= render("relationships/follow_btn", company:company, size:"medium")

@@ -30,6 +30,6 @@
                 .media-heading= link_to(company.name.upcase, root_url(subdomain:company.subdomain))
                 = truncate(company.short_description, length:75)
                 %br
-                = render("relationships/follow_btn", company:company, size:"mini")
+                = render("relationships/follow_btn", company:company, size:"small")
 
 
