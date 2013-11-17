@@ -2,5 +2,5 @@
   - company.provider_identifiers.each do|pi|
     - if current_user.linkedin_connections.has_key?(pi.linkedin)
       = link_to(root_url(subdomain:company.subdomain)) do 
-        .connection-flag in
+        .connection-flag.connection-flag-nested in
       - break

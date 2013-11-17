@@ -49,13 +49,18 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    # Check to see if user has an email param from a newsletter
-    session[:email] = params[:email] if params[:email]
+    @connections = []
+    @company.provider_identifiers.each do |pi| 
+      if current_user.linkedin_connections.include?(pi.linkedin)
+         @connections << current_user.linkedin_connections[pi.linkedin]
+      end
+    end
+    unless @connections.empty?
+      @connections.flatten!.uniq!
+      @connections.sort_by!{|i| i["first_name"]}
+    end
     
-    @has_company_logo = true
     @posts = @company.posts.where(published:true).order("provider_publication_date DESC").paginate(:page => params[:page], per_page:8)
-    @referrer = referrer
-    @has_current_user_already_joined = current_user && current_user.talent? && current_user.member_of?(@company.id)
     respond_to do |format|
       format.html {render("show")}
       format.js {render("posts/published.js.erb")}
