@@ -49,18 +49,8 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @connections = []
-    @company.provider_identifiers.each do |pi| 
-      if current_user.linkedin_connections.include?(pi.linkedin)
-         @connections << current_user.linkedin_connections[pi.linkedin]
-      end
-    end
-    unless @connections.empty?
-      @connections.flatten!.uniq!
-      @connections.sort_by!{|i| i["first_name"]}
-    end
-    
     @posts = @company.posts.where(published:true).order("provider_publication_date DESC").paginate(:page => params[:page], per_page:8)
+    @connections = @company.connections(current_user)
     respond_to do |format|
       format.html {render("show")}
       format.js {render("posts/published.js.erb")}

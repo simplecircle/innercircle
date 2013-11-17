@@ -87,6 +87,19 @@ class Company < ActiveRecord::Base
     end
   end
 
+  def connections(user)
+    connections = []
+    self.provider_identifiers.each do |pi| 
+      if user.linkedin_connections.include?(pi.linkedin)
+         connections << user.linkedin_connections[pi.linkedin]
+      end
+    end
+    unless connections.empty?
+      connections.flatten!.uniq!
+      connections.sort_by!{|i| i["first_name"]}
+    end
+    connections
+  end
   def latest_posts_by_publish_date(count=3)
     posts.where(:published=>true).order("updated_at DESC").select([:company_id, :id, :provider_publication_date, :provider_strategy, :provider, :height, :width, :photo]).limit(count)
   end
@@ -163,4 +176,5 @@ class Company < ActiveRecord::Base
     co_ids = ids.reject{|id| following_ids.include?(id)}
     select(:name, :id, :subdomain, :short_description).find(co_ids.sample(quantity))
   end
+
 end
