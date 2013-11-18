@@ -8,6 +8,18 @@
 = render 'shared/social_tag_script'
 = render "shared/flash", :flash=>flash unless flash.blank?
 
+.photo-modal.modal{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+      .modal-footer
+        .media
+          = link_to(image_tag("#", class:"modal-logo"), "#", class:"pull-left")
+          .media-body
+            .media-heading.modal-date
+            .modal-caption
+      
+
 .container
   .row
     .col-md-8

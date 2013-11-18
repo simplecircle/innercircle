@@ -65,6 +65,10 @@ body {
    border-top:3px solid @accentColor; 
   }
 }
+/*This prevents the page from shifting when the modal is activated*/
+body, .navbar-fixed-top, .navbar-fixed-bottom {
+  margin-right: 0 !important;
+}
 
 /*@import "bootstrap/responsive";*/
 /*NOTE: twitter/bootstrap/responsive-767px-min.less has be manually included so that an aspect of it could be overridden*/
@@ -189,7 +193,7 @@ input[type="file"]{
 .btn {
   background: transparent;
   border: 1px solid #999;
-  color:#555;
+  color:#333;
   font-family: @headings-font-family;
   &:hover{
     border:1px solid #555;

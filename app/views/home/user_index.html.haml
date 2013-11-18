@@ -1,19 +1,18 @@
 - content_for :title do
   Following | JobCrush
-
+.photo-modal.modal{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+      .modal-footer
+        .media
+          = link_to(image_tag("#", class:"modal-logo"), "#", class:"pull-left")
+          .media-body
+            .media-heading.modal-date
+            .modal-caption
 .container
   .row
     .col-md-8
-      .photo-modal.modal{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
-        .modal-dialog
-          .modal-content
-            .modal-body
-            .modal-footer
-              .media
-                = link_to(image_tag("#", class:"modal-logo"), root_url(subdomain:"google"), class:"pull-left")
-                .media-body
-                  .media-heading.modal-date
-                  .modal-caption
       %ul#masonry
         = render("posts/published", posts:@posts)
       .loader
