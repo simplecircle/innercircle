@@ -49,7 +49,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @posts = @company.posts.where(published:true).order("provider_publication_date DESC").paginate(:page => params[:page], per_page:8)
+    @posts = @company.posts.where(published:true).order("provider_publication_date DESC").limit(Company::PAGINATION_LIMIT).offset(company_params[:offset])
     @connections = @company.connections(current_user)
     respond_to do |format|
       format.html {render("show")}
@@ -67,7 +67,7 @@ class CompaniesController < ApplicationController
       @verticals.unshift("All categories").sort_by!{ |v| v.downcase }
       @companies = Company.published.joins(:verticals).where("lower(verticals.name) = ?", company_params[:vertical].downcase).order('last_published_posts_at DESC')
     else
-      # Company::PAGINATION_LIMIT + 1 is being returned here to paging will ACURATELY know when it's at the end of a collection.
+      # Company::PAGINATION_LIMIT + 1 is being returned here so paging will ACURATELY know when it's at the end of a collection.
       @companies = Company.published.includes(:provider_identifiers).order('last_published_posts_at DESC').limit(Company::PAGINATION_LIMIT+1).offset(company_params[:offset])
       respond_to do |format|
         format.html {render("index")}
