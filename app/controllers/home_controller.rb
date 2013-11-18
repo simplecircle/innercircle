@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  layout 'home'
+  layout :choose_layout
 
   def index
   	if current_user
@@ -24,4 +24,12 @@ class HomeController < ApplicationController
     # params.require(:post).permit(:offset, :provider, :provider_strategy, :provider_uid, :provider_publication_date, :provider_raw_data, :media_url, :media_url_small, :like_count, :published, :caption, :width, :height, :remote_photo_url, :auto_published)
     params.permit!
   end
+
+  def choose_layout
+    if current_user
+      'application'
+    else
+      'home'
+    end
+  end 
 end
