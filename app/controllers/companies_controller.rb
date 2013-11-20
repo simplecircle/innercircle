@@ -50,7 +50,7 @@ class CompaniesController < ApplicationController
 
   def show
     @posts = @company.posts.where(published:true).order("provider_publication_date DESC").limit(Company::PAGINATION_LIMIT).offset(company_params[:offset])
-    @connections = @company.connections(current_user)
+    @connections = @company.connections(current_user) if current_user
     respond_to do |format|
       format.html {render("show")}
       format.js {render("posts/published.js.erb")}

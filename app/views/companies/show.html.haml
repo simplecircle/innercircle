@@ -44,7 +44,7 @@
           = render("relationships/follow_btn", company:@company, size:"large")
         .col-md-6
           = link_to("JOBS", @company.jobs_page, class:"btn btn-block")
-      - unless @connections.empty?
+      - unless @connections.blank?
         %header.clearfix.mtxl
           .connection-flag.connection-flag-gray.mts.mrm.pull-left in
           %h5.pull-left

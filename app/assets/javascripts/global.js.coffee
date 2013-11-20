@@ -12,7 +12,7 @@ $(document).ready ->
       if mode == "unpublished"
         # Both image and parent li need their height set to work in FF
         $(this).find('.photo-img').height(Math.round(width * $(this).data("aspect-ratio")))
-        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+30)
+        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+40)
       else
         # Both image and parent li need their height set to work in FF
         $(this).find('.photo-img').height(Math.round(width * $(this).data("aspect-ratio")))
@@ -100,9 +100,14 @@ $(document).ready ->
           complete: onComplete
 
 
-$(document).on 'click', '.inline-cta__hide', (e)->
-  e.preventDefault()
-  $(this).parent().parent().fadeOut()
+  $(document).on 'click', '.inline-cta__hide', (e)->
+    e.preventDefault()
+    $(this).parent().parent().fadeOut()
+
+  $('.photo-wrapper').on 'click', ->
+    if $(this).hasClass 'unpublished'
+      $(this).find('.photo-overlay-text').html('<img src="http://06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com/loader.gif" width="16px" height="11px" />')
+      $(this).addClass('publishing')
 
 
 
