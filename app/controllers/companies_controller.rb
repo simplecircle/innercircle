@@ -66,6 +66,13 @@ class CompaniesController < ApplicationController
       @verticals.reject!{|v| v == @vertical.downcase}
       @verticals.unshift("All categories").sort_by!{ |v| v.downcase }
       @companies = Company.published.joins(:verticals).where("lower(verticals.name) = ?", company_params[:vertical].downcase).order('last_published_posts_at DESC')
+    elsif current_user.god?
+      # Company::PAGINATION_LIMIT + 1 is being returned here so paging will ACURATELY know when it's at the end of a collection.
+      @companies = Company.includes(:provider_identifiers).order(:name)
+      # respond_to do |format|
+      #   format.html {render("index")}
+      #   format.js {render("index.js.erb")}
+      # end
     else
       # Company::PAGINATION_LIMIT + 1 is being returned here so paging will ACURATELY know when it's at the end of a collection.
       @companies = Company.published.includes(:provider_identifiers).order('last_published_posts_at DESC').limit(Company::PAGINATION_LIMIT+1).offset(company_params[:offset])

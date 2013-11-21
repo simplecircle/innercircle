@@ -38,11 +38,12 @@ class FacebookWorker
   end
 
   def get_albums(page)
-    HTTParty.get("https://graph.facebook.com/#{page}/albums", :query=>{access_token:@access_token, limit:@limit})
+    # For some reason the response needs to be parsed explicitly as JSON cause it comes back as string only from Facebook!
+    JSON.parse(HTTParty.get("https://graph.facebook.com/#{page}/albums", :query=>{access_token:@access_token, limit:@limit}).body)
   end
 
   def get_media(album, company)
-    media = HTTParty.get("https://graph.facebook.com/#{album}/photos", :query=>{access_token:@access_token, limit:@limit})
+    media = JSON.parse(HTTParty.get("https://graph.facebook.com/#{album}/photos", :query=>{access_token:@access_token, limit:@limit}).body)
 
     if media["data"]
       media["data"].each do |post|

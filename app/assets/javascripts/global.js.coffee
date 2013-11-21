@@ -12,7 +12,7 @@ $(document).ready ->
       if mode == "unpublished"
         # Both image and parent li need their height set to work in FF
         $(this).find('.photo-img').height(Math.round(width * $(this).data("aspect-ratio")))
-        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+40)
+        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+70)
       else
         # Both image and parent li need their height set to work in FF
         $(this).find('.photo-img').height(Math.round(width * $(this).data("aspect-ratio")))
