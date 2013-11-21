@@ -11,8 +11,8 @@ Innercircle::Application.routes.draw do
 
   # Admin: must be above other subdomain constraints
   constraints subdomain: 'admin' do
-    scope module: 'admin' do
-      get 'posts' =>'posts#index'
+    namespace :admin, path:'' do
+      resources :posts
     end
   end
 

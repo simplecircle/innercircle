@@ -1,0 +1,3 @@
+$('#<%= @post.id %> a').data("method", "delete")
+$('#<%= @post.id %>').removeClass("unpublished publishing").addClass("published")
+$('#<%= @post.id %> .photo-overlay-text').html("✓")
