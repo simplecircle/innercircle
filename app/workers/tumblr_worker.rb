@@ -32,7 +32,7 @@ class TumblrWorker
     photo_count = media["blog"]["posts"].to_i
     media["posts"].each do |post|
       logger.info "#{company.subdomain} -- existing post?"
-      unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"])
+      unless Post.select([:provider, :provider_uid]).find_by_provider_and_provider_uid(PROVIDER, post["id"].to_s)
         new_post = company.posts.new
         new_post.provider = PROVIDER
         new_post.provider_uid = post["id"]
