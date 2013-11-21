@@ -8,7 +8,7 @@
     = link_to(image_tag("jobcrush_logo.png"), root_url(subdomain:false), class:"navbar-brand")
   .collapse.navbar-collapse.navbar-ex1-collapse
     %ul.nav.navbar-nav
-      %li= nav_link("COMPANIES", companies_url())
+      %li= nav_link("COMPANIES", companies_url(subdomain:false))
       %li= nav_link("JOBS", "http://google.com")
     %ul.nav.navbar-nav.navbar-right
       - if current_user
@@ -25,8 +25,8 @@
             = current_user.email
             %b.caret.caret-black
           %ul.dropdown-menu
-            %li= link_to "Your Account", :controller => "users", :action=> "edit", :id => current_user.id
-            %li= link_to "Logout", logout_url(subdomain:false)
+            %li= link_to("Your Account", user_url(current_user, subdomain:false))
+            %li= link_to("Logout", logout_url(subdomain:false))
       - else
         .signup_cta.pull-left
           = link_to("Sign Up", signup_url(subdomain:false, company_connections:true), class:"underlined")

@@ -1,0 +1,24 @@
+- posts.each do |post|
+  %li{id:post.id, class:"photo-wrapper #{post.published ? ' published' : ' unpublished'}", data:{"aspect-ratio"=>"#{post.aspect_ratio}"}}
+    = link_to(post_url(post.id, subdomain: post.company.subdomain), method:"#{post.published ? 'delete':'put'}", remote:true) do
+      .photo
+        .photo-overlay
+        .photo-overlay-text= post.published ? "✓" : "Publish"
+        = image_tag post.media_url_small
+    .info
+      - case post.provider
+      - when "facebook"
+        .facebook_logo_gray.pull-left
+      - when "instagram"
+        .instagram_logo_gray.pull-left
+        - if post.provider_strategy == "location"
+          .location_pin_gray.pull-left
+      - when "tumblr"
+        .tumblr_logo_gray.pull-left
+      - when "foursquare"
+        .foursquare_logo_gray.pull-left
+      .date.pull-left= render('shared/pretty_publication_date', post:post)
+      - unless post.caption.blank?
+        .photo__caption--unpublished= strip_tags(CGI::unescapeHTML(post.caption))
+      .clearfix
+      = post.company.name

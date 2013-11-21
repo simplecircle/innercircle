@@ -1,0 +1,12 @@
+#post
+  .container-fluid
+    .row-fluid
+      .span12.mobile-padding
+        %h2 
+          Admin preflight 
+          = link_to "Show Profile", root_url, class:"btn pull-right"
+        %hr
+  .mobile-padding
+    %ul#masonry.masonry-unpublished
+      = render("unpublished", posts:@posts)
+    .loader

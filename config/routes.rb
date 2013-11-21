@@ -9,6 +9,13 @@ Innercircle::Application.routes.draw do
   resources :admin_invites
   resources :linkedin, only:[:new, :create, :destroy]
 
+  # Admin: must be above other subdomain constraints
+  constraints subdomain: 'admin' do
+    scope module: 'admin' do
+      get 'posts' =>'posts#index'
+    end
+  end
+
   constraints(Subdomain) do
     get '/' => 'companies#show'
     get 'join' => 'users#new'
@@ -36,4 +43,6 @@ Innercircle::Application.routes.draw do
   get '/robots.txt' => 'static#robots'
   post 'relationships/:company_id'=>'relationships#create', as:'relationships'
   delete 'relationships/:company_id'=>'relationships#destroy', as:'relationship'
+
+
 end
