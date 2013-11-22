@@ -1,8 +1,10 @@
 - posts.each do |post|
-  %li{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}", "caption"=>"#{strip_tags(post.caption)}", "subdomain"=>"#{post.company.subdomain}"}}
+  %li.post{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}", "caption"=>"#{strip_tags(post.caption)}", "subdomain"=>"#{post.company.subdomain}"}}
     = render("relationships/connection_flag", company:post.company)
-    .photo
+    .post__photo
       = image_tag(url_for_cdn_image(post, post.photo_url(:large)), class:"photo-img")
-      .post-info-bar.clearfix
-        .pull-left= link_to(image_tag(post.company.logo_url(:medium), class:"company-logo-small"), root_url(subdomain:post.company.subdomain))
-        .date.pull-right= render('shared/pretty_publication_date', post:post)
+    - if post.caption
+      .post__caption= post.caption
+    .post__info-bar.clearfix
+      .pull-left= link_to(image_tag(post.company.logo_url(:medium), class:"post__logo__small"), root_url(subdomain:post.company.subdomain))
+      .post__date.pull-right= render('shared/pretty_publication_date', post:post)

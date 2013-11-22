@@ -9,14 +9,15 @@ $(document).ready ->
     $.each items, ->
       # 29 makes up for the faux gutter
       width = (containerWidth/columnCount)-15
+      height = Math.round(width * $(this).data("aspect-ratio"))
       if mode == "unpublished"
         # Both image and parent li need their height set to work in FF
         $(this).find('.photo-img').height(Math.round(width * $(this).data("aspect-ratio")))
         $(this).height(Math.round(width * $(this).data("aspect-ratio"))+70)
       else
         # Both image and parent li need their height set to work in FF
-        $(this).find('.photo-img').height(Math.round(width * $(this).data("aspect-ratio")))
-        $(this).height(Math.round(width * $(this).data("aspect-ratio"))+40)
+        $(this).find('.photo-img').attr('height', height)
+        $(this).css('min-height', height)
 
   if mode == "unpublished"
     items = $(unpublishedContainer).find("li")
@@ -34,7 +35,7 @@ $(document).ready ->
       setHeight(columnCount, container.width(), items)
       container.masonry
         columnWidth: ->
-         container.width()/columnCount
+          container.width()/columnCount
     initPublished()
     items.show()
 
@@ -54,19 +55,17 @@ $(document).ready ->
     if (scrollY >= $(document).height() - window.innerHeight - 800) and $('.loader').length
       existingItems = $("#masonry li")
       
-      onComplete = ->
-        loading = false
-        $('.loader').hide()
 
-      success = ->
+      onComplete = ->
         # This block only gets ran if its for a Masonry page
         items = $("#masonry li")
         if items.length
           offset = existingItems.length - items.length
-          if offset  != -8
+          console.log offset
+          if offset  != -14
             newItems = items.slice(offset)
           else
-            newItems = items.slice(-8)
+            newItems = items.slice(-14)
 
           if mode == "unpublished"
             if window.innerWidth < 600
@@ -81,8 +80,13 @@ $(document).ready ->
             unpublishedContainer.masonry( 'appended', newItems);
           else
             setHeight(columnCount, containerWidth, newItems)
-            container.masonry( 'appended', newItems );
-          newItems.fadeIn("fast")
+            # This cludgy timeout is here because FF needs a bit more time to get and set new items heights.
+            setTimeout (->
+              container.masonry( 'appended', newItems )
+              newItems.fadeIn("fast")
+              loading = false
+              $('.loader').hide()
+            ), 100
 
       if loading == false
         loading = true
@@ -95,7 +99,6 @@ $(document).ready ->
         $.ajax
           url: url
           dataType: "script"
-          success: success
           async: true
           complete: onComplete
 
