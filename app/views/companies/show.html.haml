@@ -25,7 +25,7 @@
     .col-md-8
       .masonry-wrapper
         %ul#masonry.masonry-published
-          = render("posts/published", posts:@posts)
+          = render("posts/public", posts:@posts)
       .loader
     .col-md-4
       %h1.company-name= link_to(@company.name.upcase, @company.website_url, target:"_blank")

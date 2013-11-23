@@ -53,7 +53,7 @@ class CompaniesController < ApplicationController
     @connections = @company.connections(current_user) if current_user
     respond_to do |format|
       format.html {render("show")}
-      format.js {render("posts/published.js.erb")}
+      format.js {render("posts/public.js.erb")}
     end
   end
 

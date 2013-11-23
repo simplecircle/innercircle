@@ -12,7 +12,7 @@ class HomeController < ApplicationController
 
   	  respond_to do |format|
         format.html {render("user_index")}
-        format.js {render("posts/published.js.erb")}
+        format.js {render("posts/public.js.erb")}
       end
   	else
       @companies = Company.where(:show_in_index=>true).order('last_published_posts_at DESC')

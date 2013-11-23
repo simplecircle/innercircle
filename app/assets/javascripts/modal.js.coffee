@@ -14,7 +14,7 @@ showModal = (photo) ->
   $('.photo-modal').modal()
 
 
-$(document).on 'click', '.photo-img', ->
+$(document).on 'click', '.post__media', ->
   showModal($(this))
 
 $('.modal-body').on 'click', ->

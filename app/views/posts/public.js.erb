@@ -1,0 +1,5 @@
+$('#masonry').append('<%= j render("posts/public", posts:@posts) %>');
+<% if @posts.length <  Company::PAGINATION_LIMIT%> 
+  $('.loader').remove();
+<% end %>
+

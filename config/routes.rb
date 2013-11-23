@@ -12,7 +12,7 @@ Innercircle::Application.routes.draw do
   # Admin: must be above other subdomain constraints
   constraints subdomain: 'admin' do
     namespace :admin, path:'' do
-      resources :posts
+      resources :posts, only:[:index]
     end
   end
 
