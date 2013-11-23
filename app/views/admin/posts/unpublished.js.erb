@@ -1,4 +1,0 @@
-$('#masonry').append('<%= j render("admin/posts/unpublished", posts:@posts) %>');
-<% if @posts.length <  Company::PAGINATION_LIMIT%> 
-  $('.loader').remove();
-<% end %>
