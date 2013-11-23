@@ -4,7 +4,7 @@
     .post__photo
       = image_tag(url_for_cdn_image(post, post.photo_url(:large)), class:"photo-img")
     - if post.caption
-      .post__caption= post.caption
+      .post__caption= truncate(strip_tags(post.caption), length:105, separator:' ')
     .post__info-bar.clearfix
       .pull-left= link_to(image_tag(post.company.logo_url(:medium), class:"post__logo__small"), root_url(subdomain:post.company.subdomain))
       .post__date.pull-right= render('shared/pretty_publication_date', post:post)

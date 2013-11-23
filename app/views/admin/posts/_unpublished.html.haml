@@ -5,6 +5,8 @@
         .photo-overlay
         .photo-overlay-text= post.published ? "✓" : "Publish"
         = image_tag post.media_url_small
+    - if post.caption
+      .caption= strip_tags(CGI::unescapeHTML(post.caption))
     .info
       - case post.provider
       - when "facebook"
@@ -17,8 +19,6 @@
         .tumblr_logo_gray.pull-left
       - when "foursquare"
         .foursquare_logo_gray.pull-left
-      .date.pull-left= render('shared/pretty_publication_date', post:post)
-      - unless post.caption.blank?
-        .photo__caption--unpublished= strip_tags(CGI::unescapeHTML(post.caption))
+      .date.pull-right= render('shared/pretty_publication_date', post:post)
       .clearfix
-      = post.company.name
+    .name= link_to(post.company.name.upcase, root_url(subdomain:post.company.subdomain), target:"_blank")
