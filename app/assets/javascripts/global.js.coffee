@@ -39,8 +39,8 @@ $(document).ready ->
     initPublished()
     items.show()
 
-    $(window).resize ->
-      initPublished()
+  $(window).resize ->
+    initPublished()
 
 
 
@@ -61,11 +61,10 @@ $(document).ready ->
         items = $("#masonry li")
         if items.length
           offset = existingItems.length - items.length
-          console.log offset
-          if offset  != -14
+          if offset  != -queryOffsetQuantity
             newItems = items.slice(offset)
           else
-            newItems = items.slice(-14)
+            newItems = items.slice(-queryOffsetQuantity)
 
           if mode == "unpublished"
             if window.innerWidth < 600
@@ -77,7 +76,12 @@ $(document).ready ->
               setHeight(columnCount, unpublishedContainerWidth, newItems)
             else
               setHeight(columnCount, unpublishedContainerWidth, newItems)
-            unpublishedContainer.masonry( 'appended', newItems);
+            setTimeout (->
+              unpublishedContainer.masonry( 'appended', newItems);
+              newItems.fadeIn("fast")
+              loading = false
+              $('.loader').hide()
+            ), 200
           else
             setHeight(columnCount, containerWidth, newItems)
             # This cludgy timeout is here because FF needs a bit more time to get and set new items heights.
@@ -86,7 +90,7 @@ $(document).ready ->
               newItems.fadeIn("fast")
               loading = false
               $('.loader').hide()
-            ), 100
+            ), 200
 
       if loading == false
         loading = true
