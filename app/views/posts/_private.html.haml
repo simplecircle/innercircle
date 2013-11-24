@@ -26,6 +26,5 @@
           .foursquare_logo_gray.pull-left
         .post__date.pull-right= render('shared/pretty_publication_date', post:post)
         .clearfix
-      - if @admin_panel
-        .post__company-name= link_to(post.company.name.upcase, root_url(subdomain:post.company.subdomain), target:"_blank")
+      .post__company-name= link_to(post.company.name.upcase, root_url(subdomain:post.company.subdomain), target:"_blank")
 

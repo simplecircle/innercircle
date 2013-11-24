@@ -63,8 +63,8 @@
   height: 63px;
   overflow: hidden;
   position: absolute;
-  top: -3px;
-  left: -3px;
+  top: 0px;
+  left: 7px;
   z-index: 5;
 }
 .post__new-ribbon{
@@ -81,16 +81,6 @@
   top: 10px;
   width: 90px;
   background-color: @accentRed;
-  &:before, &:after {
-    content: "";
-    border-top:   3px solid darken(@accentRed, 10%);
-    border-left:  3px solid transparent;
-    border-right: 3px solid transparent;
-    position:absolute;
-    bottom: -3px;
-  }
-  &:before{ left:0; }
-  &:after{ right:0; }
 }
 .post__media-overlay {
   position: absolute;

@@ -1,8 +1,8 @@
 - posts.each do |post|
   %li.post{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}", "caption"=>"#{strip_tags(post.caption)}", "subdomain"=>"#{post.company.subdomain}"}}
     .post__content
-      = render("relationships/connection_flag", company:post.company)
       .post__media-wrapper
+        = render("relationships/connection_flag", company:post.company)
         = image_tag(url_for_cdn_image(post, post.photo_url(:large)), class:"post__media")
       - if post.caption
         .post__caption= truncate(strip_tags(post.caption), length:105, separator:' ')
