@@ -1,8 +1,8 @@
 showModal = (photo) ->
-  parent_item = photo.parent().parent()
+  parent_item = photo.parent().parent().parent()
   photoSrc = photo.attr('src')
-  logoSrc = photo.siblings().find('.company-logo-small').attr('src')
-  date = photo.siblings().find('.date').text()
+  logoSrc = photo.parent().siblings().find('.post__logo--small').attr('src')
+  date = photo.siblings().find('.post__date').text()
   caption = parent_item.data("caption")
   subdomain = parent_item.data("subdomain")
 

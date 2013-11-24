@@ -53,7 +53,6 @@ $(document).ready ->
     # Dont page if .loader is not present
     if (scrollY >= $(document).height() - window.innerHeight - 800) and $('.loader').length
       existingItems = $("#masonry li")
-      
 
       onComplete = ->
         # This block only gets ran if its for a Masonry page
@@ -90,6 +89,10 @@ $(document).ready ->
               loading = false
               $('.loader').hide()
             ), 200
+        else
+          # This block is for NON masonry infinite scroll
+          loading = false
+          $('.loader').hide()
 
       if loading == false
         loading = true
