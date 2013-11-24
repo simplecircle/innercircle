@@ -1,30 +1,31 @@
 - posts.each do |post|
   %li.post.post--private{id:post.id, class:"#{post.published ? 'post--published' : 'post--unpublished'}", data:{"aspect-ratio"=>"#{post.aspect_ratio}"}}
-    = link_to(post_url(post.id), method:"#{post.published ? 'delete':'patch'}", remote:true) do
-      - if @last_reviewed_time
-        - if !post.published && post.created_at > @last_reviewed_time
-          .post__new-ribbon-wrapper
-            .post__new-ribbon NEW
-      .post__media-wrapper
-        .post__media-overlay
-        .post__media-overlay-text= post.published ? "✓" : "Publish"
-        = image_tag(post.media_url_small, class:'post__media')
-    - if post.caption
-      .post__caption= strip_tags(CGI::unescapeHTML(post.caption))
-    .post__info
-      - case post.provider
-      - when "facebook"
-        .facebook_logo_gray.pull-left
-      - when "instagram"
-        .instagram_logo_gray.pull-left
-        - if post.provider_strategy == "location"
-          .location_pin_gray.pull-left
-      - when "tumblr"
-        .tumblr_logo_gray.pull-left
-      - when "foursquare"
-        .foursquare_logo_gray.pull-left
-      .post__date.pull-right= render('shared/pretty_publication_date', post:post)
-      .clearfix
-    - if @admin_panel
-      .post__company-name= link_to(post.company.name.upcase, root_url(subdomain:post.company.subdomain), target:"_blank")
+    .post__content
+      = link_to(post_url(post.id), method:"#{post.published ? 'delete':'patch'}", remote:true) do
+        - if @last_reviewed_time
+          - if !post.published && post.created_at > @last_reviewed_time
+            .post__new-ribbon-wrapper
+              .post__new-ribbon NEW
+        .post__media-wrapper
+          .post__media-overlay
+          .post__media-overlay-text= post.published ? "✓" : "Publish"
+          = image_tag(post.media_url_small, class:'post__media')
+      - if post.caption
+        .post__caption= strip_tags(CGI::unescapeHTML(post.caption))
+      .post__info
+        - case post.provider
+        - when "facebook"
+          .facebook_logo_gray.pull-left
+        - when "instagram"
+          .instagram_logo_gray.pull-left
+          - if post.provider_strategy == "location"
+            .location_pin_gray.pull-left
+        - when "tumblr"
+          .tumblr_logo_gray.pull-left
+        - when "foursquare"
+          .foursquare_logo_gray.pull-left
+        .post__date.pull-right= render('shared/pretty_publication_date', post:post)
+        .clearfix
+      - if @admin_panel
+        .post__company-name= link_to(post.company.name.upcase, root_url(subdomain:post.company.subdomain), target:"_blank")
 

@@ -7,8 +7,7 @@ $(document).ready ->
 
   setHeight = (columnCount, containerWidth, items) ->
     $.each items, ->
-      # 29 makes up for the faux gutter
-      width = (containerWidth/columnCount)-15
+      width = (containerWidth/columnCount)
       height = Math.round(width * $(this).data("aspect-ratio"))
       if mode == "unpublished"
         # Both image and parent li need their height set to work in FF
@@ -112,7 +111,7 @@ $(document).ready ->
     $(this).parent().parent().fadeOut()
 
   $('.post--private .post__media-wrapper').on 'click', ->
-    post = $(this).parent().parent()
+    post = $(this).parent().parent().parent()
     if post.hasClass 'post--unpublished'
       post.find('.post__media-overlay-text').html('<img src="http://06f29b33afa7ef966463-b188da212eda95ba370d870e1e01c1c9.r45.cf1.rackcdn.com/loader.gif" width="16px" height="11px" />')
       post.addClass('post--publishing')

@@ -1,10 +1,11 @@
 - posts.each do |post|
   %li.post{id:post.id, data:{"aspect-ratio"=>"#{post.aspect_ratio}", "caption"=>"#{strip_tags(post.caption)}", "subdomain"=>"#{post.company.subdomain}"}}
-    = render("relationships/connection_flag", company:post.company)
-    .post__media-wrapper
-      = image_tag(url_for_cdn_image(post, post.photo_url(:large)), class:"post__media")
-    - if post.caption
-      .post__caption= truncate(strip_tags(post.caption), length:105, separator:' ')
-    .post__info
-      .pull-left= link_to(image_tag(post.company.logo_url(:medium), class:"post__logo--small"), root_url(subdomain:post.company.subdomain))
-      .post__date.pull-right= render('shared/pretty_publication_date', post:post)
+    .post__content
+      = render("relationships/connection_flag", company:post.company)
+      .post__media-wrapper
+        = image_tag(url_for_cdn_image(post, post.photo_url(:large)), class:"post__media")
+      - if post.caption
+        .post__caption= truncate(strip_tags(post.caption), length:105, separator:' ')
+      .post__info
+        .pull-left= link_to(image_tag(post.company.logo_url(:medium), class:"post__logo--small"), root_url(subdomain:post.company.subdomain))
+        .post__date.pull-right= render('shared/pretty_publication_date', post:post)

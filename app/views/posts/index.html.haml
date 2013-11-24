@@ -1,13 +1,10 @@
-#post
-  .container-fluid
-    .row-fluid
-      .span12.mobile-padding
-        %h2 
-          Content library
-          = link_to "Show Profile", root_url, class:"btn pull-right"
-        %h4 Publish great photos that show what it’s like to work at #{capitalize_phrase(@company.name)}
-        %hr
-  .mobile-padding
-    %ul#masonry.masonry-unpublished
-      = render("private", posts:@posts)
-    .loader
+.posts--960-static.centered
+  %header.clearfix
+    %div.pull-left
+      %h3= "#{@company.name.upcase}’S CONTENT"
+      %h4 Publish great photos that show what it’s like at #{capitalize_phrase(@company.name)}
+    = link_to("View profile", root_url, class:"btn pull-right")
+  %hr
+  %ul#masonry.masonry-unpublished
+    = render("posts/private", posts:@posts)
+  .loader
