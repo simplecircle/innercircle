@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Innercircle::Application.load_tasks
+Jobcrush::Application.load_tasks

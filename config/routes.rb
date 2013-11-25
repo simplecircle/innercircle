@@ -1,4 +1,4 @@
-Innercircle::Application.routes.draw do
+Jobcrush::Application.routes.draw do
 
   require 'sidekiq/web'
   mount Sidekiq::Web, at: "/sidekiq"
